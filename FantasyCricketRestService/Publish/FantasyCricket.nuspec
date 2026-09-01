@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>FantasyCricket</id>
+    <version>1.1.0.1</version>
+    <title>2015</title>
+    <authors>Rajib Das</authors>
+    <owners>Rajib Das</owners>
+    <description>REST API for Fantasy Cricket</description>
+    <copyright>Copyright 2015</copyright>
+  </metadata>
+  <files>
+    <file src="bin\*.*" target="bin"/>
+    <file src="Global.asax"/>
+    <file src="Configs\token.web.config" target="web.config" />
+  </files>
+</package>

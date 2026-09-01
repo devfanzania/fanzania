@@ -1,0 +1,1105 @@
+POST (Active + Old + Upcoming tournament details) -> TournamentStatus = COMPLETE/INPROGRESS/TBD
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/all-tournament-details
+
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Response: 
+{"status":"success","statusMessage":"Request Successful.","httpStatus":"200 OK","httpStatusCode":200,"httpStatusDescription":"OK","data":[{"TournamentId":1,"TournamentName":"INDTOURENGLAND","TournamentStatus":"COMPLETE","TournamentStage":"ONEDAY","TournamentStartDate":"2018-07-01T00:00:00","TournamentEndDate":"2018-09-14T00:00:00"},{"TournamentId":2,"TournamentName":"AsiaCup2018","TournamentStatus":"INPROGRESS","TournamentStage":"LEAGUE","TournamentStartDate":"2018-09-15T00:00:00","TournamentEndDate":null}]}
+
+
+POST (For logged in User, for a tournament , all leagues) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-all-leagues
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+Request:
+{ "UserId":4,"TournamentId":1}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "TeamStanding": 1,
+            "TeamPoints": 6484,
+            "UserId": 4,
+            "TournamentId": 1,
+            "UserTeamName": "Team Hyenas",
+            "LeagueLeaderId": 3,
+            "LeagueName": "Karmayudh",
+            "LeagueId": 1,
+            "LeaguePoints": 12976,
+            "LeagueRank": 2,
+            "Status": "Approved",
+            "LeaguePin": "8oO!0m1+"
+        },
+        {
+            "TeamStanding": 2,
+            "TeamPoints": 6484,
+            "UserId": 4,
+            "TournamentId": 1,
+            "UserTeamName": "Team Hyenas",
+            "LeagueLeaderId": 4,
+            "LeagueName": "Megaleague",
+            "LeagueId": 2,
+            "LeaguePoints": 6522,
+            "LeagueRank": 3,
+            "Status": "Approved",
+            "LeaguePin": "VDz[^f94"
+        },
+        {
+            "TeamStanding": 3,
+            "TeamPoints": 6484,
+            "UserId": 4,
+            "TournamentId": 1,
+            "UserTeamName": "Team Hyenas",
+            "LeagueLeaderId": 1,
+            "LeagueName": "TestLeague",
+            "LeagueId": 3,
+            "LeaguePoints": 31554,
+            "LeagueRank": 1,
+            "Status": "Approved",
+            "LeaguePin": "vtnY=*F3"
+        }
+    ]
+}
+
+
+POST (For a particular League details) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/league-details
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+Request:
+{ "LeagueId":1}
+
+Response:
+{"status":"success","statusMessage":"Request Successful.","httpStatus":"200 OK","httpStatusCode":200,"httpStatusDescription":"OK","data":[{"LeagueName":"ABC","LeagueLeader":"rdas","LeaguePoints":1719,"UserLeagueId":1,"UserId":1,"UserName":"rdas","LeagueApproved":false,"IsLeagueLeader":"Y","LeagueJoinedDate":"2018-08-06T21:09:16.83"}]}
+
+POST (all the team under that league. ) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/league-teams
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":1,"LeagueId":2}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "TeamCurrentStanding": 1,
+            "TeamOldStanding": 0,
+            "LeagueName": "Karmayudh",
+            "LeagueLeader": "neeraj.sinha",
+            "TeamGlobalRank": 2,
+            "UserTeamName": "Team Hyenas",
+            "UserTeamId": 2,
+            "SubsLeft": 18,
+            "NitroLeft": 1,
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1,
+            "UserName": "Hyenas",
+            "UserId": 4,
+            "Status": "Approved",
+            "IsLeagueLeader": "N",
+            "FullName": "G P",
+            "TotalPoints": 6484,
+            "LeagueRank": 2
+        },
+        {
+            "TeamCurrentStanding": 2,
+            "TeamOldStanding": 0,
+            "LeagueName": "Karmayudh",
+            "LeagueLeader": "neeraj.sinha",
+            "TeamGlobalRank": 3,
+            "UserTeamName": "Bujhakkads",
+            "UserTeamId": 3,
+            "SubsLeft": 27,
+            "NitroLeft": 1,
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1,
+            "UserName": "neeraj.sinha",
+            "UserId": 3,
+            "Status": "Approved",
+            "IsLeagueLeader": "Y",
+            "FullName": "Neeraj Sinha",
+            "TotalPoints": 6229,
+            "LeagueRank": 2
+        }
+    ]
+}
+
+POST (unapprove a league user) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/unapprove-league-users
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+Request:
+{ "LeagueId":2,"UserId":3}
+
+Response:
+{"status":"success","statusMessage":"Request Successful.","httpStatus":"200 OK","httpStatusCode":200,"httpStatusDescription":"OK"}
+
+POST (approve a league user) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/approve-league-users
+
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "LeagueId":2,"UserIds":"1|2|3"}
+
+Response:
+{"status":"success","statusMessage":"Request Successful.","httpStatus":"200 OK","httpStatusCode":200,"httpStatusDescription":"OK"}
+
+
+POST (get User tournaments) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-tournament-details
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "UserId":1}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamId": 5,
+            "UserTeamName": "HawaHawai",
+            "TournamentId": 1,
+            "UserId": 1,
+            "SubsLeft": 45,
+            "NitroLeft": 1,
+            "TotalPoints": 6352,
+            "TeamCompositionId": 34,
+            "TeamRank": 1,
+            "CreatedDate": "2018-08-11T04:26:05.343",
+            "ModifiedDate": "2018-09-10T01:31:52.017",
+            "PainKillerLeft": null,
+            "AutoPilotLeft": null,
+            "TournamentName": "INDTOURENGLAND",
+            "TournamentLogo": "image.jpg",
+            "TournamentStatus": "COMPLETE",
+            "TournamentStage": "ONEDAY",
+            "TournamentStartDate": "2018-07-01T00:00:00",
+            "TournamentEndDate": "2018-10-13T00:00:00"
+        },
+        {
+            "UserTeamId": 7,
+            "UserTeamName": "DadasXI",
+            "TournamentId": 2,
+            "UserId": 1,
+            "SubsLeft": 10,
+            "NitroLeft": 0,
+            "TotalPoints": 7042,
+            "TeamCompositionId": 64,
+            "TeamRank": 1,
+            "CreatedDate": "2018-09-13T21:33:22.54",
+            "ModifiedDate": "2018-09-28T15:56:08.627",
+            "PainKillerLeft": null,
+            "AutoPilotLeft": null,
+            "TournamentName": "AsiaCup2018",
+            "TournamentLogo": "image.jpg",
+            "TournamentStatus": "INPROGRESS",
+            "TournamentStage": "LEAGUE",
+            "TournamentStartDate": "2018-09-15T00:00:00",
+            "TournamentEndDate": null
+        }
+    ]
+}
+
+
+POST (User Verification)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/verify-user
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "Email":"das.rajibdas@gmail.com"}
+
+Response:
+{
+    "status": "fail",
+    "statusMessage": "user already exists",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 1,
+            "UserName": "rdas",
+            "Name": null,
+            "Email": "das.rajibdas@gmail.com",
+            "CountryId": null,
+            "FirstName": "rajib",
+            "LastName": "das",
+            "DOB": null,
+            "PhoneNumber": null,
+            "ActivationToken": "9897",
+            "Active": true,
+            "UserRoleId": 2,
+            "SignUpDate": "2018-08-10T03:48:02.89",
+            "LastSignIn": "2018-08-10T03:48:02.89",
+            "LastPasswordFailureDate": null,
+            "PasswordFailuresSinceLastSuccess": 0,
+            "PasswordChangedDate": "2018-08-10T03:48:02.89",
+            "SessionId": "4897853B-F843-4C20-A606-EE42E296B51E",
+            "SessionCreationDate": null,
+            "SessionActive": false,
+            "BackgroundTheme": "AFG",
+            "WalletPoint": null,
+            "DeviceMacAddress": null
+        }
+    ]
+}
+
+
+POST (User creation)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/sign-up
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "Email":"das2.rajibdas@gmail.com","Password":"mynameisDon","FirstName":"Rajib","LastName":"Das","CountryId":3,"PhoneNumber":"310-887-9879","DOB":"1987-10-19"}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": null,
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 23,
+            "UserName": "das2.rajibdas@gmail.com",
+            "Email": "das2.rajibdas@gmail.com",
+            "CountryId": 3,
+            "FirstName": "Rajib",
+            "LastName": "Das",
+            "DOB": "1987-10-19T00:00:00",
+            "PhoneNumber": "310-887-9879",
+            "ActivationToken": "862ec0",
+            "Active": false,
+            "UserRoleId": 2,
+            "SignUpDate": "2018-10-31T02:34:38.993",
+            "LastSignIn": "2018-10-31T02:34:38.993",
+            "LastPasswordFailureDate": null,
+            "PasswordFailuresSinceLastSuccess": 0,
+            "PasswordChangedDate": "2018-10-31T02:34:38.993",
+            "SessionId": "999304CF-C526-40CA-AB32-D2FAEEC54F53",
+            "LoginLocation": null,
+            "SessionCreationDate": "2018-10-31T02:34:38.993",
+            "SessionActive": true,
+            "BackgroundTheme": null,
+            "WalletPoint": null,
+            "DeviceMacAddress": null
+        }
+    ]
+}
+
+
+POST (login check)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/sign-in
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "Email":"das2.rajibdas@gmail.com","Password":"mynameisDon"}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 23,
+            "UserName": "das2.rajibdas@gmail.com",
+            "Email": "das2.rajibdas@gmail.com",
+            "CountryId": 3,
+            "FirstName": "Rajib",
+            "LastName": "Das",
+            "DOB": "1987-10-19T00:00:00",
+            "PhoneNumber": "310-887-9879",
+            "ActivationToken": "862ec0",
+            "Active": false,
+            "UserRoleId": 2,
+            "SignUpDate": "2018-10-31T02:34:38.993",
+            "LastSignIn": "2018-10-31T02:34:38.993",
+            "LastPasswordFailureDate": null,
+            "PasswordFailuresSinceLastSuccess": 0,
+            "PasswordChangedDate": "2018-10-31T02:34:38.993",
+            "SessionId": "132E5F10-4828-4BFA-87E2-76CD25444A69",
+            "LoginLocation": null,
+            "SessionCreationDate": "2018-10-31T02:34:38.993",
+            "SessionActive": true,
+            "BackgroundTheme": null,
+            "WalletPoint": null,
+            "DeviceMacAddress": null
+        }
+    ]
+}
+
+POST (logout ) 
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/log-out
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+
+Request:
+{ "UserId":8}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "logout successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": []
+}
+
+
+POST (external login check)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/external-sign-in
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{"UserName":"rdas","LoginProviderAccessToken":"289FA956-E82E-4EDF-994A-40DF01623A75","LoginProvider":"yahoo","Email":"das.rajibdas@yahoo.com"}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "login success.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 13,
+            "UserName": "rdas",
+            "Email": "das.rajibdas@yahoo.com",
+            "Country": null,
+            "FirstName": null,
+            "LastName": null,
+            "DOB": null,
+            "PhoneNumber": null,
+            "ActivationToken": null,
+            "Active": true,
+            "UserRoleId": 2,
+            "SignUpDate": "2018-10-06T02:44:09.507",
+            "LastSignIn": "2018-10-06T02:44:09.507",
+            "LastPasswordFailureDate": null,
+            "PasswordFailuresSinceLastSuccess": 0,
+            "PasswordChangedDate": null,
+            "SessionId": "D3C4D018-C1EE-4849-9E96-DDAC68637DFC",
+            "LoginLocation": null,
+            "SessionCreationDate": "2018-10-06T02:44:09.507",
+            "SessionActive": true,
+            "BackgroundTheme": null,
+            "WalletPoint": null,
+            "DeviceMacAddress": null
+        }
+    ]
+}
+
+POST (last match points) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/last-match-points
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{"UserId":2,"TournamentId":2,"UserTeamId":4}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamMatchPointId": 11,
+            "MatchId": 3,
+            "UserTeamId": 1,
+            "UserId": 2,
+            "Player1": 1,
+            "Player2": 4,
+            "Player3": 11,
+            "Player4": 13,
+            "Player5": 17,
+            "Player6": 19,
+            "Player7": 21,
+            "Player8": 22,
+            "Player9": 23,
+            "Player10": 26,
+            "Player11": 29,
+            "Inning1Capt": 1,
+            "Inning2Capt": 1,
+            "Inning3Capt": 1,
+            "Inning4Capt": 1,
+            "Player1Point": 204,
+            "Player2Point": 8,
+            "Player3Point": 526,
+            "Player4Point": 142,
+            "Player5Point": 102,
+            "Player6Point": 0,
+            "Player7Point": 408,
+            "Player8Point": 244,
+            "Player9Point": 318,
+            "Player10Point": 172,
+            "Player11Point": 104,
+            "MatchTotalPoints": 2228,
+            "CreatedDate": "2018-09-13T14:31:46.773"
+        }
+    ]
+}
+
+POST (country list)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/country-list
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "CountryId": 1,
+            "Country": "INDIA",
+            "Active": true
+        },
+        {
+            "CountryId": 2,
+            "Country": "PAKISTAN",
+            "Active": true
+        },
+        {
+            "CountryId": 3,
+            "Country": "BANGALADESH",
+            "Active": true
+        },
+        {
+            "CountryId": 4,
+            "Country": "WEST INDIES",
+            "Active": true
+        },
+        {
+            "CountryId": 5,
+            "Country": "SRI LANKA",
+            "Active": true
+        },
+        {
+            "CountryId": 6,
+            "Country": "AFGANISTAN",
+            "Active": true
+        },
+        {
+            "CountryId": 7,
+            "Country": "ENGLAND",
+            "Active": true
+        }
+    ]
+}
+
+POST(to get email verification code after regstration done long back)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/email-verification-code
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{"UserId":2,"Email":"das.rajibdas@gmail.com"}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 2,
+            "ActivationToken": "09Ef8H"
+        }
+    ]
+}
+
+POST(set email verified)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/email-verified
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{"UserId":2}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserId": 2,
+            "Active": true
+        }
+    ]
+}
+
+
+POST(get tournament player details)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/get-tournament-players
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "TournamentId":2}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "PlayerId": 37,
+            "PlayerName": "Rohit Sharma",
+            "PlayerType": "local",
+            "PlayerSpeciality": "batsman",
+            "PlayerValue": 95000,
+            "ParticipationTeamId": 3,
+            "TotalPoints": 63,
+            "ParticipationTeamName": "IND",
+            "TeamDescription": "India",
+			"PlayerImage": "image.jpg"
+        },
+        {
+            "PlayerId": 38,
+            "PlayerName": "Jasprit Bumrah",
+            "PlayerType": "local",
+            "PlayerSpeciality": "bowler",
+            "PlayerValue": 95000,
+            "ParticipationTeamId": 3,
+            "TotalPoints": 30,
+            "ParticipationTeamName": "IND",
+            "TeamDescription": "India",
+			"PlayerImage": "image.jpg"
+        }]
+}
+
+POST(user team details without players in the team) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-team
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":2,"UserId":1}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamId": 7,
+            "UserTeamName": "DadasXI",
+            "TournamentId": 2,
+            "UserId": 1,
+            "SubsLeft": 10,
+            "NitroLeft": 0,
+            "TotalPoints": 7042,
+            "TeamCompositionId": 64,
+            "TeamRank": 1,
+            "CreatedDate": "2018-09-13T21:33:22.54",
+            "ModifiedDate": "2018-09-28T15:56:08.627",
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1,
+            "SubsLeftAtSnapShot": 15
+        }
+    ]
+}
+
+POST(User team players saved last) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-team-players
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":2,"UserTeamId":7}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamName": "DadasXI",
+            "UserId": 1,
+            "SubsLeft": 10,
+            "NitroLeft": 0,
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1,
+            "TotalPoints": 7042,
+            "TeamRank": 1,
+            "TeamCompositionId": 64,
+            "Player1": 37,
+            "Player2": 39,
+            "Player3": 42,
+            "Player4": 46,
+            "Player5": 48,
+            "Player6": 50,
+            "Player7": 87,
+            "Player8": 88,
+            "Player9": 90,
+            "Player10": 93,
+            "Player11": 94,
+            "TeamCapt": 42,
+            "CreatedByUserId": 1,
+            "CreatedDateTime": "2018-09-28T15:56:08.627",
+            "UpdatedDateTime": "2018-09-28T15:56:08.627",
+            "NitroUsed": false,
+            "TeamVCapt": null,
+            "PainKillerUsed": null,
+            "AutoPilotUsed": null
+        }
+    ]
+}
+
+
+POST(User team players since last cutoff) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-team-players-last-cutoff
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":2,"UserTeamId":7}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "TeamCompositionId": 63,
+            "Player1": 87,
+            "Player2": 90,
+            "Player3": 93,
+            "Player4": 39,
+            "Player5": 88,
+            "Player6": 42,
+            "Player7": 48,
+            "Player8": 94,
+            "Player9": 50,
+            "Player10": 46,
+            "Player11": 37,
+            "TeamCapt": 37,
+            "CreatedByUserId": 1,
+            "CreatedDateTime": "2018-09-28T13:02:05.487",
+            "UpdatedDateTime": "2018-09-28T13:02:05.487",
+            "NitroUsed": false,
+            "TeamVCapt": null,
+            "PainKillerUsed": false,
+            "AutoPilotUsed": false
+        }
+    ]
+}
+
+
+
+
+POST(to get player details for a given team of 11 players)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/player-details
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "TournamentId":2,"Player1": 37,
+            "Player2": 39,
+            "Player3": 42,
+            "Player4": 46,
+            "Player5": 48,
+            "Player6": 50,
+            "Player7": 87,
+            "Player8": 88,
+            "Player9": 90,
+            "Player10": 93,
+            "Player11": 94
+			}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "PlayerId": 37,
+            "PlayerName": "Rohit Sharma",
+            "PlayerType": "local",
+            "PlayerSpeciality": "batsman",
+            "PlayerValue": 95000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 39,
+            "PlayerName": "Bhuvneshwar Kumar",
+            "PlayerType": "local",
+            "PlayerSpeciality": "bowler",
+            "PlayerValue": 90000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 42,
+            "PlayerName": "Shikhar Dhawan",
+            "PlayerType": "local",
+            "PlayerSpeciality": "batsman",
+            "PlayerValue": 90000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 46,
+            "PlayerName": "Kedar Jadhav",
+            "PlayerType": "local",
+            "PlayerSpeciality": "allrounder",
+            "PlayerValue": 85000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 48,
+            "PlayerName": "Kuldeep Yadav",
+            "PlayerType": "local",
+            "PlayerSpeciality": "bowler",
+            "PlayerValue": 85000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 50,
+            "PlayerName": "Ambati Rayudu",
+            "PlayerType": "local",
+            "PlayerSpeciality": "batsman",
+            "PlayerValue": 85000,
+            "ParticipationTeamId": 3,
+            "ParticipationTeamName": "IND"
+        },
+        {
+            "PlayerId": 87,
+            "PlayerName": "Mustafizur Rahman",
+            "PlayerType": "local",
+            "PlayerSpeciality": "bowler",
+            "PlayerValue": 95000,
+            "ParticipationTeamId": 6,
+            "ParticipationTeamName": "BAN"
+        },
+        {
+            "PlayerId": 88,
+            "PlayerName": "Mushfiqur Rahim",
+            "PlayerType": "local",
+            "PlayerSpeciality": "wicketkeeper",
+            "PlayerValue": 95000,
+            "ParticipationTeamId": 6,
+            "ParticipationTeamName": "BAN"
+        },
+        {
+            "PlayerId": 90,
+            "PlayerName": "Mahmudullah",
+            "PlayerType": "local",
+            "PlayerSpeciality": "allrounder",
+            "PlayerValue": 90000,
+            "ParticipationTeamId": 6,
+            "ParticipationTeamName": "BAN"
+        },
+        {
+            "PlayerId": 93,
+            "PlayerName": "Mashrafe Mortaza",
+            "PlayerType": "local",
+            "PlayerSpeciality": "allrounder",
+            "PlayerValue": 85000,
+            "ParticipationTeamId": 6,
+            "ParticipationTeamName": "BAN"
+        },
+        {
+            "PlayerId": 94,
+            "PlayerName": "Liton Das",
+            "PlayerType": "local",
+            "PlayerSpeciality": "wicketkeeper",
+            "PlayerValue": 85000,
+            "ParticipationTeamId": 6,
+            "ParticipationTeamName": "BAN"
+        }
+    ]
+}
+
+
+
+
+POST(API to verify team name already exist or not) - 'fail' if team name already exist , 'success' if no team exist with that name
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/verify-team-name
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ "TournamentId":2,"UserTeamName":"DadasXI"}
+
+Response:
+{
+    "status": "fail",
+    "statusMessage": "user team Name already exist.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": []
+}
+
+
+POST(create user team - just save team name) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/create-user-team
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":2,"UserId":5,"UserTeamName":"JattinsXI"}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamId": 12,
+            "UserTeamName": "JattinsXI",
+            "TournamentId": 2,
+            "UserId": 5,
+            "SubsLeft": 50,
+            "NitroLeft": 3,
+            "TotalPoints": 0,
+            "TeamCompositionId": null,
+            "TeamRank": 0,
+            "CreatedDate": "2018-10-26T01:56:25.577",
+            "ModifiedDate": "2018-10-26T01:56:25.577",
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1
+        }
+    ]
+}
+
+
+
+POST(modify user team name) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/modify-user-team
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "TournamentId":2,"UserTeamId":12,"UserTeamName":"JattinsXISSS"}
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamId": 12,
+            "UserTeamName": "JattinsXISSS",
+            "TournamentId": 2,
+            "UserId": 5,
+            "SubsLeft": 50,
+            "NitroLeft": 3,
+            "TotalPoints": 0,
+            "TeamCompositionId": null,
+            "TeamRank": 0,
+            "CreatedDate": "2018-10-26T01:56:25.577",
+            "ModifiedDate": "2018-10-26T01:56:25.577",
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1
+        }
+    ]
+}
+
+
+POST(to save team selection of 11 players with nitro, painkiller, autopilot,captain, vicecaptain) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/save-team-selection
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "UserTeamId":12,"Player1":37,"Player2":38,"Player3":39,"Player4":41,"Player5":42,"Player6":43,"Player7":44,"Player8":47,"Player9":50
+	,"Player10":51,"Player11":53,"TeamCapt":42,"TeamVCapt":47,"NumberOfSubs":5,"NitroUsed":1,"PainKillerUsed":0,"AutoPilotUsed":0
+}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "UserTeamName": "JattinsXISSS",
+            "SubsLeft": 50,
+            "NitroLeft": 3,
+            "PainKillerLeft": 1,
+            "AutoPilotLeft": 1,
+            "TeamCompositionId": 65,
+            "NitroUsed": true,
+            "PainKillerUsed": false,
+            "AutoPilotUsed": false
+        }
+    ]
+}
+
+
+POST(team selection generic rule - 5 batsman, 3 bowler etc)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/team-selection-rule
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ 
+"TournamentId":2
+}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "TeamSelectionRuleId": 1,
+            "TournamentId": 2,
+            "WicketKeeper": 1,
+            "MaxBatsman": 5,
+            "MinBatsman": 3,
+            "MaxBowler": 5,
+            "MinBowler": 3,
+            "MaxAllrounder": 3,
+            "MinAllrounder": 1,
+            "MaxSameTeamPlayer": 6,
+            "TotalPlayers": 11,
+            "TotalBudget": 100
+        }
+    ]
+}
+
+
+
+POST(all matches till that current date)
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/all-matches
+Header: x-api-authtoken = "999304CF-C526-40CA-AB32-D2FAEEC54F53"
+Request:
+{ 
+"TournamentId":2
+}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "MatchId": 16,
+            "MatchNo": 13,
+            "MatchType": "ODI",
+            "Venue": null,
+            "MatchStage": null,
+            "TournamentId": 2,
+            "Team1": "IND",
+            "Team2": "BAN",
+            "Winner": "India",
+            "Loser": null,
+            "Draw": 0,
+            "TotalPoints": 841,
+            "MatchScheduledDate": "2018-09-28T00:00:00",
+            "MatchStatus": "DONE",
+            "MatchDate": "2018-09-28T15:56:19.403",
+            "Inning1BattingTeam": "Bangladesh",
+            "Inning2BattingTeam": null,
+            "TossWinner": "India"
+        },
+        {
+            "MatchId": 14,
+            "MatchNo": 11,
+            "MatchType": "ODI",
+            "Venue": null,
+            "MatchStage": null,
+            "TournamentId": 2,
+            "Team1": "AFG",
+            "Team2": "IND",
+            "Winner": null,
+            "Loser": null,
+            "Draw": 0,
+            "TotalPoints": 962,
+            "MatchScheduledDate": "2018-09-25T00:00:00",
+            "MatchStatus": "DONE",
+            "MatchDate": "2018-09-25T18:26:41.153",
+            "Inning1BattingTeam": "Afghanistan",
+            "Inning2BattingTeam": null,
+            "TossWinner": "Afghanistan"
+        }
+		]
+}
+
+
+POST(upcoming tournament for a user) - TOKEN VALIDATION
+http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/api/fantasycricket/user-upcoming-tournament
+Header: x-api-authtoken = "B087BD51-3425-4BB2-B1F0-119EDB987346"
+x-api-userid = "2"
+
+Request:
+{ "UserId":1}
+
+Response:
+{
+    "status": "success",
+    "statusMessage": "Request Successful.",
+    "httpStatus": "200 OK",
+    "httpStatusCode": 200,
+    "httpStatusDescription": "OK",
+    "data": [
+        {
+            "TournamentId": 3,
+            "TournamentName": "Test Tournament 1",
+            "TournamentStatus": "TBD",
+            "TournamentStage": "ONEDAY",
+            "TournamentLogo": "image.jpg",
+            "TournamentLogoBytes": null,
+            "TournamentStartDate": "2018-11-01T00:00:00",
+            "TournamentEndDate": "2018-12-13T00:00:00"
+        },
+        {
+            "TournamentId": 4,
+            "TournamentName": "Test Tournament 2",
+            "TournamentStatus": "TBD",
+            "TournamentStage": "ONEDAY",
+            "TournamentLogo": "image.jpg",
+            "TournamentLogoBytes": null,
+            "TournamentStartDate": "2018-11-01T00:00:00",
+            "TournamentEndDate": "2018-12-13T00:00:00"
+        }
+    ]
+}
+
