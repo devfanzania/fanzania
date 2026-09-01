@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <RelativeLayout
+            android:id="@+id/llMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorGreyNew"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/llTournament"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rrLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/header_banner"
+                    android:paddingTop="10dp">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/right_nav"
+                        android:layout_toEndOf="@+id/left_nav" />
+
+                    <ImageView
+                        android:id="@+id/left_nav"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_left_arrow_new_disable" />
+
+                    <ImageView
+                        android:id="@+id/right_nav"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_right_arrow_new_disable" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLeague"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tbLeagues"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:overScrollMode="never"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.7dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="5dp"
+                            android:background="@color/colorOrangeNew" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                            android:id="@+id/rankText"
+                            android:layout_width="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/right_side_round_grey"
+                            android:paddingStart="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_toStartOf="@+id/tvLeagueSubscription"
+                            android:text="-"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="12sp" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                            android:id="@+id/tvLeagueSubscription"
+                            android:layout_width="140dp"
+                            android:layout_height="34dp"
+                            android:visibility="invisible"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/round_corner_red"
+                            android:paddingStart="5dp"
+                            android:paddingEnd="5dp"
+                            android:gravity="center"
+                            android:text="League Subscription"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.7dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/colorOrangeNew" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:id="@+id/llManage"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imgManage"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:src="@drawable/ic_settings_light" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/tvManageLeagueTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:text="@string/text_changepin"
+                                android:textColor="@color/colorText"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llShare"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imgShare"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:src="@drawable/ic_share_new" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/tvShareLeagueTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:text="@string/text_sharecode"
+                                android:textColor="@color/colorText"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llStats"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/imgStats"
+                                android:layout_width="20dp"
+                                android:layout_height="@dimen/dimen_20dp"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:src="@drawable/ic_star_new" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/tvLeagueStatsTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="3dp"
+                                android:text="@string/text_leaguestats"
+                                android:textColor="@color/colorText"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/llListLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/llTournament"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/llLeagueHeaders"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorDarkGreyNew"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <!--Rank-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvHeaderRank"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.7"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="@string/text_rank"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp" />
+
+<!--                    &lt;!&ndash;Supported Team&ndash;&gt;-->
+<!--                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular-->
+<!--                        android:id="@+id/tvHeaderSupportedTeam"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="1.8"-->
+<!--                        android:gravity="center"-->
+<!--                        android:paddingStart="5dp"-->
+<!--                        android:text="@string/text_supportedteam"-->
+<!--                        android:textColor="@color/colorBlack"-->
+<!--                        android:textSize="10sp" />-->
+
+                    <!--Team Name-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvHeaderTeamName"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.7"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:text="@string/text_team"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp" />
+
+                    <!--Transfer Pending-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvHeaderTransfer"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="@string/text_transferpending"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="10sp" />
+
+                    <!--Points-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvHeaderPoints"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="@string/text_points"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="10sp" />
+
+                    <!--Last MAtch-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvHeaderAction"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:text="@string/text_lastmatch"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/inRVList"
+                    layout="@layout/commonrecycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/llLeagueHeaders" />
+
+                <View
+                    android:id="@+id/View"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/llLeagueHeaders" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvNoTextMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:gravity="center"
+            android:textColor="@color/colorDark"
+            android:visibility="gone" />
+    </FrameLayout>
+</layout>

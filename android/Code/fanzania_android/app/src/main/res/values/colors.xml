@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#081B39</color>
+    <color name="colorPrimaryDark">#081B39</color>
+    <color name="colorAccent">#081B39</color>
+    <color name="colorBtnDark">#D42915</color>
+    <color name="colorBtnLight">#FFB403</color>
+    <color name="colorTextHint">#444444</color>
+    <color name="colorText">#2D415A</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorLightBlack">#80000000</color>
+    <color name="colorLightWhite">#10ffffff</color>
+    <color name="colorGrey">#DDDDDD</color>
+    <color name="colorGreen">#7DBD21</color>
+    <color name="colorDarkGreen">#497804</color>
+    <color name="colorLightGrey">#40E4E4E6</color>
+    <color name="colorBorder">#502D415A</color>
+    <color name="colorRed">#E95354</color>
+    <color name="colorBlue">#3a08fd</color>
+    <color name="colorOrange">#F48F00</color>
+    <color name="colorLightYellow">#F5F6CE</color>
+    <color name="colorYellow">#F5FB02</color>
+    <color name="colorLight">#F9F9F9</color>
+    <color name="colorLight1">#80ffffff</color>
+    <color name="colorPink">#e95354</color>
+
+    <!--New COlors-->
+    <color name="colorRedNew">#F21541</color>
+    <color name="colorAppIcon">#F28F00</color>
+    <color name="colorGreyNew">#EEEFF1</color>
+    <color name="colorDarkGreyNew">#D4D2D3</color>
+    <color name="colorOrangeNew">#F58F09</color>
+    <color name="colorDark">#0A264D</color>
+
+    <!--Fanzania 2.0 -->
+    <color name="colorRedText">#E95354</color>
+    <color name="colorOrangeGradient">#F39207</color>
+
+</resources>

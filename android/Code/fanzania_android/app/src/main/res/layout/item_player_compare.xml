@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="5">
+        <LinearLayout
+            android:id="@+id/llFirst"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvBatsmanFirst"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Rahul K."
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:paddingStart="2dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_vc"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/imgCVC" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvPointsFirst"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="-"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvPointDif"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="-"
+            android:paddingVertical="5dp"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:paddingVertical="5dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:weightSum="2"
+            android:id="@+id/llSecond"
+            android:orientation="horizontal">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvPointsSecond"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="-"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_vc"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:id="@+id/imgCVCO" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvBatsmanSecond"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:text="Rahul k."
+                android:paddingEnd="2dp"
+                android:textAlignment="textEnd"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

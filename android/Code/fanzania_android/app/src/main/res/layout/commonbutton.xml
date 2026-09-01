@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <com.yorker.fanzania.customviews.CustomButton
+            android:layout_width="@dimen/button_width"
+            android:id="@+id/btnButton"
+            android:background="@drawable/round_corner_gradient"
+            android:layout_height="@dimen/button_height"
+            android:textColor="@color/colorWhite"
+            app:fontName="Montserrat_Regular"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            />
+
+        <ProgressBar
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/pbLogin"/>
+
+    </RelativeLayout>
+</layout>
+

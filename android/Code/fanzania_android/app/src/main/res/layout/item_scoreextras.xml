@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="10">
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+            android:id="@+id/tvBatsman"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.5"
+            android:textColor="@color/colorRedNew"
+            android:textSize="14sp"
+            tools:text="@string/text_batman" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5.5"
+            android:orientation="horizontal">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                tools:text="@string/text_r"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvRR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                tools:text="@string/text_r"
+                android:layout_marginStart="10dp"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

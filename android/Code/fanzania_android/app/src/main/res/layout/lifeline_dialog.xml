@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/llmain"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_background_dialog"
+            android:paddingBottom="30dp"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:background="@color/colorDark"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Powerplay Lifeline"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textAllCaps="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtTitle"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorWhite"
+                    />
+
+                <ImageView
+                    android:backgroundTint="@color/colorRed"
+                    android:layout_toEndOf="@+id/txtTitle"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="8dp"
+                    android:src="@drawable/ic_lifeline_new"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    app:tint="@color/colorRed" />
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="8dp"
+                    android:id="@+id/imgLogo"
+                    android:src="@drawable/ic_menu_logo"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"/>
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:id="@+id/imgClose"
+                    android:layout_marginEnd="7dp"
+                    android:src="@drawable/ic_cancel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"/>
+
+            </RelativeLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/lifeline_heading"
+                        android:id="@+id/amtNotice"
+                        android:layout_marginStart="7dp"
+                        android:textColor="@color/colorRed"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:weightSum="3"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_new_painkiller"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:src="@drawable/ic_new_nitro"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    android:src="@drawable/ic_new_autocaptain"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="3"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="6dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginEnd="3dp"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="4dp"
+                    android:background="@drawable/round_border_black_only"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratBold
+                        android:textSize="14sp"
+                        android:text="PAINKILLER"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/painKillerText"
+                        android:textSize="12sp"
+                        android:layout_marginTop="15dp"
+                        android:textAlignment="center"
+                        android:text="@string/lifeline_not_available"
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginEnd="3dp"
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="4dp"
+                    android:background="@drawable/round_border_black_only"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratBold
+                        android:textSize="14sp"
+                        android:text="NITRO"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:textSize="12sp"
+                        android:id="@+id/nitroText"
+                        android:layout_marginTop="15dp"
+                        android:textAlignment="center"
+                        android:text="@string/lifeline_option_already_used"
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingVertical="20dp"
+                    android:paddingHorizontal="4dp"
+                    android:background="@drawable/round_border_black_only"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratBold
+                        android:textSize="14sp"
+                        android:text="ULTRACAPT"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/autoPilotText"
+                        android:textSize="12sp"
+                        android:layout_marginTop="15dp"
+                        android:textAlignment="center"
+                        android:text="Lifeline option already used."
+                        android:textColor="@color/colorBlack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:weightSum="3"
+                android:paddingHorizontal="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginEnd="3dp"
+                    android:paddingHorizontal="4dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="@drawable/round_corner_gradient"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:clickable="false"
+                        android:text="Unavailable"
+                        android:id="@+id/painKillerBtn"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginEnd="3dp"
+                    android:paddingHorizontal="4dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="match_parent"
+                        android:id="@+id/nitroBtn"
+                        android:layout_height="34dp"
+                        android:background="@drawable/round_corner_gradient"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:clickable="false"
+                        android:text="Select"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginEnd="3dp"
+                    android:paddingHorizontal="4dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="@drawable/round_corner_gradient"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:clickable="false"
+                        android:text="Select"
+                        android:id="@+id/autoPilotBtn"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:id="@+id/notSelectedText"
+                android:textAlignment="center"
+                android:clickable="false"
+                android:layout_marginTop="20dp"
+                android:text="You haven't selected any PowerPlay to save"
+                android:textColor="@color/colorRed"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/llImportant"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:textAlignment="center"
+                    android:clickable="false"
+                    android:layout_marginTop="20dp"
+                    android:text="IMPORTANT"
+                    android:textColor="@color/colorRed"
+                    android:textSize="14sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="2dp"
+                    android:paddingEnd="2dp"
+                    android:textAlignment="center"
+                    android:clickable="false"
+                    android:layout_marginTop="8dp"
+                    android:text="Previously scored bonus points will be nullified upon saving and cannot be reverted."
+                    android:textColor="@color/colorRed"
+                    android:textSize="14sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:textAlignment="center"
+                    android:clickable="false"
+                    android:layout_marginTop="8dp"
+                    android:text="Your selected PowerPlays will be available for reuse in the ‘Team Manager’ screen. You can choose to reuse anytime over the course of the tournament and the same rules as with the original PowerPlays will apply."
+                    android:textColor="@color/colorBlack"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:layout_width="100dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/round_corner_grey_live"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="Save"
+                android:id="@+id/saveBtn"
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        </ScrollView>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </RelativeLayout>
+</layout>

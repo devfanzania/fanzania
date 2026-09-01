@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itJoinLeague"
+        android:title="@string/text_join"
+        android:icon="@drawable/ic_add_league"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/itCreateLeague"
+        android:title="@string/text_create"
+        android:icon="@drawable/ic_join_league"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/itRenameLeague"
+        android:title="@string/text_rename_league"
+        android:icon="@drawable/ic_join_league"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

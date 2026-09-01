@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llPaymentDetails"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvRewardDate"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="5dp"
+                android:layout_weight="3"
+                tools:text="@string/text_bundle"
+                android:textColor="@color/colorText"
+                android:textSize="10sp" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvRewardType"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_weight="2.5"
+                tools:text="@string/text_payoutday"
+                android:textColor="@color/colorText"
+                android:textSize="10sp" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvRewardDetails"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_weight="2.5"
+                tools:text="@string/text_amount"
+                android:textColor="@color/colorText"
+                android:textSize="10sp" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvRewardsAmount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:paddingEnd="5dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

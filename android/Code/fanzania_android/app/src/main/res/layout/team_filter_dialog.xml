@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:background="@drawable/round_background_dialog"
+            android:padding="10dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/text_filterbyteam"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:id="@+id/txtTitle"
+                android:textColor="@color/colorBlack"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/txtTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                />
+
+            <LinearLayout
+                android:layout_below="@+id/rvList"
+                android:id="@+id/llButton"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:weightSum="3">
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnNo"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_red"
+                    android:gravity="center"
+                    android:text="@string/text_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnReset"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_corner_gradient"
+                    android:gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/text_reset"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnYes"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/round_dark"
+                    android:gravity="center"
+                    android:text="@string/text_apply"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

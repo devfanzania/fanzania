@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/inToolbar"
+            layout="@layout/commontoolbar_one" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/square_red_gradient">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/tvMatchPoints"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:layout_marginStart="35dp"
+                        android:layout_toStartOf="@+id/imgPowerPlay"/>
+
+                    <ImageView
+                        android:id="@+id/imgPowerPlay"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="15dp"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/llHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="1dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:text="@string/text_player"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.75"
+                        android:gravity="center"
+                        android:text="@string/tetx_bat"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.75"
+                        android:gravity="center"
+                        android:text="@string/tetx_bowl"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.75"
+                        android:gravity="center"
+                        android:text="@string/tetx_field"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.75"
+                        android:gravity="center"
+                        android:text="@string/tetx_total"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/inRVList"
+                    layout="@layout/commonrecycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</layout>

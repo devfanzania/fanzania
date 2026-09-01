@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/rrHeader"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:weightSum="3"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:layout_width="0dp"
+                android:id="@+id/tvTName"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:text="IND-ENG 2018"/>
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"/>
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:layout_width="0dp"
+                android:id="@+id/tvTeamName"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/colorText"
+                android:textSize="10sp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:text="Dhoper Team"/>
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"/>
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/tvPoints"
+                android:layout_weight="1"
+                android:textColor="@color/colorRed"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textSize="10sp"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:text="400"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/colorGrey"
+            android:orientation="vertical"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                android:id="@+id/tvTrournamentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Tournament Name"
+                android:textColor="@color/colorTextHint"
+                android:textSize="10sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="17dp">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvTournamentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    tools:text="Live"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorText"
+                    android:textSize="12sp" />
+<!--                android:drawableStart="@drawable/ic_round"-->
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvTournamentTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTournamentStatus"
+                    android:layout_centerHorizontal="true"
+                    tools:text="You have 56 pts"
+                    android:gravity="center"
+                    android:textColor="@color/colorRedNew"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvTournamentPts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTournamentTxt"
+                    android:layout_centerHorizontal="true"
+                    tools:text="You have 56 pts"
+                    android:gravity="center"
+                    android:textColor="@color/colorRedNew"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/imgLeft"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:src="@drawable/blank_jersey" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvLeftTeamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/tvTournamentTxt"
+                    android:layout_toEndOf="@+id/imgLeft"
+                    android:gravity="center"
+                    tools:text="IND"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorText"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/imgRight"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/blank_jersey" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvRightTeamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/imgRight"
+                    android:layout_toEndOf="@+id/tvTournamentTxt"
+                    android:gravity="center"
+                    tools:text="AUS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorText"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

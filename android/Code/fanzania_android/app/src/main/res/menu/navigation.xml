@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/itHome"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/itMyTeam"
+        android:icon="@drawable/ic_myteam"
+        android:title="@string/title_team" />
+
+    <item
+        android:id="@+id/itMyLeague"
+        android:icon="@drawable/ic_star_border_black_24dp"
+        android:title="@string/title_league" />
+
+    <item
+        android:id="@+id/itLiveScore"
+        android:icon="@drawable/ic_livescore"
+        android:title="@string/title_livescore" />
+
+    <item
+        android:id="@+id/itMyProfile"
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/title_notification" />
+
+</menu>

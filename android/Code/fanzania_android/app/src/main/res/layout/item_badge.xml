@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+        android:id="@+id/notifications"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top|end"
+        android:background="@drawable/round_circle_red"
+        android:gravity="center"
+        tools:text="99+"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="8sp" />
+</layout>

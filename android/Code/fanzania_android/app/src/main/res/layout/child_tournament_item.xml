@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:id="@+id/rrMainlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            app:cardCornerRadius="8dp"
+            android:elevation="10dp">
+
+            <RelativeLayout
+                android:layout_width="180dp"
+                android:background="@drawable/gradient"
+                android:layout_height="120dp">
+
+                <ImageView
+                    android:id="@+id/imgTournamentLogo"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_cricket_player"
+                    android:padding="5dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/tvTournamentName"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    android:textSize="16sp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/imgTournamentLogo"
+                    android:textColor="@color/colorText"
+                    />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</layout>

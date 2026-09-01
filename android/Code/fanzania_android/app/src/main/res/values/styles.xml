@@ -1,0 +1,136 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorBlack</item>
+        <item name="colorPrimaryDark">@color/colorBlack</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="android:statusBarColor">@color/colorBlack</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
+
+    </style>
+
+
+    <style name="AppThemeRegistration" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@drawable/login_background</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:actionMenuTextAppearance">@style/customActionBar</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="AppTheme.OverFlow">
+        <item name="android:src">@drawable/ic_optionmenu</item>
+    </style>
+
+    <style name="NavigationDrawerStyle">
+        <item name="android:textSize">14sp</item><!-- text size in menu-->
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
+        <item name="listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
+    </style>
+
+    <style name="BottomNavigationDrawerStyle"  parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@color/colorRedNew</item>
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="android:textSize">10sp</item><!-- text size in menu-->
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
+        <item name="listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/colorText</item>
+    </style>
+
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="customActionBar" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Menu">
+        <item name="android:textSize">5sp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="ActionButton" parent="@android:style/Widget.ActionButton">
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
+    <style name="CustomTextTab" parent="android:TextAppearance.Medium">
+        <item name="android:textColor">@drawable/tab_txt_selector</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="CustomTextTabLive" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@drawable/tab_txt_selector_live</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="Color1SwitchStyle">
+        <item name="colorControlActivated">@color/colorGreen</item>
+        <item name="android:colorControlNormal">@color/colorWhite</item>
+        <item name="android:colorControlActivated">@color/colorWhite</item>
+        <item name="trackTint">@color/colorTextHint</item>
+        <!--<item name="tex">@color/colorGrey</item>-->
+    </style>
+
+    <style name="ToolTipLayoutCustomStyle">
+        <item name="ttlm_padding">20dip</item>
+        <item name="ttlm_backgroundColor">@color/colorPrimary</item>
+        <item name="ttlm_cornerRadius">10dip</item>
+        <item name="ttlm_overlayStyle">@style/ToolTipOverlayCustomStyle</item>
+        <item name="android:textAppearance">@style/ToolTipTextStyle</item>
+    </style>
+
+    <style name="ToolTipTextStyle">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="ToolTipOverlayCustomStyle">
+        <item name="android:color">@color/colorPrimary</item>
+        <item name="ttlm_repeatCount">0</item>
+        <item name="ttlm_duration">600</item>
+    </style>
+
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/colorWhite</item> <!-- Whatever color you want-->
+    </style>
+
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+</resources>

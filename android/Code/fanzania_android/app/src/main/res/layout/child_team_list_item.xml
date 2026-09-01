@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <RelativeLayout
+            android:id="@+id/rrHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            >
+
+            <!--<CheckBox-->
+                <!--android:layout_width="30dp"-->
+                <!--android:id="@+id/cbTeam"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_height="30dp"-->
+                <!--/>-->
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:layout_width="match_parent"
+                android:id="@+id/tvTeamName"
+                android:layout_height="30dp"
+                android:textColor="@color/colorWhite"
+                android:textAllCaps="true"
+                android:textSize="12sp"
+                android:background="@drawable/round_corner_playlist"
+                android:singleLine="true"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:gravity="center"
+                />
+
+        </RelativeLayout>
+
+</layout>

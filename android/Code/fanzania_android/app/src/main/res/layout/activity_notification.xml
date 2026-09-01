@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<!--    <android.support.constraint.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context=".views.screens.notification.NotificationActivity">-->
+
+<!--        <include-->
+<!--            android:id="@+id/inToolbar"-->
+<!--            layout="@layout/commontoolbar"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0" />-->
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvNoMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="There is no data found"
+                    android:layout_centerVertical="true" />
+
+                <ProgressBar
+                    android:id="@+id/pBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnClearAll"
+                    android:minWidth="150dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="39dp"
+                    android:background="@drawable/round_corner_red"
+                    android:text="@string/text_clear_all"
+                    android:textAllCaps="true"
+                    android:layout_marginTop="7dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:fontName="Montserrat_Medium"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginBottom="10dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMatches"
+                    android:layout_below="@+id/btnClearAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"/>
+
+            </RelativeLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+<!--    </android.support.constraint.ConstraintLayout>-->
+</layout>

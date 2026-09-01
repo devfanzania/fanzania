@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        >
+        <RelativeLayout
+
+            android:id="@+id/rrSub"
+            android:layout_centerVertical="true"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:background="@drawable/tab_round_corner_dark"
+            tools:ignore="UselessParent">
+
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvLeagueName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:singleLine="true"
+                android:gravity="center"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                tools:text="ssgsgsw"
+                android:padding="2dp"
+                android:textSize="12sp"
+                />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorWhite"
+                android:layout_centerInParent="true"
+                />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvLeagueRank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/view"
+                android:singleLine="true"
+                tools:text="10"
+                android:gravity="center"
+                android:padding="2dp"
+                android:textSize="10sp"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

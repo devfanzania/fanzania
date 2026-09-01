@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "917623529864",
+    "firebase_url": "https://fanzania-c60c8.firebaseio.com",
+    "project_id": "fanzania-c60c8",
+    "storage_bucket": "fanzania-c60c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917623529864:android:4287ce3d1ec525be",
+        "android_client_info": {
+          "package_name": "com.yorker.fanzania"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917623529864-qo4sjrb1q1d60vnjsbnj2ai5e0605si7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yorker.fanzania",
+            "certificate_hash": "9a7c4a5a24da5d3dcaae4d33b18f70b379311833"
+          }
+        },
+        {
+          "client_id": "917623529864-qpe717a9mf55tp9nlg48e555rfb4uq5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4x5Vvf9Gj-C3DklBklEHQHEmsZi6DrlY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917623529864-qpe717a9mf55tp9nlg48e555rfb4uq5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,27 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+
+    repositories {
+        google()
+        mavenCentral()
+        maven  {  url 'https://jitpack.io' }
+        maven  {  url 'https://maven.cashfree.com/release' }
+    }
+}
+
+rootProject.name = "fanzania"
+
+include ':app'
+
+//include ':app'
+//rootProject.name='fanzania'

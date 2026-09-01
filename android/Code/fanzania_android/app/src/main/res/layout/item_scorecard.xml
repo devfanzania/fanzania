@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="10">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvBatsman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/text_batman"
+                android:textColor="@color/colorRedNew"
+                android:textSize="14sp" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/text_batman"
+                android:textColor="@color/colorText"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/text_r"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/text_b"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tv4S"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/text_4s"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tv6S"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/text_6s"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvSR"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/text_sr"
+            android:textAllCaps="true"
+            android:textColor="@color/colorText"
+            android:textSize="14sp" />
+    </LinearLayout>
+</layout>

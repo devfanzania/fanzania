@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/log_bg"
+        tools:context=".views.screens.webview.WebviewActivity">
+
+        <include
+            android:id="@+id/inToolbar"
+            layout="@layout/commontoolbar" />
+
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pBar"
+            android:layout_centerInParent="true"
+            />
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_below="@+id/inToolbar"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:background="@color/colorWhite"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+</layout>

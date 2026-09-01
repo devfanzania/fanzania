@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:id="@+id/llFirst"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:orientation="vertical">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvTeamName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="-"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:paddingStart="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="-"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:paddingStart="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="10sp"
+                tools:ignore="RtlSymmetry" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvPlan1"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="-"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/imgPlan1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvPlan2"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="-"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/imgPlan2"
+                android:layout_width="25dp"
+                android:visibility="gone"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvPlan3"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="-"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:visibility="gone"
+                android:id="@+id/imgPlan3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingVertical="5dp"
+            android:orientation="horizontal">
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvTotal"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:text="-"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

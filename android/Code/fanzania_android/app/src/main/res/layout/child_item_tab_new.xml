@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/llSub"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:elevation="10dp"
+            tools:ignore="UselessParent">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvTrounamentName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingRight="20dp"
+                android:paddingLeft="20dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvTrounamentYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

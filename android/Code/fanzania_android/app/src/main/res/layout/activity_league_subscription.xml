@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/log_bg">
+
+        <include
+            android:id="@+id/inToolbar"
+            layout="@layout/commontoolbar"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorWhite" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="8dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@null" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                            android:id="@+id/edtCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawableEnd="@drawable/down_arrow_filled"
+                            android:drawablePadding="10dp"
+                            android:drawableTint="@color/colorWhite"
+                            android:gravity="center_vertical"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="10dp"
+                            android:singleLine="true"
+                            android:text="INR"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:targetApi="m" />
+
+                    </RelativeLayout>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                        android:id="@+id/txtErrorCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/colorRed"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="7dp"
+                android:weightSum="5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/teamHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Team"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/plan2Heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Prize"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan1Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="INR 99"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan1Select"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="9dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/round_corner_red"
+                        android:text="Select All"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/plan1Heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Live Score"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan2Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="99"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan2Select"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="9dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/round_corner_red"
+                        android:text="Select All"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/plan3Heading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Full"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan3Price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="INR 140"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/plan3Select"
+                        android:layout_width="65dp"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="9dp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Select All"
+                        android:background="@drawable/round_corner_red"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/totalAmountHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="Total"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="INR"
+                        android:id="@+id/totalcurrency"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp"
+                        tools:ignore="RtlCompat" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <include
+                android:layout_marginTop="8dp"
+                android:id="@+id/inRVList"
+                layout="@layout/commonrecycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llLeagueHeaders" />
+
+            <View
+                android:background="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="7dp"
+                android:weightSum="5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/subscriptionSelectedHeading"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Subscription Selected"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan1SelectedAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan2SelectedAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan3SelectedAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/planSelectedTotalAmount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="7dp"
+                android:weightSum="5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/totalAmountBDHeading"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Total Amount (Before Discount)"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan1SelectedAmountBD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan2SelectedAmountBD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan3SelectedAmountBD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/planSelectedTotalAmountBD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <View
+                android:background="@color/colorRed"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:paddingBottom="15dp"
+                android:layout_marginTop="7dp"
+                android:weightSum="5"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/totalAmountADHeading"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Total Amount (After Discount)"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan1SelectedAmountAD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan2SelectedAmountAD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/plan3SelectedAmountAD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/planSelectedTotalAmountAD"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="0"
+                    android:textColor="@color/colorRed"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
+
+<com.yorker.fanzania.customviews.CustomButton
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="15dp"
+    android:layout_width="match_parent"
+    android:id="@+id/btnPay"
+    android:background="@drawable/square_gradient"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorWhite"
+    android:text="Proceed to pay"
+    app:fontName="Montserrat_Medium"
+    android:textAllCaps="true"
+    android:textSize="14sp"
+    />
+</RelativeLayout>
+
+</layout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <include
+            android:id="@+id/inToolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/commontoolbar"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgImageView"
+            android:layout_width="180dp"
+            android:padding="10dp"
+            android:layout_below="@+id/inToolbar"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="180dp"
+            app:civ_border_width="0.2dp"
+            app:civ_border_color="#ffffff"/>
+
+        <!--<ImageView-->
+            <!--android:layout_below="@+id/inToolbar"-->
+            <!--android:id="@+id/imgImageView"-->
+            <!--android:layout_width="180dp"-->
+            <!--android:padding="10dp"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_height="180dp"-->
+            <!--/>-->
+
+        <include
+            android:id="@+id/inButton"
+            layout="@layout/commonbutton"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+</layout>

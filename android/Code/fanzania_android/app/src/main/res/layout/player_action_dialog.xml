@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_background_dialog"
+            android:padding="10dp">
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/text_chooseaction"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <RadioGroup
+                android:id="@+id/RG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtTitle"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                >
+
+                <RadioButton
+                    android:id="@+id/rbCaptain"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/text_captain"
+                    android:textColor="@color/radio_flat_text_selector" />
+
+                <RadioButton
+                    android:id="@+id/rbVSCaptain"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/radio_flat_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/text_vicecaptain"
+                    android:textColor="@color/radio_flat_text_selector" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnNo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_red"
+                    android:gravity="center"
+                    android:text="@string/text_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnChange"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_corner_gradient"
+                    android:gravity="center"
+                    android:text="@string/text_editplayer"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:visibility="invisible" />
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:id="@+id/btnYes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_dark"
+                    android:gravity="center"
+                    android:text="@string/text_save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pBar"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/colorLight1"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

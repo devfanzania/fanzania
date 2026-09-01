@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_bg">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp"
+                android:src="@drawable/app_fanzania" />
+
+        </RelativeLayout>
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratBoldItalic
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tetx_referfriend"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:textColor="@color/colorWhite"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="100dp"
+            >
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                >
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:layout_width="match_parent"
+                    android:id="@+id/btnSignUp"
+                    android:background="@drawable/round_corner_red"
+                    android:layout_height="@dimen/button_height_new"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/text_signup"
+                    app:fontName="Montserrat_Medium"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    />
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    android:id="@+id/pbSignUp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="15dp"
+                >
+
+                <com.yorker.fanzania.customviews.CustomButton
+                    android:layout_width="match_parent"
+                    android:id="@+id/btnSignIn"
+                    android:background="@drawable/round_corner_white"
+                    android:layout_height="@dimen/button_height_new"
+                    android:textColor="@color/colorRedNew"
+                    app:fontName="Montserrat_Medium"
+                    android:text="@string/text_signin"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    />
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    android:id="@+id/pbSignIn"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

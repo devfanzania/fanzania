@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Commit 28th March -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <data
+                android:host="pay"
+                android:scheme="upi" />
+        </intent>
+
+        <package android:name="com.android.chrome" />
+    </queries>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="lege" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
+    <application
+        android:name=".applications.FanzaniaApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_appicon"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_appicon_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
+        <activity
+            android:name=".views.screens.tournament.subscription.CaseFreeAPIActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.screens.matchcontest.scorecard.ScoreCardActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <receiver
+            android:name="com.google.android.play.core.listener.zzb"
+            android:exported="true" />
+
+        <activity
+            android:name=".views.screens.auth.landingpage.LandingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <service
+            android:name=".pushnotification.FireBaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_appicon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorPrimaryDark" />
+
+        <activity
+            android:name=".views.imagecapture.ActivityImageTaker"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/text_facebook_app_id" />
+
+        <activity
+            android:name=".views.screens.splash.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.screens.auth.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeRegistration"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.auth.registration.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeRegistration"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".views.screens.auth.forgotpassword.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeRegistration"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.Home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".views.screens.auth.changepassword.ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeRegistration"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".views.screens.tournament.pointhistory.PointHistoryActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.tournament.pointsbreakdown.PointsBreakDownActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.tournament.playerlist.PlayerListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".views.screens.tournament.manageteam.ManageTeamActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.createteam.CreateTeamActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".views.screens.league.LeagueSubscriptionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".views.screens.auth.emailverification.EmailVerificationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysVisible" />
+        <activity
+            android:name=".views.screens.webview.WebviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.leaguestats.LeagueStatsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.teamstats.TeamStatsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.tournamentstats.TournamentStatsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.liveleagueview.LiveLeagueViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" /> <!-- New Activity -->
+        <activity
+            android:name=".views.screens.tournament.liveteamview.LiveTeamViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.liveteamview.LiveTeamViewCompareActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.matchcontest.playerselection.PlayerSelectionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.matchcontest.myallmatches.MyAllMatchesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <activity
+            android:name=".views.screens.tournament.fragments.profilefragment.ProfileFragment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.tournament.wallet.WalletActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.tournament.subscription.SubscriptionActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.tournament.kyc.KYCActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+        <activity
+            android:name=".views.screens.matchcontest.mcliveteamscore.McLiveTeamScoreActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="084c1757c5fb92512bb0d33e16eebb776a3bf63a" />
+        <meta-data
+            android:name="cashfree_pg_logging_level"
+            android:value="2"
+            tools:replace="android:value" />
+    </application>
+
+</manifest>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--expandebel-->
+
+    <declare-styleable name="ExpandableLayout">
+        <attr name="el_duration" format="integer" />
+        <attr name="el_expanded" format="boolean" />
+        <attr name="el_parallax" format="float" />
+        <!-- {@deprecated Use el_parallax instead.} -->
+        <attr name="el_translate_children" format="boolean" />
+        <attr name="layout_expandable" format="boolean" />
+        <attr name="android:orientation" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomButton">
+        <attr name="fontName" />
+    </declare-styleable>
+
+    <attr name="fontName" format="enum">
+        <enum name="Montserrat_Medium" value="1" />
+        <enum name="Montserrat_Regular" value="2" />
+        <enum name="Montserrat_Light" value="3" />
+    </attr>
+
+    <declare-styleable name="PinEntryEditText">
+        <attr name="pinAnimationType" format="enum">
+            <enum name="popIn" value="0" />
+            <enum name="fromBottom" value="1" />
+            <enum name="none" value="-1" />
+        </attr>
+        <attr name="pinCharacterMask" format="string" />
+        <attr name="pinRepeatedHint" format="string" />
+        <attr name="pinLineStroke" format="dimension" />
+        <attr name="pinLineStrokeSelected" format="dimension" />
+        <attr name="pinCharacterSpacing" format="dimension" />
+        <attr name="pinTextBottomPadding" format="dimension" />
+        <attr name="pinLineColors" format="color" />
+        <attr name="pinBackgroundDrawable" format="reference" />
+        <attr name="pinBackgroundIsSquare" format="boolean" />
+    </declare-styleable>
+
+    <!--FlowLayout-->
+
+    <declare-styleable name="FlowLayout">
+        <attr name="flFlow" format="boolean" />
+        <attr name="flChildSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+        </attr>
+        <attr name="flMinChildSpacing" format="dimension" />
+        <attr name="flChildSpacingForLastRow" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+            <enum name="align" value="-65537" />
+        </attr>
+        <attr name="flRowSpacing" format="enum|dimension">
+            <enum name="auto" value="-65536" />
+        </attr>
+        <attr name="flRtl" format="boolean" />
+        <attr name="flMaxRows" format="integer" />
+        <attr name="flRowVerticalGravity" format="enum">
+            <enum name="auto" value="-65536" />
+            <enum name="top" value="0x30" />
+            <enum name="center" value="0x10" />
+            <enum name="bottom" value="0x50" />
+        </attr>
+        <attr name="android:gravity" />
+    </declare-styleable>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="ButtonBarContainerTheme">
+        <attr name="metaButtonBarStyle" format="reference" />
+        <attr name="metaButtonBarButtonStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragEdge">
+            <flag name="left" value="1" />
+            <flag name="right" value="2" />
+            <flag name="top" value="4" />
+            <flag name="bottom" value="8" />
+        </attr>
+
+        <attr name="mode">
+            <enum name="normal" value="0" />
+            <enum name="same_level"   value="1" />
+        </attr>
+
+        <attr name="flingVelocity" format="integer" />
+
+        <attr name="minDistRequestDisallowParent" format="dimension" />
+    </declare-styleable>
+
+</resources>

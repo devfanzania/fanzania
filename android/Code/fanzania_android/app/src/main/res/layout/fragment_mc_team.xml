@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMain"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            tools:context=".views.screens.matchcontest.fragments.teams.McTeam">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMatch"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorRedNew"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch" />
+
+            <ProgressBar
+                android:id="@+id/mBar"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rvMatch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/rvMatch"
+                app:layout_constraintTop_toTopOf="@+id/rvMatch" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvTotalTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="-"
+                android:textColor="@color/colorText"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                android:id="@+id/montserratLight2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/text_totalteams"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTotalTeam"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvMyPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                tools:text="01-Jan-20"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                android:id="@+id/montserratLight3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/text_sartsin"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tvMyPoints"
+                app:layout_constraintStart_toStartOf="@+id/tvMyPoints"
+                app:layout_constraintTop_toBottomOf="@+id/tvMyPoints"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvManage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/round_corner_black"
+                android:drawableStart="@drawable/ic_settings_light"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:text="@string/text_manage"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/montserratLight2"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPrediction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="15dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/montserratLight2"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0.5dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorTextHint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/montserratLight2"
+                app:layout_constraintStart_toEndOf="@+id/montserratLight3"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0.5dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorTextHint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvManage"
+                app:layout_constraintStart_toEndOf="@+id/montserratLight2"
+                app:layout_constraintTop_toBottomOf="@+id/rvMatch"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <!--Back Ground Image-->
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/groundnew"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/montserratLight2" />
+
+            <!--Player 1-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer1"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.025">
+
+                <ImageView
+                    android:id="@+id/tvPlayer1Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer1Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer1Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer1Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 2-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer2"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.193"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.26">
+
+                <ImageView
+                    android:id="@+id/imgPlayer2Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer2Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer2Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer2Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 3-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer3"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.26">
+
+                <ImageView
+                    android:id="@+id/imgPlayer3Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer3Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
+                <ImageView
+                    android:id="@+id/imgPlayer3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer3Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer3"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer3Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer3Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 4-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer4"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.812"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.25">
+
+                <ImageView
+                    android:id="@+id/imgPlayer4Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer4Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer4Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer4"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer4Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer4Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 5-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer5"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.194"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.46">
+
+                <ImageView
+                    android:id="@+id/imgPlayer5Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer5Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
+                <ImageView
+                    android:id="@+id/imgPlayer5"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer5Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer5Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer5Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 6-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer6"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.46">
+
+                <ImageView
+                    android:id="@+id/imgPlayer6Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer6Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
+                <ImageView
+                    android:id="@+id/imgPlayer6"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer6Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer6"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer6Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer6Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 7-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer7"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.46">
+
+                <ImageView
+                    android:id="@+id/imgPlayer7Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer7Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer7"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer7Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer7"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer7Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer7Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 8-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer8"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.194"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.7">
+
+                <ImageView
+                    android:id="@+id/imgPlayer8Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer8Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+
+                <ImageView
+                    android:id="@+id/imgPlayer8"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer8Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer8"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer8Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer8Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 9-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer9"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.7">
+
+                <ImageView
+                    android:id="@+id/imgPlayer9Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer9Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer9"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer9Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer9"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer9Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer9Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 10-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer10"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintHorizontal_bias="0.808"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.7">
+
+                <ImageView
+                    android:id="@+id/imgPlayer10Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer10Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer10"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer10Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer10"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer10Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer10Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+            <!--Player 11-->
+            <RelativeLayout
+                android:id="@+id/rrPlayer11"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:layout_constraintVertical_bias="0.95">
+
+                <ImageView
+                    android:id="@+id/imgPlayer11Delete"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="2dp"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/tvPlayer11Captain"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/imgPlayer11"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:src="@drawable/ic_boy"
+                    app:civ_border_color="#ffffff"
+                    app:civ_border_width="0.2dp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer11Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgPlayer11"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayer11Point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvPlayer11Name"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="8sp" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/pBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:id="@+id/tvNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="14sp"
+            tools:ignore="TooManyViews" />
+
+    </FrameLayout>
+
+</layout>

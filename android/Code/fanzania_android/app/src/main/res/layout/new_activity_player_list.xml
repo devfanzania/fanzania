@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        tools:context=".views.screens.tournament.playerlist.PlayerListActivity">
+
+        <include
+            android:id="@+id/inToolbar"
+            layout="@layout/commontoolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/untitlednew"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rrLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true" />
+
+                <ProgressBar
+                    android:id="@+id/pbMatches"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvNoMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lldetails"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_piggy_bank"
+                        />
+
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/tvBudgetAmt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:text="@string/text_budget"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFilterByTeam"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvSPlayers"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/round_corner_teampreview"
+                        android:drawableEnd="@drawable/ic_up_arrow_filled"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="@string/text_teampreview"
+                        android:textColor="@color/colorText"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/tvTransferAmt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/imgInfinity"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="2dp"
+                        android:src="@drawable/ic_infinity"
+                        android:visibility="gone" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:text="@string/text_transfer"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_transfer_logo"
+                         />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--Budget and Transfer-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorBorder" />
+
+            <com.yorker.fanzania.widgets.ExpandableLayout
+                android:id="@+id/explPlayers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:el_duration="300"
+                app:el_expanded="false">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:overScrollMode="never" />
+                </RelativeLayout>
+
+            </com.yorker.fanzania.widgets.ExpandableLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tbSort"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            app:tabBackground="@drawable/tab_player_selector"
+            app:tabIndicatorColor="@null"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="10dp"
+            app:tabPaddingStart="10dp"
+            app:tabSelectedTextColor="@color/colorRedNew"
+            app:tabTextColor="@color/colorText">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@layout/tab1" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@layout/tab2" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@layout/tab3" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@layout/tab4" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabItem5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout="@layout/tab5" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <!--All Count-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvAllCount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="8sp" />
+
+            <!--Batsman Count-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvBatsmanCount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="8sp" />
+
+            <!--All Count-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvKeeperCount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="8sp" />
+
+            <!--All Count-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvAllRounderCount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="8sp" />
+
+            <!--All Count-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:id="@+id/tvBowlerCount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="8sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llheader"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <!--Role-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="@string/text_role"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <!--Player-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPlayerName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:drawableEnd="@drawable/ic_search_red"
+                android:gravity="center_vertical"
+                android:text="@string/text_player"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <!--Team-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvFilter"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="2"
+                android:drawableEnd="@drawable/ic_filter"
+                android:gravity="center"
+                android:text="@string/text_team"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <!--Price-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPriceSort"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:drawableEnd="@drawable/ic_swap"
+                android:gravity="center"
+                android:text="@string/text_price"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+
+            <!--Action-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPointsSort"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="1dp"
+                android:layout_weight="2"
+                android:drawableEnd="@drawable/ic_swap"
+                android:gravity="center"
+                android:text="@string/text_points"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.yorker.fanzania.widgets.ExpandableLayout
+            android:id="@+id/explPlayerSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_duration="300"
+            app:el_expanded="false">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/rlSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                >
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:hint="@string/text_searchby"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorBorder"
+                    android:backgroundTint="@color/colorGrey"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:backgroundTint="@color/colorDarkGreyNew"/>
+
+            </LinearLayout>
+
+
+        </com.yorker.fanzania.widgets.ExpandableLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/inRecyclerview"
+                layout="@layout/commonrecycleview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:id="@+id/View"
+                />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>

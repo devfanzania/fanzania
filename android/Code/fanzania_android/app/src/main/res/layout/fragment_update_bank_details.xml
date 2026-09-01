@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/log_bg"
+        tools:context=".views.screens.notification.NotificationActivity">
+
+<!--        <include-->
+<!--            android:id="@+id/inToolbar"-->
+<!--            layout="@layout/commontoolbar"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0" />-->
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:id="@+id/llMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:visibility="visible">
+
+                    <!--Name-->
+                    <RelativeLayout
+                        android:id="@+id/llName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/emailVerifyImg"
+                            android:id="@+id/edtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="Bank Name *"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:inputType="textCapWords"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp" />
+
+                        <LinearLayout
+                            android:layout_below="@+id/edtName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="Bank Name"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:visibility="visible"
+                                tools:ignore="RtlSymmetry" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/txtErrorName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="Error in name"
+                                android:textColor="@color/colorRed"
+                                android:textSize="12sp"
+                                android:visibility="gone"
+                                tools:ignore="RtlSymmetry" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <!--Number-->
+                    <RelativeLayout
+                        android:id="@+id/llNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:id="@+id/edtNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="Account Number *"
+                            android:inputType="number"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:textAllCaps="true"
+                            android:maxLength="15"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:ignore="TextFields" />
+
+                        <LinearLayout
+                            android:layout_below="@+id/edtNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="Account Number"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:visibility="visible" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/txtErrorNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="Error in name"
+                                android:textColor="@color/colorRed"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <!--Number-->
+                    <RelativeLayout
+                        android:id="@+id/enterOTPRL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:id="@+id/edtIfsc"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="IFSC Code *"
+                            android:inputType="textCapCharacters"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:textAllCaps="true"
+                            android:maxLength="15"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:ignore="TextFields" />
+
+                        <LinearLayout
+                            android:layout_below="@+id/edtIfsc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="IFSC"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="12sp"
+                                android:visibility="visible" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                                android:id="@+id/txtErrorIFSC"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginTop="2dp"
+                                android:paddingStart="10dp"
+                                android:text="Error in name"
+                                android:textColor="@color/colorRed"
+                                android:textSize="12sp"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:visibility="visible"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp"
+                        android:weightSum="4"
+                        android:paddingRight="30dp">
+
+                        <RelativeLayout
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                                android:id="@+id/tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/edittext_height"
+                                android:layout_marginTop="10dp"
+                                android:drawablePadding="10dp"
+                                android:gravity="center_vertical"
+                                android:paddingStart="15dp"
+                                android:singleLine="true"
+                                android:text="Verified "
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                                android:id="@+id/edtStatus"
+                                android:layout_toEndOf="@+id/tv"
+                                android:minWidth="100dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/edittext_height"
+                                android:layout_marginTop="10dp"
+                                android:drawablePadding="10dp"
+                                android:backgroundTint="@color/colorLightYellow"
+                                android:gravity="center_vertical"
+                                android:paddingStart="5dp"
+                                android:paddingEnd="15dp"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:text="-"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="16sp"
+                                tools:ignore="RtlCompat" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                        android:id="@+id/submitNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="7dp"
+                        android:paddingLeft="38dp"
+                        android:paddingRight="30dp"
+                        android:text="* Submit button will be enable when KYC and Phone number is verified"
+                        android:textColor="@color/colorRed"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+                    <RelativeLayout
+                        android:visibility="visible"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="30dp">
+
+                        <com.yorker.fanzania.customviews.CustomButton
+                            android:id="@+id/btnSave"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/button_height_new"
+                            android:clickable="false"
+                            android:background="@drawable/round_corner_grey_live"
+                            android:text="Submit"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="14sp"
+                            app:fontName="Montserrat_Medium" />
+
+                        <ProgressBar
+                            android:id="@+id/pbSignUp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/pBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/inToolbar"
+            layout="@layout/commontoolbar" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/pullToRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llLeagueHeaders"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="1dp"
+                    android:weightSum="10">
+
+                    <!--Rank-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.7"
+                        android:gravity="center"
+                        android:text="@string/text_rank"
+                        android:id="@+id/tvRank"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="10sp" />
+
+                    <!--Team | Power Play-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3.1"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_team"
+                        android:id="@+id/tvHeaderRank"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="10sp" />
+
+                    <!--Transfer-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:gravity="center"
+                        android:id="@+id/tvHeaderTeamName"
+                        android:text="@string/text_transfer_used"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="10sp" />
+
+                    <!--Action-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:gravity="center"
+                        android:id="@+id/tvHeaderAction"
+                        android:text="@string/text_total"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="10sp" />
+
+                    <!--Points-->
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.8"
+                        android:gravity="center"
+                        android:id="@+id/tvHeaderPoints"
+                        android:text="@string/text_match"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/inRVList"
+                    layout="@layout/commonrecycleview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+
+</layout>

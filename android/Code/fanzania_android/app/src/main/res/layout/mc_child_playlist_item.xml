@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.yorker.fanzania.widgets.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <LinearLayout
+            android:id="@+id/llAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:id="@+id/tvCaptain"
+                android:text="C"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:background="@drawable/id_circle_black"
+                android:layout_marginEnd="2dp"
+                android:textSize="10sp"
+                />
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:id="@+id/tvVCaptain"
+                android:text="VC"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:background="@drawable/id_circle_black"
+                android:textSize="10sp"
+                />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMain"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/tvPlayerType"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgIsPlaying"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:src="@drawable/ic_round"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/tvPlayerType"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Player-->
+            <LinearLayout
+                android:id="@+id/playerNameBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvPriceSort"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imgIsPlaying"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvPlayerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    tools:text="ivhjbbjkbjbjb"
+                    android:textColor="@color/colorText"
+                    android:textSize="12sp"
+                    />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvPlayerTeamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    tools:text="JSK"
+                    android:textColor="@color/colorText"
+                    android:textSize="10sp"
+                    />
+            </LinearLayout>
+
+            <!--Price-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPriceSort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="120k" />
+
+            <!--Action-->
+            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                android:id="@+id/tvPointsSort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                tools:text="1239"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.45"
+                app:layout_constraintStart_toEndOf="@+id/tvPriceSort"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--Action-->
+            <ImageView
+                android:id="@+id/imgCVC"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="visible"
+                android:src="@drawable/ic_c"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.7"
+                app:layout_constraintStart_toEndOf="@+id/tvPointsSort"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.yorker.fanzania.widgets.SwipeRevealLayout>
+</layout>

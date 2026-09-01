@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+<!--        <item-->
+<!--            android:id="@+id/itNotificaion"-->
+<!--            android:icon="@drawable/ic_notifications"-->
+<!--            android:title="@string/title_profile" />-->
+
+        <item
+            android:id="@+id/itGameRule"
+            android:icon="@drawable/ic_rules"
+            android:title="@string/title_gamerule" />
+        <item
+            android:id="@+id/itFAQ"
+            android:icon="@drawable/ic_faq"
+            android:title="@string/title_faqs" />
+        <item
+            android:id="@+id/itAboutUs"
+            android:icon="@drawable/ic_about_us"
+            android:title="@string/title_aboutus" />
+        <item
+            android:id="@+id/itTermsCondition"
+            android:icon="@drawable/ic_terms_condition"
+            android:title="@string/title_termscondition" />
+        <item
+            android:id="@+id/itContactUs"
+            android:icon="@drawable/ic_contact_us"
+            android:title="@string/text_contactus" />
+        <item
+            android:visible="false"
+            android:id="@+id/itWallet"
+            android:icon="@drawable/ic_wallet_sidemenu"
+            android:title="@string/text_wallet" />
+        <item
+            android:visible="false"
+            android:iconTint="@color/colorBlack"
+            android:id="@+id/itSubscription"
+            android:icon="@drawable/ic_subscription"
+            android:title="@string/text_subcription" />
+    </group>
+
+    <item android:title="@string/text_communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="@string/text_referfriends" />
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_rating"
+                android:title="@string/text_rateus" />
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/itKYC"
+                android:icon="@drawable/ic_document"
+                android:title="@string/title_kyc" />
+
+            <item
+                android:id="@+id/itSignOut"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/title_signout" />
+
+            <item
+                android:id="@+id/nav_version"
+                android:enabled="false"
+                android:title=""
+                />
+        </menu>
+    </item>
+
+</menu>

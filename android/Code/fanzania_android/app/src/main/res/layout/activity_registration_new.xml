@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/log_bg"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:fitsSystemWindows="true"
+            android:background="@android:color/transparent"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            />
+        
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="240dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/app_fanzania" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp"
+                    android:text="@string/text_registration"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <!--First Name-->
+                <LinearLayout
+                    android:id="@+id/llFname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <EditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/round_corner_white_border"
+                        android:inputType="textCapWords"
+                        android:paddingEnd="15dp"
+                        android:drawableStart="@drawable/ic_user_new"
+                        android:drawablePadding="10dp"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="@color/colorWhite"
+                        android:hint="@string/text_name"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtErrorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/colorRed"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!--Email Address-->
+                <LinearLayout
+                    android:id="@+id/llEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <EditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/round_corner_white_border"
+                        android:inputType="textEmailAddress"
+                        android:paddingEnd="15dp"
+                        android:hint="@string/text_emailaddress"
+                        android:textColor="@color/colorWhite"
+                        android:drawableStart="@drawable/ic_mail"
+                        android:drawablePadding="10dp"
+                        android:textColorHint="@color/colorWhite"
+                        android:paddingStart="15dp"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtErrorEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/colorRed"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!--Password-->
+                <LinearLayout
+                    android:id="@+id/llPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/round_corner_white_border"
+                        android:inputType="textPassword"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
+                        android:textColor="@color/colorWhite"
+                        android:drawableStart="@drawable/ic_lock"
+                        android:drawablePadding="10dp"
+                        android:textColorHint="@color/colorWhite"
+                        android:hint="@string/text_password"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/txtErrorPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:textColor="@color/colorRed"
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+                <!--Password-->
+                <LinearLayout
+                    android:id="@+id/llReferral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <EditText
+                        android:id="@+id/edtReferral"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/round_corner_white_border"
+                        android:inputType="text"
+                        android:paddingEnd="15dp"
+                        android:paddingStart="15dp"
+                        android:maxLength="5"
+                        android:textColor="@color/colorWhite"
+                        android:drawableStart="@drawable/ic_referral"
+                        android:drawablePadding="10dp"
+                        android:textColorHint="@color/colorWhite"
+                        android:hint="@string/text_referralcodeoptional"
+                        android:singleLine="true"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/txtTermsCondition"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="20dp">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:autoLink="web"
+                        android:textSize="12sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_termsconditiontext"
+                        android:textColor="@color/colorWhite" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="@string/text_tc"
+                        android:textAllCaps="false"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp"
+                        />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    >
+
+                    <com.yorker.fanzania.customviews.CustomButton
+                        android:layout_width="match_parent"
+                        android:id="@+id/btnSignUp"
+                        android:background="@drawable/round_corner_red"
+                        android:layout_height="@dimen/button_height_new"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/text_signup"
+                        app:fontName="Montserrat_Medium"
+                        android:textAllCaps="true"
+                        android:textSize="16sp"
+                        />
+
+                    <ProgressBar
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        android:id="@+id/pbSignUp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="25dp"
+                android:background="@color/colorWhite"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnSupport"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/text_forsupport"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="@string/text_contactus"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/colorRedNew"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

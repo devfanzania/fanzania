@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:id="@+id/HeaderMain"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:padding="16dp"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <RelativeLayout
+            android:id="@+id/rrProfileImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/whitecircle"
+            android:visibility="visible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_user"
+                app:civ_border_color="#ffffff"
+                app:civ_border_width="0.2dp" />
+
+        </RelativeLayout>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imgLogo"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginStart="15dp"-->
+<!--            android:src="@drawable/ic_user"-->
+<!--            />-->
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rrProfileImage"
+            android:layout_marginTop="5dp"
+            android:id="@+id/tvUserName"
+            android:text="skgfsjgbjdn"
+            android:textColor="@color/colorWhite"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="5dp"
+            />
+
+        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvViewProfile"
+            android:text="@string/text_viewprofile"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:layout_toStartOf="@+id/imgArrow"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageView
+            android:id="@+id/imgArrow"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            android:padding="5dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow_new_disable"
+            />
+
+    </RelativeLayout>
+</layout>

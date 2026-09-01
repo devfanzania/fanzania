@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clTournament"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/rrLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/header_banner"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/right_nav"
+                        android:layout_toEndOf="@+id/left_nav" />
+
+                    <ImageView
+                        android:id="@+id/left_nav"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_left_arrow_new_disable" />
+
+                    <ImageView
+                        android:id="@+id/right_nav"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_right_arrow_new_disable" />
+
+                </RelativeLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/rlFunFact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@color/colorGreen"
+                    android:elevation="3dp"
+                    android:visibility="visible"
+                    app:cardBackgroundColor="@color/colorGreyNew"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rrLayout1"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                            android:id="@+id/tvFunFact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_margin="15dp"
+                            android:layout_toStartOf="@+id/imgClose"
+                            android:textColor="@color/colorText"
+                            tools:text="ggccgjh" />
+
+                        <ImageView
+                            android:id="@+id/imgClose"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_clear_black" />
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvMyMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/right_round_corner_red"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="40dp"
+                    tools:text="My Team | ABhijit"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rlFunFact"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvGlobalRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    tools:text="25"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyMatch" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                    android:id="@+id/tvGlobalRankTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/text_globalrank1"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorRedText"
+                    app:layout_constraintEnd_toEndOf="@+id/tvGlobalRank"
+                    app:layout_constraintStart_toStartOf="@+id/tvGlobalRank"
+                    app:layout_constraintTop_toBottomOf="@+id/tvGlobalRank" />
+
+                <View
+                    android:id="@+id/v2"
+                    android:layout_width="0.5dp"
+                    android:layout_height="0dp"
+                    android:background="@color/colorDark"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintEnd_toStartOf="@+id/tvLastMatchTxt"
+                    app:layout_constraintStart_toEndOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintTop_toTopOf="@+id/tvGlobalRank" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvTotalPoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    tools:text="47"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintEnd_toEndOf="@+id/tvtvTotalPointTxt"
+                    app:layout_constraintStart_toStartOf="@+id/tvtvTotalPointTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyMatch" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                    android:id="@+id/tvtvTotalPointTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/text_totallpoint"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorRedText"
+                    app:layout_constraintEnd_toStartOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTotalPoint" />
+
+                <View
+                    android:id="@+id/v1"
+                    android:layout_width="0.5dp"
+                    android:layout_height="0dp"
+                    android:background="@color/colorDark"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintEnd_toStartOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintStart_toEndOf="@+id/tvtvTotalPointTxt"
+                    app:layout_constraintTop_toTopOf="@+id/tvGlobalRank" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvLastMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="0"
+                    android:textColor="@color/colorBlack"
+                    app:layout_constraintEnd_toEndOf="@+id/tvLastMatchTxt"
+                    app:layout_constraintStart_toStartOf="@+id/tvLastMatchTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyMatch" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                    android:id="@+id/tvLastMatchTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/text_lastmatch"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorRedText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintTop_toBottomOf="@+id/tvLastMatch" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvMyMatch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/right_round_corner_red"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="40dp"
+                    tools:text="RCB vs KKR Top 10 teams"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvGlobalRankTxt"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <include
+                    android:id="@+id/inLeagueList"
+                    layout="@layout/commonrecycleview"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/colorWhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMyMatch2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clJoin"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/montserratMedium2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="@string/text_notournamenttextnew"
+                    android:textColor="@color/colorRedText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvOpenTournament"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/right_round_corner_red"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="40dp"
+                    android:text="@string/text_opentournament"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/montserratMedium2"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <LinearLayout
+                    android:id="@+id/llSub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorWhite"
+                    android:elevation="10dp"
+                    android:padding="25dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvOpenTournament"
+                    app:layout_constraintVertical_bias="0.0"
+                    android:gravity="center"
+                    tools:ignore="UselessParent">
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:id="@+id/tvTrounamentName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="14sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:id="@+id/tvTrounamentYear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="12sp" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:textAllCaps="true"
+                        android:text="@string/text_taptojoin"
+                        android:textColor="@color/colorRedText"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clNodata"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:id="@+id/tvNodata"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="@string/text_nodatahome"
+                    android:textColor="@color/colorRedText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pBar"
+                android:layout_gravity="center"
+                />
+
+        </FrameLayout>
+    </ScrollView>
+
+</layout>

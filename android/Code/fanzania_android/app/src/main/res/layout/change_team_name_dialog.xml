@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        >
+
+
+
+        <LinearLayout
+            android:id="@+id/llmain"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/round_background_dialog"
+            android:paddingVertical="10dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Update Team Name"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/txtTitle"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/colorPink"
+                    />
+
+                <ImageView
+                    android:id="@+id/imgClose"
+                    android:layout_marginEnd="7dp"
+                    android:src="@drawable/ic_cancel"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"/>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="30dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/amtRL"
+                        android:layout_marginVertical="13dp"
+                        android:background="@drawable/round_corner_red_edittext"
+                        android:gravity="center_vertical"
+                        android:layout_below="@+id/pointsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:background="@drawable/round_corner_white_edittext"
+                            android:layout_marginEnd="8dp"
+                            android:id="@+id/edtAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:drawablePadding="10dp"
+                            android:layout_marginStart="15dp"
+                            android:hint="Enter New Name"
+                            android:paddingEnd="15dp"
+                            android:layout_marginVertical="5dp"
+                            android:inputType="textCapWords"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGreyNew"
+                            android:textSize="16sp" />
+
+                    </RelativeLayout>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratMedium
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="Error will goes here"
+                        android:id="@+id/amtNotice"
+                        android:layout_below="@+id/amtRL"
+                        android:layout_marginStart="7dp"
+                        android:textColor="@color/colorRed"
+                    />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvConfirm"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/round_corner_gradient"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:clickable="false"
+                    android:text="Confirm"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp" />
+
+                <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                    android:id="@+id/tvClose"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:background="@drawable/round_corner_gradient"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:clickable="false"
+                    android:text="Close"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/pBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </RelativeLayout>
+</layout>

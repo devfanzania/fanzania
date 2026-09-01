@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/log_bg"
+        tools:context=".views.screens.notification.NotificationActivity">
+
+<!--        <include-->
+<!--            android:id="@+id/inToolbar"-->
+<!--            layout="@layout/commontoolbar"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0" />-->
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingTop="25dp"
+                    android:id="@+id/llMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:visibility="visible">
+
+                    <!--Name-->
+                    <RelativeLayout
+                        android:id="@+id/llName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <ImageView
+                            android:tint="@color/colorGreen"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_tick"
+                            android:id="@+id/emailVerifyImg"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"/>
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/emailVerifyImg"
+                            android:editable="false"
+                            android:id="@+id/edtName"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="Email *"
+                            android:inputType="none"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtErrorName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Error in name"
+                            android:textColor="@color/colorRed"
+                            android:textSize="10sp"
+                            android:layout_below="@+id/edtName"
+                            android:layout_toEndOf="@+id/txtHintName"
+                            android:visibility="gone" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtHintName"
+                            android:layout_below="@+id/edtName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:text="eg. abc@xyz.com"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <!--Number-->
+                    <RelativeLayout
+                        android:id="@+id/llNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <LinearLayout
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:id="@+id/verifyLL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:visibility="invisible"
+                                android:tint="@color/colorGreen"
+                                android:src="@drawable/ic_tick"
+                                android:id="@+id/phoneVerifyImg"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"/>
+
+                            <com.yorker.fanzania.customviews.CustomButton
+                                android:layout_width="wrap_content"
+                                android:id="@+id/sendOTP"
+                                android:background="@drawable/round_corner_red"
+                                android:layout_height="35dp"
+                                android:textColor="@color/colorWhite"
+                                android:text="@string/send_otp"
+                                app:fontName="Montserrat_Medium"
+                                android:textAllCaps="true"
+                                android:textSize="10sp"
+                                android:visibility="gone"
+                                android:layout_marginHorizontal="3dp"
+                                />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/verifyLL"
+                            android:editable="false"
+                            android:id="@+id/edtNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="Mobile Number --"
+                            android:inputType="none"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:textAllCaps="true"
+                            android:maxLength="10"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:ignore="TextFields" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtErrorNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Error in name"
+                            android:layout_toEndOf="@+id/txtHintNumber"
+                            android:textColor="@color/colorRed"
+                            android:textSize="10sp"
+                            android:layout_below="@+id/edtNumber"
+                            android:visibility="gone" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtHintNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:layout_below="@+id/edtNumber"
+                            android:text="@string/_10_digit_mobile_number"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <!--Number-->
+                    <RelativeLayout
+                        android:layout_marginBottom="12dp"
+                        android:visibility="gone"
+                        android:id="@+id/enterOTPRL"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <LinearLayout
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:id="@+id/enterOTPLL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.CustomButton
+                                android:layout_width="wrap_content"
+                                android:id="@+id/verifyOTP"
+                                android:background="@drawable/round_corner_red"
+                                android:layout_height="35dp"
+                                android:textColor="@color/colorWhite"
+                                android:text="@string/verify_otp"
+                                app:fontName="Montserrat_Medium"
+                                android:textAllCaps="true"
+                                android:textSize="10sp"
+                                android:layout_marginHorizontal="3dp"
+                                />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/enterOTPLL"
+                            android:id="@+id/edtOTP"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/edittext_height"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/round_corner_white_border"
+                            android:drawablePadding="10dp"
+                            android:hint="Enter Verification Code"
+                            android:inputType="number"
+                            android:paddingStart="15dp"
+                            android:paddingEnd="15dp"
+                            android:textAllCaps="true"
+                            android:maxLength="10"
+                            android:singleLine="true"
+                            android:textColor="@color/colorWhite"
+                            android:textColorHint="@color/colorWhite"
+                            android:textSize="12sp"
+                            tools:ignore="TextFields" />
+
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtResend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Resend OTP"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorGreen"
+                            android:textSize="12sp"
+                            android:layout_below="@+id/edtOTP"
+                            android:visibility="visible" />
+                        <View
+                            android:layout_marginLeft="10dp"
+                            android:background="@color/colorGreen"
+                            android:layout_below="@+id/txtResend"
+                            android:layout_width="80dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_height="2dp"/>
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:id="@+id/txtErrorOTP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:text="Error in name"
+                            android:textColor="@color/colorRed"
+                            android:textSize="10sp"
+                            android:layout_below="@+id/edtOTP"
+                            android:visibility="gone" />
+
+                        <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="2dp"
+                            android:paddingStart="10dp"
+                            android:layout_below="@+id/edtOTP"
+                            android:text="@string/_10_digit_mobile_number"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:visibility="invisible" />
+
+                    </RelativeLayout>
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:text="Update your phone number in your profile section"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="10sp"
+                        android:visibility="visible" />
+
+                    <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratLight
+                        android:id="@+id/sendOTPNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="2dp"
+                        android:paddingStart="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:text="* Send OTP to verify your phone number will be enabled after the KYC Status is approved under PAN"
+                        android:textColor="@color/colorRedNew"
+                        android:textSize="12sp"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="30dp"
+                        android:weightSum="4"
+                        android:paddingRight="30dp">
+
+                        <RelativeLayout
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content">
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                                android:id="@+id/tv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/edittext_height"
+                                android:layout_marginTop="10dp"
+                                android:drawablePadding="10dp"
+                                android:gravity="center_vertical"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:singleLine="true"
+                                android:text="KYC Status: "
+                                android:textColor="@color/colorWhite"
+                                android:textSize="14sp" />
+
+                            <com.yorker.fanzania.customviews.customfonts.montserrat.MontserratRegular
+                                android:id="@+id/edtStatus"
+                                android:layout_toEndOf="@+id/tv"
+                                android:minWidth="100dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/edittext_height"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/round_corner_white_border"
+                                android:drawablePadding="10dp"
+                                android:backgroundTint="@color/colorLightYellow"
+                                android:gravity="center_vertical"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp"
+                                android:singleLine="true"
+                                android:textAlignment="center"
+                                android:text="pending"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginEnd="30dp">
+
+                        <com.yorker.fanzania.customviews.CustomButton
+                            android:id="@+id/btnSave"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/button_height_new"
+                            android:background="@drawable/round_corner_red"
+                            android:text="Submit for approval"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="14sp"
+                            app:fontName="Montserrat_Medium" />
+
+                        <ProgressBar
+                            android:id="@+id/pbSignUp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone" />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/pBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
