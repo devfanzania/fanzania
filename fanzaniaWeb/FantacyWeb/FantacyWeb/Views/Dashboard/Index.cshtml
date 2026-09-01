@@ -1,0 +1,267 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@Html.Hidden("SelectUpcommingTournament")
+@Html.Hidden("SelectUpcommingTournamentName")
+@Html.Hidden("SelectUpcommingTournamentStatus")
+<style>
+    #Players {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+</style>
+
+<input type="hidden" id="hdnTourCnt" />
+
+<section id="DashboardMsg" style="display:none;" class="inner-wrap">
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="text-center">Hello @ViewBag.UserName, Looks like we don't have much happening here. Please create a team by selecting a tournament listed below to proceed.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="TournamentSlider" class="inner-wrap">
+    <div class="container">
+        <div class="banner-slider">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="carousel slide multi-item-carousel" data-interval="false" data-wrap="false" id="theCarousel">
+                        <div id="TournamentBox" class="carousel-inner">
+
+                        </div>
+                    </div>
+                    <a id="TournamentSlide_prev" class="left carousel-control" href="#theCarousel" data-slide="prev" onclick="OnChangeTournamentSlide('prev');"><i class="fa fa-angle-left"></i></a>
+                    <a id="TournamentSlide_next" class="right carousel-control" href="#theCarousel" data-slide="next" onclick="OnChangeTournamentSlide('next');"><i class="fa fa-angle-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section id="TeamNameBar">
+    <div class="container">
+        <div class="heading">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="/Assets/Icon/fanzania-icon-white.png" alt="" class="fanzania-icon" />
+                    <h3 class="team-name-hdng" id="teamname"></h3>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="team-name-dng" id="DashFact"></h3>
+                </div>
+                <div class="col-md-3" id="tourStat">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="DashboardMsg2" style="display:none;">
+    <div class="container">
+        <div class="dashboard_blank">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 class="text-center">Hold tight ! The tournament starts very soon.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="TournamentInfo">
+    <div class="container">
+        <div class="dashboard-info">
+            <div class="dashboard-in">
+                <div class="row" id="UserTournamentStatus">
+                    <div class="col-md-4 text-center">
+                        <div class="score-point">
+                            <h3 id="teampoint"></h3>
+                        </div>
+                        <div class="point-name text-uppercase">
+                            <h4>TOTAL POINTS</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center mid-row">
+                        <div class="score-point">
+                            <h3 id="globalrank"></h3>
+                        </div>
+                        <div class="point-name text-uppercase">
+                            <h4>GLOBAL RANK</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <div class="score-point">
+                            <h3 id="TeamPercentile"></h3>
+                        </div>
+                        <div class="point-name text-uppercase">
+                            <h4>LAST MATCH POINTS</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <!--div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive dashboard-t">
+                            <table id="grid" class="table text-center"></table>
+
+                        </div>
+
+                    </div>
+                </div-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="TopTenTeamsTable">
+    <div class="container">
+        <div class="heading">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="team-name-hdng" id="TopTenUserHeader"></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="" id="tourStat">
+                <div class="col-md-6 text-center">
+                    <div class="table-responsive statTable"><table id="TopTenUserTable"></table></div>
+                </div>
+                    <div class="col-md-6 text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul id="" class="text-center panel-info-final">
+                                <li style="padding: 0 22px !important;" class="text-uppercase" id="transferLeft"></li>
+                                <li style="padding: 0 22px !important;" class="text-uppercase" id="lastMatchPoint"></li>
+                                <li style="padding: 0 22px !important;" class="text-uppercase" id="powerPlay"></li>
+                                <li style="padding: 0 22px !important;" class="text-uppercase" id="WinnerPredictionWithstatus"></li>
+
+                            </ul>
+                        </div>
+                        <div id="TeamView">
+
+                            <div class="col-md-12 ">
+                                <div class="d-ground4">
+                                    <div class="playground-team">
+                                        <div class="dGroundPalyers">
+                                            <div id="Players">
+                                            </div>
+                                        </div>
+                                        <div class="team-indicates">
+                                            <div class="team-indicate">
+                                                <img src="~/Assets/Icon/WicketkeeperGrey.png" />
+                                            </div>
+                                            <div class="team-indicate2">
+                                                <img src="~/Assets/Icon/BatsmanGrey.png" />
+
+                                            </div>
+                                            <div class="team-indicate3">
+                                                <img src="~/Assets/Icon/BowlerGrey.png" />
+                                            </div>
+                                            <div class="team-indicate4">
+                                                <img src="~/Assets/Icon/AllrounderGrey.png" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="div_JoinTour">
+    <div class="container">
+        <div class="footer-slider">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="j-t">
+                        <h3 class="text-uppercase text-center">Join Tournament</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="carousel slide multi-item-carousel" data-interval="false" id="theCarousel1">
+                        <div id="UpcommingTournamentBox" class="carousel-inner">
+
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#theCarousel1" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a class="right carousel-control" href="#theCarousel1" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div id="ModalJoinTournament" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title"><span>Join Tournament -</span><span id="Tname_join"></span></h4>
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close  img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body" style="padding-left: 10px;">
+
+                <table class="table" style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" id="txtTeamName" class="form-control" placeholder="Enter Team Name" maxlength="10" />
+                                <span class="Labelregister">Team name minimum 3 characters</span>
+                            </td>
+                            <td colspan="2">
+                                <div id="checkmsg" class="text-center"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-width-80" onclick="CheckAvailable();">Confirm</button>
+                <button type="button" class="btn btn-primary btn-width-80" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="spinnerContainer" class="spinnerContainer" style="display: block;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+
+<script src="~/CustomScript/Dashboard/Home.js"></script>

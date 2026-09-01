@@ -1,0 +1,311 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Hidden("RewardWeek")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Calculate Rewards</h3>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="form-body">
+
+                        <div class="row form-group">
+                            <div class="col-md-6 text-center">
+                                <button id="btn_CalcReferralReward" class="btn btn-info" onclick="CalcReferralReward()" ;> Calculate Referral Reward</button>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <input type="number" class="form-control1" id="txt_TourId" autocomplete="off" placeholder="Tournament Id">
+                            </div>
+                            <div class="col-md-3 text-left">
+                                <button id="btn_CalcTournamentReward" class="btn btn-info" onclick="CalcTournamentReward()" ;> Calculate Tournament Reward</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Download Rewards</h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a class="inner-tittle " href="#" onclick="DownloadRewards();">Export to excel <i class="fa fa-cloud-download"></i></a>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="row">
+                        <div class="col-md-12 reward-list text-center">
+                            <table id="DownloadRewardList"></table>
+                        </div>
+                        <table id="tblExcel" class="table2excel" style="display: none;"></table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Upload Claim</h3>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label class="control-label" id="default_template"><a href="/Downloader.ashx?FilePath=Template/Claim_Template.xlsx">Download Template</a></label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control1" type="file" id="FileUpload" onchange="ValidateFileType(this);" />
+                        </div>
+                        <div class="col-md-4">
+                            <button id="btnUploadRewards" type="button" class="btn btn-info" onclick="UploadClaim();">Upload Claim</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 reward-list text-center">
+                                <table id="ViewClaimList"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+  
+    $(document).ready(function () {
+        ShowRewardList();
+    });
+
+    function CalcReferralReward() {
+       
+        var uurl = '/AdminReward/CalcReferralReward';
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            //data: jsonData,
+            //dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.status == 'success') {
+                    alert(data.statusMessage);
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                alert("Unable to connect server for calc reward!");
+                return false;
+            }
+        });
+
+    }
+
+    function CalcTournamentReward() {
+        var tId = $('#txt_TourId').val();
+        if (tId == '') {
+            alert('Please enter a tournament id !');
+            return;
+        }
+        var uurl = '/AdminReward/CalcTournamentReward';
+        var pData = { TournamentId: tId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.status == 'success') {
+                    $('#txt_TourId').val(0);
+                    alert(data.statusMessage);
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                alert("Unable to connect server for calc reward!");
+                return false;
+            }
+        });
+
+    }
+
+    var gridRewardList;
+    function ShowRewardList() {
+
+        gridRewardList = $("#DownloadRewardList").grid({
+            dataSource: { url: '/AdminReward/ShowRewardList' },
+            notFoundText: "No reward available",
+            uiLibrary: "bootstrap",
+
+            columns: [
+                { field: "RewardId", title: "Reward Id", width: "8%", align: "center", cssClass: "RewardId" },
+                { field: "UserId", title: "User Id", width: "8%", align: "center", cssClass: "UserId" },
+                { field: "RewardDate", title: "Date", width: "20%", align: "center", cssClass: "RewardDate" },
+                { field: "RewardType", title: "Type", width: "20%", align: "center", cssClass: "RewardType" },
+                 { field: "Details", title: "Details", width: "30%", align: "left", cssClass: "Details" },
+                { field: "RewardAmount", title: "Amount", width: "8%", align: "center", cssClass: "RewardAmount" }
+               
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+    }
+
+    function DownloadRewards()
+    {
+        var uurl = '/AdminReward/DownloadRewardList';
+        $.ajax({
+            url: uurl,
+            type: 'GET',
+            async: false,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+               
+                if (data.length > 0) {
+
+                    $('#tblExcel').empty();
+                    var trHead = "<thead><tr><th>Reward Id</th><th>User Id</th><th>Date</th><th>Reward Type</th><th>Details</th><th>Amount</th></thead>";
+                    var tBody = trHead + "<tbody>";
+                    $.each(data, function (index, value) {
+                        tBody += "<tr><td>" + value.RewardId + "</td><td>" + value.UserId + "</td><td>" + value.RewardDate + "</td><td>" + value.RewardType + "</td><td>" + value.Details + "</td><td>" + value.RewardAmount + "</td></tr>";
+                    });
+                    tBody += "</tbody>";
+                    $('#tblExcel').append(tBody);
+                    var FileName = "PendingRewardList_" + new Date().toLocaleString();
+                    $(".table2excel").table2excel({
+                        //exclude: ".noExl",
+                        name: "Excel Document Name",
+                        filename: FileName
+                    });
+                }
+                else {
+                    alert('No data found..');
+                }
+            },
+            error: function (req, status, error) {
+                alert("Unable to connect server for download reward!");
+                return false;
+            }
+        });
+    }
+
+
+    function ValidateFileType(file) {
+        var ext = $(file).val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xls', 'xlsx']) == -1) {
+            alert('Please select only excel file!');
+            return false;
+        }
+        else {
+            $("#ViewRewardList").css("display", "table");
+            PreSaveList();
+        }
+    }
+
+    function PreSaveList() {
+
+        if ($('#FileUpload').val() == "") {
+            alert('Please select users excel file!');
+            jQuery('#FileUpload').trigger('click');
+            return;
+        }
+        var pData = new FormData();
+        var files = $("#FileUpload").get(0).files;
+        pData.append("pFile", files[0]);
+        var res = $.ajax({
+            url: '/AdminReward/ShowClaimList',
+            type: 'POST',
+            data: pData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+
+                if (data.result == "T") {
+                    ViewListGrid(data.fileName);
+                }
+                else {
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    var ViewClaimList
+    function ViewListGrid(fileName) {
+        $("#ViewClaimList").css("display", "inline-table");
+        var count = 0;
+        if (ViewClaimList != null)
+            count = ViewClaimList.count();
+        if (count <= 0) {
+            ViewClaimList = $("#ViewClaimList").grid({
+                dataSource: { url: "/AdminReward/PreSaveClaimList", data: { FileName: fileName } },
+                notFoundText: "no team found!",
+                uiLibrary: "bootstrap",
+                columns: [
+                    { field: "UserId", title: "User Id" },
+                    { field: "ClaimAmount", title: "Claim Amount" },
+                    { field: "Voucher", title: "Voucher", align: "center" },
+                    { field: "Bundle", title: "Bundle", align: "center" },
+                    { field: "Comments", title: "Comments", align: "center" }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+        }
+        else {
+            ViewClaimList.reload({ page: 1, FileName: fileName });
+        }
+
+    }
+
+    function UploadClaim() {
+       
+        if (ViewClaimList == null || ViewClaimList.count() <= 0) {
+            alert('Please upload some data!');
+            return;
+        }
+        $.ajax({
+            url: '/AdminReward/UploadClaim',
+            type: 'POST',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    $("#ViewClaimList").css("display", "none");
+                    alert('Data uploaded successfuly!');
+                    $('#FileUpload').val('');
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        })
+
+    }
+  
+
+</script>
+

@@ -1,0 +1,113 @@
+﻿@model Fantacy_Model.RegistrationModel
+
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+<div class="inner-bg2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 form-box">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-top">
+                            <h3>DISCOVER YOUR PASSION FOR FANTASY SPORTS.</h3>
+                            <p class="r-form-txt text-uppercase">no gambling.<br />
+                            no contest fees.<br />
+                            <span>only pure fantasy sports.</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-bottom">
+                            <div class="login-from-left">
+                            <img src="~/Assets/Icon/fanzania-icon.png" class="login-icn" />
+                            <p>Create your fanzania account</p>                                        
+                            <form id="frmregister" method="post">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-name form-control", placeholder = "Name" })
+                                    @Html.Label("First name and last name", htmlAttributes: new { @class = "Labelregister" })</br>
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-phone form-control", placeholder = "Email" })
+                                    @Html.Label("This will be your login id", htmlAttributes: new { @class = "Labelregister" })</br>
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <div class="form-group">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form-password", placeholder = "Password" })
+                                    @Html.Label("Minimum of any 8 characters", htmlAttributes: new { @class = "Labelregister" }) </br>
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.ReferralCodeUsed, new { @class = "form-control form-password", placeholder = "Referral Code (Optional)", autocomplete = "off", maxlength ="5" })
+                                    @Html.Label("5 character referral code", htmlAttributes: new { @class = "Labelregister" }) </br>
+                                    @Html.ValidationMessageFor(m => m.ReferralCodeUsed)
+                                </div>
+                                <div class="form-group cap-bg">
+                                    <span class="cap1">
+                                        @Html.DisplayFor(m => m.CaptchaCodeSentParam1)
+                                    </span>
+                                    <span class="cap1">
+                                        @Html.DisplayFor(m => m.CaptchaCodeSentOperator)
+                                    </span>
+                                    <span class="cap1">
+                                        @Html.DisplayFor(m => m.CaptchaCodeSentParam2)
+                                    </span>
+                                    <span class="cap1">
+                                        =
+                                    </span>
+                                    @Html.TextBoxFor(m => m.CaptchaCodeUsed, new { @class = "cap-text", autocomplete = "off" })
+                                    </br>
+                                    <span class="field-validation-error">@Html.DisplayFor(m => m.CaptchaCodeError)</span>
+                                    @Html.ValidationMessageFor(m => m.CaptchaCodeUsed)
+                                    <input type="hidden" id="getlat" name="Lat" class="form-control" />
+                                    <input type="hidden" id="getlong" name="Long" class="form-control" />
+                                </div>
+                                <button id="btnLogin" type="submit" class="btn btn-sign-in">Sign Up</button>
+                                <div class="form-group">
+                                    <span class="field-validation-error">@ViewBag.Message</span>
+                                </div>
+                                <div class="form-group text-center">
+                                    <a href="~/Home/TermsCondition" class="Labellink" target="_blank">By registering, I agree to fanzania's T&Cs</a>
+                                </div>
+
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#dob").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy",
+            yearRange: '1960:' + (new Date).getFullYear()
+        });
+    });
+    $(document).ready(function () {
+        getLocation();
+    });
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else { x.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+    function showPosition(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        $('#getlat').val(lat);
+        $('#getlong').val(long)
+        console.log(lat);
+    }
+</script>

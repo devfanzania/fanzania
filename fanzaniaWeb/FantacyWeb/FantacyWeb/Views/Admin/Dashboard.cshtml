@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<style>
+    #chartTopTenTeamdiv {
+        width: 50%;
+        height: 400px;
+    }
+    
+    #chartTopTenLeaguediv {
+        width: 50%;
+        height: 400px;
+    }
+</style>
+
+<script src="/JS/chart/core.js"></script>
+<script src="/JS/chart/chart.js"></script>
+<script src="/JS/chart/animated.js"></script>
+<script src="/JS/chart/spiritedaway.js"></script>
+
+<script>
+    $(document).ready(function () {
+        LoadTournament();
+        
+    });
+    function LoadTournament() {
+        var pId = $('#pId').val();
+        var pData = { TournamentId: "0" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Admin/GetAllTournament',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                $('#ddlTourList').empty();
+                $.each(data, function (index, value) {
+                    if (index == 0) {
+                        TopTenTeamChart(value.TournamentId);
+                        TopTenLeagueChart(value.TournamentId);
+                    }
+                    $('#ddlTourList').append($("<option></option>").val(value.TournamentId).html(value.TournamentName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        TopTenTeamChart(Tid);
+        TopTenLeagueChart(Tid);
+    });
+
+    function TopTenTeamChart(tid) {
+        var chartData;
+        var uurl = '/Admin/GetGlobalTopTeam';
+        var pData = { TournamentId: tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                chartData = data;
+                // Themes begin
+                am4core.useTheme(am4themes_animated);
+                // Themes end
+                // Create chart instance
+                var chart = am4core.create("chartTopTenTeamdiv", am4charts.XYChart3D);
+                // Add data
+                chart.data = chartData;
+
+                // Create axes
+                let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.dataFields.category = "UserTeamName";
+                categoryAxis.renderer.labels.template.rotation = 270;
+                categoryAxis.renderer.labels.template.hideOversized = false;
+                categoryAxis.renderer.minGridDistance = 20;
+                categoryAxis.renderer.labels.template.horizontalCenter = "right";
+                categoryAxis.renderer.labels.template.verticalCenter = "middle";
+                categoryAxis.tooltip.label.rotation = 270;
+                categoryAxis.tooltip.label.horizontalCenter = "right";
+                categoryAxis.tooltip.label.verticalCenter = "middle";
+                categoryAxis.title.text = "Global Top 10 Teams";
+                categoryAxis.title.fontWeight = "bold";
+
+                categoryAxis.tooltip.getFillFromObject = false;
+                categoryAxis.tooltip.background.fill = am4core.color("#FFFFFF");
+                categoryAxis.tooltip.autoTextColor = false;
+                categoryAxis.tooltip.label.fill = am4core.color("#000000");
+
+
+                let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.title.text = "Points";
+                valueAxis.title.fontWeight = "bold";
+                valueAxis.tooltip.getFillFromObject = false;
+                valueAxis.tooltip.background.fill = am4core.color("#FFFFFF");
+                valueAxis.tooltip.autoTextColor = false;
+                valueAxis.tooltip.label.fill = am4core.color("#000000");
+
+                // Create series
+                var series = chart.series.push(new am4charts.ColumnSeries3D());
+                series.dataFields.valueY = "TotalPoints";
+                series.dataFields.categoryX = "UserTeamName";
+                series.dataFields.name = "Owner";
+                series.dataFields.rank = "TeamRank";
+                series.name = "TotalPoints";
+                series.tooltipText = "{rank}. {name}: [bold]{valueY}[/]";
+                series.columns.template.fillOpacity = 1;
+
+                var columnTemplate = series.columns.template;
+                columnTemplate.strokeWidth = 5;
+                columnTemplate.strokeOpacity = 1;
+                columnTemplate.stroke = am4core.color("#fff");
+
+
+                columnTemplate.adapter.add("fill", (fill, target) => {
+                    return chart.colors.getIndex(target.dataItem.index);
+                })
+
+                columnTemplate.adapter.add("stroke", (stroke, target) => {
+                    return chart.colors.getIndex(target.dataItem.index);
+                })
+
+                chart.cursor = new am4charts.XYCursor();
+                chart.cursor.lineX.strokeOpacity = 0;
+                chart.cursor.lineY.strokeOpacity = 0;
+            },
+            error: function (req, status, error) {
+                toastr_warning("Oops. We are unable to connect to our servers. Please try again.!");
+                return false;
+            }
+        });
+    }
+
+    function TopTenLeagueChart(tid) {
+        var chartData;
+        var uurl = '/Admin/GetGlobalTopLeague';
+        var pData = { TournamentId: tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                chartData = data;
+                // Themes begin
+                am4core.useTheme(am4themes_spiritedaway);
+                // Themes end
+                // Create chart instance
+                var chart = am4core.create("chartTopTenLeaguediv", am4charts.XYChart3D);
+                // Add data
+                chart.data = chartData;
+
+                // Create axes
+                let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                categoryAxis.dataFields.category = "LeagueName";
+                categoryAxis.renderer.labels.template.rotation = 270;
+                categoryAxis.renderer.labels.template.hideOversized = false;
+                categoryAxis.renderer.minGridDistance = 20;
+                categoryAxis.renderer.labels.template.horizontalCenter = "right";
+                categoryAxis.renderer.labels.template.verticalCenter = "middle";
+                categoryAxis.tooltip.label.rotation = 270;
+                categoryAxis.tooltip.label.horizontalCenter = "right";
+                categoryAxis.tooltip.label.verticalCenter = "middle";
+                categoryAxis.title.text = "Global Top 10 Leagues";
+                categoryAxis.title.fontWeight = "bold";
+
+                categoryAxis.tooltip.getFillFromObject = false;
+                categoryAxis.tooltip.background.fill = am4core.color("#FFFFFF");
+                categoryAxis.tooltip.autoTextColor = false;
+                categoryAxis.tooltip.label.fill = am4core.color("#000000");
+
+                let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.title.text = "League Points";
+                valueAxis.title.fontWeight = "bold";
+                valueAxis.tooltip.getFillFromObject = false;
+                valueAxis.tooltip.background.fill = am4core.color("#FFFFFF");
+                valueAxis.tooltip.autoTextColor = false;
+                valueAxis.tooltip.label.fill = am4core.color("#000000");
+
+                // Create series
+                var series = chart.series.push(new am4charts.ColumnSeries3D());
+                series.dataFields.valueY = "LeaguePoints";
+                series.dataFields.categoryX = "LeagueName";
+                series.dataFields.owner = "LeagueOwner";
+                series.dataFields.rank = "LeagueRank";
+                series.name = "LeaguePoints";
+                series.tooltipText = "{rank}. {owner}: [bold]{valueY}[/]";
+                series.columns.template.fillOpacity = .8;
+
+                var columnTemplate = series.columns.template;
+                columnTemplate.strokeWidth = 2;
+                columnTemplate.strokeOpacity = 1;
+                columnTemplate.stroke = am4core.color("#FFFFFF");
+
+                columnTemplate.adapter.add("fill", (fill, target) => {
+                    return chart.colors.getIndex(target.dataItem.index);
+                })
+
+                columnTemplate.adapter.add("stroke", (stroke, target) => {
+                    return chart.colors.getIndex(target.dataItem.index);
+                })
+
+                chart.cursor = new am4charts.XYCursor();
+                chart.cursor.lineX.strokeOpacity = 0;
+                chart.cursor.lineY.strokeOpacity = 0;
+            },
+            error: function (req, status, error) {
+                toastr_warning("Oops. We are unable to connect to our servers. Please try again.!");
+                return false;
+            }
+        });
+    }
+
+</script>
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                @*<h3 class="inner-tittle">Dashboard</h3>*@
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <label class="control-label">Select Tournament :</label>
+                    </div>
+                    <div class="col-md-3">
+                        <select id="ddlTourList" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="chartTopTenTeamdiv" class="col-md-6"></div>
+                    <div id="chartTopTenLeaguediv" class="col-md-6"></div>
+                </div>
+                </div>
+        </div>
+    </div>
+    
+</div>
+<div class="chart-off"></div>

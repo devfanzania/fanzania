@@ -1,0 +1,476 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add New Match</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label1">Game Type</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlGameType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label">Select Tournament</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlTourList" class="form-control1"></select>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <button id="btnSyncMatch" type="button" class="btn btn-info" onclick="SyncMatch();">Sync Match</button>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_AddNewMatch" class="control-label">Add New Match</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" id="default_template"><a href="/Downloader.ashx?FilePath=Template/Match_Template.xlsx">Download Template</a></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control1" type="file" id="FileUpload" onchange="ValidateFileType(this);" />
+                            </div>
+                            <div>
+                                <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="SaveMatch();">Save</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="inner-wrap" id="divpoint">
+                                <div class="col-md-12 text-center">
+
+                                    <div class="pointTable">
+                                        <table id="PreSaveMatchgrid"></table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <h3 class="inner-tittle">Saved Match List</h3>
+                <div class="grid-1">
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 text-center">
+                                <div class="pointTable">
+                                    <table id="SaveMatchgrid"></table>
+                                    <table id="SaveDailyMatchgrid"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        if (sessionStorage.getItem("Temp_MatchGameType") != null) {
+            $('#ddlGameType').val(sessionStorage.getItem("Temp_MatchGameType"));
+            var tid = sessionStorage.getItem("MatchTournamentId");
+            if (tid != null) {
+                if ($('#ddlGameType').val() == 'D') {
+                    $('#ddlTourList').prop("disabled", true);
+                    ShowSaveMatchGrid(0, 'D');
+                }
+                else {
+                    LoadTournament();
+                    $('#ddlTourList').prop("disabled", false);
+                    $('#ddlTourList').val(tid);
+                    ShowSaveMatchGrid(tid, 'T');
+                }
+            } else {
+                LoadTournament();
+            }
+        }
+        else {
+            $('#ddlGameType').val('T');
+            LoadTournament();
+            
+        }
+
+    });
+    $("#ddlGameType").change(function () {
+
+        if ($('#ddlGameType').val() == 'D') {
+            $('#ddlTourList').attr("disabled", "disabled");
+            $('#ddlTourList').val('');
+            ShowSaveMatchGrid(0, 'D');
+            $("#SaveMatchgrid").hide();
+            $("#SaveDailyMatchgrid").show();
+        } else {
+            $('#ddlTourList').removeAttr('disabled');
+            LoadTournament();
+            $("#SaveMatchgrid").show();
+            $("#SaveDailyMatchgrid").hide();
+        }
+        sessionStorage.setItem("Temp_MatchGameType", $('#ddlGameType').val());
+    });
+
+    function LoadTournament() {
+        var pId = $('#pId').val();
+        var pData = { TournamentId: "0" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/GetAllTournament',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                $('#ddlTourList').empty();
+                $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+                $.each(data, function (index, value) {
+                    $('#ddlTourList').append($("<option></option>").val(value.TournamentId).html(value.TournamentName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        ShowSaveMatchGrid(Tid, 'T');
+    });
+
+    function ValidateFileType(file) {
+        var ext = $(file).val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xls', 'xlsx']) == -1) {
+            alert('Please select only excel file!');
+            // $(file).replaceWith($(file).clone());
+            return false;
+        }
+        else {
+            //console.log('first step');
+            $("#PreSaveMatchgrid").css("display", "table");
+            PreSaveMatch();
+        }
+    }
+
+    function PreSaveMatch() {
+        
+        //$('#divMsg').html("");
+        if ($('#FileUpload').val() == "") {
+            alert('Please select users excel file!');
+            jQuery('#FileUpload').trigger('click');
+            return;
+        }
+        var pData = new FormData();
+        var files = $("#FileUpload").get(0).files;
+        //$('#spinnerContainer').show();
+        pData.append("pFile", files[0]);
+        var res = $.ajax({
+            url: '/AdminMatch/ShowMatch',
+            type: 'POST',
+            data: pData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                
+                if (data.result == "T") {
+                    //console.log('second step');
+                    PreSaveMatchGrid(data.fileName);
+                    //$('#spinnerContainer').hide();
+                }
+                else {
+                    //alert('Unable to show. Try again!');
+                    //$('#divMsg').html(data.resMsg);
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    var PreSaveMatchgrid
+    function PreSaveMatchGrid(fileName) {
+        $("#PreSaveMatchgrid").css("display", "inline-table");
+        //$("#TourPointgrid").css("display", "block");
+        //$("#ShowTourPointgrid").css("display", "none");
+        //console.log('third step');
+        var count = 0;
+        if (PreSaveMatchgrid != null)
+            count = PreSaveMatchgrid.count();
+        if (count <= 0) {
+            PreSaveMatchgrid = $("#PreSaveMatchgrid").grid({
+                dataSource: { url: "/AdminMatch/PreSaveMatchList", data: { FileName: fileName } },
+                notFoundText: "no match found!",
+                uiLibrary: "bootstrap",
+                columns: [
+                    { field: "MatchNo", title: "Match No", width: "80px" },
+                    { field: "MatchType", title: "Match Type", width: "80px" },
+
+                    { field: "MatchStage", title: "Match Stage", align: "center", width: "80px" },
+                    { field: "MatchScheduledDate", title: "Match Date", align: "center", cssClass: "status", width: "80px" },
+                    { field: "MatchScheduledTime", title: "Match Time", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Team1", title: "Team1", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Team2", title: "Team2", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Venue", title: "Venue", align: "center", width: "80px" },
+                    { field: "TournamentName", title: "T Name", align: "center", width: "80px" },
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+        }
+        else {
+            PreSaveMatchgrid.reload({ page: 1, FileName: fileName });
+        }
+
+    }
+
+    var SaveMatchgrid
+    var SaveDailyMatchgrid
+    function ShowSaveMatchGrid(Tid, gameType) {
+        
+        var count = 0;
+        if (gameType == 'T') {
+
+            if (SaveMatchgrid != null)
+                count = SaveMatchgrid.count();
+            if (count <= 0) {
+                SaveMatchgrid = $("#SaveMatchgrid").grid({
+                    dataSource: { url: "/AdminMatch/GetSaveMatch", data: { TournamentId: Tid, GameType: gameType } },
+                    notFoundText: "no match found!",
+                    uiLibrary: "bootstrap",
+                    columns: [
+                        //{ field: "MatchNo", title: "Match No", width: "80px" },
+                        //{ field: "UniqueId", title: "Unique Id", width: "100px" },
+                        //{ field: "MatchType", title: "Match Type", width: "80px" },
+
+                        //{ field: "MatchDate", title: "Match Date", align: "center" },
+                        //{ field: "MatchScheduledDate", title: "Scheduled Date", align: "center", cssClass: "status" },
+                        //{ field: "MatchScheduledTime", title: "Scheduled Time", align: "center", cssClass: "status" },
+                        //{ field: "Team1", title: "Team1", align: "center", cssClass: "status" },
+                        //{ field: "Team2", title: "Team2", align: "center", cssClass: "status" },
+                        //{ field: "Venue", title: "Venue", align: "center" },
+                        //{ field: "", title: "", align: "center", cssClass: "edit" },
+                        //{ field: "", title: "", align: "center", cssClass: "delete" }
+
+                        { field: "MatchNo", title: "Match No", width: "8%" },
+                        { field: "UniqueId", title: "Unique Id", width: "8%" },
+                        { field: "MatchType", title: "M-Type", width: "8%" },
+                        { field: "MatchDate", title: "Match Date", align: "center", width: "10%" },
+                        { field: "MatchScheduledDate", title: "Scheduled Date", align: "center", cssClass: "status", width: "10%" },
+                        { field: "MatchScheduledTime", title: "Scheduled Time", align: "center", cssClass: "status", width: "10%" },
+                        { field: "Team1", title: "Team1", align: "center", cssClass: "status", width: "13%" },
+                        { field: "Team2", title: "Team2", align: "center", cssClass: "status", width: "13%" },
+                        { field: "Venue", title: "Venue", align: "center", width: "10%" },
+                        { field: "", title: "", align: "center", width: "5%", cssClass: "edit" },
+                        { field: "", title: "", align: "center", width: "5%", cssClass: "delete" }
+
+                    ]//,
+                    //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+                });
+                SaveMatchgrid.on("rowDataBound", function (e, $row, id, record) {
+
+                    $row.find('.edit').append('<a href="#" title="Edit Match" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'' + record.MatchId + '\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+                    $row.find('.delete').append('<a href="#" title="Delete Match" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteMatch(\'' + record.MatchId + '\',\'' + Tid + '\')"; width="17" height="17" /></a>');
+                });
+            }
+            else {
+                SaveMatchgrid.reload({ page: 1, TournamentId: Tid });
+            }
+        }
+        else {
+
+            if (SaveDailyMatchgrid != null)
+                count = SaveDailyMatchgrid.count();
+            if (count <= 0) {
+                SaveDailyMatchgrid = $("#SaveDailyMatchgrid").grid({
+                    dataSource: { url: "/AdminMatch/GetSaveMatch", data: { MatchId: 0, GameType: gameType } },
+                    notFoundText: "No match found!",
+                    responsive: true,
+                    uiLibrary: "bootstrap",
+                    fixedHeader: true,
+                    height: 350,
+                    minWidth: 800,
+
+                    columns: [
+                        { field: "TournamentName", title: "T-Name", width: "8%" },
+                        { field: "UniqueId", title: "Unique Id", width: "8%" },
+                        { field: "MatchType", title: "M-Type", width: "8%" },
+                        { field: "MatchDate", title: "Match Date", align: "center", width: "10%" },
+                        { field: "MatchScheduledDate", title: "Scheduled Date", align: "center", cssClass: "status", width: "10%" },
+                        { field: "MatchScheduledTime", title: "Scheduled Time", align: "center", cssClass: "status", width: "10%" },
+                        { field: "Team1", title: "Team1", align: "center", cssClass: "status", width: "13%" },
+                        { field: "Team2", title: "Team2", align: "center", cssClass: "status", width: "13%" },
+                        { field: "Venue", title: "Venue", align: "center", width: "10%" },
+                        { field: "", title: "", align: "center", width: "5%", cssClass: "edit" },
+                        { field: "", title: "", align: "center", width: "5%", cssClass: "delete" }
+
+                    ]//,
+                    //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+                });
+                SaveDailyMatchgrid.on("rowDataBound", function (e, $row, id, record) {
+
+                    $row.find('.edit').append('<a href="#" title="Edit Match" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'' + record.MatchId + '\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+                    $row.find('.delete').append('<a href="#" title="Delete Match" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteMatch(\'' + record.MatchId + '\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+                });
+            }
+            else {
+                SaveDailyMatchgrid.reload({ page: 1, TournamentId: Tid });
+            }
+        }
+
+    }
+
+    function SaveMatch() {
+        if (PreSaveMatchgrid == null || PreSaveMatchgrid.count() <= 0) {
+            alert('Please upload some data!');
+            return;
+        }
+        
+        var Tid = $('#ddlTourList').val();
+        if (Tid == '' && $('#ddlGameType').val() == "T") {
+            alert('Please select a tournament!');
+            return;
+        }
+        var pData = {
+            TournamentId: Tid
+        }
+        var jsonData = JSON.stringify(pData);
+        $('#spinnerContainer').show();
+        $.ajax({
+            url: '/AdminMatch/SaveMatch',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    $("#PreSaveMatchgrid").css("display", "none");
+                    $('#FileUpload').val('');
+                    
+                    alert('Data uploaded successfuly!');
+                    //location.href = '/AdminTour/Index';
+                }
+                else {
+                    alert(data.Error);
+                }
+                var Tid = $('#ddlTourList').val();
+                if ($('#ddlGameType').val() == 'T') {
+                    SaveMatchgrid.reload({ page: 1, TournamentId: Tid });
+                } else {
+                    SaveDailyMatchgrid.reload({ page: 1, MatchId: 0 });
+                }
+                $('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                $('#spinnerContainer').hide();
+            }
+        })
+
+    }
+
+    function AddEditRedirection(Mid, Tid) {
+        
+
+        location.href = '/AdminMatch/MatchEdit?mid=' + Mid + '&tid=' + Tid;
+
+    }
+
+    function DeleteMatch(MId, Tid) {
+        //$('#spinnerContainer').show();
+
+        var uurl = '/AdminMatch/DeleteMatch';
+        var pData = { MatchId: MId, TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                
+                //console.log(data);
+                if (data.status == 'success') {
+                    alert('Successfully deleted');
+
+                    if ($('#ddlGameType').val() == 'T') {
+                        SaveMatchgrid.reload({ page: 1, TournamentId: Tid });
+                    } else {
+                        SaveDailyMatchgrid.reload({ page: 1, MatchId: 0 });
+                    }
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete match!");
+                return false;
+            }
+        });
+
+    }
+
+    function SyncMatch() {
+        //var Tid = $('#ddlTourList').val();
+        //if (Tid == '') {
+        //    alert('Please select a tournament!');
+        //    return;
+        //}
+
+        var uurl = '/AdminMatch/SyncMatch';
+        //var pData = { TournamentId: Tid };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            //data: jsonData,
+            //dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status == 'success') {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for Sync match!");
+                return false;
+            }
+        });
+
+    }
+</script>
+

@@ -1,0 +1,453 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Welcome to fanzania ! We strive to offer a fun-filled, exciting and rewarding playing experience." />
+    <meta property="og:description" content="Download the fanzania Android app from Google Play store.While SignUp
+       Use Refferal Code:@ViewBag.ReferralCode" />
+    <meta property="og:url" content="https://play.google.com/store/apps/details?id=com.yorker.fanzania" />
+    <title>fanzania</title>
+    @*@Styles.Render("~/Content/css")*@
+    <link rel="icon" href="~/Assets/Icon/fanzania-icon.png">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jquery.multiselect.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="~/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/css/slick-theme.css">
+    <link rel="stylesheet" href="~/css/dashboard-new.css">
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/JS/jquery-1.12.4.js"></script>
+    <script src="~/JS/jquery-ui.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <link href="~/Content/grid-1.9.13.css" rel="stylesheet" />
+    <style>
+        #shareModal11 .mt-100 {
+            margin-top: 100px
+        }
+
+        #shareModal11 .modal {
+            background-image: linear-gradient(rgb(35, 79, 71) 0%, rgb(36, 121, 106) 100.2%)
+        }
+
+        #shareModal11 .modal-title {
+            font-weight: 900
+        }
+
+        #shareModal11 .modal-content {
+            border-radius: 13px
+        }
+
+        #shareModal11 .modal-body {
+            color: #3b3b3b
+        }
+
+        #shareModal11 .img-thumbnail {
+            border-radius: 33px;
+            width: 61px;
+            height: 61px;
+            cursor: pointer;
+        }
+
+        #shareModal11 .fa:before {
+            position: relative;
+            top: 13px
+        }
+
+        #shareModal11 .smd {
+            width: 200px;
+            font-size: small;
+            text-align: center
+        }
+
+        #shareModal11 .modal-footer {
+            display: block
+        }
+
+        #shareModal11 .ur {
+            border: none;
+            background-color: #e6e2e2;
+            border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px
+        }
+
+        #shareModal11 .cpy {
+            border: none;
+            background-color: #e6e2e2;
+            border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;
+            cursor: pointer
+        }
+
+        #shareModal11 button.focus,
+        #shareModal11 button:focus {
+            outline: 0;
+            box-shadow: none !important
+        }
+
+        #shareModal11 .ur.focus,
+        #shareModal11 .ur:focus {
+            outline: 0;
+            box-shadow: none !important
+        }
+
+        #shareModal11 .message {
+            font-size: 11px;
+            color: #ee5535
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="~/Assets/Image/logo-icon.png" alt="fanzania" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="">
+                            @if (ViewBag.Page == "HomeD")
+                            {
+                                <a href="/DailyGame/HomeD" class="active">Home</a>
+                            }
+                            else
+                            {
+                                <a href="/DailyGame/HomeD" class="">Home</a>
+                            }
+                        </li>
+                        <li>
+                            @if (ViewBag.Page == "LeagueD")
+                            {
+                                <a href="/DailyGame/LeagueD" class="active">League</a>
+                            }
+                            else
+                            {
+                                <a href="/DailyGame/LeagueD">League</a>
+                            }
+                        </li>
+                        <li>
+                            @if (ViewBag.Page == "LiveD")
+                            {
+                                <a href="/DailyGame/LiveScoreD" class="active">Live Score</a>
+                            }
+                            else
+                            {
+                                <a href="/DailyGame/LiveScoreD" class="">Live Score</a>
+                            }
+                        </li>
+                        @*<li>
+                            @if (ViewBag.Page == "Wallet")
+                            {
+                                <a href="/Profile/wallet" class="active">My Wallet</a>
+                            }
+                            else
+                            {
+                                <a href="/Profile/wallet" class="">My Wallet</a>
+                            }
+                        </li>*@
+                        @*<li>
+                            @if (ViewBag.Page == "Wallet")
+                            {
+                                <a href="/Profile/wallet" class="active">My Wallet</a>
+                            }
+                            else
+                            {
+                                <a href="/Profile/wallet" class="">My Wallet</a>
+                            }
+                        </li>*@
+                        @*<li>
+                            @if (ViewBag.Page == "Subscription")
+                            {
+                                <a href="/Payment/Subscription" class="active">Subscription</a>
+                            }
+                            else
+                            {
+                                <a href="/Payment/Subscription" class="">Subscription</a>
+                            }
+                        </li>*@
+                        <li class="dropdown">
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Help <span class="caret"></span></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/HowToPlay_Online/" target="_blank"><i class="fa fa-inbox"></i>How To Play</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Home/TeamComposition_Online" target="_blank"><i class="fa fa-inbox"></i>Team Combination</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Home/PointScoring_Online" target="_blank"><i class="fa fa-inbox"></i>Points System</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Home/FAQ_Online/" target="_blank"><i class="fa fa-inbox"></i>FAQ</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="~/Home/PrivacyPolicy" target="_blank"><i class="fa fa-inbox"></i> Privacy Policy</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="~/Home/TermsCondition" target="_blank"><i class="fa fa-inbox"></i> Terms and Conditions</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user"></i> Welcome
+                                @if (Session["UserName"].ToString() != null || Session["UserName"].ToString() != string.Empty)
+                                {
+                                    //  string name= Session["UserName"].ToString();
+                                    string name = Session["UserName"].ToString();
+                                    int nameLength = name.Length;
+                                    if (nameLength >= 12)
+                                    {
+                                        @Session["UserName"].ToString().Substring(0, 12);
+                                    }
+                                    else
+                                    {
+                                        @Session["UserName"].ToString()
+                                    }
+
+                                }
+
+
+
+                                @ViewBag.UserId <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Profile"><i class="fa fa-user"></i> Profile</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/Profile/ChangePassword"><i class="fa fa-key"></i> Change Password</a></li>
+                                @*<li role="separator" class="divider"></li>
+                                    <li><a href="/Profile/wallet"><i class="fa fa-credit-card"></i> My Wallet</a></li>*@
+                                <li role="separator" class="divider"></li>
+                                @if (!string.IsNullOrEmpty(Session["ReferralCodee"] as string))
+                                {
+
+                                    //  @Session["ReferralCodee"].ToString();
+                                    string refercode = Session["ReferralCodee"].ToString();
+                                    string something1 = "Welcome to fanzania ! We strive to offer a fun-filled, exciting and rewarding playing experience.%0A%0A";
+                                    string something2 = "Download the fanzania Android app from Google Play store:%0A";
+                                    string something3 = "https://play.google.com/store/apps/details?id=com.yorker.fanzania%0A%0A";
+                                    string something4 = "While SignUp Use%0ARefferal Code:  " + refercode + "%0A%0Afanzania Team%0Awww.fanzania.com";
+                                    var fullName = something1 + " " + something2 + "" + something3 + " " + something4;
+
+                                    <li>
+                                        <a href="#" class="socialsharepopup" data-twitter="https://twitter.com/intent/tweet?text=@fullName" data-facebook="https://www.facebook.com/sharer/sharer.php?u=https://play.google.com/store/apps/details?id=com.yorker.fanzania" data-whatsapp="https://api.whatsapp.com/send?text=@fullName" data-email="https://mail.google.com/mail/?view=cm&su=@something1&to&body=@something2@something3@something4&scc=1<mpl=default<mplcache=2&emr=1&osid=1#identifier"><i class="fa fa-share-alt "></i> Refer Friends</a>
+                                    </li>
+                                    //   string refercode = Session["ReferralCodee"].ToString();
+                                    //   string something1 = "Welcome to fanzania ! We strive to offer a fun-filled, exciting and rewarding playing experience.%0A%0A";
+                                    //   string something2 = "Download the fanzania Android app from Google Play store:%0A";
+                                    //  string something3 = "https://play.google.com/store/apps/details?id=com.yorker.fanzania%0A";
+                                    //   string something4 = "While SignUp Use%0ARefferal  " + refercode + "%0Afanzania Team%0Awww.fanzania.com";
+                                    //   var fullName = something1 + " " + something2 + "" + something3 + " " + something4;
+
+                                    // <li>
+                                    // <a href="#" class="socialsharepopup" data-twitter="https://twitter.com/intent/tweet?text=@fullName" data-facebook="https://www.facebook.com/sharer/sharer.php?u=https://play.google.com/store/apps/details?id=com.yorker.fanzania" data-whatsapp="https://api.whatsapp.com/send?text=@fullName" data-email="https://mail.google.com/mail/?view=cm&su=@something1&to&body=@something2@something3@something4&scc=1<mpl=default<mplcache=2&emr=1&osid=1#identifier"><i class="fa fa-share-alt "></i> Refer Friends</a>
+                                    //  </li>
+                                }
+
+
+                                <li role="separator" class="divider"></li>
+
+                                <li><a href="/Profile/KycUpload"><i class="fa fa-upload"></i> KYC Verification</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" onclick="Logout()" ;><i class="fa fa-lock"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" class="switchButton" onclick="SaveLogin()">Switch to </br>Tournaments</a></li>
+                        <li class="dropdown notification-dropdown">
+                            <a href="#" onclick="GetNotifications()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i> <span class="badge" id="NotificationCount"></span></a>
+                            <ul id="NotificationList" class="dropdown-menu twoxtwowhite animated flipInY"></ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </header>
+
+
+
+    @RenderBody()
+    <div class="modal fade" id="shareModal11" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm  modal-dialog-centered" role="document">
+            <div class="modal-content col-12">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                    <h4>Share Refer Code Via</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="icon-container1 d-flex">
+                        <a href="#" data-action="share/twitter/share" class="smd twitter_share" target="_blank">
+                            <i class="img-thumbnail fa fa-twitter fa-2x" style="color: #1DA1F2;background-color:#1da1f21f;"></i>
+                            <p>Twitter</p>
+                        </a>
+                        <a href="#" data-action="share/whatsapp/share" class="smd whatsapp_share" target="_blank">
+                            <i class="img-thumbnail fa fa-whatsapp fa-2x" style="color: #25D366;background-color: #cef5dc;"></i>
+                            <p>Whatsapp</p>
+                        </a>
+                        <!----<div class="smd">
+                             <a data-action="share/facebook/share" class="smd facebook_share" target="_blank">
+                                 <i class="img-thumbnail fa fa-facebook fa-2x" style="color: #3b5998;background-color: #eceff5;"></i>
+                                 <p>Facebook</p>
+                             </a>
+                         </div>-->
+                        <a href="#" data-action="share/whatsapp/share" class="smd  email_share" target="_blank">
+                            <i class="img-thumbnail fa fa-envelope fa-2x" style="color:#BB001B;background-color: #bb001b17;"></i>
+                            <p>Email</p>
+                        </a>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboardfooter">
+        <div class="container">
+            <div class="row copyright">
+                <div class="col-md-6">
+                    <div class="pull-left">
+                        <p>&copy;Copyrights <span id="year"></span> | All Rights Reserved by <a href="#" target="_blank"> fanzania</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="pull-right">
+                        <a href="~/Home/PrivacyPolicy" target="_blank"> Privacy Policy</a> | <a href="~/Home/TermsCondition" target="_blank"> Terms and Conditions</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/JS/dashboard-script.js" type="text/javascript"></script>
+    <script src="~/Scripts/grid-1.9.13.js"></script>
+    <script src="~/JS/jquery.multiselect.js"></script>
+    <script src="~/JS/CustomLogin.js"></script>
+    <script src="~/Scripts/Toastr_Config.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/CustomScript/Common/notification.js"></script>
+</body>
+
+</html>
+<script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+<script>
+    $(document).ready(function () {
+
+       // SaveLogin();
+        getLocation();
+        var x = setInterval(function () {
+
+            var now = new Date();
+            //console.log(now);
+            var uurl = '/HomeD/MakeActive';
+            $.ajax({
+                url: uurl,
+                type: 'POST',
+                //dataType: 'json',
+                async: true,
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    // console.log(data);
+                },
+                error: function (req, status, error) {
+                    return false;
+                }
+            });
+
+        }, 270000);
+
+    });
+    function SaveLogin() {
+        Session_UserId = @Session["UserId"].ToString();
+        var pData = { UserId: Session_UserId, LoginPreference: 'tournament'};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Dashboard/SaveloginPreference',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+              //  console.log(data);
+             //   return;
+                if (data.status == 'success') {
+
+                    location.href = '/Dashboard';
+                  //  GetNotificationCount();
+                    //.hide("slide", { direction: "left" }, 1000);
+                    // $("#li_" + id).hide("slide", { direction: "left" }, 400, function () {
+
+                  //  GetNotifications();
+                }
+                location.href = '/Dashboard';
+
+            },
+            error: function (req, status, error) {
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else { x.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lang = position.coords.longitude;
+
+        window.localStorage.setItem("latt", lat);
+        window.localStorage.setItem("langt", lang);
+       console.log(lat);       //return lat,long;
+        //  codeLatLng(lat, lang);
+    }
+    $(document).on("click", ".socialsharepopup", function (e) {
+        e.preventDefault();
+        $(".whatsapp_share").attr("href", '');
+        $('.facebook_share').attr("href", '');
+        $('.twitter_share').attr("href", '');
+        $('.email').attr("href", '');
+        var facebook = $(this).data("facebook");
+        var whatsapp = $(this).data("whatsapp");
+        var twitter = $(this).data("twitter");
+        var email = $(this).data("email");
+        $(".whatsapp_share").attr("href", whatsapp);
+        $('.facebook_share').attr("href", facebook);
+        $('.twitter_share').attr("href", twitter);
+        $('.email_share').attr("href", email);
+        $("#shareModal11").modal();
+        //console.log("clicked");
+    });
+</script>

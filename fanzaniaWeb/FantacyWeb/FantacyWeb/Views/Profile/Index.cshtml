@@ -1,0 +1,170 @@
+﻿@model Fantacy_Model.ProfileModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<section class="inner-wrap">
+    <div class="container">
+        <div class="dashboardProfile">
+            <div class="row">
+                <div class="col-md-12 text-center"> <h3 class="profile-header">My Profile</h3></div>
+                <div class="col-md-3 ">
+                    <div class="col-sm-10 col-sm-offset-1 profile-image-container" style="cursor:pointer; margin :0px 0px 0px 100px;" onclick="jQuery('#filePhoto').trigger('click');">
+                        @if (String.IsNullOrWhiteSpace(Model.ProfileImage))
+                        {
+                        <img src="/images/blank-profile.png" alt="" />
+                        }
+                        else
+                        {
+                        <img src="@Model.ProfileImage" alt="" />
+                        }
+                    </div>
+                    <div class="profile-image-btn" style="display:none;">
+                        <a href="#" class="btn btn-success btn-sm">Change Photo</a>
+                        @Html.TextBoxFor(m => m.UploadedImage, new { @id = "filePhoto", @type = "file", @style = "display:none;", @onchange = "UpdateImage();" })
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-sm-10 col-sm-offset-1 form-box">
+                        <div class="form-bottom-profile">
+                            <form id="frmregister" method="post">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-firstname form-control", placeholder = "Name" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-phone form-control", placeholder = "Email", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", id = "DOB", placeholder = "Enter Dob", autocomplete = "off" })
+                                    @Html.ValidationMessageFor(m => m.DOB)
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control form-Email", placeholder = "Mobile", maxLength = "11" })
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countrylist, "CountryId", "Country"), "- Select residence country -", new { @class = "form-control form-country" })
+                                    @Html.ValidationMessageFor(m => m.CountryId)
+                                </div>
+                                @if (Model.ListOfTeam != null)
+                                {
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(m => m.BackgroundTheme, new SelectList(Model.ListOfTeam, "TeamShortName", "TeamShortName"), "- Supported Team  -", new { @class = "form-control form-country" })
+                                        @Html.ValidationMessageFor(m => m.BackgroundTheme)
+
+
+                                    </div>
+                                }
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.ReferralCode, new { @class = "form-phone form-control", placeholder = "Referral Code", @readonly = "readonly" })
+
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.ReferralCount, new { @class = "form-phone form-control", placeholder = "Referral Count", @readonly = "readonly" })
+
+                                </div>
+                                <!---- <div class="form-group" style="padding-top:5px;padding-bottom:5px">
+         <label style="font-weight: 200;padding-bottom:5px">Upload KYC Document </label>
+         @Html.TextBoxFor(m => m.KycUploadedImage, new { @id = "KycfilePhoto", @type = "file", @accept = "image/*, application/pdf", @onchange = "KycUpdateImage();" })
+
+     </div>-->
+                                <div class="form-group">
+                                    @Html.CheckBoxFor(m => m.CommPreference, new { @class = "form-comm" })
+                                    @Html.Label("Receive emails from fanzania", new { @class = "form-comm-label" })
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="field-validation-error">@ViewBag.Message</span>
+                                </div>
+                                <button id="btnSave" type="submit" class="btn-e">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    
+    $(function () {
+        $("#DOB").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd-M-yy",
+            yearRange: '1960:' + (new Date).getFullYear()
+        });
+
+    });
+    function KycUpdateImage() {
+        var filedata = new FormData();
+        var files = $("#KycfilePhoto").get(0).files;
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            filedata.append("KycUploadedImage", files[0]);
+
+            //Make Ajax request with the contentType = false, and procesDate = false
+            $.ajax({
+                type: "POST",
+                url: "/Profile/ImageUpload",
+                contentType: false,
+                processData: false,
+                data: filedata,
+                success: function (data) {
+
+                    if (data.status == "success") {
+                        location.href = '/Profile/Index';
+                        toastr_success("File saved successfully.");
+                    }
+                    else {
+                        toastr_error("File Not Saved. Please Contact Admin Team.");
+
+                        return;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) { alert(err); });
+        }
+
+
+    }
+    
+    function UpdateImage() {
+        var filedata = new FormData();
+        var files = $("#filePhoto").get(0).files;
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            filedata.append("UploadedImage", files[0]);
+
+            //Make Ajax request with the contentType = false, and procesDate = false
+            $.ajax({
+                type: "POST",
+                url: "/Profile/ImageUpload",
+                contentType: false,
+                processData: false,
+                data: filedata,
+                success: function (data) {
+                    
+                    if (data.status == "success") {
+                        location.href = '/Profile/Index';
+                        toastr_success("File saved successfully.");
+                    }
+                    else {
+                        toastr_error("File Not Saved. Please Contact Admin Team.");
+
+                        return;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) { alert(err); });
+        }
+
+
+    }
+
+</script>

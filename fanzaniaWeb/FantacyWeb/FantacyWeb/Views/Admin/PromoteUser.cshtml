@@ -1,0 +1,669 @@
+﻿
+@{
+    ViewBag.Title = "PromoteUser";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Promote User</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-4 text-center">
+                                <label for="txt_UserEmail" class="control-label">Email Id</label>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <input type="text" class="form-control1" id="txt_UserEmail" placeholder="">
+                            </div>
+                         
+                     
+
+
+                            <div class="col-md-4 text-center">
+                                <button id="btnSave" type="button" class="btn btn-info" onclick="PromoteUser();">Promote</button>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2 text-center">
+                                <label for="txt_LeaguePin" class="control-label">League Code</label>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <input type="text" class="form-control1" id="txt_LeaguePin" placeholder="">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="txt_SubscriptionTypeLeague" class="control-label"> Subscription Type</label>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <input type="text" class="form-control1" id="txt_SubscriptionTypeLeague" placeholder="">
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <button id="btnSave" type="button" class="btn btn-info" onclick="PromoteUserLeague();">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add Fun Fact</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-4 text-center">
+                                <label for="txt_funfact" class="control-label">Fun Facts</label>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <textarea class="form-control1" id="txt_funfact" placeholder="" maxlength="150"></textarea>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <button id="btnFunFactSave" type="button" class="btn btn-info" onclick="SaveFunfact();">Save Fun Fact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Sync Tournament Data</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-3 text-center">
+                                <label for="txt_SeriesId" class="control-label">TournamentKey</label>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <input type="text" class="form-control1" id="TournamentKey" placeholder="">
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <label for="txt_SeriesId" class="control-label">TeamKey</label>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <input type="text" class="form-control1" id="TeamKey" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3 text-center">
+                                <label for="txt_SeriesId" class="control-label">TournamentType</label>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <select id="TournamentType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+
+                          
+                                <div class="col-md-3 text-center">
+                                    <label for="txt_SeriesId" class="control-label">MatchType</label>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <select name="selector1" id="MatchType" class="form-control1">
+                                        <option value="T20">T20</option>
+                                        <option value="ODI">ODI</option>
+                                        <option value="TEST">TEST</option>
+                                    </select>
+                                </div>
+
+                            
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3 text-center">
+                                <button id="btnSyncMatch" type="button" class="btn btn-info" onclick="SyncMatch();">Sync Match</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button id="btnSyncTeam" type="button" class="btn btn-info" onclick="SyncTeam();">Sync Team</button>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <button id="btnSyncPlayer" type="button" class="btn btn-info" onclick="SyncPlayer();">Sync Player</button>
+                            </div>
+                            
+
+                        </div>
+                            @*<div class="row form-group">
+            <div class="col-md-3 text-center">
+                <label for="txt_SeriesId" class="control-label">MatchId </label>
+            </div>
+            <div class="col-md-3 text-center">
+                <input type="number" class="form-control1" id="MatchId" placeholder="">
+            </div>
+
+            <div class="col-md-6 text-center">
+
+                <button id="btnSyncPlayer" type="button" class="btn btn-info" onclick="SyncPlayer();">Sync Player</button>
+            </div>
+        </div>*@
+                        </div>
+                    </div>
+            </div>
+            <div class="graph-2 general">
+                <h3 class="inner-tittle"> Update User Points</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-2 text-center">
+                                <label for="MatchId" class="control-label">MatchId</label>
+                                <input type="number" class="form-control1" id="MatchIdd" placeholder="">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="PlayerId" class="control-label">PlayerId</label>
+                                <input type="number" class="form-control1" id="PlayerId" placeholder="">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="BattingPoints" class="control-label">BattingPoints</label>
+                                <input type="number" class="form-control1" id="BattingPoints" placeholder="">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="BowlingPoints" class="control-label">BowlingPoints</label>
+                                <input type="number" class="form-control1" id="BowlingPoints" placeholder="">
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="FieldingPoints" class="control-label">FieldingPoints</label>
+                                <input type="number" class="form-control1" id="FieldingPoints" placeholder="">
+                            </div>
+
+                            <div class="col-md-2 text-center">
+
+                                <button id="btnSyncMatch" style="margin-top: 33px;" type="button" class="btn btn-info" onclick="updateuserpoints();">Update Point</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-2 general">
+                <h3 class="inner-tittle"> Update Subscription</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-4 text-center">
+                                <label for="MatchId" class="control-label">Email</label>
+                                <input type="text" class="form-control1" id="email" placeholder="">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <label for="PlayerId" class="control-label">SubscriptionType</label>
+                                <input type="number" class="form-control1" id="SubscriptionType" placeholder="">
+                                <span style="font-size: 13px;">(1=Prize, 2=LiveScore, 3=combined)</span>
+                            </div>
+                            <div class="col-md-2 text-center">
+                                <label for="BattingPoints" class="control-label">Amount</label>
+                                <input type="number" class="form-control1" id="Amount" placeholder="">
+                            </div>
+
+
+
+                            <div class="col-md-2 text-center">
+
+                                <button id="btnSyncMatch" style="margin-top: 33px;" type="button" class="btn btn-info" onclick="updateSubscriptionDetails();">Update Subscription</button>
+                                <button id="btnSyncMatch" style="margin-top: 33px;" type="button" class="btn btn-info" onclick="getSubscriptiondetails();">Get Details</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add Notification</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-4 text-center">
+                                <label for="txt_funfact" class="control-label">Title </label>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <input type="text" class="form-control1" id="title_notification" placeholder="">
+                            </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-4 text-center">
+                                    <label for="txt_funfact" class="control-label">Write Notification </label>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <textarea class="form-control1" id="txt_Notification" placeholder="" maxlength="500"></textarea>
+                                </div>
+
+                                <div class="col-md-4 text-center">
+                                    <button id="btnNotificationSave" type="button" class="btn btn-info" onclick="SendNotification();">Send Notification</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function updateuserpoints() {
+        var MatchId = $('#MatchIdd').val();
+        if (MatchId == '') {
+            alert('Please enter some MatchId');
+            return;
+        }
+        var PlayerId = $('#PlayerId').val();
+        if (PlayerId == '') {
+            alert('Please enter some PlayerId');
+            return;
+        }
+        var BattingPoints = $('#BattingPoints').val();
+        if (BattingPoints == '') {
+            alert('Please enter some BattingPoints');
+            return;
+        }
+        var BowlingPoints = $('#BowlingPoints').val();
+        if (BowlingPoints == '') {
+            alert('Please enter some BowlingPoints');
+            return;
+        }
+        var FieldingPoints = $('#FieldingPoints').val();
+        if (FieldingPoints == '') {
+            alert('Please enter some FieldingPoints');
+            return;
+        }
+        //$('#spinnerContainer').show();
+        var uurl = '/Admin/adminupdateuserpoints';
+        var pData = { MatchId: MatchId, PlayerId: PlayerId, BattingPoints: BattingPoints, BowlingPoints: BowlingPoints, FieldingPoints: FieldingPoints};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                console.log(data);
+                if (data.status = 'Success') {
+                    alert(data.statusMessage);
+                 //   $('#txt_funfact').val('');
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+    function SendNotification() {
+        var title_notification = $('#title_notification').val();
+        if (title_notification == '') {
+            alert('Please enter title');
+            return;
+        }
+        var txt_Notification = $('#txt_Notification').val();
+        if (txt_Notification == '') {
+            alert('Please enter message');
+            return;
+        }
+      
+        //$('#spinnerContainer').show();
+        var uurl = '/Admin/SendNotification';
+        var pData = { Title: title_notification ,Message: txt_Notification };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Notification Send successfully');
+                    $('#txt_Notification').val('');
+                    $('#title_notification').val('');
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+
+    function PromoteUser() {
+        var email = $('#txt_UserEmail').val();
+        if (email == '') {
+            alert('Please enter email id');
+            return;
+        }
+      
+        //$('#spinnerContainer').show();
+        var uurl = '/Admin/UpdateUser';
+        var pData = { Email: email};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Promoted successfully');
+                    $('#txt_UserEmail').val('');
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+    function PromoteUserLeague() {
+        var txt_LeaguePin = $('#txt_LeaguePin').val();
+        if (txt_LeaguePin == '') {
+            alert('Please enter League Pin');
+            return;
+        }
+        var txt_SubscriptionTypeLeague = $('#txt_SubscriptionTypeLeague').val();
+        if (txt_SubscriptionTypeLeague == '') {
+            alert('Please enter Subscription Type ');
+            return;
+        }
+        //$('#spinnerContainer').show();
+        var uurl = '/Admin/UpdateUser';
+        var pData = { LeaguePin: txt_LeaguePin, SubscriptionType: txt_SubscriptionTypeLeague, PromotionType: 'league' };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Promoted successfully');
+                    $('#txt_UserEmail').val('');
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+    
+
+    function SaveFunfact() {
+        var funf = $('#txt_funfact').val();
+        if (funf == '') {
+            alert('Please enter some fun fact');
+            return;
+        }
+        //$('#spinnerContainer').show();
+        var uurl = '/Admin/AddFunFact';
+        var pData = { FunMessage: funf };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert(data.statusMessage);
+                    $('#txt_funfact').val('');
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+
+    function SyncMatch() {
+        var TournamentKey = $('#TournamentKey').val();
+        if (TournamentKey == '') {
+            alert('Please enter TournamentKey');
+            return;
+        }
+        var TeamKey = $('#TeamKey').val();
+        if (TeamKey == '') {
+            alert('Please enter TeamKey');
+            return;
+        }
+        var TournamentType = $('#TournamentType').val();
+        if (TournamentType == '') {
+            alert('Please enter TournamentType');
+            return;
+        }
+        var MatchType = $('#MatchType').val();
+        if (MatchType == '') {
+            alert('Please enter MatchType');
+            return;
+        }
+        
+        var uurl = '/Admin/SyncMatch';
+        var pData = { TournamentKey: TournamentKey, TeamKey: TeamKey, TournamentType: TournamentType, MatchType: MatchType };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Match synchronized successfully');
+                    $('#TournamentKey').val('');
+                    $('#TournamentType').val('');
+                    $('#TeamKey').val('');
+                    $('#MatchType').val('');
+                }
+            },
+            error: function (req, status, error) {
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+    function SyncTeam() {
+        var TournamentKey = $('#TournamentKey').val();
+        if (TournamentKey == '') {
+            alert('Please enter TournamentKey');
+            return;
+        }
+        var TeamKey = $('#TeamKey').val();
+        if (TeamKey == '') {
+            alert('Please enter TeamKey');
+            return;
+        }
+        var TournamentType = $('#TournamentType').val();
+        if (TournamentType == '') {
+            alert('Please enter TournamentType');
+            return;
+        }
+        var MatchType = $('#MatchType').val();
+        if (MatchType == '') {
+            alert('Please enter MatchType');
+            return;
+        }
+        var uurl = '/Admin/SyncTeam';
+        var pData = { TournamentKey: TournamentKey, TeamKey: TeamKey, TournamentType: TournamentType, MatchType: MatchType };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Team synchronized successfully');
+                    $('#TournamentKey').val('');
+                    $('#TournamentType').val('');
+                    $('#TeamKey').val('');
+                    $('#MatchType').val('');
+                }
+            },
+            error: function (req, status, error) {
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+    function SyncPlayer() {
+        var TournamentKey = $('#TournamentKey').val();
+        if (TournamentKey == '') {
+            alert('Please enter TournamentKey');
+            return;
+        }
+        var TeamKey = $('#TeamKey').val();
+        if (TeamKey == '') {
+            alert('Please enter TeamKey');
+            return;
+        }
+        var TournamentType = $('#TournamentType').val();
+        if (TournamentType == '') {
+            alert('Please enter TournamentType');
+            return;
+        }
+        var MatchType = $('#MatchType').val();
+        if (MatchType == '') {
+            alert('Please enter MatchType');
+            return;
+        }
+        var uurl = '/Admin/SyncPlayer';
+        var pData = { TournamentKey: TournamentKey, TeamKey: TeamKey, TournamentType: TournamentType, MatchType: MatchType };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Player synchronized successfully');
+                    $('#TournamentKey').val('');
+                    $('#TournamentType').val('');
+                    $('#TeamKey').val('');
+                    $('#MatchType').val('');
+                }
+            },
+            error: function (req, status, error) {
+                toastr_warning("Unable to connect server!");
+                return false;
+            }
+        });
+    }
+     function updateSubscriptionDetails(){
+         var email = $('#email').val();
+         if (email == '') {
+             alert('Please enter  email');
+             return;
+         }
+         var SubscriptionType = $('#SubscriptionType').val();
+         if (SubscriptionType == '') {
+             alert('Please enter  SubscriptionType');
+             return;
+         }
+        
+         var Amount = $('#Amount').val();
+         if (Amount == '') {
+             alert('Please enter Amount');
+             return;
+         }
+         var pData = { Email: email, SubscriptionTier: SubscriptionType, receipt: "manual", amount: Amount };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Admin/UpdateSubscriptionDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+          
+            success: function (data) {
+             //   alert('test');
+              //  console.log("update subscription derails",data);
+              // return;
+              if (data.status == 'success') {
+                  $('#email').val('');
+                  $('#SubscriptionType').val('');
+                  $('#Amount').val('');
+                  alert(data.statusMessage);
+              }
+
+            },
+            error: function (req, status, error) {
+                alert("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+    function getSubscriptiondetails() {
+        var email = $('#email').val();
+        if (email == '') {
+            alert('Please enter  email');
+            return;
+        }
+        var pData = { Email: email, UserId: 0 };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Admin/GetSubscriptionDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                
+                if (data.status == 'success') {
+                    console.log(data.data.CurrentSubscriptionTier);
+                    $('#SubscriptionType').val(data.data.CurrentSubscriptionTier);
+                 
+                }
+
+            },
+            error: function (req, status, error) {
+                alert("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+</script>

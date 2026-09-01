@@ -1,0 +1,178 @@
+﻿@model Fantacy_Model.Playerlist
+@{
+    ViewBag.Title = "PLayerList";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+
+<h2>PlayerList</h2>
+
+<div id="PLayerList" class="row">
+
+    <div class="col-md-6" style="max-height:500px; overflow:auto;">
+        <div class="row">
+            <div class="col-md-2">
+                <button id="btn_AllP" type="button" style="width:100%;" onclick="FilterByType('All');">All</button>
+            </div>
+            <div class="col-md-2">
+                <button id="btn_Bat" type="button" style="width:100%;" onclick="FilterByType('batsman');">Bat</button>
+            </div>
+            <div class="col-md-2">
+                <button id="btn_Wk" type="button" style="width:100%;" onclick="FilterByType('wicketkeeper');">Wk</button>
+            </div>
+            <div class="col-md-2">
+                <button id="btn_AllR" type="button" style="width:100%;" onclick="FilterByType('allrounder');">AR</button>
+            </div>
+            <div class="col-md-2">
+                <button id="btn_Bwl" type="button" style="width:100%;" onclick="FilterByType('bowler');">Bwl</button>
+            </div>
+        </div>
+        <div class="row"><input type="text" id="SearchPlayer"/></div>
+        <table id="playergrid" style="margin-top:20px; cursor:pointer;"></table>
+    </div>
+    <div class="col-md-6">
+        <table id="Selectedplayergrid" style="margin-top:20px; cursor:pointer;"></table>
+    </div>
+    
+    @*<input type="button" value="Save2" onclick="location.repalce('@Url.Action("SaveSelectPlayer", "Team")')" />*@
+    <input type="button" value="Save" onclick="redirectToSaveList();" />
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        var Tid = @Session["SelectTournamentId"].ToString();
+        LoadPlayerlist(Tid);
+        LoadSelectedPlayerlist("0", "");
+    });
+
+    //var preUrl = '/fanzania';
+    var preUrl = '';
+
+    function redirectToSaveList() {
+        location.href = '/Team/SaveSelectPlayer';
+    }
+
+    var grid;
+    function LoadPlayerlist(Tid) {
+        debugger;
+
+        grid = $("#playergrid").grid({
+            dataSource: { url: '@Url.Action("GetPlayerlist", "Team")', data: { TournamentId: Tid } },
+            notFoundText: "No records found!",
+            uiLibrary: "bootstrap",
+
+            columns: [
+
+                { field: "", title: "Role", width: "15%", align: "center", cssClass: "Role" },
+                { field: "PlayerName", title: "Player", width: "35%", cssClass: "Player" },
+                { field: "ParticipationTeamName", title: "Team", width: "15%", cssClass: "Team" },
+                { field: "PlayerValue", title: "Price", width: "20%", sortable: true, cssClass: "Price" },
+                { field: "", title: "Action", width: "15%", align: "center", cssClass: "Action" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        grid.on("rowDataBound", function (e, $row, id, record) {
+            //if (record.PSelected == 'U') {
+
+                $row.find('.Action').append('<a href="#" title="Add" onclick="return SaveOrRemove(\'' + record.PlayerId + '\',\'A\');" ><img src="/Assets/Icon/plus.png" alt="" height="18px" width="18px"/></a>');
+            //}
+
+                if (record.PlayerSpeciality == 'batsman') {
+                    $row.find('.Role').html('<img src="/Assets/Icon/bat.png" alt="" height="27px" width="30px"/>');
+                }
+                else if (record.PlayerSpeciality == 'wicketkeeper') {
+                    $row.find('.Role').html('<img src="/Assets/Icon/gloves.png" alt="" height="27px" width="30px"/>');
+                }
+                else if (record.PlayerSpeciality == 'allrounder') {
+                    $row.find('.Role').html('<img src="/Assets/Icon/batball.png" alt="" height="27px" width="30px"/>');
+                }
+                else if (record.PlayerSpeciality == 'bowler') {
+                    $row.find('.Role').html('<img src="/Assets/Icon/ball.png" alt="" height="25px" width="25px"/>');
+                }
+        });
+
+    }
+    var Sgrid;
+    function LoadSelectedPlayerlist(Id, PSelect) {
+        debugger;
+
+        Sgrid = $("#Selectedplayergrid").grid({
+            dataSource: { url: '@Url.Action("SelectRejectPlayer", "Team")', data: { PId: Id, PSelect: PSelect } },
+            notFoundText: "No Select Player in your list!",
+            uiLibrary: "bootstrap",
+
+            columns: [
+                { field: "PlayerId", title: "Id", width: "10%", hidden: true, cssClass: "pId" },
+                { field: "PlayerSpeciality", title: "Role", width: "15%", cssClass: "Role" },
+                { field: "PlayerName", title: "Player", width: "35%", cssClass: "Player" },
+                { field: "ParticipationTeamName", title: "Team", width: "15%", cssClass: "Team" },
+                { field: "PlayerValue", title: "Price", width: "20%", sortable: true, cssClass: "Price" },
+                { field: "", title: "Action", width: "15%", align: "center", cssClass: "Action" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        Sgrid.on("rowDataBound", function (e, $row, id, record) {
+            if (record.PSelected == 'S') {
+                $row.find('.Action').append('<a href="#" title="Remove" onclick="return SaveOrRemove(\'' + record.PlayerId + '\',\'R\');" ><img src="/Assets/Icon/cancel.png" alt="" height="18px" width="18px" /></a>');
+            }
+            if (record.PlayerSpeciality == 'batsman') {
+                $row.find('.Role').html('<img src="/Assets/Icon/bat.png" alt="" height="27px" width="30px"/>');
+            }
+            else if (record.PlayerSpeciality == 'wicketkeeper') {
+                $row.find('.Role').html('<img src="/Assets/Icon/gloves.png" alt="" height="27px" width="30px"/>');
+            }
+            else if (record.PlayerSpeciality == 'allrounder') {
+                $row.find('.Role').html('<img src="/Assets/Icon/batball.png" alt="" height="27px" width="30px"/>');
+            }
+            else if (record.PlayerSpeciality == 'bowler') {
+                $row.find('.Role').html('<img src="/Assets/Icon/ball.png" alt="" height="25px" width="25px"/>');
+            }
+        });
+
+    }
+
+    function FilterByType(PType) {
+        var Tid = @Session["SelectTournamentId"].ToString();
+        grid.reload({ page: 1, TournamentId: Tid, PlayerType: PType });
+
+    }
+
+    $("#SearchPlayer").keyup(function (event) {
+        debugger;
+        if (event.keyCode === 13) {
+            var searchText = $("#SearchPlayer").val();
+            var Tid = @Session["SelectTournamentId"].ToString();
+            grid.reload({ page: 1, TournamentId: Tid, PlayerSearch: searchText });
+        }
+    });
+
+    function SaveOrRemove(Id, PSelect) {
+        debugger;
+        var NoOfPlayer = Sgrid.count();
+        if (NoOfPlayer >= 11 && PSelect == 'A') {
+            alert('Sorry Player selection limit is full..');
+        }
+        else {
+            var flag = false;
+            $('#Selectedplayergrid tbody tr').each(function () {
+                if ($(this).find('.pId').attr('title') == Id) {
+                    flag = true;
+                }
+            });
+            if (flag == true && PSelect == 'A') {
+                alert('Already Selected..');
+            } else {
+                Sgrid.reload({ page: 1, PId: Id, PSelect: PSelect });
+                //grid.reload({ page: 1, TournamentId: "1" });
+            }
+        }
+
+    }
+
+</script>

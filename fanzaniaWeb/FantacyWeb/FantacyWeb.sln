@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantacyWeb", "FantacyWeb\FantacyWeb.csproj", "{E658E535-3812-4D54-84AB-00CAD17936DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantacy_Model", "Fantacy_Model\Fantacy_Model.csproj", "{DF68F84D-4E04-4048-B4A2-78BCC091D2F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E658E535-3812-4D54-84AB-00CAD17936DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E658E535-3812-4D54-84AB-00CAD17936DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E658E535-3812-4D54-84AB-00CAD17936DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E658E535-3812-4D54-84AB-00CAD17936DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF68F84D-4E04-4048-B4A2-78BCC091D2F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF68F84D-4E04-4048-B4A2-78BCC091D2F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF68F84D-4E04-4048-B4A2-78BCC091D2F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF68F84D-4E04-4048-B4A2-78BCC091D2F3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

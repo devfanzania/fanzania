@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<div class="sub-heard-part">
+    <ol class="breadcrumb m-b-0">
+        <li><a href="index.html">Dashboard</a></li>
+        <li class="active"> / Tournament</li>
+    </ol>
+</div>*@
+
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label1">Game Type</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlGameType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a id="btnAddEdit" href="#" class="btn btn-info" onclick="AddEditRedirection('add',0)" ;> Add Tournament</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="leagueTable"><table id="TourList"></table></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (sessionStorage.getItem("Temp_TourGameType") != null) {
+            $('#ddlGameType').val(sessionStorage.getItem("Temp_TourGameType"));
+            if(sessionStorage.getItem("Temp_TourGameType") == 'D')
+                $('#btnAddEdit').text('Edit Tournament');
+            else
+                $('#btnAddEdit').text('Add Tournament');
+        } else {
+            ShowTourList();
+        }
+    });
+
+    $("#ddlGameType").change(function () {
+        
+        sessionStorage.setItem("Temp_TourGameType", $('#ddlGameType').val());
+        if ($('#ddlGameType').val() != 'D') {
+            $('#btnAddEdit').text('Add Tournament');
+            ShowTourList();
+        }
+        else {
+            $('#btnAddEdit').text('Edit Tournament');
+            $('#TourList').grid('destroy', true, true);
+        }
+    });
+
+
+    var gridTour;
+    function ShowTourList() {
+
+        gridTour = $("#TourList").grid({
+            dataSource: { url: '@Url.Action("GetAllTournament", "AdminTour")', data: { TournamentId: "0" } },
+            notFoundText: "No Tournament available",
+            uiLibrary: "bootstrap",
+
+            columns: [
+                { field: "TournamentName", title: "Name", width: "25.%", align: "center", cssClass: "TournamentName" },
+                { field: "TournamentStage", title: "Stage", width: "10%", align: "center", cssClass: "TournamentStage" },
+                { field: "TournamentStatus", title: "Status", width: "15%", align: "center", cssClass: "TournamentStatus" },
+                { field: "TournamentStartDate", title: "Start Date", width: "15%", align: "center", cssClass: "TournamentStartDate" },
+                { field: "TournamentEndDate", title: "End Date", width: "15%", align: "center", cssClass: "TournamentEndDate" },
+                { field: "", tooltip: "Edit Tournament", width: "10%", align: "center", cssClass: "EditTournament" },
+                { field: "", tooltip: "Delete Tournament", width: "10%", align: "center", cssClass: "DeleteTournament" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        gridTour.on("rowDataBound", function (e, $row, id, record) {
+            $row.find('.EditTournament').append('<a href="#" title="Edit Tournament" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'edit\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+            $row.find('.DeleteTournament').append('<a href="#" title="Delete Tournament" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteTournament(\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+        });
+    }
+
+    function AddEditRedirection(Type, Tid) {
+        sessionStorage.setItem('GameType', $('#ddlGameType').val());
+        if (Type == "add") {
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type;
+        }else if(Type == "edit"){
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type + '&tid=' + Tid;
+        }
+        
+    }
+
+    function DeleteTournament(Tid) {
+        //$('#spinnerContainer').show();
+
+        var uurl = '/AdminTour/DeleteTournament';
+        var pData = { TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    gridTour.reload({ page: 1, TournamentId: "0" });
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+</script>

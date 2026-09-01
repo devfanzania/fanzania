@@ -1,0 +1,281 @@
+﻿
+@{
+    ViewBag.Title = "MatchEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+@Html.Hidden("MatchId")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Match Edit</h3>
+                    </div>
+
+                    <div class="text-right pull-right col-md-6">
+                        <a href="/AdminMatch/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>Back</a>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="form-body">
+                        @*<form class="form-horizontal">*@
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_MatchId" class="control-label">Match Id</label>
+                                <input type="text" class="form-control1" id="txt_MatchId" readonly="readonly" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_MatchNo" class="control-label">Match No</label>
+                                <input type="text" class="form-control1" id="txt_MatchNo" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddl_MType" class="control-label">Match Type</label>
+                                <select name="selector1" id="ddl_MType" class="form-control1">
+                                    <option value="T20">T20</option>
+                                    <option value="ODI">ODI</option>
+                                    <option value="TEST">TEST</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Venue" class="control-label">Venue</label>
+                                <input type="text" class="form-control1" id="txt_Venue" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_team1" class="control-label">Team 1</label>
+                                <input type="text" class="form-control1" id="txt_team1" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_team2" class="control-label">Team 2</label>
+                                <input type="text" class="form-control1" id="txt_team2" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_MStage" class="control-label">Match Stage</label>
+                                <input type="text" class="form-control1" id="txt_MStage" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddl_Status" class="control-label">Match Status</label>
+                                <select name="selector2" id="ddl_Status" class="form-control1">
+                                    <option value="UPCOMING">UPCOMING</option>
+                                    <option value="COMPLETE">COMPLETE</option>
+                                    <option value="1stInng">1st Inng</option>
+                                    <option value="2ndInng">2nd Inng</option>
+                                    <option value="FINISH">FINISH</option>
+                                    <option value="CANCEL">CANCEL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_uniqueId" class="control-label">Unique Id</label>
+                                <input type="text" class="form-control1" id="txt_uniqueId" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_SDate" class="control-label">Schedule Date</label>
+                                <input type="text" class="form-control1" id="txt_SDate" autocomplete="off" placeholder="Schedule Date">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_STime" class="control-label">Schedule Time</label>
+                                <input type="text" class="form-control1" id="txt_STime" autocomplete="off" placeholder="HH:MM:SS">
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label for="txt_MatchDate" class="control-label">Match Date</label>
+                                <input type="text" class="form-control1" id="txt_MatchDate" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3" id="div_Tname" style="display:none;">
+                                <label for="txt_TournamentName" class="control-label">Tournament Name</label>
+                                <input type="text" class="form-control1" id="txt_TournamentName" placeholder="">
+                            </div>
+                            @*<div class="col-md-3">
+            <label for="txt_RapidMatchId" class="control-label">Rapid Match Id</label>
+            <input type="text" class="form-control1" id="txt_RapidMatchId" placeholder="">
+        </div>*@
+                            <div class="col-md-3">
+                                <label for="MatchCity" class="control-label">MatchCity</label>
+                                <input type="text" class="form-control1" id="MatchCity" placeholder="">
+                            </div>
+                            <div class="col-md-9  text-right">
+                                <button id="btn_Update_Details" class="btn btn-info" onclick="UpdateMatch()" ;> Update Details</button>
+                            </div>
+                        </div>
+
+                            @*</form>*@
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $("#txt_SDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+            yearRange: '2019:' + (new Date).getFullYear()
+        });
+
+    });
+    $(function () {
+        $('#txt_STime').timepicker({ 'timeFormat': 'H:i:s' });
+    });
+    $(document).ready(function () {
+        var Tid = '@Session["M_tid"].ToString()';
+        var Mid = '@Session["M_mid"].ToString()';
+        sessionStorage.setItem("MatchTournamentId", Tid);
+        $('#TournamentId').val(Tid);
+        $('#MatchId').val(Mid);
+
+        GetMatchDetails();
+
+        if (sessionStorage.getItem("Temp_MatchGameType") == "D") {
+            $('#div_Tname').css("display", "block");
+        }
+        else {
+            $('#div_Tname').css("display", "none");
+        }
+        
+    });
+
+    function GetMatchDetails() {
+        var Tid = $('#TournamentId').val();
+        var Mid = $('#MatchId').val();
+        
+        /// $('#spinnerContainer').show();
+        var pData = { TournamentId: Tid, MatchId: Mid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/GetMatchForUpdte',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //console.log(data[0]["TournamentId"]);
+                $('#txt_MatchId').val(data[0]["MatchId"]);
+                $('#txt_MatchNo').val(data[0]["MatchNo"]);
+                $('#ddl_MType').val(data[0]["MatchType"]);
+                $('#ddl_Status').val(data[0]["MatchStatus"]);
+                $('#txt_Venue').val(data[0]["Venue"]);
+                $('#txt_MStage').val(data[0]["MatchStage"]);
+                $('#txt_SDate').val(data[0]["MatchScheduledDate"]);
+                $('#txt_STime').val(data[0]["MatchScheduledTime"]);
+                $('#txt_team1').val(data[0]["Team1"]);
+                $('#txt_team2').val(data[0]["Team2"]);
+                $('#txt_uniqueId').val(data[0]["UniqueId"]);
+                $('#txt_TournamentName').val(data[0]["TournamentName"]);
+                $('#txt_MatchDate').val(data[0]["MatchDate"]);
+               // $('#txt_RapidMatchId').val(data[0]["RapidMatchId"]);
+                $('#MatchCity').val(data[0]["MatchCity"]);
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function UpdateMatch() {
+        
+        var Tid = $('#TournamentId').val();
+        var Mid = $('#MatchId').val();
+        var txt_MatchNo = $('#txt_MatchNo').val();
+        var ddl_MType = $('#ddl_MType').val();
+        var ddl_Status = $('#ddl_Status').val();
+        var txt_Venue = $('#txt_Venue').val();
+        var txt_MStage = $('#txt_MStage').val();
+        var txt_SDate = $('#txt_SDate').val();
+        var txt_STime = $('#txt_STime').val();
+        var txt_team1 = $('#txt_team1').val();
+        var txt_team2 = $('#txt_team2').val();
+        var txt_uniqueId = $('#txt_uniqueId').val();
+        var txt_TournamentName = $('#txt_TournamentName').val();
+        var txt_MatchDate = $('#txt_MatchDate').val();
+       // var txt_RapidMatchId = $('#txt_RapidMatchId').val();
+        var MatchCity = $('#MatchCity').val();
+
+        if (txt_MatchNo == '') {
+            alert('Please enter match no');
+            return;
+        }
+        if (txt_Venue == '') {
+            alert('Please enter venue');
+            return;
+        }
+        if (txt_SDate == '') {
+            alert('Please enter schedule date');
+            return;
+        }
+        if (txt_STime == '') {
+            alert('Please schedule time');
+            return;
+        }
+        if (txt_team1 == '') {
+            alert('Please team1 name');
+            return;
+        }
+        if (txt_team2 == '') {
+            alert('Please team2 name');
+            return;
+        }
+        if (txt_uniqueId == '') {
+            alert('Please enter Unique Id');
+            return;
+        }
+        if (txt_TournamentName == '' && sessionStorage.getItem("Temp_MatchGameType") == "D") {
+            alert('Please enter Tournament Name');
+            return;
+        }
+        //if (txt_RapidMatchId == '') {
+        //    alert('Please enter rapid match id');
+        //    return;
+        //}
+        if (MatchCity == '') {
+            alert('Please enter MatchCity ');
+            return;
+        }
+        /// $('#spinnerContainer').show();
+       
+        var pData = { TournamentId: Tid, MatchId: Mid, MatchNo: txt_MatchNo, MatchType: ddl_MType, Venue: txt_Venue, MatchStage: txt_MStage, MatchStatus: ddl_Status, MatchScheduledDate: txt_SDate, MatchScheduledTime: txt_STime, Team1: txt_team1, Team2: txt_team2, UniqueId: txt_uniqueId, TournamentName: txt_TournamentName, MatchDate: txt_MatchDate, MatchCity: MatchCity  };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/UpdateMatch',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.status == "success") {
+                    alert('Data updated successfuly!');
+                    location.href = '/AdminMatch/Index';
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+</script>
+

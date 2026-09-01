@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewBag.Title = "ManageLeague";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 text-left"><a href="/League/Index" style="font-size:12pt;"><i class="fa fa-arrow-left"></i>  Back to League</a></div>
+</div>
+<div class="row">
+    <div class="inner-wrap">
+        <div class="col-md-12 text-center">
+            <h3 class="text-uppercase dashboard-title"><span id="LeagueName"></span></h3>
+            <div class="info-box-2">
+                @*<span class="info-box-icon bg-blue"><i class="fa fa-flag"></i></span>*@
+                <div class="info-box-content-2">
+                    <span class="info-box-text-2">My League Share Code :</span>
+                    <span class="info-box-number-2" id="sharecode"></span>
+
+                    <button class="theme-btn-dash" type="button" onclick="changeCode()" ;>Want to generate new code !!</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="inner-wrap" id="divLeague">
+        <div class="col-md-12 text-center">
+            <h3 class="text-uppercase dashboard-title">|| Team List ||</h3>
+
+            <div class="leagueTable"><table id="Teamgrid"></table></div>
+        </div>
+    </div>
+</div>
+
+@*<div id="spinnerContainer" class="spinnerContainer" style="display: block;">
+        <div id="spinner" class="spinner">
+            <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+        </div>
+    </div>*@
+<script>
+    $(document).ready(function () {
+        //$('#spinnerContainer').show();
+
+
+        var Lid = @Session["ManageLeagueId"].ToString();
+        var Tid = @Session["TournamentId"].ToString();
+        if(Lid != 0 && Tid != 0){
+            LoadTeams(Lid,Tid);
+            LeagueStanding(Lid,Tid);
+        }
+    });
+
+    function LeagueStanding(LId,Tid) {
+
+        //$('#spinnerContainer').show();
+        var uurl = '/League/LoadUserActiveLeagueInfo';
+        var pData = { TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                var LeagueName = '';
+                var sharecode = ''; var TeamPoints = '';var LeaguePoints = '';
+                var LeagueRank = '';var UserTeamName = '';
+
+                $.each(data, function (index, value) {
+
+                    if (value.LeagueId == LId) {
+                        LeagueName = '|| League : ' + value.LeagueName + ' ||';
+                        TeamPoints = value.TeamPoints;
+                        LeaguePoints = value.LeaguePoints;
+                        LeagueRank = value.LeagueRank;
+                        UserTeamName = value.UserTeamName;
+                        sharecode = value.LeaguePin;
+
+                    }
+                });
+
+                //$('#myrank').html(myrank);
+                $('#LeagueName').html(LeagueName);
+                $('#sharecode').html(sharecode);
+                //$('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+                return false;
+            }
+        });
+    }
+
+    function changeCode() {
+        var Lid = @Session["ManageLeagueId"].ToString();
+        var Tid = @Session["TournamentId"].ToString();
+        var uurl = '/League/ResetShareCode';
+        var pData = { TournamentId: Tid, LeagueId: Lid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                var sharecode = data[0]["LeaguePin"];
+
+                $('#sharecode').html(sharecode);
+                //$('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+                return false;
+            }
+        });
+    }
+
+    function ActionAdmin(action,UserLeagueId,UserId) {
+        debugger;
+        if(action == "A"){
+            var Lid = @Session["ManageLeagueId"].ToString();
+
+            var uurl = '/League/ActionAdmin';
+            var pData = {UserLeagueId: UserLeagueId, LeagueId: Lid,Type: action,UserId:UserId };
+            var jsonData = JSON.stringify(pData);
+            $.ajax({
+                url: uurl,
+                type: 'POST',
+                data: jsonData,
+                dataType: 'json',
+                async: true,
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+                    debugger;
+                    var Tid = @Session["TournamentId"].ToString();
+                    alert('Approved...');
+                    grid.reload({ page: 1, LeagueId: LId , TournamentId:Tid});
+
+                    //$('#spinnerContainer').hide();
+                },
+                error: function (req, status, error) {
+                    //$('#spinnerContainer').hide();
+                    alert('Unable to connect server!');
+                    return false;
+                }
+            });
+        }
+        else {
+            if (confirm('Are you sure want to remove ?')) {
+                var Lid = @Session["ManageLeagueId"].ToString();
+
+                var uurl = '/League/ActionAdmin';
+                var pData = {UserLeagueId: UserLeagueId, LeagueId: Lid,Type: action,UserId:UserId };
+                var jsonData = JSON.stringify(pData);
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        var Tid = @Session["TournamentId"].ToString();
+                        alert('Removed...');
+                        grid.reload({ page: 1, LeagueId: LId , TournamentId:Tid});
+                        //$('#spinnerContainer').hide();
+                    },
+                    error: function (req, status, error) {
+                        //$('#spinnerContainer').hide();
+                        alert('Unable to connect server!');
+                        return false;
+                    }
+                });
+            }
+        }
+    }
+
+
+    var grid;
+    function LoadTeams(LId,TId) {
+        var Tstatus = '@Session["TournamentStatus"].ToString()';
+        debugger;
+        grid = $("#Teamgrid").grid({
+            dataSource: { url: '@Url.Action("GetLeagueTeamsForManage", "League")', data: { LeagueId: LId , TournamentId:TId} },
+            notFoundText: "No Team records found!",
+            uiLibrary: "bootstrap",
+            columns: [
+                { field: "", title: "Rank", width: "10%", align: "center", cssClass: "Teamleaguerank" },
+            { field: "UserTeamName", title: "Team Name", width: "20%", align: "center", cssClass: "UserTeamName" },
+            { field: "FullName", title: "Owner", width: "20%", align: "center", cssClass: "FullName" },
+            { field: "", title: "Trans Pending", width: "20%", align: "center", cssClass: "SubsLeft" },
+            { field: "TotalPoints", title: "Points", width: "10%", align: "center", cssClass: "TotalPoints" },
+            
+            { field: "", title: "Action/Type", width: "15%", align: "center", cssClass: "Action" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        grid.on("rowDataBound", function (e, $row, id, record) {
+
+            if(Tstatus.trim() == 'INPROGRESS'){
+                $row.find('.SubsLeft').append('<span>' + record.SubsLeft + '</span>');
+            }
+            else{
+                $row.find('.SubsLeft').append('<i class="fa fa-ellipsis-h" aria-hidden="true"></i>');
+            }
+            if(record.TeamOldStanding > 0){
+                if(record.TeamCurrentStanding > record.TeamOldStanding)
+                {
+                    $row.find('.Teamleaguerank').append('<span>' + record.TeamCurrentStanding + '</span> <i class="fa fa-long-arrow-up" aria-hidden="true" style="color: #42d040;"></i>');
+                }else if(record.TeamCurrentStanding < record.TeamOldStanding)
+                {
+                    $row.find('.Teamleaguerank').append('<span>' + record.TeamCurrentStanding + '</span> <i class="fa fa-long-arrow-down" aria-hidden="true" style="color: #f91800;"></i>');
+                }else if(record.TeamCurrentStanding == record.TeamOldStanding)
+                {
+                    $row.find('.Teamleaguerank').append('<span>' + record.TeamCurrentStanding + '</span> <i class="fa fa-arrows-v" aria-hidden="true" style="color: #f99627;"></i>');
+                }
+            }else{
+                $row.find('.Teamleaguerank').append('<span>' + record.TeamCurrentStanding + '</span> <i class="fa fa-arrows-v" aria-hidden="true" style="color: #f99627;"></i>');
+            }
+
+            if(record.IsLeagueLeader == 'Y')
+            {
+                $row.find('.Action').append('<img src="/Assets/Icon/admin.png" title="Approve" alt="" height="18px" width="18px" />');
+            }
+            else{
+                if(record.Status == 'Approved'){
+                    $row.find('.Action').append('<a href="" title="League Admin" onclick="ActionAdmin(\'' + 'R' + '\',\'' + record.UserLeagueId + '\',\'' + record.UserId + '\')";><img src="/Assets/Icon/cancel.png" alt="" height="18px" width="18px" style="margin-left:5px;" /></a>');
+                }
+                else{
+                    $row.find('.Action').append('<a href="" title="Approve" onclick="ActionAdmin(\'' + 'A' + '\',\'' + record.UserLeagueId + '\',\'' + record.UserId + '\')";><img src="/Assets/Icon/approve.png" alt="" height="18px" width="18px" style="margin-right:5px;" /></a><a href="" title="Reject" onclick="ActionAdmin(\'' + 'R' + '\',\'' + record.UserLeagueId + '\',\'' + record.UserId + '\')"><img src="/Assets/Icon/cancel.png" alt="" height="18px" width="18px" style="margin-left:5px;" /></a>');
+                }
+            }
+        });
+
+    }
+</script>
+

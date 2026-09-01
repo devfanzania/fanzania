@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="917623529864-1iofe74t89onc62sbt2aia0ahvh30bqa.apps.googleusercontent.com">
+    <title>fanzania</title>
+    <link rel="icon" href="~/Assets/Icon/fanzania-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/JS/jquery-1.12.4.js"></script>
+    <script src="~/JS/jquery-ui.js"></script>
+
+
+</head>
+<body class="theme-red">
+    <div class="page-wrapper">
+        <!-- Main Header / Style One-->
+        <header class="main-header header-style-one">
+            <!-- Header Top -->
+            <div class="header-top">
+                <div class="container clearfix ptn pbn">
+                    <!--Top Left-->
+                    <div class="top-left pull-left">
+                        <ul class="info-nav clearfix">
+                            <li>
+                                <!--Social Links-->
+                                <div class="social-links pull-left"> <span class="text-theme-color">Follow Us</span> : <a href="https://www.facebook.com/playfanzania" target="_blank"><span class="fa fa-facebook-f"></span></a> <a href="https://mobile.twitter.com/playfanzania" target="_blank"><span class="fa fa-twitter"></span></a></div>
+                            </li>
+                            <li><a href="mailto:support@fanzania.com"><span class="fa fa-envelope-o mr10"></span>fanzania support</a></li>
+                        </ul>
+                    </div>
+                    <!--Top Right-->
+                    <div class="top-right pull-right clearfix">
+                        <!--Lang Bar-->
+                        <ul class="info-nav clearfix">
+                            
+                            <li><a class="btn-log" href="~/Account/Register"><i class="text-theme-color"></i>SIGN UP</a></li>
+                            <li>|</li>
+                            <li><a class="btn-log" href="~/Account/Index"><i class="text-theme-color"></i>LOGIN</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Top End -->
+            <!--Header-Main Box-->
+            <div class="header-mainbox">
+                <div class="container ptn pbn">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <div class="logo"> <a href="~/Home/Index"><img src="~/images/logo-icon.png" alt=""></a> </div>
+                        </div>
+                        <div class="outer-box clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu logo-outer">
+                                <div class="navbar-header">
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                                </div>
+                                <div class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li class="current">
+                                            <a href="~/Home/Index">Home</a>
+
+                                        </li>
+                                        <li> <a href="~/Home/Howtoplay/">How to play</a></li>
+                                        @*<li> <a href="~/Home/Subscription">Subscription</a></li>*@
+                                        
+                                        <li> <a href="~/Home/About">Our Story</a></li>
+
+                                        </li>
+                                        <li> <a href="~/Home/Contact">Get In Touch </a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Main Menu End-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header Main Box End-->
+        </header>
+        <!--End Main Header -->
+        @RenderBody()
+
+
+    </div>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Toastr_Config.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+
+
+</body>
+
+</html>

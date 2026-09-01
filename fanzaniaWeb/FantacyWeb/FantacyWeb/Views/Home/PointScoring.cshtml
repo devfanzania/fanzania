@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "Point Scoring";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="page-banner-section">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Point System</h2>
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/Home/Index"><i class="fa fa-home"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Point System</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+@{
+    Html.RenderPartial("_PointScoring");
+}
+<script src="~/JS/main.js"></script>

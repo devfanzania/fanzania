@@ -1,0 +1,705 @@
+﻿
+@model Fantacy_Model.PaymentInitiateModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/stylesub.css" rel="stylesheet" />
+<style>
+    .page-toop-section1 {
+        padding: 82px 0 0px;
+    }
+    .fa1 {
+        padding: 5px;
+        font-weight: 500;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    .success {
+        background-color: #50d055;
+    }
+    .form-control1 {
+        height: 50px;
+        border: 1px solid #e95354;
+        border-radius: 0;
+        background-color: #fff;
+        border-radius: 10px;
+        height: 36px;
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+    }
+</style>
+<div class="row commanrow">
+    <div class="col-md-2 leftpanel">
+        <div class="firrstcolum">
+            <p class="hedingleft " style="margin: 0 0 10px;"> fanzania</p>
+
+            <p class="hedingleft " style="margin: 0 0 10px;">is</p>
+
+            <p class="hedingleft " style="margin: 0 0 10px;">still</p>
+
+            <p class="hedingleft free " style="margin: 0 0 10px;">  FREE</p>
+
+            <p class="hedingleft " style="margin: 0 0 10px;"> to play.</p>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="firstsection" style="padding-top: 30px;">
+            @*<output id="details1"></output>*@
+            To subscribe, please login, choose your payment currency INR/GBP/USD and pick your preferred plan. For bulk subscriptions for your league, please go to your league page and use the 'League Subscription' button.
+        </div>
+        @* <div class="firstsection">To subscribe, please login and choose your preferred plan. </div>*@
+        <div class="row commanrow">
+
+            <div class="coll">
+                <span>&nbsp</span>
+            </div>
+            <div class="coll">
+                <span>&nbsp</span>
+                <span id="CurrentSubscriptionTier0" style="display:none" class=" label success fa1">SUBSCRIBED</span>
+            </div>
+            <div class="coll">
+                <span>&nbsp</span>
+                <span id="CurrentSubscriptionTier1" style="display:none" class=" label success fa1">SUBSCRIBED</span>
+            </div>
+            <div class="coll">
+                <span>&nbsp</span>
+                <span id="CurrentSubscriptionTier2" style="display:none" class=" label success fa1">SUBSCRIBED</span>
+            </div>
+            <div class="coll">
+                <span id="CurrentSubscriptionTier3" style="display:none" class=" label success fa1">SUBSCRIBED</span>
+                <!---- <div class="firstsection mostpopular"> <p> <span class="fa fa-thumbs-o-up"></span> MOST POPULAR</p> </div>-->
+            </div>
+        </div>
+        <div class="row hedingbaground commanrow onlyMobile">
+            <div class="row hedingbaground commanrow onlyMobile">
+                <div class="col-md-2 col-xs-hidden" style="
+    background-color: #fff;
+    width: 20%;">
+                    <div>
+                        <div class="hedingtitle">Select Currency   </div>
+
+                        <select id="selectcurrancy" class="form-control1" style="font-weight: 600;width: 66%;height: 23px!important;padding: 2px 10px!important;font-size: 14px!important;">
+                            <option value="INR">INR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="USD">USD</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="grayDiv">
+                    <div class="sameSize1">
+                        <div class="hedingtitle">BASIC  </div>
+
+
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">PRIZE ELIGIBILITY </div>
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">  LIVE SCORE   </div>
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">PRIZE ELIGIBILITY and LIVE SCORE    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr" style="margin-top: 0px;">
+        <div class="row commanrow">
+            <div class="col-md-1 col-xs-4" style="padding-top: 10px; padding-bottom: 10px;padding-left: 0px;">
+                <div class="mostpopular"> Coverage</div>
+            </div>
+            <div class="col-md-11 col-xs-8 covrage" style="padding-top: 10px; padding-bottom: 10px;">
+                <div class="pacakgeRes">All packages relate to <output id="details"></output></div>
+                @* <div class="pacakgeRes">(Tournament Mode And Match  Contests)</div>*@
+            </div>
+
+        </div>
+        <!--<hr class="hr">-->
+        <!--<div class="table-responsive">
+            <table class="table subsciptionTbl">
+      <thead>
+        <tr>
+          <th scope="col"> <span class="mostpopular">Price</span></th>
+          <th scope="col">Free</th>
+          <th scope="col">INR 99</th>
+          <th scope="col">INR 99</th>
+    <th scope="col">INR 149</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">  <span class="mostpopular">What is  included*</span></th>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+        </tr>
+        <tr>
+          <th scope="row">&nbsp;</th>
+          <td>&nbsp;</td>
+          <td>Give you eligibility to win prizes in both Tournament Mode and Match Contests</td>
+          <td>Give you access to live score fetaure in both Tournament Mode and Match Contests</td>
+           <td>Give you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests</td>
+        </tr>
+        <tr>
+          <th scope="row">What is not included*</th>
+          <td>Excludes Live Score and Prize Eligibility</td>
+          <td>Excludes Live Score</td>
+          <td>Excludes prize Eligibility</td>
+          <td>&nbsp;</td>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>-->
+        <hr class="hr">
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular "> Price</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTierFree"></div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier1"> </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier2">  </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier3">   </div>
+            </div>
+
+        </div>
+        <hr class="hr">
+        <div class="row commanrow onlyMobile mainContent">
+            <div class="coll">
+                <div class="mostpopular">  Features</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Basic Support</span>
+                    <br />
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;"><del>Live Scoring</del></span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;"><del>Prize Eligibility</del></span>
+                    <br />
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;"><del>Live Scoring</del></span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Prize Eligibility</span>
+                    <br />
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Live Scoring</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;"><del>Prize Eligibility</del></span>
+                    <br />
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Live Scoring</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Prize Eligibility</span>
+                    <br />
+                </div>
+
+            </div>
+            @*<div class="coll">
+                <div class="mostpopular"> What is  included*</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Make your team and play in leagues for free</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;">
+                    Gives you eligibility to win prizes in both Tournament Mode and Match Contests
+                </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection " style="padding-top: 20px;"> Gives you access to live score fetaure in both Tournament Mode and Match Contests </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;"> Gives you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests  </div>
+            </div>*@
+        </div>
+
+        <hr class="hr">
+        <!-- <div class="row commanrow">
+        <div class="col-md-2">
+            <div class="mostpopular "> Price</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection covrage1">Free</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection covrage1"> INR 99</div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection covrage1">  INR 99</div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection covrage1">  INR 149</div>
+        </div>
+
+
+    </div>
+    <hr class="hr">
+
+    <div class="row commanrow">
+        <div class="col-md-2">
+            <div class="mostpopular">  What is  included*</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection">Make your team and play in leagues for free</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection" style="padding-top: 20px;">
+               Give you eligibility to win prizes in both Tournament Mode and Match Contests
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection " style="padding-top: 20px;"> Give you access to live score fetaure in both Tournament Mode and Match Contests </div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection" style="padding-top: 20px;"> Give you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests  </div>
+        </div>
+
+    </div>
+    <hr class="hr">-->
+        @*<div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular"> What is not included* </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes Live Score and Prize Eligibility </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes Live Score  </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes prize Eligibility   </div>
+            </div>
+            <div class="coll">
+            </div>
+        </div>*@
+        @*  <hr class="hr">*@
+        <div class="row commanrow">
+
+            <div class="coll">
+                <div class="firstsection">* Only key features shown  </div><br />
+
+            </div>
+            <div class="coll">&nbsp</div>
+            <div class="coll">
+
+
+                <div class="firstsection">
+                    <input id="amountSubTier1" value="" name="amount" type="hidden">
+                    <button type="button" id="dpaybtn1" disabled style="background-color: #f38a8a ;  display:none" class="btn-red">PAY</button>
+                    <button type="button" id="paybtn1" style="display:none" onclick="payment('@ViewBag.UserName','@ViewBag.Email','@if (!string.IsNullOrEmpty(Session["PhoneNumber"] as string)){@Session["PhoneNumber"].ToString();}','SubTier1')" class="btn-red">PAY</button>
+
+
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+                    <input id="amountSubTier2" value="" name="amount" type="hidden">
+
+                    <button type="button" id="dpaybtn2" disabled style="background-color: #f38a8a; display:none" class="btn-red">PAY</button>
+                    <button type="button" id="paybtn2" style="display:none" onclick="payment('@ViewBag.UserName','@ViewBag.Email','@if (!string.IsNullOrEmpty(Session["PhoneNumber"] as string)){@Session["PhoneNumber"].ToString();}','SubTier2')" class="btn-red">PAY</button>
+
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <input id="amountSubTier3" value="" name="amount" type="hidden">
+                    <button type="button" id="dpaybtn3" disabled style="background-color: #f38a8a;  display:none" class="btn-red">PAY</button>
+                    <button type="button" id="paybtn3" style="display:none" onclick="payment('@ViewBag.UserName','@ViewBag.Email','@if (!string.IsNullOrEmpty(Session["PhoneNumber"] as string)){@Session["PhoneNumber"].ToString();}','SubTier3')" class="btn-red">PAY</button>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular"> Our Payment Partners<br /> <img src="~/Assets/logo/razerpaylogo.png" style="width: 50%;background: #fff;" alt=""> </div>
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+            </div>
+        </div>
+        @* <div class="firstsection"> * For bulk subscriptions for your league, please go to your league page and use the 'League Subscription' button.   </div><br />*@
+
+    </div>
+</div>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $(document).ready(function () {
+        GetSubscriptionDetails();
+    });
+    let getsubdetails;
+    $("#selectcurrancy").change(function () {
+        //console.log("getde",getsubdetails);
+        var outof = '';
+        var outof1 = '';
+        var outof2 = '';
+        var outof3 = '';
+        if ($('#selectcurrancy').val() == 'USD') {
+          //  alert(getsubdetails.LivePackageAmount_USD);
+            outof1 += ' <span>USD</span> <span>NA</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>USD</span> <span>' + getsubdetails.LivePackageAmount_USD + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += ' <span>USD</span> <span>NA</span>';
+            $("#SubTier3").html(outof3);
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+            $('#paybtn1').hide();
+            $('#dpaybtn1').show();
+            $('#paybtn3').hide();
+            $('#dpaybtn3').show();
+            document.getElementById("amountSubTier1").value = getsubdetails.PrizePackageAmount_USD;
+            document.getElementById("amountSubTier2").value = getsubdetails.LivePackageAmount_USD;
+            document.getElementById("amountSubTier3").value = getsubdetails.FullPackageAmount_USD;
+
+        }
+        else if ($('#selectcurrancy').val() == 'INR') {
+            outof1 += '<span>INR</span> <span>' + getsubdetails.PrizePackageAmount + '</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>INR</span> <span>' + getsubdetails.LivePackageAmount + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += '<span>INR</span> <span>' + getsubdetails.FullPackageAmount + '</span>';
+            $("#SubTier3").html(outof3);
+            $('#paybtn1').show();
+            $('#dpaybtn1').hide();
+            $('#paybtn3').show();
+            $('#dpaybtn3').hide();
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+            document.getElementById("amountSubTier1").value = getsubdetails.LivePackageAmount;
+            document.getElementById("amountSubTier2").value = getsubdetails.PrizePackageAmount;
+            document.getElementById("amountSubTier3").value = getsubdetails.FullPackageAmount;
+
+
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+            outof1 += ' <span>GBP</span> <span>NA</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>GBP</span> <span>' + getsubdetails.LivePackageAmount_GBP + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += '<span>GBP</span> <span>NA</span>';
+            $("#SubTier3").html(outof3);
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+            $('#paybtn1').hide();
+            $('#dpaybtn1').show();
+            $('#paybtn3').hide();
+            $('#dpaybtn3').show();
+            document.getElementById("amountSubTier1").value = getsubdetails.LivePackageAmount_GBP;
+            document.getElementById("amountSubTier2").value = getsubdetails.PrizePackageAmount_GBP;
+            document.getElementById("amountSubTier3").value = getsubdetails.FullPackageAmount_GBP;
+
+        }
+    });
+    function GetSubscriptionDetails() {
+        Session_UserId =0);
+        var pData = { UserId: Session_UserId};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Payment/GetSubscriptionDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                getsubdetails = data;
+               console.log(data);
+            //   return;
+              //  if (data.status == 'success') {
+                var outof = '';
+                var outof1 = '';
+                var outof2 = '';
+                var outof3 = '';
+              //  var CurrentSubscriptionTier = '';
+               
+                if (data.SubTier1PayEnable.toUpperCase() == 'TRUE') {
+                    $('#paybtn1').show();
+                    $('#dpaybtn1').hide();
+                }
+                if (data.SubTier2PayEnable.toUpperCase() == 'TRUE') {
+                    $('#paybtn2').show();
+                    $('#dpaybtn2').hide();
+                }
+                if (data.SubTier3PayEnable.toUpperCase() == 'TRUE') {
+                    $('#paybtn3').show();
+                    $('#dpaybtn3').hide();
+
+                }
+                if (data.SubTier1PayEnable.toUpperCase() == 'FALSE') {
+                    $('#paybtn1').hide();
+                    $('#dpaybtn1').show();
+                }
+                if (data.SubTier2PayEnable.toUpperCase() == 'FALSE') {
+                    $('#paybtn2').hide();
+                    $('#dpaybtn2').show();
+                }
+                if (data.SubTier3PayEnable.toUpperCase() == 'FALSE') {
+                   $('#paybtn3').hide();
+                    $('#dpaybtn3').show();
+
+                }
+
+                if (data.CurrentSubscriptionTier == 3) {
+                    $('#CurrentSubscriptionTier3').show();
+
+                }
+             
+                if (data.CurrentSubscriptionTier == 2) {
+                    $('#CurrentSubscriptionTier2').show();
+                  
+                }
+                if (data.CurrentSubscriptionTier == 1) {
+                    $('#CurrentSubscriptionTier1').show();
+               
+                }
+                if (data.CurrentSubscriptionTier == 0) {
+                    $('#CurrentSubscriptionTier0').show();
+             
+                }
+            
+
+                outof1 += '<span>INR</span> <span>' + data.PrizePackageAmount + '</span>';
+                $("#SubTier1").html(outof1);
+                outof2 += '<span>INR</span> <span>' + data.LivePackageAmount + '</span>';
+                $("#SubTier2").html(outof2);
+
+                outof3 += '<span>INR</span> <span>' + data.FullPackageAmount + '</span>';
+                $("#SubTier3").html(outof3);
+                outof += '<span>' + data.SubTierFree + '</span>';
+                $("#SubTierFree").html(outof);
+                document.getElementById("amountSubTier1").value = data.PrizePackageAmount;
+                document.getElementById("amountSubTier2").value = data.LivePackageAmount;
+                document.getElementById("amountSubTier3").value = data.FullPackageAmount;
+              
+              //  arr1 = data.SubTier1.split(' ');
+              //  strA = arr1[1];    
+              //  document.getElementById("amountSubTier1").value = strA;
+
+              //  arr2 = data.SubTier2.split(' ');
+               // strB = arr2[1];
+              //  document.getElementById("amountSubTier2").value = strB;
+
+               // arr3 = data.SubTier3.split(' ');
+             //   strC = arr3[1];
+              //  document.getElementById("amountSubTier3").value = strC;
+               // document.getElementById("myText").value =data.SubTier1;
+                document.getElementById('details').innerHTML = data.Details;
+               // document.getElementById('details1').innerHTML = data.Details;
+                //  }
+
+            },
+            error: function (req, status, error) {
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+    function payment(UserName, Email, PhoneNumber, tire) {
+        if ($('#selectcurrancy').val() == 'USD') {
+
+            currency = 'USD';
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+            currency = 'GBP';
+        }
+        else if ($('#selectcurrancy').val() == 'INR') {
+            currency = 'INR';
+        }
+        if (tire == 'SubTier1') {
+            amount = document.getElementById('amountSubTier1').value;
+            description = 'PRIZE ELIGIBILITY Package | ' + currency + ' ' + amount +' Gives you eligibility to win prizes in both Tournament Mode and Match Contests. Excludes Live Scoring'
+        } else if (tire == 'SubTier2') {
+            amount = document.getElementById('amountSubTier2').value;
+            description = 'LIVE SCORE Package | ' + currency + ' ' + amount +' Gives you access to Live Score feature in both Tournament Mode and Match Contests. Prize Eligibility Excluded.'
+        } else if (tire == 'SubTier3'){
+            amount = document.getElementById('amountSubTier3').value;
+            description = 'PRIZE ELIGIBILITY and LIVE SCORE Package |' + currency +' ' + amount +' Gives you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests.'
+        }
+      
+      //  console.log(UserName, Email, PhoneNumber, amount)
+        var uurl = '/Payment/CreateOrder';
+        var pData = { UserName: UserName, Email: Email, PhoneNumber: PhoneNumber, amount: amount, currency: currency };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+             //   console.log(data);
+              //  return;
+             //   console.log(data.razorpayKey);
+
+
+                var options = {
+                  "key": data.razorpayKey, // Enter the Key ID generated from the Dashboard
+                    "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": data.currency,
+                    "name": 'fanzania',
+                    "description": description,
+                   // "image": "https://example.com/your_logo", // You can give your logo url
+                    "order_id": data.orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response){
+                    // After payment successfully made response will come here
+                    // Set the data in hidden form
+                    updateSubscriptionDetails(tire, data.amount, data.receipt,data.currency);
+                    document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
+                    document.getElementById('rzp_orderid').value = response.razorpay_order_id;
+
+                    // // Let's submit the form automatically
+                    document.getElementById('rzp-paymentresponse').click();
+                },
+                "prefill": {
+                    "name": UserName,
+                    "email": Email,
+                    "contact":PhoneNumber
+                },
+                "notes": {
+                
+                }
+               // "theme": {
+                 //   "color": "#F37254"
+                              //  }
+
+                            };
+              //  console.log(options);
+                var propay = new Razorpay(options);
+                propay.open();
+               var rzp1 = new Razorpay(options);
+
+
+
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+    function updateSubscriptionDetails(tire, amount, receipt, currency) {
+      
+        Session_UserId =0;
+        tire = tire.substr(tire.length - 1);
+        amt = (amount / 100);
+        //alert(amt);
+       // alert(receipt);
+        var pData = { UserId: Session_UserId, SubscriptionTier: tire, receipt: receipt, amount: amt, Currency: currency};
+
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Payment/UpdateSubscriptionDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+          
+            success: function (data) {
+             //   alert('test');
+              //  console.log("update subscription derails",data);
+              // return;
+              if (data.status == 'success') {
+              
+                // alert ('sdfs')
+              }
+
+            },
+            error: function (req, status, error) {
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+
+
+</script>
+<!-- This form is hidden, and submit when payment successfully made -->
+@using (Html.BeginForm("Complete", "Payment"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("rzp_paymentid")
+    @Html.Hidden("rzp_orderid")
+    <button type="submit" id="rzp-paymentresponse" class="btn btn-primary " style="display:none" hidden>Submit</button>
+}

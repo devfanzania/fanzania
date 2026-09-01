@@ -1,0 +1,179 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Admin Panel </title>
+    <link rel="icon" href="~/Assets/Icon/fanzania-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+
+    <link href="~/Content/style_AdminDasboard.css" rel="stylesheet" />
+    <link href="~/Content/Siteadmin.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/parts-selector.css" rel="stylesheet" />
+    <!-- Graph CSS -->
+
+    <link href="~/css/font-awesome.css" rel="stylesheet" />
+    <!-- jQuery -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
+    <!-- lined-icons -->
+    <!-- <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />-->
+    <!-- //lined-icons -->
+
+    <script src="~/JS/jquery-1.12.4.js"></script>
+    <script src="~/JS/jquery-ui.js"></script>
+    <link href="~/Content/grid-0.4.5.css" rel="stylesheet" />
+    <script src="~/JS/jquery.table2excel.js"></script>
+    <link href="~/Content/jquery.timepicker.css" rel="stylesheet" />
+    <script src="~/JS/jquery.timepicker.js"></script>
+    <script src="~/Scripts/parts-selector.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <!--/content-inner-->
+        <div class="left-content">
+            <div class="inner-content">
+                <!-- header-starts -->
+                <div class="header-section">
+                    <!--menu-right-->
+                    <div class="top_menu">
+
+                        <!--/profile_details-->
+                        <div class="profile_details_left">
+                            <ul class="nofitications-dropdown">
+
+                                <li class="dropdown note">
+                                    <a href="#" aria-expanded="false"  onclick="AdminLogout()";> Log out <i class="fa fa-sign-out"></i></a>
+
+                                </li>
+                                <div class="clearfix"></div>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--//profile_details-->
+                    </div>
+                    <!--//menu-right-->
+                    <div class="clearfix"></div>
+                </div>
+                <!-- //header-ends -->
+                <div class="outter-wp">
+                    @RenderBody()
+                </div>
+                <!--footer section start-->
+                <footer>
+                    <p>&copy <span id="year"></span> fanzania . All Rights Reserved </p>
+                </footer>
+                <!--footer section end-->
+            </div>
+        </div>
+        <!--//content-inner-->
+        <!--/sidebar-menu-->
+        <div class="sidebar-menu">
+            <header class="logo">
+                <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#">
+                    <span id="logo"> <h1>fanzania</h1></span>
+
+                </a>
+            </header>
+            <div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
+            <!--/down-->
+            <div class="down">
+                <a href="#"><img src="~/Assets/Icon/fanzania-icon.png"></a>
+                <a href="index.html"><span class="name-caret">Welcome Admin</span></a>
+
+            </div>
+            <!--//down-->
+            <div class="menu">
+                <ul id="menu">
+                    <li><a href="#"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-trophy"></i> <span> Tournament</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminTour"> Add Or Edit</a></li>
+                            <li id="menu-academico-boletim"><a href="/AdminTour/CalculatePoint">Set Count</a></li>
+                        </ul>
+                    </li>
+
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-flag"></i> <span>Team</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminTeam">Add Or Edit</a></li>
+
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-sitemap"></i> <span>Match</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminMatch">Add Or Edit</a></li>
+                            <li id="menu-academico-boletim"><a href="/AdminMatch/MatchControl">Match Control</a></li>
+                        </ul>
+                    </li>
+
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-users"></i> <span>Player</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminPlayer">Add Or Edit</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="/Admin/PromoteUser"><i class="fa fa-cogs"></i> <span>Other Setting</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/Admin/PromoteUser">Other Setting</a></li>
+                            <li id="menu-academico-avaliacoes"><a href="/AdminKycVerification">Kyc Verification</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-flag"></i> <span>Auto Team</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminAutoTeam">Add or Edit</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-money"></i> <span>Rewards</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminReward">Manage Rewards</a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-academico">
+                        <a href="#"><i class="fa fa-money"></i> <span>Player Points</span> <span class="fa fa-angle-right" style="float: right"></span></a>
+                        <ul id="menu-academico-sub">
+                            <li id="menu-academico-avaliacoes"><a href="/AdminUpdatePScore">Manage Player Points</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+
+        $(".sidebar-icon").click(function () {
+            if (toggle) {
+                $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                $("#menu span").css({ "position": "absolute" });
+            }
+            else {
+                $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                setTimeout(function () {
+                    $("#menu span").css({ "position": "relative" });
+                }, 400);
+            }
+
+            toggle = !toggle;
+        });
+    </script>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script src="~/Scripts/grid-0.4.5.js"></script>
+    <script src="~/JS/CustomLogin.js"></script>
+</body>
+</html>

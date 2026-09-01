@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+}
+
+
+
+
+<section class="inner-wrap">
+    <div class="container">
+        <div class="row n-d">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-5 col-xs-5 text-right rank b-ryt">
+                        @*<p id="WeeklyRank"></p>
+                            <span>WEEKLY RANK</span>*@
+
+                    </div>
+
+                    <div class="col-md-5 col-xs-5 text-left rank">
+                        @*<p id="WeeklyPoint"></p>
+                            <span>WEEKLY POINTS</span>*@
+
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <a id="SelectMyMatch" class="red-btn" onclick="SelectMyMatch()" ;>my matches</a>
+                    </div>
+                    <div class="col-md-5 col-xs-5">
+                        <a id="SelectJoinMatch" class="blue-btn" onclick="SelectJoinMatch()" ;>join matches</a>
+                    </div>
+                    <div class="col-md-2 col-xs-2">
+                        <a class="filter-btn" id="tourFilter" onclick="OpenTournamentFilterModal();"><i class="fa fa-filter"></i></a>
+                    </div>
+                    <div id="MatchFilter">
+                        <div id="All" class="col-md-3 col-xs-6 active" onclick="FilterMatch('All');"><span>All</span></div>
+                        <div id="Upcoming" class="col-md-3 col-xs-6" onclick="FilterMatch('Upcoming');"><span>Upcoming</span></div>
+                        <div id="Live" class="col-md-3 col-xs-6" onclick="FilterMatch('Live');"><span>Live</span></div>
+                        <div id="Complete" class="col-md-3 col-xs-6" onclick="FilterMatch('Complete');"><span>Complete</span></div>
+                    </div>
+                    <div id="DailyMatchList">
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="nd-right left-skew">
+                    @*<i class="fa fa-gift"></i>*@
+                    <p id="displayMsg"></p>
+                </div>
+                <div id="MakeYourTeam" class="MakeYourTeam" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="selectmatch">
+                                <div class="category-icon-item">
+                                    <div class="icon-box">
+                                        <div class="matchFullscreen">
+                                            <span id="team1"></span>
+                                            <span id="team2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 text-center point b-ryt-r">
+                            <p id="TotalTeam"></p>
+                            <span>TOTAL TEAMS</span>
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-center point">
+                            <p id="StartsIn"><span></span></p>
+                            <span>START TIME</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center" id="makeYourTeam">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center info">
+                            <span>Playing Tip</span>
+                            <p>Did you know you can track live scoring on your mobile ?</p>
+                            <p>Try fanzania on iOS and Android</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="MyTeamView" class="row">
+                    <div class="col-md-12">
+                        <ul id="MyTeamDetail" class="text-center panel-info-final">
+                            @*<li class="text-uppercase">21<br /><span>Total items</span></li>
+                                <li class="text-uppercase">30m : 3s<br /><span>Starts in</span></li>
+                                <li class="text-uppercase"><a href="#"><i class="fa fa-gear"></i>Manage</a></li>*@
+                        </ul>
+                    </div>
+                    <div class="col-md-12 d-ground3">
+                        <div class="playground-team">
+                            <div class="dGroundPalyers">
+                                <div id="ManageButton" style="padding-top: 32px;text-align: right;"></div>
+                                    <div id="Players">
+                                    </div>
+                                </div>
+                                <div class="team-indicates">
+                                    <div class="team-indicate">
+                                        <img src="~/Assets/Icon/WicketkeeperGrey.png" />
+                                    </div>
+                                    <div class="team-indicate2">
+                                        <img src="~/Assets/Icon/BatsmanGrey.png" />
+
+                                    </div>
+                                    <div class="team-indicate3">
+                                        <img src="~/Assets/Icon/BowlerGrey.png" />
+                                    </div>
+                                    <div class="team-indicate4">
+                                        <img src="~/Assets/Icon/AllrounderGrey.png" />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section id="HomeMsg" style="display:none;">
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="text-center">
+                            <strong>
+                                Stay tuned. We will be back very soon with exciting matches for you.
+                            </strong>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="spinnerContainer" class="spinnerContainer" style="display: none;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+<div id="ModalTournametFilter" class="modal fade">
+    <div class="modal-dialog modal-filter">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title text-center"><span>Filter by tournament name</span></h4>
+                </span>
+            </div>
+            <div class="modal-body filter-body">
+                <div class="capt2 text-left">
+                    <div id="filterTournament">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-popup" data-dismiss="modal" onclick="ClearFilter();">Reset</button>
+                <button type="button" class="btn btn-popup" onclick="FilterTournament();">Apply</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Areas/DailyGame/CustomScript/DailyHome.js"></script>
+
+

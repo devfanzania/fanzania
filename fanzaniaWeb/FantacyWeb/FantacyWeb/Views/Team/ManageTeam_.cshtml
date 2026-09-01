@@ -1,0 +1,1407 @@
+﻿@model Fantacy_Model.Transfer
+@{
+    ViewBag.Title = "ManageTeam";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@Html.Hidden("Rule_WicketKeeper")
+@Html.Hidden("Rule_MaxBatsman")
+@Html.Hidden("Rule_MinBatsman")
+@Html.Hidden("Rule_MaxBowler")
+@Html.Hidden("Rule_MinBowler")
+@Html.Hidden("Rule_MaxAllrounder")
+@Html.Hidden("Rule_MinAllrounder")
+@Html.Hidden("Rule_MaxSameTeamPlayer")
+@Html.Hidden("Rule_MaxOverseasPlayer")
+@Html.Hidden("Rule_SubCount")
+
+@Html.Hidden("SelectedPlayerCnt")
+@Html.Hidden("Selectedwk")
+@Html.Hidden("SelectedBat")
+@Html.Hidden("SelectedBowl")
+@Html.Hidden("SelectedAll")
+
+@Html.Hidden("OverSeasPlayer")
+
+@Html.Hidden("NitroLeft")
+@Html.Hidden("AutoPilotLeft")
+@Html.Hidden("PainKillerLeft")
+
+@Html.Hidden("NitroUsed")
+@Html.Hidden("AutoPilotUsed")
+@Html.Hidden("PainKillerUsed")
+
+@Html.Hidden("AllotedBudget")
+@Html.Hidden("Budget_Calc")
+@Html.Hidden("Transfer_Cnt")
+@Html.Hidden("Tournament_Status")
+
+<div class="container body-container">
+
+    <div class="row">
+        <div class="col-md-6 text-left"><a href="/Team/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>  Back to Team</a></div>
+    </div>
+    <div class="row"><div class="dashboard-title2 text-center"><h5>@ViewBag.TournamentName</h5><h5>@ViewBag.TeamName</h5></div></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="info-box-2">
+                <div class="info-box-content-2">
+                    <span class="info-box-text-2 bgt-icn">
+                        <img src="~/Assets/Icon/money.png" />
+                    </span>
+                    <span class="info-box-text-2">Budget </span>
+                    <span class="info-box-number"><span id="TotalBudget"></span>@*<span id="AllotedBudget"></span>*@</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-box-2">
+                <div class="info-box-content-2 filterCursor" onclick="OpenTeamFilterModal();">
+                    <span id="filter_team" class="info-box-text-2">Filter By Team </span>
+                    <span class="info-box-text-2 bgt-icn"><i class="fa fa-filter"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-box-2">
+                <div class="info-box-content-2">
+                    <span class="info-box-text-2 bgt-icn">
+                        <img src="~/Assets/Icon/transfer.png" />
+                    </span>
+                    <span class="info-box-text-2">Transfer </span>
+                    <span class="info-box-number"><span id="SubsLeft">@Model.Transfer_left</span><span id="SubsCount"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div id="playerlistcontainer" class="col-md-6">
+            <div id="PLayerList" class="row">
+
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <ul class="f-btn">
+                            <li><button id="btn_AllP" type="button" onclick="FilterByType('All');">All</button></li>
+                            <li>
+                                <button id="btn_Bat" type="button" onclick="FilterByType('batsman');">
+                                    <img src="~/Assets/Icon/bat.png" />
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn_Wk" type="button" onclick="FilterByType('wicketkeeper');">
+                                    <img src="~/Assets/Icon/gloves.png" />
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn_AllR" type="button" onclick="FilterByType('allrounder');">
+                                    <img src="~/Assets/Icon/batball.png" />
+                                </button>
+                            </li>
+                            <li>
+                                <button id="btn_Bwl" type="button" onclick="FilterByType('bowler');">
+                                    <img src="~/Assets/Icon/ball.png" />
+                                </button>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="searchbox">
+                            <input type="text" id="SearchPlayer" class="searcharea" placeholder="Type the player name and press enter" />
+                            <span class="search-button"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="playergrid">
+                            <table id="playergrid"></table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row ag">
+                <div class="col-md-4">
+                    <p>NITRO</p>
+                    <label class="switch">
+                        <input type="checkbox" id="Chk_Booster" onclick="BoosterChange('Chk_Booster')" ;>
+
+                        <span class="switchslider round"></span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <p>PAIN KILLER</p>
+                    <label class="switch">
+                        <input type="checkbox" id="Chk_PainKiller" onclick="BoosterChange('Chk_PainKiller')" ; />
+                        <span class="switchslider round"></span>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <p>AUTO CAPTAIN</p>
+                    <label class="switch">
+                        <input type="checkbox" id="Chk_AutoCaptain" onclick="BoosterChange('Chk_AutoCaptain')" ; />
+                        <span class="switchslider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="playground">
+
+                <div class="center-play">
+                    <div id="playerList" style="padding-top:45px; ">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <a id="anc_autofill" href="#" class="btn theme-btn-dash" onclick="Autofill()" ;>Autofill</a>
+                </div>
+                <div class="col-md-4">
+                    <a id="anc_reset" href="#" class="btn theme-btn-dash" onclick="LoadSelectedPlayers_LastCutoff()" ;>Reset</a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="btn theme-btn-dash" onclick="SavePlayers()" ;>Save</a>
+                </div>
+            </div>
+            <div id="div_bottom"></div>
+        </div>
+
+        <div id="ModalCapVCap" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-bak">
+                    <div class="modal-header">
+                        <span>
+                            <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                            <h4 class="modal-title"><span id="Modal_Playername"></span></h4>
+                        </span>
+                        <img src="~/Assets/Icon/close_popup.png" alt="" class="close  img-popup" data-dismiss="modal" aria-hidden="true" />
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="capt">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="Chk_captain" class="radio" value="1" name="capvs[1][]" /><p class="c-tp">Select as Captain</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" id="Chk_vcaptain" class="radio" value="1" name="capvs[1][]" /><p class="c-tp">Select as Vice Captain</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        @Html.Hidden("PlayerId_CapVs")
+                       
+                        <button type="button" class="btn btn-primary btn-width-80" onclick="SaveCaptainVsCaptain();">Done</button>
+                        @*<button type="button" class="btn btn-primary btn-width-80" data-dismiss="modal">Close</button>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ModalTeamFilter" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content modal-bak">
+                    <div class="modal-header">
+                        <span>
+                            <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                            <h4 class="modal-title"><span>Sort by team name</span></h4>
+                        </span>
+                        <img src="~/Assets/Icon/close_popup.png" alt="" class="close  img-popup" data-dismiss="modal" aria-hidden="true" />
+                    </div>
+                    <div class="modal-body">
+                        <div class="capt2">
+                            <select id="ddlTeamlist" class="ddlTeamlist" multiple="multiple" placeholder="Select Team"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-primary btn-width-80" onclick="FilterTeam();">Done</button>
+                        <button type="button" class="btn btn-primary btn-width-80" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $("input:checkbox").on('click', function() {
+                // in the handler, 'this' refers to the box clicked on
+                var $box = $(this);
+                if ($box.is(":checked")) {
+                    // the name of the box is retrieved using the .attr() method
+                    // as it is assumed and expected to be immutable
+                    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                    // the checked state of the group/box on the other hand will change
+                    // and the current value is retrieved using .prop() method
+                    $(group).prop("checked", false);
+                    $box.prop("checked", true);
+                } else {
+                    $box.prop("checked", false);
+                }
+            });
+            $(document).ready(function () {
+                debugger;
+                var Tid = @Session["SelectTournamentId"].ToString();
+                LoadTeamSelectionRules();
+                CheckLastCutOff();
+                LoadSelectedPlayers();
+                ShowPlayerList();
+
+                $('#SelectedPlayerCnt').val(@Session["SelectPlayerCount"].ToString());
+                $('#SelectedBat').val(@Session["BatsmanCount"].ToString());
+                $('#Selectedwk').val(@Session["WicketkeeperCount"].ToString());
+                $('#SelectedBowl').val(@Session["BowlerCount"].ToString());
+                $('#SelectedAll').val(@Session["AllrounderCount"].ToString());
+                //debugger;
+
+                $('#div_bottom').focus();
+                $('#SubsLeft').html(@Session["Subs"].ToString());
+                $('#anc_autofill').attr("disabled","disabled");
+                $('#anc_reset').attr("disabled","disabled");
+                $('#NitroLeft').val(@Session["NitroLeft"].ToString());
+                $('#AutoPilotLeft').val(@Session["AutoPilotLeft"].ToString());
+                $('#PainKillerLeft').val(@Session["PainKillerLeft"].ToString());
+
+                $('#NitroUsed').val('@Session["NitroUsed"].ToString()');
+                $('#AutoPilotUsed').val('@Session["AutoPilotUsed"].ToString()');
+                $('#PainKillerUsed').val('@Session["PainKillerUsed"].ToString()');
+
+                var nitro =$('#NitroLeft').val();
+                var aCap =$('#AutoPilotLeft').val();
+                var pk =$('#PainKillerLeft').val();
+                var nitroUsed ='@Session["NitroUsed"].ToString()';
+                var aCapUsed = '@Session["AutoPilotUsed"].ToString()';
+                var pkUsed = '@Session["PainKillerUsed"].ToString()';
+
+                if (nitro == 0){
+                    $('#Chk_Booster').attr("disabled","disabled");
+                }
+                else{
+                    $('#Chk_Booster').removeAttr("disabled")
+                }
+
+                if(aCap == 0){
+                    $('#Chk_AutoCaptain').attr("disabled","disabled");
+                }
+                else{
+                    $('#Chk_AutoCaptain').removeAttr("disabled")
+                }
+
+                if(pk == 0){
+                    $('#Chk_PainKiller').attr("disabled","disabled");
+                }
+                else{
+                    $('#Chk_PainKiller').removeAttr("disabled")
+                }
+
+                if(nitroUsed == 'True'){
+                    $('#Chk_Booster').prop( "checked", true );
+                    $('#Chk_AutoCaptain').prop( "checked", false );
+                    $('#Chk_PainKiller').prop( "checked", false );
+
+                    $('#Chk_AutoCaptain').attr("disabled","disabled");
+                    $('#Chk_PainKiller').attr("disabled","disabled");
+
+                }else if(aCapUsed == 'True'){
+                    $('#Chk_AutoCaptain').prop( "checked", true );
+                    $('#Chk_Booster').prop( "checked", false );
+                    $('#Chk_PainKiller').prop( "checked", false );
+
+                    $('#Chk_Booster').attr("disabled","disabled");
+                    $('#Chk_PainKiller').attr("disabled","disabled");
+                }else if(pkUsed == 'True'){
+                    $('#Chk_PainKiller').prop( "checked", true );
+                    $('#Chk_AutoCaptain').prop( "checked", false );
+                    $('#Chk_Booster').prop( "checked", false );
+
+                    $('#Chk_AutoCaptain').attr("disabled","disabled");
+                    $('#Chk_Booster').attr("disabled","disabled");
+                }
+
+
+
+            });
+
+            var AllotedBudget = 0;
+            var Plist = [];
+            var Nitro_Cnt = 0;
+            var PainKiller_Cnt = 0;
+            var AutoPilot_Cnt = 0;
+            var TeamDet = new Array();
+
+            function OpenCaptModal(playerid,playerName,playerType){
+                $('#PlayerId_CapVs').val(playerid);
+                $('#Modal_Playername').html(playerName);
+
+                $('#Chk_captain').prop( "checked", false );
+                $('#Chk_vcaptain').prop( "checked", false );
+
+                if(playerType == 'C'){
+                    $('#Chk_captain').prop( "checked", true );
+                }else if(playerType == 'VC'){
+                    $('#Chk_vcaptain').prop( "checked", true );
+                }
+                $("#ModalCapVCap").modal('show');
+            }
+            function OpenTeamFilterModal(){
+                //$("#ModalTeamFilter").modal('show');
+                var uurl ='/Team/ShowTeamFilter';
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    //data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        debugger;
+                        if(data.status='Success'){
+
+                            if (data.length > 0) {
+                                $('#ddlTeamlist').empty();
+                                $.each(data, function (index, value) {
+                                    $('#ddlTeamlist').append($("<option Team='" + value.ParticipationTeamId + "'  ></option>").val(value.ParticipationTeamId).html(value.ParticipationTeamName));
+                                });
+
+                                $('#ddlTeamlist').multiselect({
+                                    columns: 1,
+                                    search: true,
+                                    texts: {
+                                        placeholder: 'Select Team', // text to use in dummy input
+                                        search: 'Search'         // search input placeholder text
+                                    },
+                                    onLoad: function () {
+                                        var spn = $('.ms-options-wrap').find('span');
+                                        var ln = spn.html().length;
+                                        if (ln >= 150) {
+                                            var ndata = spn.html().substring(0, 150) + "....";
+                                            spn.html(ndata);
+                                        }
+
+                                        $('.ms-options-wrap button').on('click', function () {
+                                            var w = $('.ms-options-wrap').width() + "px";
+                                            $('.ms-options').width(w);
+                                        });
+                                    }
+                                });
+
+                            }
+
+                            $("#ModalTeamFilter").modal('show');
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server for Save Captain!');
+                        return false;
+                    }
+                });
+
+            }
+
+            function FilterTeam(){
+                var checked_flag = 0;
+                var teamname ='';
+                $(".ms-options ul li input").each(function () {
+                    $this = $(this);
+                    if ($this.prop("checked")) {
+                        teamname += $('#ddlTeamlist option[value="' + $this.val() + '"]').attr('Team');
+                        teamname += ',';
+                        checked_flag = 1;
+                    }
+                });
+                if(checked_flag == 1){
+                    $('#filter_team').addClass('filter_team');
+                }
+                else{
+                    $('#filter_team').removeClass('filter_team');
+                }
+                var Tid = @Session["SelectTournamentId"].ToString();
+
+                grid.reload({ page: 1, TournamentId: Tid, FilterTeams: teamname });
+                $("#ModalTeamFilter").modal('hide');
+                //alert(teamname);
+            }
+
+            function SaveCaptainVsCaptain(){
+                //debugger;
+                var PlayerId = $('#PlayerId_CapVs').val();
+                var PlayerSelectas = '';
+                if(Chk_captain.checked){
+                    PlayerSelectas = 'Captain';
+                }
+                if(Chk_vcaptain.checked){
+                    PlayerSelectas = 'ViceCaptain';
+                }
+                var uurl ='/Team/SaveCaptainVsCaptain';
+                var pData = { PlayerId: PlayerId, PlayerSelectAs: PlayerSelectas};
+                var jsonData = JSON.stringify(pData);
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        if(data.status='Success'){
+                            $("#ModalCapVCap").modal('hide');
+
+                            $('#Chk_captain').prop( "checked", false );
+                            $('#Chk_vcaptain').prop( "checked", false );
+                            LoadSelectedPlayers();
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server for Save Captain!');
+                        return false;
+                    }
+                });
+
+            }
+
+            function SavePlayers(){
+                var NoOfPlayer =  $('#SelectedPlayerCnt').val();
+                var NoOf_Wk =  $('#Rule_WicketKeeper').val();
+                var NoOf_minBat =  $('#Rule_MinBatsman').val();
+                var NoOf_minBwl =  $('#Rule_MinBowler').val();
+                var NoOf_minAll =  $('#Rule_MinAllrounder').val();
+
+                var Selectedwk =  $('#Selectedwk').val();
+                var SelectedBat =  $('#SelectedBat').val();
+                var SelectedBowl =  $('#SelectedBowl').val();
+                var SelectedAll =  $('#SelectedAll').val();
+
+                var NitroUsed = $('#NitroUsed').val();
+                var AutoPilotUsed = $('#AutoPilotUsed').val();
+                var PainKillerUsed = $('#PainKillerUsed').val();
+                //debugger;
+                if(NoOfPlayer == 11){
+
+                    if(parseInt(NoOf_Wk) != parseInt(Selectedwk)){
+                        alert('You have to select atleast one Wicketkeeper');
+                    }
+                    else{
+                        if(parseInt(NoOf_minBat) > parseInt(SelectedBat)){
+                            alert('You have to select atleast three Batsman');
+                        }
+                        else{
+                            if(parseInt(NoOf_minBwl) > parseInt(SelectedBowl)){
+                                alert('You have to select atleast three Bowler');
+                            }
+                            else{
+                                if(parseInt(NoOf_minAll) > parseInt(SelectedAll)){
+                                    alert('You have to select atleast one Allrounder');
+                                }
+                                else{
+
+                                    var uurl ='/Team/SavePlayer';
+                                    var pData = { NitroUsed: NitroUsed, PainKillerUsed: PainKillerUsed , AutoPilotUsed: AutoPilotUsed};
+                                    var jsonData = JSON.stringify(pData);
+                                    $.ajax({
+                                        url: uurl,
+                                        type: 'POST',
+                                        data: jsonData,
+                                        dataType: 'json',
+                                        async: true,
+                                        cache: false,
+                                        contentType: "application/json; charset=utf-8",
+
+                                        success: function (data) {
+                                            if(data.status='Success'){
+                                                alert('Team Save Successfully');
+                                                location.href = '/Team/Index';
+                                            }
+                                        },
+                                        error: function (req, status, error) {
+                                            alert('Unable to connect server for Save Team!');
+                                            return false;
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    alert('Please select 11 players');
+                }
+            }
+
+            function BoosterChange(checkType){
+                var nitroleft ='@Session["Nitroleft"].ToString()';
+                var aCapleft = '@Session["AutoPilotleft"].ToString()';
+                var pkleft = '@Session["PainKillerleft"].ToString()';
+
+                if(checkType == 'Chk_Booster'){
+                    if (!$('#Chk_Booster').is(':checked')) {
+                        $('#NitroUsed').val('False');
+                        if(pkleft > 0){
+                            $('#Chk_PainKiller').removeAttr("disabled");}
+                        if(aCapleft > 0){
+                            $('#Chk_AutoCaptain').removeAttr("disabled");}
+                    }
+                    if (!$('#Chk_Booster').is(':unchecked')) {
+                        $('#NitroUsed').val('True');
+                        $('#Chk_PainKiller').attr("disabled","disabled");
+                        $('#Chk_AutoCaptain').attr("disabled","disabled");
+                    }
+                }
+                if(checkType == 'Chk_PainKiller'){
+                    if (!$('#Chk_PainKiller').is(':checked')) {
+                        $('#PainKillerUsed').val('False');
+                        if(nitroleft > 0){
+                            $('#Chk_Booster').removeAttr("disabled");}
+                        if(aCapleft > 0){
+                            $('#Chk_AutoCaptain').removeAttr("disabled");}
+                    }
+                    if (!$('#Chk_PainKiller').is(':unchecked')) {
+                        $('#PainKillerUsed').val('True');
+                        $('#Chk_Booster').attr("disabled","disabled");
+                        $('#Chk_AutoCaptain').attr("disabled","disabled");
+                    }
+                }
+                if(checkType == 'Chk_AutoCaptain'){
+                    if (!$('#Chk_AutoCaptain').is(':checked')) {
+                        $('#AutoPilotUsed').val('False');
+                        if(pkleft > 0){
+                            $('#Chk_PainKiller').removeAttr("disabled");}
+                        if(nitroleft > 0){
+                            $('#Chk_Booster').removeAttr("disabled");}
+                    }
+                    if (!$('#Chk_AutoCaptain').is(':unchecked')) {
+                        $('#AutoPilotUsed').val('True');
+                        $('#Chk_PainKiller').attr("disabled","disabled");
+                        $('#Chk_Booster').attr("disabled","disabled");
+                    }
+                }
+
+            }
+
+
+            function MovefromList(pid) {
+
+                alert(pid);
+            }
+
+            var grid;
+            function LoadPlayerlist(Tid) {
+
+
+                grid = $("#playergrid").grid({
+                    dataSource: { url: '@Url.Action("GetPlayerlist", "Team")', data: { TournamentId: Tid } },
+                    notFoundText: "No players found!",
+                    uiLibrary: "bootstrap",
+
+                    columns: [
+
+
+                        { field: "PlayerSpeciality", title: "Role", width: "15%", align: "center", cssClass: "Role" },
+                        { field: "PlayerName", title: "Player", width: "35%", sortable: true, cssClass: "Player" },
+                        { field: "ParticipationTeamName", title: "Team", width: "20%", cssClass: "Team" },
+                        { field: "PlayerValue", title: "Price", width: "15%", sortable: true, cssClass: "Price" },
+                        { field: "", title: "Action", width: "15%", align: "center", cssClass: "Action" }
+
+                    ],
+                    //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+                });
+                grid.on("rowDataBound", function (e, $row, id, record) {
+                    //if(record.PlayerImage == 'image.jpg'){
+                    $row.find('.Player').html('<img src="/Assets/Icon/cricket-player.png" alt="" /><span class="plyer-list-name">' + record.PlayerName + '</span>');
+                    //}else{
+                    //    $row.find('.Player').html('<img src="http://ec2-52-207-99-56.compute-1.amazonaws.com/FantasyCricketRest/ImagePath/Players/' + record.PlayerImage + '" alt="" height="30px" width="30px"/><span>' + record.PlayerName + '</span>');
+                    //}
+
+                    //if (record.PSelected == 'S') {
+
+                    //    $row.find('.Action').append('<a href="#" title="Remove" onclick="return SelectOrRemove(\'' + record.PlayerId + '\',\'' + record.PlayerName + '\',\'' + record.PlayerImage+ '\',\'R\');" ><img src="/Assets/Icon/cancel.png" alt="" height="18px" width="18px"/></a>');
+                    //}
+                    //else {
+                    $row.find('.Action').append('<a href="#" title="Add" onclick="return SelectOrRemove(\'' + record.PlayerId + '\',\'A\',\'' + record.PlayerSpeciality + '\',\'' + record.PlayerValue + '\',\'' + record.TeamDescription + '\',\'' + record.PlayerType + '\');" ><img src="/Assets/Icon/plus.png" alt="" height="18px" width="18px"/></a>');
+                    //$row.find('.Price').append( record.PlayerValue + 'K');
+                    //}
+
+                    if (record.PlayerSpeciality == 'batsman') {
+                        $row.find('.Role').html('<img src="/Assets/Icon/bat.png" alt="" height="27px" width="30px"/>');
+                    }
+                    else if (record.PlayerSpeciality == 'wicketkeeper') {
+                        $row.find('.Role').html('<img src="/Assets/Icon/gloves.png" alt="" height="27px" width="30px"/>');
+                    }
+                    else if (record.PlayerSpeciality == 'allrounder') {
+                        $row.find('.Role').html('<img src="/Assets/Icon/batball.png" alt="" height="27px" width="30px"/>');
+                    }
+                    else if (record.PlayerSpeciality == 'bowler') {
+                        $row.find('.Role').html('<img src="/Assets/Icon/ball.png" alt="" height="25px" width="25px"/>');
+                    }
+                });
+
+
+            }
+
+
+
+            function FilterByType(PType) {
+                var Tid = @Session["SelectTournamentId"].ToString();
+                grid.reload({ page: 1, TournamentId: Tid, PlayerType: PType });
+
+            }
+
+            $("#SearchPlayer").keyup(function (event) {
+
+                if (event.keyCode === 13) {
+                    var searchText = $("#SearchPlayer").val();
+                    var Tid = @Session["SelectTournamentId"].ToString();
+                    grid.reload({ page: 1, TournamentId: Tid, PlayerSearch: searchText });
+                }
+            });
+
+
+            function CalculateSameTeamPlayer( PSelect, PTeam) {
+                //debugger;
+                if(PSelect == 'R'){
+                    for (var i = 0; i < TeamDet.length; i++) {
+                        //debugger;
+                        if (TeamDet[i][0] === PTeam) {
+                            var cnt_flag = TeamDet[i][1];
+                            cnt_flag= cnt_flag - 1;
+                            TeamDet[i][1] = cnt_flag;
+                        }
+                    }
+
+                }
+                else {
+                    var teamcnt = TeamDet.length;
+                    var flag = 0;
+                    if(teamcnt == 0){
+                        TeamDet[teamcnt] = new Array(PTeam,1);
+                        flag=1;
+                    }
+                    else{
+                        for (var i = 0; i < TeamDet.length; i++) {
+                            if (TeamDet[i][0] === PTeam) {
+                                var cnt_flag = TeamDet[i][1];
+                                cnt_flag= cnt_flag + 1;
+                                TeamDet[i][1] = cnt_flag;
+                                flag=1;
+                            }
+                        }
+                    }
+                    if(flag == 0){
+                        TeamDet[teamcnt] = new Array(PTeam,1);
+                    }
+
+                }
+            }
+
+            function SelectOrRemove(Id, PSelect, Pspciality, Pvalue, PTeam, Ptype) {
+                debugger;
+                var MaxSameTeamPlayer = $('#Rule_MaxSameTeamPlayer').val()
+                var maxlimit_flag = 0;
+                if(TeamDet.length > 0 && PSelect == 'A'){
+                    for (var i = 0; i < TeamDet.length; i++) {
+                        if (TeamDet[i][1] == MaxSameTeamPlayer && TeamDet[i][0] === PTeam) {
+                            maxlimit_flag = 1;
+                        }
+                    }
+                }
+                if(maxlimit_flag === 1){
+                    alert('Max player limit from team ' + PTeam + ' is crossed');
+                }
+                else{
+
+                    var NoOfPlayer =  $('#SelectedPlayerCnt').val();
+                    if (NoOfPlayer >= 11 && PSelect == 'A') {
+                        alert('Sorry Player selection limit is full..');
+                    }
+                    else if(PSelect == 'R'){
+                        CalculateSameTeamPlayer( PSelect, PTeam);
+                        SelectionOrRejection(Id, PSelect,NoOfPlayer,Pspciality, Pvalue);
+                    }
+                    else {
+                        debugger;
+                        var Total_Budget = $('#AllotedBudget').val();
+                        var  Calculated_Budget = $('#Budget_Calc').val();
+                        var overseas = $('#OverSeasPlayer').val();
+                        var Rule_overseas =$('#Rule_MaxOverseasPlayer').val();
+                        if(Ptype == 'overseas'){ overseas = parseInt(overseas) + 1;}
+                        if(parseInt(overseas) > parseInt(Rule_overseas)){
+                            alert('You can choose only ' + Rule_overseas +' overseas player.');
+                        }
+                        else{
+                            if((parseInt(Calculated_Budget) - parseInt(Pvalue)) >= 0)
+                            {
+                                var Selectedwk =  $('#Selectedwk').val();
+                                var SelectedBat =  $('#SelectedBat').val();
+                                var SelectedBowl =  $('#SelectedBowl').val();
+                                var SelectedAll =  $('#SelectedAll').val();
+
+                                var Rule_WicketKeeper = $('#Rule_WicketKeeper').val();
+                                var Rule_MaxBatsman = $('#Rule_MaxBatsman').val();
+                                var Rule_MinBatsman = $('#Rule_MinBatsman').val();
+                                var Rule_MaxBowler = $('#Rule_MaxBowler').val();
+                                var Rule_MinBowler = $('#Rule_MinBowler').val();
+                                var Rule_MaxAllrounder = $('#Rule_MaxAllrounder').val();
+                                var Rule_MinAllrounder =$('#Rule_MinAllrounder').val();
+
+
+                                if(Pspciality == 'wicketkeeper'){ Selectedwk = parseInt(Selectedwk) + 1;}
+                                else if(Pspciality == 'batsman'){ SelectedBat = parseInt(SelectedBat) + 1;}
+                                else if(Pspciality == 'bowler'){ SelectedBowl = parseInt(SelectedBowl) + 1;}
+                                else if(Pspciality == 'allrounder'){ SelectedAll = parseInt(SelectedAll) + 1;}
+
+                                if(Selectedwk > Rule_WicketKeeper){
+                                    alert('You can select only one WicketKeeper.');
+                                } else
+                                    if(SelectedBat > Rule_MaxBatsman){
+                                        alert('You have select max number of Batsmans.');
+                                    } else
+                                        if(SelectedBowl > Rule_MaxBowler){
+                                            alert('You have select max number of Bolwers.');
+                                        } else
+                                            if(SelectedAll > Rule_MaxAllrounder){
+                                                alert('You have select max number of Allrounders.');
+                                            }else
+                                            {
+
+                                                SelectionOrRejection(Id, PSelect,NoOfPlayer,Pspciality, Pvalue);
+                                            }
+                            }
+                            else{
+                                alert('Sorry you have not enough budget remain.');
+                            }
+                        }
+                    }
+                }
+            }
+
+            function SelectionOrRejection(Id, PSelect, NoOfPlayer,Pspciality, Pvalue) {
+                debugger;
+                var uurl = '/Team/SelectOrRemove';
+                var pData = { PId: Id, PSelect: PSelect };
+                var jsonData = JSON.stringify(pData);
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        debugger;
+                        if(data.result.status == "Success"){
+                            LoadSelectedPlayers();
+                            var Tid = @Session["SelectTournamentId"].ToString();
+                            grid.reload({ page: 1, TournamentId: Tid });
+                            var CalcBudget = 0;
+                            //debugger;
+                            if(PSelect == 'A'){
+
+                                var cnt = parseInt(NoOfPlayer) + 1;
+                                $('#SelectedPlayerCnt').val(cnt);
+                                var precalcBudget = $('#Budget_Calc').val();
+                                CalcBudget = parseInt(precalcBudget) + parseInt(Pvalue);
+
+                                if(Pspciality == 'wicketkeeper'){
+                                    var Selectedwk =  $('#Selectedwk').val();
+                                    Selectedwk = parseInt(Selectedwk) + 1;
+                                    $('#Selectedwk').val(Selectedwk);
+                                }
+                                else if(Pspciality == 'batsman'){
+                                    var SelectedBat =  $('#SelectedBat').val();
+                                    SelectedBat = parseInt(SelectedBat) + 1;
+                                    $('#SelectedBat').val(SelectedBat);
+                                }
+                                else if(Pspciality == 'bowler'){
+                                    var SelectedBowl =  $('#SelectedBowl').val();
+                                    SelectedBowl = parseInt(SelectedBowl) + 1;
+                                    $('#SelectedBowl').val(SelectedBowl);
+                                }
+                                else if(Pspciality == 'allrounder'){
+                                    var SelectedAll =  $('#SelectedAll').val();
+                                    SelectedAll = parseInt(SelectedAll) + 1;
+                                    $('#SelectedAll').val(SelectedAll);
+                                }
+
+                            }else{
+                                var cnt =parseInt(NoOfPlayer) - 1;
+                                //debugger;
+                                $('#SelectedPlayerCnt').val(cnt);
+                                var precalcBudget = $('#Budget_Calc').val();
+                                CalcBudget = parseInt(precalcBudget) - parseInt(Pvalue);
+
+
+                                if(Pspciality == 'wicketkeeper'){
+                                    var Selectedwk =  $('#Selectedwk').val();
+                                    Selectedwk = parseInt(Selectedwk) - 1;
+                                    $('#Selectedwk').val(Selectedwk);
+                                }
+                                else if(Pspciality == 'batsman'){
+                                    var SelectedBat =  $('#SelectedBat').val();
+                                    SelectedBat = parseInt(SelectedBat) - 1;
+                                    $('#SelectedBat').val(SelectedBat);
+                                }
+                                else if(Pspciality == 'bowler'){
+                                    var SelectedBowl =  $('#SelectedBowl').val();
+                                    SelectedBowl = parseInt(SelectedBowl) - 1;
+                                    $('#SelectedBowl').val(SelectedBowl);
+                                }
+                                else if(Pspciality == 'allrounder'){
+                                    var SelectedAll =  $('#SelectedAll').val();
+                                    SelectedAll = parseInt(SelectedAll) - 1;
+                                    $('#SelectedAll').val(SelectedAll);
+                                }
+                            }
+
+                            $('#SubsLeft').html(data.cnt.Transfer_left);
+                            var pcnt = $('#SelectedPlayerCnt').val();
+                            $('#Transfer_Cnt').val(data.cnt.Transfer_left);
+                        }
+                        if(data.result.status == "LimitCross"){
+                            alert(data.result.statusMessage);
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server1!');
+                        return false;
+                    }
+                });
+
+
+            }
+
+                function ShowPlayerList() {
+                    debugger;
+                var Tid = @Session["SelectTournamentId"].ToString();
+                LoadPlayerlist(Tid);
+                $('#playerlistcontainer').show();
+            }
+
+            function LoadSelectedPlayers() {
+                    debugger;
+                TeamDet.length=0;
+                var uurl ='/Team/LoadSelectedPlayers';
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    //data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        debugger;
+                        if(data.length == 0){
+                            $('#anc_autofill').removeAttr("disabled");}
+                        else{
+                            $('#anc_autofill').attr("disabled","disabled");
+                        }
+                        var TotalPlayerValue = 0;
+                        var divs = '';
+                        var wkrow = '';
+                        var batrow = '';
+                        var bwlrow = '';
+                        var allrow = '';
+                        var Overseas = 0;
+                        var pcnt =0; var wkcnt = 0; var batcnt = 0; var ballcnt = 0; var allcnt = 0;
+                        $.each(data, function (index, value) {
+                            var pPrice = value.PlayerValue; var pt ='';
+                            debugger;
+                            if (value.PlayerSpeciality == 'wicketkeeper') {
+
+                                wkrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    wkrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    wkrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                wkrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');" /></div>';
+                                wkrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                wkrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+
+                                wkrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                wkrow += '</div>';
+                                wkcnt = wkcnt +1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'batsman') {
+                                batrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    batrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    batrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                batrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                batrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                batrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                batrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                batrow += '</div>';
+                                batcnt = batcnt +1 ;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'bowler') {
+
+                                bwlrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    bwlrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />'
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    bwlrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                bwlrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                bwlrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                bwlrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                bwlrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                bwlrow += '</div>';
+                                ballcnt = ballcnt + 1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'allrounder') {
+
+                                allrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    allrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    allrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                allrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                allrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                allrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                allrow += '<div class="playerprice">' + pPrice + '  K</div>';
+                                allrow += '</div>';
+
+                                allcnt = allcnt + 1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if(value.PlayerType == 'overseas'){
+                                Overseas = Overseas +1;
+                            }
+                            pcnt = pcnt + 1;
+
+                            CalculateSameTeamPlayer( 'A', value.ParticipationTeamName);
+                        });
+
+
+                        divs += '<div class="playerrowtitle">WICKET-KEEPER</div><div class="playerrow">' + wkrow + '</div>';
+                        divs += '<div class="playerrowtitle">BATSMAN</div><div class="playerrow">' + batrow + '</div>';
+                        divs += '<div class="playerrowtitle">BOWLER</div><div class="playerrow">' + bwlrow + '</div>';
+                        divs += '<div class="playerrowtitle">ALL-ROUNDERS</div><div class="playerrow">' + allrow + '</div>';
+
+                        $('#SelectedPlayerCnt').val(pcnt);
+                        $('#playerList').html(divs);
+                        debugger;
+                        var alltedBudget = $('#AllotedBudget').val();
+
+                        TotalPlayerValue = parseInt(alltedBudget) - parseInt(TotalPlayerValue);
+                        $('#TotalBudget').html(TotalPlayerValue+ 'K');//.toFixed(2)
+                        $('#Budget_Calc').val(TotalPlayerValue);
+
+                        $('#SelectedPlayerCnt').val(pcnt);
+                        $('#Selectedwk').val(wkcnt);
+                        $('#SelectedBat').val(batcnt);
+                        $('#SelectedBowl').val(ballcnt);
+                        $('#SelectedAll').val(allcnt);
+                        $('#OverSeasPlayer').val(Overseas);
+
+                    },
+                    error: function (req, status, error) {
+                        alert('Select your players');
+                        var divs = '';
+                        divs += '<div class="playerrowtitle">WICKET-KEEPER</div><div class="playerrow"></div>';
+                        divs += '<div class="playerrowtitle">BATSMAN</div><div class="playerrow"></div>';
+                        divs += '<div class="playerrowtitle">BOWLER</div><div class="playerrow"></div>';
+                        divs += '<div class="playerrowtitle">ALL-ROUNDERS</div><div class="playerrow"></div>';
+                        $('#playerList').html(divs);
+                        // $("#anc_autofill").removeAttr("disabled");
+                        return false;
+                    }
+                });
+            }
+
+            function LoadSelectedPlayers_LastCutoff() {
+                TeamDet.length=0;
+                var uurl ='/Team/TeamPlayer_LastCutoff';
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    //data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        var TotalPlayerValue = 0;
+                        var divs = '';
+                        var wkrow = '';
+                        var batrow = '';
+                        var bwlrow = '';
+                        var allrow = '';
+                        var Overseas = 0;
+                        var pcnt =0; var wkcnt = 0; var batcnt = 0; var ballcnt = 0; var allcnt = 0;
+                        $.each(data, function (index, value) {
+                            var pPrice = value.PlayerValue;
+                            var pt ='';
+                            if (value.PlayerSpeciality == 'wicketkeeper') {
+
+                                wkrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    wkrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    wkrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                wkrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');" /></div>';
+                                wkrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                wkrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+
+                                wkrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                wkrow += '</div>';
+                                wkcnt = wkcnt +1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'batsman') {
+                                batrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    batrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    batrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                batrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                batrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                batrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                batrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                batrow += '</div>';
+                                batcnt = batcnt +1 ;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'bowler') {
+
+                                bwlrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    bwlrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    bwlrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                bwlrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                bwlrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                bwlrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                bwlrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                bwlrow += '</div>';
+                                ballcnt = ballcnt + 1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'allrounder') {
+
+                                allrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    allrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    allrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                allrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                allrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                allrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                allrow += '<div class="playerprice">' + pPrice + '  K</div>';
+                                allrow += '</div>';
+
+                                allcnt = allcnt + 1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if(value.PlayerType == 'overseas'){
+                                Overseas = Overseas +1;
+                            }
+                            pcnt = pcnt + 1;
+                            CalculateSameTeamPlayer( 'A', value.ParticipationTeamName);
+                        });
+
+                        if(pcnt==0){alert('Sorry this is your first combination');}
+                        divs += '<div class="playerrowtitle">WICKET-KEEPER</div><div class="playerrow">' + wkrow + '</div>';
+                        divs += '<div class="playerrowtitle">BATSMAN</div><div class="playerrow">' + batrow + '</div>';
+                        divs += '<div class="playerrowtitle">BOWLER</div><div class="playerrow">' + bwlrow + '</div>';
+                        divs += '<div class="playerrowtitle">ALL-ROUNDERS</div><div class="playerrow">' + allrow + '</div>';
+
+                        $('#SelectedPlayerCnt').val(pcnt);
+                        $('#Selectedwk').val(wkcnt);
+                        $('#SelectedBat').val(batcnt);
+                        $('#SelectedBowl').val(ballcnt);
+                        $('#SelectedAll').val(allcnt);
+                        $('#OverSeasPlayer').val(Overseas);
+
+                        $('#playerList').html(divs);
+
+                        var alltedBudget = $('#AllotedBudget').val();
+
+                        TotalPlayerValue = parseInt(alltedBudget) - parseInt(TotalPlayerValue);
+                        $('#TotalBudget').html(TotalPlayerValue+ 'K');//.toFixed(2)
+                        $('#Budget_Calc').val(TotalPlayerValue);
+
+
+
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server for Reset');
+                        return false;
+                    }
+                });
+            }
+
+            function Autofill() {
+
+                TeamDet.length=0;
+
+
+                var uurl ='/Team/AutoSelectTeam';
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    //data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        var TotalPlayerValue = 0;
+                        var divs = '';
+                        var wkrow = '';
+                        var batrow = '';
+                        var bwlrow = '';
+                        var allrow = '';
+                        var Overseas = 0;
+                        var pcnt =0; var wkcnt = 0; var batcnt = 0; var ballcnt = 0; var allcnt = 0;
+                        $('#SubsLeft').html(data.cnt.Transfer_left);
+                        $('#Transfer_Cnt').val(data.cnt.Transfer_left);
+                        $.each(data.result, function (index, value) {
+                            var pPrice = value.PlayerValue;
+                            var pt ='';
+                            if (value.PlayerSpeciality == 'wicketkeeper') {
+
+                                wkrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    wkrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    wkrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                wkrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                wkrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                wkrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+
+                                wkrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                wkrow += '</div>';
+                                wkcnt = wkcnt +1;
+                                TotalPlayerValue += parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'batsman') {
+                                batrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    batrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    batrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                batrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                batrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                batrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                batrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                batrow += '</div>';
+                                batcnt = batcnt +1 ;
+                                TotalPlayerValue +=  parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'bowler') {
+
+                                bwlrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    bwlrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    bwlrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                bwlrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px"  onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');"/></div>';
+                                bwlrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                bwlrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                bwlrow += '<div class="playerprice">' + pPrice + ' K</div>';
+                                bwlrow += '</div>';
+                                ballcnt = ballcnt + 1;
+                                TotalPlayerValue +=  parseInt(pPrice);
+                            }
+                            if (value.PlayerSpeciality == 'allrounder') {
+
+                                allrow += '<div class="playericonholder"><div class="playericon"><div class="player-left">';
+                                if(value.PlayerId == value.TeamCapt){
+                                    allrow += '<img src="/Assets/Icon/c-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'C';
+                                }
+                                if(value.PlayerId == value.TeamVCapt){
+                                    allrow += '<img src="/Assets/Icon/vc-icon.png" alt="" height="20px" width="20px" />';
+                                    pt= 'VC';
+                                }
+                                allrow += '</div><div class="player-center"><img src="/Assets/Icon/cricket-player.png" alt="" height="30px" width="30px" onclick="OpenCaptModal(\'' + value.PlayerId + '\',\'' + value.PlayerShortName + '\',\'' + pt + '\');" /></div>';
+                                allrow += '<div class="player-right"><a href="#" title="Remove" onclick="return SelectOrRemove(\'' + value.PlayerId + '\',\'R\',\'' + value.PlayerSpeciality + '\',\'' + value.PlayerValue + '\',\'' + value.ParticipationTeamName + '\',\'' + value.PlayerType + '\');" ><img src="/Assets/Icon/cancel.png" alt="" height="15px" width="15px"/></a></div></div>';
+                                allrow += '<div class="playername">' + value.PlayerShortName + '</div>';
+                                allrow += '<div class="playerprice">' + pPrice + '  K</div>';
+                                allrow += '</div>';
+
+                                allcnt = allcnt + 1;
+                                TotalPlayerValue +=  parseInt(pPrice);
+                            }
+                            if(value.PlayerType == 'overseas'){
+                                Overseas = Overseas +1;
+                            }
+                            pcnt = pcnt + 1;
+
+                            CalculateSameTeamPlayer( 'A', value.ParticipationTeamName);
+                        });
+
+
+                        divs += '<div class="playerrowtitle">WICKET-KEEPER</div><div class="playerrow">' + wkrow + '</div>';
+                        divs += '<div class="playerrowtitle">BATSMAN</div><div class="playerrow">' + batrow + '</div>';
+                        divs += '<div class="playerrowtitle">BOWLER</div><div class="playerrow">' + bwlrow + '</div>';
+                        divs += '<div class="playerrowtitle">ALL-ROUNDERS</div><div class="playerrow">' + allrow + '</div>';
+
+                        $('#SelectedPlayerCnt').val(pcnt);
+                        $('#Selectedwk').val(wkcnt);
+                        $('#SelectedBat').val(batcnt);
+                        $('#SelectedBowl').val(ballcnt);
+                        $('#SelectedAll').val(allcnt);
+                        $('#OverSeasPlayer').val(Overseas);
+                        $('#playerList').html(divs);
+
+                        var alltedBudget = $('#AllotedBudget').val();
+
+                        TotalPlayerValue = parseInt(alltedBudget) - parseInt(TotalPlayerValue);
+                        $('#TotalBudget').html(TotalPlayerValue+ 'K');//.toFixed(2)
+                        $('#Budget_Calc').val(TotalPlayerValue);
+
+
+
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server  for auto fill!');
+                        return false;
+                    }
+                });
+            }
+
+            function CheckLastCutOff() {
+                debugger;
+                var uurl ='/Team/TeamPlayer_LastCutoff';
+
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    //data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+
+                        if(data == 0){
+                            $("#anc_autofill").removeAttr("disabled");
+                            $('#anc_reset').attr("disabled","disabled");
+                        }
+                        else {
+                            $("#anc_reset").removeAttr("disabled");
+                            $('#anc_autofill').attr("disabled","disabled");
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server for Team Rules 5!');
+                        return false;
+                    }
+                });
+            }
+
+            function LoadTeamSelectionRules() {
+                debugger;
+                var uurl ='/Team/PlayerSelectionRules';
+                var Tid = @Session["SelectTournamentId"].ToString();
+                var pData = { TournamentId: Tid };
+                var jsonData = JSON.stringify(pData);
+                $.ajax({
+                    url: uurl,
+                    type: 'POST',
+                    data: jsonData,
+                    dataType: 'json',
+                    async: true,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+
+                        $.each(data, function (index, value) {
+
+                            $('#Rule_WicketKeeper').val(value.WicketKeeper);
+                            $('#Rule_MaxBatsman').val(value.MaxBatsman);
+                            $('#Rule_MinBatsman').val(value.MinBatsman);
+                            $('#Rule_MaxBowler').val(value.MaxBowler);
+                            $('#Rule_MinBowler').val(value.MinBowler);
+                            $('#Rule_MaxAllrounder').val(value.MaxAllrounder);
+                            $('#Rule_MinAllrounder').val(value.MinAllrounder);
+                            //AllotedBudget = value.TotalBudget;
+                            // $('#AllotedBudget').html(value.TotalBudget + 'K');
+                            debugger;
+                            $('#AllotedBudget').val(value.TotalBudget);
+                            $('#Rule_MaxSameTeamPlayer').val(value.MaxSameTeamPlayer);
+                            $('#Rule_MaxOverseasPlayer').val(value.MaxOverseasPlayer);
+
+                            $('#SubsCount').html('/' + value.SubCount);
+                            $('#Rule_SubCount').val(value.SubCount);
+                        });
+
+                    },
+                    error: function (req, status, error) {
+                        alert('Unable to connect server for Team Rules 4!');
+                        return false;
+                    }
+                });
+            }
+        </script>

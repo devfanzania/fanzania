@@ -1,0 +1,1145 @@
+﻿
+@{
+    ViewBag.Title = "wallet";
+    //if(Session["USERSELECTIONMODE"].ToString() == "T")
+    //{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    //}
+    //else
+    //{
+    //    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+    //}
+
+}
+<style>
+    .highlightStrip11 {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        background: #fa3f45;
+        width: fit-content;
+        margin-top: 11px;
+        color: #fff;
+        padding: 10px 247px 10px 10px;
+        font-size: 14px;
+    }
+
+    .nativePramot {
+        /* position: absolute;*/
+        top: 3%;
+        margin: auto;
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+    }
+
+    .mainGrid {
+        margin-bottom: 23px;
+        padding: 0% 4%;
+        /* width: 100%; */
+    }
+
+    .boxesPostion {
+        /* margin: 0 auto;*/
+        height: auto;
+        background-color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        border-radius: 0px;
+        display: grid;
+        /* border: 2px solid #ab9e9e;*/
+    }
+
+    .previewText {
+        padding: 5px 18px 12px;
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+    }
+
+    .titleTop {
+        color: #000423;
+        border-bottom: 0px solid #e0e3e9;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 0px;
+        line-height: normal;
+        word-break: break-all;
+    }
+
+    .previewDec {
+        color: #324B54;
+        margin-bottom: 7px;
+        border-bottom: 0px solid #e0e3e9;
+        font-size: 16px;
+        margin-top: 0px;
+        font-weight: 500;
+        padding: 3% 0%;
+        margin-bottom: 0px;
+        font-family: 'Montserrat', sans-serif;
+        text-align: left;
+        line-height: normal;
+        word-break: break-word;
+    }
+
+    .nativePramot i.fa.fa-bell {
+        margin-right: 9px;
+        font-size: 23px;
+    }
+
+    .border {
+        border: 1px solid #e1e1e1;
+    }
+
+    .powerdBy {
+        width: 100%;
+        display: grid;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px !important;
+        text-align: center;
+        padding-bottom: 0px;
+        margin-bottom: 3px;
+        color: #ff00009c;
+        /* margin-top: 14px;*/
+    }
+
+    .highlightStrip {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        background: linear-gradient(to right, #EF2C0B 0%,#EF2C0B 50%,#FD8601 100%);
+        width: fit-content;
+        margin-top: 11px;
+        color: #fff;
+        padding: 7px 92px 7px 10px;
+        font-size: 14px
+    }
+
+    .boxSection {
+        /*  padding: 4% 4% 2%; */
+        padding: 1% 7% 8%;
+    }
+
+    .boxSectionBorder {
+        padding: 0% 2%;
+    }
+
+    .viratPic {
+        vertical-align: middle;
+        margin-right: 13px;
+    }
+
+    .black {
+        color: #000423;
+        font-weight: 600;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .normalFont {
+        margin-top: 6px;
+        font-size: 13px;
+        color: #324B54;
+        margin-bottom: 4px;
+    }
+
+    .smallFont {
+        margin-top: 7px;
+        font-size: 14px;
+        color: #324B54;
+        padding-top: 0px;
+        margin-bottom: 7px;
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+
+    .modal-body1 {
+        max-height: 600px !important;
+    }
+
+    .CloseIconSub {
+        color: #4c7fe2;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        transition: transform 300ms, opacity 200ms !important;
+        cursor: pointer;
+    }
+
+    .icon-close:before {
+        content: "\e928";
+    }
+
+    .widrow {
+        padding: 5px 10px;
+        border: 2px solid #fa3f45;
+        border-radius: 50px;
+        margin-left: 10px;
+        font-size: 14px;
+        background: #fa3f45;
+        color: #fff;
+    }
+
+    .get-points p {
+        padding: 16px 14px !important;
+        ;
+        float: left;
+    }
+</style>
+<div id="ModalForgotPassword" class="modal fade bs-example-modal-lgwallet">
+    <div class="modal-dialog modal-med modal-open">
+        <div class="modal-content">
+
+            <div class="modal-body modal-body1" style="padding-left: 0px;padding-right: 0px;text-align: left;">
+                <div class="">
+                    <div class="nativePramot">
+                        <div class="boxesPostion">
+                            <i class="CloseIconSub" data-dismiss="modal"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAA20lEQVQ4EeXSsQrCMBAG4D6hq4sgzoLv4GJB0K108QF0FsFBcBOcxEWcrUWw0jrUKtb2lxsOJJemIN3aJUMuX//cxUKFn1WhhTpjr3eO+JkXtjOKM+SabdGzLAOceYiee8H1/hHg5pCgNTxje0zEnsCoghDCVJCgpu3BXYRI5X+Kp6mCZRCF0Cbj/Ay2R74xEdcbMSpa7WI0+id0xj78W8rntKsR46sNpgG6juyhKhZiDHGz+crqUH5BLaZCfKAMFBg9xvX+gcky0o6fQHsWwAtk/wTGKf5Za4J9AQbcd/4k7kATAAAAAElFTkSuQmCC" /></i>
+
+                            <p class="powerdBy" id="tname"> WITHDRAW CASH</p>
+                            <div class="highlightStrip" id="playername">
+                                AVAILABLE TO WITHDRAW | <strong><span id="avltowithdrow"></span></strong>
+                            </div>
+                            <div class="previewText">
+                                <div class="row">
+                                    <div class="cust-col-xs-12">
+                                        <div class="mainGrid">
+
+                                            <div class="" style="padding: 10px;">
+
+                                            </div>
+                                            <div class="boxSection" id="Showbankdetails" style="text-align: center; display:none">
+
+                                                <p class="normalFont">Bank Name :  <span id="BankName"></span></p>
+                                                <p class="normalFont">Account Number :  <span id="AccountNumber"></span></p>
+
+                                            </div>
+
+                                            <div class="" id="" style="font-size: 11px; text-align: center;">
+                                                <span>AMOUNT TO WITHDRAW</span>
+                                            </div>
+                                            <div class="boxSection" style="    text-align: center;">
+                                                <input type="hidden" value="" id="TotalOutstandingAmount" />
+                                                <input type="hidden" value="" id="MinAmountToWithDraw" />
+                                                <input class="form-firstname  valid " style="padding: 5px 10px;border: 2px solid #fa3f45; border-radius: 50px;       margin-left: 10px;
+                                                                                                font-size: 14px; height: 36px; width: 210px;" type="number" value="" id="amount">
+
+                                                <br /><lable style="font-size: 10px;">min INR 100 and max INR 10000 allowed per day  </lable>
+
+
+                                            </div>
+
+                                            <div class="boxSection" style="text-align: center; font-size: 12px;">
+                                                <p style="letter-spacing: 1px;font-size: 12px;"> Your stored KYC verified bank and contact details will be used for this transaction.if you wish to change the details please resubmit in kyc section before initiating this withdrawal.</p>
+                                            </div>
+
+                                            <div class="boxSection" id="dwithdraw" style=" text-align: center; display:none;">
+                                                <button type="button" disabled style="width: 211px; height: 35px; background-color: #8a8383; border: 2px solid #8a8383;" class="breakdown widrow">WITHDRAW</button>
+                                            </div>
+                                            <div id="ewithdraw" class="boxSection" style="text-align: center; display:none ">
+                                                <button type="button" style="width: 211px; height: 35px;" class="breakdown widrow" onclick="return transferfunds();">WITHDRAW</button>
+                                            </div>
+                                            <div id="showmessage" class="boxSection" style="text-align: center; display:none ">
+                                                <lable style="font-size: 12px;">Please wait while transaction is in progress.  </lable>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="wallet-area inner-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 wallet-area-header">
+                <div class="mid-wallet">
+                    <div class="wallet-btn">
+                        <p><span id="memberType"></span> MEMBER</p>
+                        <p><small id="tierPoint"></small></p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 text-center wallet-pts b-ryt-r">
+                            <p id="matchPts"></p>
+                            <span>match contest</span>
+                        </div>
+                        <div class="col-md-6 col-xs-6 text-center wallet-pts">
+                            <p id="tourPts"></p>
+                            <span>tournament</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="wallet-area-subheader">
+
+            <p id="p1">YOU ARE A MEMBER SINCE <span id="memshipFrom"></span></p>
+            <p id="p2">
+                Your tier points are recalculated each membership year starting <span id="recalculateTime"></span> each year.
+                <a href="#" data-toggle="modal" data-target="#myInfo" class="info-btn"> <i class="fa fa-info"></i></a>
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="default-sec">
+    <div class="container">
+        <div class="wallet-area-mem col-md-8 col-md-offset-2">
+
+            <div class="row">
+                <div class="firstsection">
+                    <input id="amountSubTier1" value="" name="amount" type="hidden">
+                    @*<a href="#" data-toggle="modal" data-target="#amountpopup" class="info-btn"> <i class="fa fa-info"></i></a>*@
+                    @*<button type="button" id="dpaybtn1" disabled style="background-color: #f38a8a ;" class="btn-red">Add Money</button*@
+
+
+                </div>
+                <div class="col-md-3 text-center">
+                    <div id="div_bronze" class="m-box">
+                        <i class="fa fa-circle color1"></i>
+                        <p>Bronze</p>
+                    </div>
+                    <p class="text-dark" id="div_bronze_Text"></p>
+                </div>
+
+                <div class="col-md-3 text-center">
+                    <div id="div_silver" class="m-box">
+                        <i class="fa fa-circle color2"></i>
+                        <p>Silver</p>
+                    </div>
+                    <p class="text-dark" id="div_silver_Text"></p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div id="div_gold" class="m-box">
+                        <i class="fa fa-circle color3"></i>
+                        <p>gold</p>
+                    </div>
+                    <p class="text-dark" id="div_gold_Text"></p>
+                </div>
+                <div class="col-md-3 text-center">
+                    <div id="div_platinum" class="m-box">
+                        <i class="fa fa-circle color4"></i>
+                        <p>platinum</p>
+                    </div>
+                    <p class="text-dark" id="div_platinum_Text"></p>
+                </div>
+
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-5 text-left">
+                    <div id="RetainType_H" class="wallet-tier">
+                        <p id="RetainType"></p>
+                    </div>
+                    <div id="AttainType_H" class="wallet-tier">
+                        <p id="AttainType"></p>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+                        <p id="RetainType_P">GET <span id="RetainPoint">0 PTS</span> MORE BY <span id="RetainDate">0 MMM 00</span></p>
+                        <p id="AttainType_P">GET <span id="AttainPoint">0 PTS</span> MORE BY <span id="AttainDate">0 MMM 00</span></p>
+                    </div>
+                </div>
+            </div>
+            <!---- <div class="row">
+                <div class="col-md-6 col-md-offset-3 ">
+                    <div class="highlightStrip11" id="playername">  </div>
+                    <span class="red-wallet">MY REWARDS (LAST 12 MONTHS)</span>
+                </div>
+            </div>-->
+
+
+            <div class="row">
+                <div class="col-md-6 text-left ">
+
+                    <div style="padding: 10px 214px 10px 12px!important;" class="highlightStrip11" id=""> MY WALLET BALANCE</div>
+
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="get-points" style=" padding: 20px 214px 10px 12px!important; ">
+                        <a style="BACKGROUND-COLOR: #000; BORDER: #000;" class="widrow" href="#" data-toggle="modal" data-target="#amountpopup" class="info-btn"> ADD CASH</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 text-left">
+                    <div class="wallet-tier">
+                        <p>CASH IN WALLET </p>
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+                        <p><span>INR</span> &nbsp;<span id="WalletAmount"></span> </p>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 text-left">
+                    <div class="wallet-tier">
+                        <p>RECENT TOP UP </p>
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+                        <p><span>INR</span> &nbsp;<span id="RecentTopUpAmount"></span>&nbsp;<span>ON</span>&nbsp;<span id="RecentTopUpDate"> </span>
+
+
+</div>
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 text-left ">
+
+                    <div class="highlightStrip11" id="playername"> MY REWARDS</div>
+
+
+
+                </div>
+            </div>
+            <!----  <div class="row">
+                <div class="col-md-6 text-left">
+                    <div class="wallet-tier">
+                        <p>TOTAL REWARDS WON</p>
+                    </div>
+                    <div class="wallet-tier">
+                        <p>REWARDS AVAILABLE TO CLAIM</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="get-points">
+                        <p><span class="b-ryt-r" id="rewards"></span> <span> <a href="#" class="breakdown-btn" data-toggle="modal" data-target="#myBreakdown">SEE BREAKDOWN</a></span></p>
+
+                        <p><span id="claim"></span></p>
+                    </div>
+               </div>
+            </div>-->
+            <div class="row">
+                <div class="col-md-5 text-left">
+                    <div class="wallet-tier">
+                        <p>TOTAL WINNINGS </p>
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+                        <p><span class="b-ryt-r" id="rewards"></span> <span> <a href="#" class="breakdown-btn" data-toggle="modal" data-target="#myBreakdown">SEE BREAKDOWN</a></span></p>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 text-left">
+                    <div class="wallet-tier">
+                        <p>CASH WITHDRAWN </p>
+                    </div>
+
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+                        <p><span class="b-ryt-r" id="claim"> </span> <span id="widrowpayment" style="display:none"> <a href="#" class="breakdown widrow" onclick="return showplayer12();"> WITHDRAW</a></span><span id="widrowpaymentd" style="display:none"> <button type="button" disabled style="width: 138px; height: 35px; background-color: #8a8383; border: 2px solid #8a8383;" class="breakdown widrow">WITHDRAW</button></span></p>
+
+                        <!---- <p><span class="b-ryt-r" id="">  INR 0</span></p>-->
+                        <!----  <p><span class="b-ryt-r" id=""> INR 0</span><span><a href="#" class="breakdown widrow" onclick="return showplayer12('499','25');">WRTHDRAW</a></span><span><a href="#" class="breakdown-btn" data-toggle="modal" data-target="#">SEE TRANSACTIONS</a></span></p>
+                        <p><span id="">INR 2600 (INR 400 OUTSTANDING)</span></p>-->
+                    </div>
+                    <!----   <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="return showplayer12('499','25');">Save</button>-->
+                    <!----  <p>
+                        <span><a href="#" class="breakdown widrow" onclick="return showplayer12('499','25');">WRTHDRAW</a></span>
+                        <span> <a href="#" class="breakdown-btn" data-toggle="modal" data-target="#">SEE TRANSACTIONS</a></span>
+                    </p>-->
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 text-left">
+
+                    <div class="wallet-tier">
+                        <p>VOUCHERS </p>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="get-points">
+
+                        <p><span id="voucheramt"></span></p>
+                        <!---- <p><span class="b-ryt-r" id="">  INR 0</span></p>-->
+                        <!----  <p><span class="b-ryt-r" id=""> INR 0</span><span><a href="#" class="breakdown widrow" onclick="return showplayer12('499','25');">WRTHDRAW</a></span><span><a href="#" class="breakdown-btn" data-toggle="modal" data-target="#">SEE TRANSACTIONS</a></span></p>
+                        <p><span id="">INR 2600 (INR 400 OUTSTANDING)</span></p>-->
+                    </div>
+                    <!----   <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="return showplayer12('499','25');">Save</button>-->
+                    <!----  <p>
+                        <span><a href="#" class="breakdown widrow" onclick="return showplayer12('499','25');">WRTHDRAW</a></span>
+                        <span> <a href="#" class="breakdown-btn" data-toggle="modal" data-target="#">SEE TRANSACTIONS</a></span>
+                    </p>-->
+
+
+                </div>
+            </div>
+
+            <div class="row" id="showmessage2" style="display:none">
+                <div class="col-md-5 text-left">
+
+                </div>
+                <div class="col-md-7 text-left">
+                    <lable style="font-size: 12px;">Withdrawal option will be enabled once your bank details have been verified (as part of KYC) and when you have funds to withdraw.  </lable>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <table class="tblclaim table table-hover wallet-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 20%;">BUNDLE</th>
+                                <th style="width: 20%;">PAYOUT DATE</th>
+                                <th style="width: 20%;">AMOUNT</th>
+                                <th style="width: 40%;">VOUCHER</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-claim"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div id="myBreakdown" class="modal fade">
+    <div class="modal-dialog modal-breakdown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title  text-center"><span>My Rewards Breakdown</span></h4>
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover wallet-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">REWARD TYPE</th>
+                            <th style="width: 20%;">REWARD DATE</th>
+                            <th style="width: 20%;">AMOUNT</th>
+                            <th style="width: 40%;">DETAILS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-reward-breakup"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myInfo" class="modal fade">
+    <div class="modal-dialog modal-breakdown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title  text-center"><span>About fanzania wallet</span></h4>
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body">
+                <p>
+                    <span>How are points credited into my wallet? </span>You get 10% of your Match
+                    Contests and Tournaments points. For example, if you score 20K
+                    points in a tournament, you get 2K points in your wallet.
+                </p>
+                <p>
+                    <span>What are wallet tiers?</span> Based on the number of wallet points you
+                    collect you are assigned a tier. There are four tiers: Bronze(achieved
+                    at 0 points), Silver(at 5K points) , Gold (at 10K points) and Platinum (at
+                    20K points). All new members start at Bronze tier.
+                </p>
+                <p>
+                    <span>How are wallet points calculated?</span>  Wallet points are reset to 0 at the
+                    start of each membership year. For example, if you joined fanzania
+                    on 15 MAR then your wallet points are reset to 0 points on 15 MAR of
+                    every year. Membership year window is unique to each user.
+                </p>
+                <p>
+                    <span>How do I maintain or move up wallet tiers?</span> Your status at the end of
+                    the current membership year is carried forward to the next
+                    membership year. To maintain or move up tiers, you need to collect
+                    the necessary points required for that tier.
+                </p>
+                <p>
+                    <span>What happens if I don’t collect enough points to maintain my tier?</span> If
+                    you are unable to collect the necessary points in the ongoing
+                    membership year, your status drops by one tier when entering the
+                    subsequent membership year.
+                </p>
+
+                <p>
+                    <span> If you want to know more, please reach us at support@fanzania.com.
+                </p></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="amountpopup" class="modal fade">
+    <div class="modal-dialog modal-breakdown">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title  text-center"><span>Add Cash</span></h4>
+                    <br />
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-2 text-right ">
+                    </div>
+                    <div class="col-md-4 text-right ">
+                        <input id="addmoneyamount" class="form-control" name="amount" type="text">
+                    </div>
+                    <div class="col-md-4 text-left ">
+                        <button style="BACKGROUND-COLOR: #000; BORDER: #000; width: 81%; height: 36px; " class="widrow" type="button" id="paybtn1" onclick="payment('@ViewBag.UserName','@ViewBag.Email','@if (!string.IsNullOrEmpty(Session["PhoneNumber"] as string)){@Session["PhoneNumber"].ToString();}','SubTier1')">ADD CASH</button>
+                    </div>
+                    <div class="col-md-2 text-right ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    // Get the environment from session, or use a default value if not set
+    string cashfreeEnv = Session["CashfreeEnv"] != null ? Session["CashfreeEnv"].ToString() : "sandbox";
+}
+
+
+<script>
+    var orderDetails = null;
+    const cashfreeRef = Cashfree({
+         //  mode: "sandbox",
+      mode: '@cashfreeEnv'
+    });
+
+    $(document).ready(function () {
+        GetSubscriptionDetails();
+    });
+
+    function checkOrderStatus() {
+
+        $.ajax({
+            url: '/CashFreePayment/fetch-order-details?orderId=' + orderDetails.order_id,
+            type: 'GET',
+            //data: JSON.stringify(paymentData), // Pass data as JSON
+            //dataType: 'json',
+            //contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                if (data.payment_session_id) {
+                    if (data.payment_session_id) {
+                        toastr.success("Order created successfully.")
+                        orderDetails = data;
+                        openCashfreeCheckout(data.payment_session_id)
+
+                        //location.reload();
+                    }
+                } else {
+                    toastr.error("Add Cash failed. " + data.message);
+                }
+            },
+            error: function () {
+                toastr.error("Something went wrong. Please try again later.");
+            }
+        });
+    }
+
+    function openCashfreeCheckout(paymentSessionId) {
+        let checkoutOptions = {
+            paymentSessionId: paymentSessionId,
+            redirectTarget: "_modal",
+        };
+        cashfreeRef.checkout(checkoutOptions).then((result) => {
+            if (result.error) {
+                // This will be true whenever user clicks on close icon inside the modal or any error happens during the payment
+                console.log("User has closed the popup or there is some payment error, Check for Payment Status");
+                console.log("Payment error", result.error);
+               // toastr_error(result.error);
+             //  checkOrderStatus();
+            }
+            if (result.redirect) {
+                // This will be true when the payment redirection page couldnt be opened in the same window
+                // This is an exceptional case only when the page is opened inside an inAppBrowser
+                // In this case the customer will be redirected to return url once payment is completed
+                console.log("Payment will be redirected");
+                // toastr_error(result.redirect);
+              //  location.href = location.href;
+            }
+            if (result.paymentDetails) {
+                // This will be called whenever the payment is completed irrespective of transaction status
+                console.log("Payment has been completed, Check for Payment Status");
+                console.log("payment details", result.paymentDetails);
+                checkOrderStatus();
+                setTimeout(function () {
+                    location.reload();
+                }, 5000);
+                //location.reload();
+            }
+        });
+    }
+
+    function showplayer12() {
+        $('#amount').val('');
+                $('.bs-example-modal-lgwallet').modal('show');
+    }
+    $(document).ready(function () {
+        FetchWalletInfo();
+        FetchRewardsInfo();
+        FetchClaimInfo();
+        fetchbankdetails();
+
+    });
+    function transferfunds() {
+        Session_UserId = @Session["UserId"].ToString();
+        var amount = $('#amount').val();
+
+
+
+        var pattern = /^(-?)\d+$/;
+        var result = pattern.test(amount);
+            if (result != true) {
+                // Do something...
+                toastr_error("enter a valid amount ");
+                return;
+            }
+
+        var TotalOutstandingAmount = $('#TotalOutstandingAmount').val();
+        var MinAmountToWithDraw = $('#MinAmountToWithDraw').val();
+
+        // if (Number(amount) == "" ) {
+        // toastr_error("Please Enter amount");
+        // return false;
+
+        if (Number(amount) <= Number(TotalOutstandingAmount) && Number(amount) >= Number(MinAmountToWithDraw)) {
+            $('#ewithdraw').hide();
+            $('#dwithdraw').show();
+            $('#showmessage').show();
+
+            var uurl = '/Profile/transferfunds/';
+            var pData = { UserId: Session_UserId, amount: amount };
+            var jsonData = JSON.stringify(pData);
+            $.ajax({
+                url: uurl,
+                type: 'POST',
+                data: jsonData,
+                dataType: 'json',
+                async: true,
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+                 // console.log(data);
+                    if (data.status =='success') {
+                        FetchWalletInfo();
+                        FetchRewardsInfo();
+                        FetchClaimInfo();
+                        fetchbankdetails();
+                        $('#amount').val('');
+                        toastr_success(data.statusMessage);
+                        $('#ewithdraw').show();
+                        $('#dwithdraw').hide();
+                        $('#showmessage').hide();
+                        $('.bs-example-modal-lgwallet').modal('hide');
+                    } else if (data.status == 'fail') {
+                        toastr_error(data.statusMessage);
+                        FetchWalletInfo();
+                        FetchRewardsInfo();
+                        FetchClaimInfo();
+                        fetchbankdetails();
+                        $('#amount').val('');
+                       // toastr_success(data.statusMessage);
+                        $('#ewithdraw').show();
+                        $('#dwithdraw').hide();
+                        $('#showmessage').hide();
+                        $('.bs-example-modal-lgwallet').modal('hide');
+
+                    }
+                    //else {
+                       // $('#ewithdraw').show();
+                       // $('#dwithdraw').hide();
+                      //  $('#showmessage').hide();
+                      //  toastr_error(data.statusMessage);
+                      //  return;
+                  //  }
+                },
+                error: function (req, status, error) {
+                    //$('#spinnerContainer').hide();
+                    // toastr_warning("Unable to connect server for delete tournament!");
+                    return false;
+                }
+            });
+
+        } else {
+            toastr_error("enter a valid amount");
+            return false;
+        }
+
+
+
+
+    }
+
+     function fetchbankdetails() {
+
+        Session_UserId = @Session["UserId"].ToString();
+        var amount = $('#TotalOutstandingAmount').val();
+        var uurl = '/Profile/fetchbankdetails/';
+        var pData = { UserId: Session_UserId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+          //      console.log(data.data); return;
+                if (data.status = 'success') {
+                    if (data.data) {
+                        if (data.data.BankVerified == "yes" && amount > 0) {
+
+                            $('#widrowpayment').show();
+                            $('#widrowpaymentd').hide();
+                            $('#ewithdraw').show();
+                            $('#dwithdraw').hide();
+                            $('#Showbankdetails').show();
+                            $('#BankName').html(data.data.BankName);
+                            $('#AccountNumber').html(data.data.AccountNumber);
+
+                        } else {
+
+                            $('#widrowpayment').hide();
+                            $('#widrowpaymentd').show();
+                            $('#ewithdraw').hide();
+                            $('#dwithdraw').show();
+                            $('#showmessage2').show();
+                            return;
+
+
+                        }
+                    }
+
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+
+    function FetchWalletInfo() {
+        $('#spinnerContainer').show();
+        var uurl = '/Profile/FetchWalletInfo';
+
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.length > 0) {
+                    $('#memberType').html(data[0].UserTier);
+                    if (data[0].UserTier == 'BRONZE') {
+                        $('#div_bronze').removeClass('m-box');
+                        $('#div_bronze').addClass('m-box-active');
+                        $('#div_bronze_Text').html('NEVER EXPIRES');
+                    } else if (data[0].UserTier == 'SILVER') {
+                        $('#div_silver').removeClass('m-box');
+                        $('#div_silver').addClass('m-box-active');
+                        $('#div_silver_Text').html('EXPIRES ' + data[0].TierExpiryDate);
+                    } else if (data[0].UserTier == 'GOLD') {
+                        $('#div_gold').removeClass('m-box');
+                        $('#div_gold').addClass('m-box-active');
+                        $('#div_gold_Text').html('EXPIRES ' + data[0].TierExpiryDate);
+                    } else {
+                        $('#div_platinum').removeClass('m-box');
+                        $('#div_platinum').addClass('m-box-active');
+                        $('#div_platinum_Text').html('EXPIRES ' + data[0].TierExpiryDate);
+                    }
+                    $('#tierPoint').html(data[0].WalletPoints + ' tier points');
+                    $('#matchPts').html(data[0].MatchContestTotal + ' PTS');
+                    $('#tourPts').html(data[0].TournamentTotal + ' PTS');
+                    $('#memshipFrom').html(data[0].SignUpDate);
+                    $('#recalculateTime').html(data[0].TierStartDate);
+                    if (data[0].RetainTier != null && data[0].RetainTierByPoints != null) {
+                        $('#RetainType').html('RETAIN ' + data[0].RetainTier + ' TIER');
+                        $('#RetainPoint').html(data[0].RetainTierByPoints + ' PTS');
+                        $('#RetainDate').html(data[0].RetainTierByDate);
+                        $('#RetainType_H').show();
+                        $('#RetainType_P').show();
+                    }
+                    else {
+                        $('#RetainType_H').hide();
+                        $('#RetainType_P').hide();
+                    }
+                    if (data[0].AttainTier != null && data[0].AttainTierByPoints != null) {
+                        $('#AttainType').html('ATTAIN ' + data[0].AttainTier + ' TIER');
+                        $('#AttainPoint').html(data[0].AttainTierByPoints + ' PTS');
+                        $('#AttainDate').html(data[0].AttainTierByDate);
+                        $('#AttainType_H').show();
+                        $('#AttainType_P').show();
+                    } else {
+                        $('#AttainType_H').hide();
+                        $('#AttainType_P').hide();
+                    }
+
+                }
+
+                $('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+    function FetchRewardsInfo() {
+        $('#spinnerContainer').show();
+        var uurl = '/Profile/FetchTotalRewards';
+
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            async: false,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.length > 0) {
+                    var div = '';
+                    $.each(data, function (index, value) {
+                        if (index == 0) {
+                            $('#rewards').html('INR ' + value.TotalRewardAmount);
+                        }
+                        div += '<tr><td class="bundle">' + value.RewardType + '</td>';
+                        div += '<td>' + ChageDatFormat((value.RewardDate).split('T')[0]) + '</td>';
+                        div += '<td> INR ' + value.RewardAmount + '</td>';
+                        div += '<td>' + value.Details + '</td></tr>';
+                    });
+                    $('#table-reward-breakup').html(div);
+                    $('.breakdown-btn').prop('disabled', false);
+                }
+                else {
+                    $('#rewards').html('INR 0');
+                    $('.breakdown-btn').prop('disabled', true);
+                }
+
+                $('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+
+    function FetchClaimInfo() {
+        $('#spinnerContainer').show();
+         Session_UserId = @Session["UserId"].ToString();
+        var uurl = '/Profile/FetchTotalClaims';
+        var pData = { UserId: Session_UserId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            data: jsonData,
+            url: uurl,
+            type: 'POST',
+            async: false,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                console.log(data);
+                if (data.length > 0) {
+                    var div = '';
+                    $.each(data, function (index, value) {
+                        if (index == 0) {
+                            if (value.TotalCash > 0 && value.TotalCash != null) {
+                              //  $('#claim').html('INR ' + value.TotalClaimAmount + ' (INR ' + value.TotalOutstandingAmount + ' OUTSTANDING)');
+                                $('#claim').html('INR ' + value.TotalCash);
+                            } else {
+                               // $('#claim').html('INR ' + value.TotalClaimAmount);
+                                $('#claim').html('INR ' + value.TotalCash);
+                            }
+                            $('#avltowithdrow').html('INR ' + value.TotalOutstandingAmount);
+                            $('#TotalOutstandingAmount').val(value.TotalOutstandingAmount);
+                            $('#MinAmountToWithDraw').val(value.MinAmountToWithDraw);
+
+
+                            $('#RecentTopUpAmount').html(value.RecentTopUpAmount);
+                            $('#RecentTopUpDate').html(value.RecentTopUpDate);
+                            $('#WalletAmount').html(value.WalletAmount);
+                            $('#voucheramt').html('INR ' + value.TotalClaimAmount + ' (INR ' + value.TotalOutstandingAmount + ' OUTSTANDING)');
+                        }
+                        if (value.ClaimId != 0) {
+                            div += '<tr><td class="bundle">' + value.Bundle + '</td>';
+                            div += '<td>' + ChageDatFormat((value.ClaimDate).split('T')[0]) + '</td>';
+                            div += '<td> INR ' + value.ClaimAmount + '</td>';
+                            div += '<td>' + value.Vouchar + '</td></tr>';
+
+                        }
+
+                    });
+                    if (div == '') {
+                        $('.tblclaim').hide();
+                    } else {
+                        $('.tblclaim').show();
+                        $('#table-claim').html(div);
+                    }
+
+
+                }
+                else {
+                    $('#claim').html('INR 0');
+                    $('.tblclaim').hide();
+                }
+
+                $('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+    function ChageDatFormat(date) {
+        var arr = date.split('-');
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        var i = 1;
+        var mon = '';
+        for (i = 1; i <= months.length; i++) {
+            if (i == parseInt(arr[1])) {
+                mon = months[i - 1];
+                break;
+            }
+        }
+        var formatddate = arr[2] + ' ' + mon + ' ' + arr[0];
+        return formatddate;
+    }
+
+    function payment(UserName, Email, PhoneNumber) {
+      //  console.log(UserName, Email, PhoneNumber);
+        //return;
+        // Hardcoded test values
+        const amountValue = document.getElementById("addmoneyamount").value;
+        if (!amountValue.trim()) {
+            toastr.warning("Oops! Amount cannot be empty.");
+            return false;
+        }
+        const username = UserName;
+        const email = Email;
+        const phonenumber = PhoneNumber;
+        const amount = amountValue;
+        const currency = "INR";
+        const description = "Test Payment Integration";
+
+        // Data to send to your server
+        const paymentData = {
+            userName: username,
+            email: email,
+            phoneNumber: phonenumber,
+            amount: amount,
+            currency: currency,
+            description: description
+        };
+
+        $.ajax({
+            url: '/CashFreePayment/CreateOrder',
+            type: 'POST',
+            data: JSON.stringify(paymentData), // Pass data as JSON
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.payment_session_id) {
+                    if (data.payment_session_id) {
+                        toastr.success("Order created successfully.")
+                        orderDetails = data;
+
+                        openCashfreeCheckout(data.payment_session_id)
+                    }
+                } else {
+                    toastr.error("Add Cash failed. " + data.message);
+                }
+            },
+            error: function () {
+                toastr.error("Something went wrong. Please try again later.");
+            }
+        });
+    }
+
+        function GetSubscriptionDetails() {
+        Session_UserId = @Session["UserId"].ToString();
+            var pData = { PaymentGatewayName:'cashfree'};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/CashFreePayment/FetchPaymentGatewayDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //getsubdetails = data;
+              // console.log(data);
+
+
+
+            },
+            error: function (req, status, error) {
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fanzania</title>
+    <link rel="icon" href="~/Assets/Icon/fanzania-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/revolution-slider.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="~/css/responsive.css" rel="stylesheet" />
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/css/home-style.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.min.css" rel="stylesheet" />
+    <script src="~/JS/jquery.js"></script>
+    <script src="~/JS/owl.carousel.js"></script>
+</head>
+<body class="theme-red">
+    <div class="page-wrapper">
+        <!-- Main Header / Style One-->
+        <header class="main-header header-style-one">
+            <!-- Header Top -->
+            <div class="header-top">
+                <div class="container-fluid clearfix ptn pbn">
+                    <!--Top Left-->
+                    <div class="top-left pull-left">
+                        <ul class="info-nav clearfix">
+                            <li>
+                                <!--Social Links-->
+                                <div class="social-links pull-left">
+                                    <span class="text-theme-color">Follow Us</span> :
+                                    <a href="https://www.facebook.com/playfanzania1" target="_blank"><span class="fa fa-facebook-f"></span></a>
+                                    <a href="https://mobile.twitter.com/playfanzania" target="_blank"><span class="fa fa-twitter"></span></a>
+                                    <a href="https://www.instagram.com/playfanzania/?hl=en" target="_blank"><span class="fa fa-instagram"></span></a>
+                                </div>
+                            </li>
+                            <li><a href="mailto:support@fanzania.com"><span class="fa fa-envelope-o mr10"></span>fanzania support</a></li>
+                        </ul>
+                    </div>
+                    <!--Top Right-->
+                    <div class="top-right pull-right clearfix">
+                        <!--Lang Bar-->
+                        <ul class="info-nav clearfix">
+
+                            <li><a class="btn-log" href="~/Account/Register"><i class="text-theme-color"></i>SIGN UP</a></li>
+                            <li>|</li>
+                            <li><a class="btn-log" href="~/Account/Index"><i class="text-theme-color"></i>LOGIN</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Top End -->
+            <!--Header-Main Box-->
+            <div class="header-mainbox">
+                <div class="container-fluid ptn pbn">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <div class="logo"> <a href="~/Home/Index"><img src="~/images/logo-icon.png" alt=""></a> </div>
+                        </div>
+                        <div class="outer-box clearfix">
+                            <!-- Main Menu -->
+                            <nav class="main-menu logo-outer">
+                                <div class="navbar-header">
+                                    <!-- Toggle Button -->
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                                </div>
+                                <div id="menu" class="navbar-collapse collapse clearfix">
+                                    <ul class="navigation clearfix">
+                                        <li>
+                                            @if (ViewBag.Page == "Home")
+                                            {
+                                                <a class="current_menu" href="~/Home/Index">Home</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="" href="~/Home/Index">Home</a>
+                                            }
+                                        </li>
+                                        <li>
+                                            @if (ViewBag.Page == "HowtoPlay")
+                                            {
+                                                <a class="current_menu" href="~/Home/Howtoplay/">How to play</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Home/Howtoplay/">How to play</a>
+                                            }
+                                        </li>
+                                        @*<li>
+                                            @if (ViewBag.Page == "Subscription")
+                                            {
+                                                <a class="current_menu" href="~/Home/Subscription">Subscription</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Home/Subscription">Subscription</a>
+                                            }
+                                        </li>*@
+                                        <li>
+                                        <li>
+                                            @if (ViewBag.Page == "OurStory")
+                                            {
+                                                <a class="current_menu" href="~/Home/About">Our Story</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Home/About">Our Story</a>
+                                            }
+                                        </li>
+
+
+                                        <li>
+                                            @if (ViewBag.Page == "GetInTouch")
+                                            {
+                                                <a class="current_menu" href="~/Home/Contact">Get In Touch </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Home/Contact">Get In Touch </a>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <!-- Main Menu End-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Header Main Box End-->
+        </header>
+        <!--End Main Header -->
+        @RenderBody()
+
+        <!--Main Footer-->
+        <footer class="main-footer">
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-md-4 col-sm-6 col-xs-12" data-wow-duration="2s" data-wow-delay=".5s">
+                        <div class="footer-1">
+                            <img src="~/images/logo-icon.png" alt="">
+
+                        </div>
+                    </div>
+
+                    <!--Footer Column-->
+                    <div class="col-md-4 col-sm-6 col-xs-12" data-wow-duration="2s" data-wow-delay="1.3s">
+                        <div class="footer-3">
+
+                            <p>
+                                <span>email :</span> <br>
+                                support@fanzania.com
+                            </p>
+                            <ul class="social">
+                                <li><a href="#"><span>follow us :</span></a></li>
+                                <li><a href="https://www.facebook.com/playfanzania1" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="https://mobile.twitter.com/playfanzania" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/playfanzania/?hl=en" target="_blank"><i class="fa fa-instagram"></i></a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!--Footer Column-->
+                    <div class="col-md-4 col-sm-6 col-xs-12 " data-wow-duration="2s" data-wow-delay="1.6s">
+                        <div class="footer-4">
+                            <div class="sitemap clearfix">
+                                <ul class="col-md-12">
+                                    <li><a href="~/Home/PointScoring" class="" title="">Points System</a></li>
+                                    <li><a href="~/Home/TeamComposition" class="" title="">Team Combination</a></li>
+                                    <li><a href="~/Home/FAQ/" class="" title="">FAQ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Copyright-->
+            <div class="container">
+                <div class="row copyright">
+                    <div class="col-md-4">
+                        <div class="pull-left">
+                            <p>&copy; <span id="year"></span> Copyrights <a href="#" target="_blank"> fanzania</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-12 " data-wow-duration="2s" data-wow-delay="1.6s">
+                        <div class="footer-4">
+                            <div class="sitemap clearfix">
+                                <ul class="col-md-12">
+                                    <li>Our Payment Partners<br /> <img src="~/Assets/logo/razerpaylogo.png" style="width: 38%;background: #fff;" alt=""></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="pull-right">
+                            <li><a href="~/Home/PrivacyPolicy" target="_blank"> Privacy Policy</a></li>
+                            <li>|</li>
+                            <li><a href="~/Home/TermsCondition" target="_blank"> Terms and Conditions</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </footer>
+        <!--End Footer -->
+    </div>
+    <div class="scroll-to-top scroll-to-target" data-target=".main-header"><span class="fa fa-long-arrow-up"></span></div>
+
+
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+    </script>
+    <script src='https://cldup.com/S6Ptkwu_qA.js'></script>
+    @*@Scripts.Render("~/bundles/allscript")*@
+
+
+    <script src="~/JS/bootstrap.min.js"></script>
+    @*<script src="~/JS/wow.js"></script>*@
+    <script src="~/JS/jquery.flexslider-min.js"></script>
+    <script src="~/JS/validate.js"></script>
+    @*<script src="~/JS/script.js"></script>*@
+    <script src="~/JS/jquery.mobile.custom.min.js"></script>
+    @*<script src="~/JS/main.js"></script>*@
+    <script src="~/JS/CustomLogin.js"></script>
+    <script src="~/JS/owl.carousel.js"></script>
+</body>
+
+
+</html>

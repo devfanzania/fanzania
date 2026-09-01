@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "PlayerEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+@Html.Hidden("PlayerId")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Player Edit</h3>
+                    </div>
+
+                    <div class="text-right pull-right col-md-6">
+                        <a href="/AdminPlayer/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>Back</a>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="form-body">
+                        @*<form class="form-horizontal">*@
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_PlayerId" class="control-label">Player Id</label>
+                                <input type="text" class="form-control1" id="txt_PlayerId" readonly="readonly" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_PlayerName" class="control-label">Player Name</label>
+                                <input type="text" class="form-control1" id="txt_PlayerName" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_PlayerShortName" class="control-label">Player Short Name</label>
+                                <input type="text" class="form-control1" id="txt_PlayerShortName" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_PlayerDesc" class="control-label">Player Description</label>
+                                <input type="text" class="form-control1" id="txt_PlayerDesc" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="ddl_type" class="control-label">Player Type</label>
+                                <select name="selector2" id="ddl_type" class="form-control1">
+                                    <option value="local">local</option>
+                                    <option value="overseas">overseas</option>
+                                  
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddl_PlayerSpeciality" class="control-label">Player Speciality</label>
+                                <select name="selector2" id="ddl_PlayerSpeciality" class="form-control1">
+                                    <option value="wicketkeeper">Wicketkeeper</option>
+                                    <option value="batsman">Batsman</option>
+                                    <option value="bowler">Bowler</option>
+                                    <option value="allrounder">Allrounder</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_PlayerValue" class="control-label">Player Value</label>
+                                <input type="number" class="form-control1" id="txt_PlayerValue" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_TeamName" class="control-label">Team Name</label>
+                                <input type="text" class="form-control1" id="txt_TeamName" placeholder="">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_Appid" class="control-label">APPID</label>
+                                <input type="number" class="form-control1" id="txt_Appid" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddl_status" class="control-label">Player Status</label>
+
+                                <select name="selector3" id="ddl_status" class="form-control1">
+                                    <option value="True">Active</option>
+                                    <option value="False">Inactive</option>
+                                </select>
+                            </div>
+                            @*<div class="col-md-3">
+                              <label for="txt_RapidPlayerId" class="control-label">Rapid Player Id</label>
+                                <input type="number" class="form-control1" id="txt_RapidPlayerId" placeholder="">
+                            </div>*@
+                                  <div class="col-md-3">
+                                <label for="txt_PlayerKey" class="control-label">Player Key</label>
+                                <input type="text" class="form-control1" id="txt_PlayerKey" placeholder="">
+                            </div>
+                            <div class="col-md-3  text-right">
+                                <button id="btn_Update_Details" class="btn btn-info" onclick="UpdatePlayer()" ;> Update Player</button>
+                            </div>
+                        </div>
+
+
+                        @*</form>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var Tid = '@Session["P_tid"].ToString()';
+        var Pid = '@Session["P_pid"].ToString()';
+        sessionStorage.setItem("PlayerTournamentId", Tid);
+        $('#TournamentId').val(Tid);
+        $('#PlayerId').val(Pid);
+
+        GetPlayerDetails();
+
+    });
+
+    function GetPlayerDetails() {
+        var Tid = $('#TournamentId').val();
+        var Pid = $('#PlayerId').val();
+        
+        /// $('#spinnerContainer').show();
+        var pData = { TournamentId: Tid, PlayerId: Pid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminPlayer/GetPlayerForUpdate',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //console.log(data[0]["TournamentId"]);
+                $('#txt_PlayerId').val(data[0]["PlayerId"]);
+                $('#txt_PlayerName').val(data[0]["PlayerName"]);
+                $('#txt_PlayerShortName').val(data[0]["PlayerShortName"]);
+                $('#txt_PlayerDesc').val(data[0]["PlayerDesc"]);
+                $('#ddl_type').val(data[0]["PlayerType"]);
+                $('#ddl_PlayerSpeciality').val(data[0]["PlayerSpeciality"]);
+                $('#txt_PlayerValue').val(data[0]["PlayerValue"]);
+                $('#txt_TeamName').val(data[0]["ParticipationTeamName"]);
+                $('#txt_Appid').val(data[0]["APIPId"]);
+                $('#ddl_status').val(data[0]["PlayerStatus"]);
+             //   $('#txt_RapidPlayerId').val(data[0]["RapidPlayerId"]);
+                $('#txt_PlayerKey').val(data[0]["PlayerKey"]);
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function UpdatePlayer() {
+        var Tid = $('#TournamentId').val();
+        var Pid = $('#PlayerId').val();
+        var txt_PlayerName = $('#txt_PlayerName').val();
+        var txt_PlayerShortName = $('#txt_PlayerShortName').val();
+        var txt_PlayerDesc = $('#txt_PlayerDesc').val();
+        var ddl_type = $('#ddl_type').val();
+        var ddl_PlayerSpeciality = $('#ddl_PlayerSpeciality').val();
+        var txt_PlayerValue = $('#txt_PlayerValue').val();
+        var txt_TeamName = $('#txt_TeamName').val();
+        var txt_Appid = $('#txt_Appid').val();
+        var chk_Status = $('#ddl_status').val();
+      //  var txt_RapidPlayerId = $('#txt_RapidPlayerId').val();
+        var txt_PlayerKey = $('#txt_PlayerKey').val();
+        
+
+        if (txt_PlayerName == '') {
+            alert('Please enter Player Name');
+            return;
+        }
+        if (txt_PlayerShortName == '') {
+            alert('Please enter short Name');
+            return;
+        }
+        if (txt_PlayerDesc == '') {
+            alert('Please enter Description');
+            return;
+        }
+        if (txt_PlayerValue == '') {
+            alert('Please enter value');
+            return;
+        }
+        if (txt_TeamName == '') {
+            alert('Please enter team name');
+            return;
+        }
+        if (txt_Appid == '') {
+            alert('Please enter APPID');
+            return;
+        }
+        //if (txt_RapidPlayerId == '') {
+        //    alert('Please enter Rapid Player Id');
+        //    return;
+        //}
+        if (txt_PlayerKey == '') {
+            alert('Please enter  Player Key');
+            return;
+        }        /// $('#spinnerContainer').show();
+
+        var pData = { TournamentId: Tid, APIPId: txt_Appid, PlayerId: Pid, PlayerName: txt_PlayerName, PlayerShortName: txt_PlayerShortName, PlayerDesc: txt_PlayerDesc, PlayerType: ddl_type, PlayerSpeciality: ddl_PlayerSpeciality, PlayerValue: txt_PlayerValue, ParticipationTeam: txt_TeamName, PlayerStatus: chk_Status, PlayerKey: txt_PlayerKey  };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminPlayer/UpdatePlayer',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+
+                    alert('Data updated successfuly!');
+                    location.href = '/AdminPlayer/Index';
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+</script>
+
+

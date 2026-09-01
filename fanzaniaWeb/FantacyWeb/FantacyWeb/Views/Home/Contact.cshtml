@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="page-banner-section">
+    <div class="text-center">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Get In Touch</h2>
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/Home/Index"><i class="fa fa-home"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Get In Touch</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- contact part-->
+<section class="contact-1">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <div class="content">
+                            <h5>Contact us : </h5>
+                            @*<p>Crystal -601, “Sun City”,<br>Sadhu Vasavani Road,<br>Rajkot-360005<br /> Gujarat, India</p>*@
+                        <p> EA 10/9, Deshbandhu Nagar,<br> Kolkata, West Bengal, 700059<p>
+</div>
+                        <span class="icon"><i class="fa fa-rocket" aria-hidden="true"></i></span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="content">
+                            <h5>Email us : </h5>
+                            <p>support@fanzania.com</p>
+                        </div>
+                        <span class="icon"><i class="fa fa-mail-forward" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+                <div class=" col-md-8">
+                    <!-- Contact Form -->
+                    <h2>send us <span>message</span> </h2>
+                    <form id="contact_form" name="contact_form" class="" method="post">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input id="txt_name" name="form_name" class="form-control" type="text" placeholder="Your Name" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input id="txt_email" name="form_email" class="form-control required" type="email" placeholder="Your Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <select id="ddl_Subject" name="form_service" class="form-control">
+                                        <option value="">Select Your Subject</option>
+                                        <option value="User/Password">User / Password</option>
+                                        <option value="Team/League">Team / League</option>
+                                        <option value="Points/Results">Points / Results</option>
+                                        <option value="Feedback">Feedback</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="txt_message" name="form_message" class="form-control required" rows="5" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input name="form_botcheck" class="form-control" type="hidden" value="" />
+                            <button type="button" class="btn theme-btn" data-loading-text="Please wait..." onclick="SubmitMsg()";>Send Your Message</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function SubmitMsg() {
+        var name = $('#txt_name').val();
+        var email = $('#txt_email').val();
+        var subject = $('#ddl_Subject').val();
+        var message = $('#txt_message').val();
+
+        if (name == '') {
+            toastr_warning('Please enter your name');
+            return;
+        }
+        if (email == '') {
+            toastr_warning('Please enter your email');
+            return;
+        }
+        if (!isValidEmailAddress(email)) {
+
+            toastr_warning('Please enter valid email');
+            return;
+        }
+        
+        if (subject == '') {
+            toastr_warning('Please select a subject');
+            return;
+        }
+        if (message == '') {
+            toastr_warning('Please enter your message');
+            return;
+        }
+       
+        /// $('#spinnerContainer').show();
+
+        var pData = { UserEmail: email, Name: name, MessageAbout: subject, Messages: message };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Home/PostFeedback',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    $('#txt_name').val('');
+                    $('#txt_email').val('');
+                    $('#ddl_Subject').val('');
+                    $('#txt_message').val('');
+                    toastr_success('Thank you for your message. We will get back to you for any concern.');
+                }
+                else {
+                    toastr_warning(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                toastr_warning(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+</script>

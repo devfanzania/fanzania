@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<div class="sub-heard-part">
+        <ol class="breadcrumb m-b-0">
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="active"> / Tournament</li>
+        </ol>
+    </div>*@
+
+<style>
+    .hiddenn {
+        display: none
+    }
+
+</style>
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <!----<div class="grid-1">
+                    <div class="form-body">
+                       <div class="row form-group">
+                <div class="col-md-3">
+                    <label class="control-label1">Game Type</label>
+                </div>
+                <div class="col-md-3">
+
+                    <select id="ddlGameType" class="form-control1">
+                        <option value="T">Tournament</option>
+                        <option value="D">Daily Match</option>
+                    </select>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a id="btnAddEdit" href="#" class="btn btn-info" onclick="AddEditRedirection('add',0)" ;> Add Tournament</a>
+
+                </div>
+            </div>
+        </div>
+    </div>-->
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        <select id="ddlLiveMatchList" class="form-control1"></select>
+                        <!---- <select id="ddlUpcomMatchList" class="form-control1"></select>-->
+                    </div>
+                    <div class="col-md-3">
+                   
+                    </div>
+                </div>
+                    <div class="leagueTable"><table id="TourList"></table></div>
+
+                </div>
+            </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+      //  ShowTourList();
+   //     LoadMatch(0, 'UPCOMING');
+        LoadMatch();
+
+    });
+
+    function LoadMatch() {
+        var pData = { MatchStatus:"Live" };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminUpdatePScore/AdminFetchMatchOnStart',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+             
+                
+                    $('#ddlLiveMatchList').empty();
+                    $('#ddlLiveMatchList').append($("<option></option>").val('').html("Select Live Match"));
+                    $.each(data, function (index, value) {
+                        $('#ddlLiveMatchList').append($("<option></option>").val(value.UniqueId).html(value.MatchScheduledDate + ' - ' + value.Team1 + ' vs ' + value.Team2));
+                    });
+                
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlLiveMatchList").change(function () {
+        $('#TourList').grid('destroy', true, true);
+        $('#ddlUpcomMatchList').val('');
+        ShowTourList($('#ddlLiveMatchList').val());
+      
+    });
+    $("#ddlUpcomMatchList").change(function () {
+        $('#ddlLiveMatchList').val('');
+        $('#TourList').grid('destroy', true, true);
+        ShowTourList($('#ddlUpcomMatchList').val());
+
+    });
+    var gridTour;
+    function ShowTourList(UniqueId) {
+       // console.log(UniqueId);
+       // return;
+        gridTour = $("#TourList").grid({
+            dataSource: { url: '@Url.Action("FetchManualScore", "AdminUpdatePScore")', data: { UniqueId:UniqueId } },
+            notFoundText: "No Players available",
+            uiLibrary: "bootstrap",
+
+            columns: [
+                { field: "PlayerName", title: "Name", width: "25.%", align: "left", cssClass: "PlayerName" },
+                { field: "", title: "MOM", width: "10%", align: "left", cssClass: "MOM" },
+                { field: "", title: "Batting Points", width: "10%", align: "left", cssClass: "BattingPoints" },
+                { field: "", title: "Bowling Points", width: "10%", align: "left", cssClass: "BowlingPoints" },
+                { field: "", title: "Fielding Points", width: "10%", align: "left", cssClass: "FieldingPoints" },
+           //     { field: "", title: "Total Points", width: "15%", align: "center", cssClass: "TotalPoints" },
+                { field: "", title: "", width: "15%", align: "left", cssClass: "UpdatePoints" },
+                { field: "", title: "", width: "15%", align: "left", cssClass: "SetMOM" },
+             //   { field: "", tooltip: "Edit Tournament", width: "10%", align: "center", cssClass: "EditTournament" },
+            //    { field: "", tooltip: "Delete Tournament", width: "10%", align: "center", cssClass: "DeleteTournament" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        gridTour.on("rowDataBound", function (e, $row, id, record) {
+      //     console.log(record);
+         //   return;
+            if (record.MoM == "True") {
+                $row.find('.MOM').append('<span id="momicon' + record.MoM + '"><i class="fa fa-check "></i></span><span  id="momicontest' + id +'" style=" display: none"><i class="fa fa-check "></i></span> ');
+            } else {
+                $row.find('.MOM').append('');
+
+            }
+            $row.find('.BattingPoints').append('<input type="number"  value="' + record.BattingPoints + '" class="form-control1" id="txt_ba_points'+id+'" placeholder="Number Only">');
+            $row.find('.BowlingPoints').append('<input type="number"  value="' + record.BowlingPoints + '" class="form-control1" id="txt_bo_points' +id +'" placeholder="Number Only">');
+
+            $row.find('.FieldingPoints').append('<input type="number"  value="' + record.FieldingPoints + '" class="form-control1" id="txt_fi_points' + id +'" placeholder="Number Only">');
+            $row.find('.UpdatePoints').append('<button id="btn_Save_Details" class="btn btn-info" onclick="update_points(' + id + ',' + record.APIPId + ')";>Update Points</button>');
+            if (record.MoM == "False") {
+                $row.find('.SetMOM').append('<button id="btnmom'+id+'" class="btn btn-info" onclick="set_mom('+id+',' + UniqueId + ',' + record.APIPId + ')";>Set MOM</button>');
+            } else {
+                $row.find('.SetMOM').append('');
+
+            }
+            //  $row.find('.EditTournament').append('<a href="#" title="Edit Tournament" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'edit\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+            //$row.find('.DeleteTournament').append('<a href="#" title="Delete Tournament" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteTournament(\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+        });
+    }
+
+    function AddEditRedirection(Type, Tid) {
+        sessionStorage.setItem('GameType', $('#ddlGameType').val());
+        if (Type == "add") {
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type;
+        }else if(Type == "edit"){
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type + '&tid=' + Tid;
+        }
+
+    }
+    function update_points(id,appid) {
+         //$('#spinnerContainer').show();
+     
+        var LUniqueId = $('#ddlLiveMatchList').val();
+     
+        var txt_ba_points = $('#txt_ba_points' + id).val();
+        var txt_bo_points = $('#txt_bo_points' + id).val();
+        var txt_fi_points = $('#txt_fi_points' + id).val();
+     // console.log(appid); return;
+        var uurl = '/AdminUpdatePScore/ManualScoreUpdateEachPlayer';
+        var pData = { UniqueId: LUniqueId, APIPId:appid, BattingPoints:txt_ba_points, BowlingPoints:txt_bo_points, FieldingPoints:txt_fi_points};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+            //    console.log('jyoti')
+                if (data.status = 'success') {
+                   // alert('Successfully deleted');
+                 //   gridTour.reload({ page: 1, TournamentId: "0" });
+                  // 
+                    ShowTourList();
+                    alert("Score update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function set_mom(id,UniqueId, appid) {
+        //$('#spinnerContainer').show();
+        //var txt_ba_points = $('#txt_ba_points' + id).val();
+       // var txt_bo_points = $('#txt_bo_points' + id).val();
+     //   var txt_fi_points = $('#txt_fi_points' + id).val();
+        // console.log(appid); return;
+        var uurl = '/AdminUpdatePScore/SetManualMom';
+        var pData = { UniqueId: UniqueId, APIPId: appid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //    console.log('jyoti')
+                if (data.status = 'success') {
+                    // alert('Successfully deleted');
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    // 
+                    ShowTourList();
+                    alert("MoM update successfully.");
+                   // $('#btnmom' + id).hide();
+                //    $('#momiconTrue').hide();
+                   // console.log("momicontest" + id);
+                 //   $("#momicontest3").show(); 
+                 //   $("#momicontest" + id).removeClass("hiddenn"); 
+                  //  $("#momicon" + id).css("display", "");
+                 //   $("#momicon" + id).show();
+                    location.href = '/AdminUpdatePScore/Index';
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function DeleteTournament(Tid) {
+        //$('#spinnerContainer').show();
+
+        var uurl = '/AdminTour/DeleteTournament';
+        var pData = { TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    gridTour.reload({ page: 1, TournamentId: "0" });
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+</script>

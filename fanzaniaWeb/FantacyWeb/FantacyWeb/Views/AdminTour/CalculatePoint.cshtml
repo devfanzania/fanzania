@@ -1,0 +1,132 @@
+﻿@model Fantacy_Model.AdminListModel
+@{
+    ViewBag.Title = "CalculatePoint";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Calculate Point</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label for="txt_TournamentId" class="control-label">Select Tournament</label>
+                            </div>
+                            <div class="col-md-4">
+                                @Html.DropDownListFor(a => a.SelectedTournament, Model.TournamentList, new { @id = "tId", @class = "form-control1" })
+                            </div>
+
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <label for="txt_Tcount" class="control-label">Set Transfer Count</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" class="form-control1" id="txt_Tcount" placeholder="">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-block btn-default" onclick="SetCount()" ;>Set Count</button>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-4">
+                                <button class="btn btn-block btn-default" onclick="ResetSubscription()";>Reset Subscription</button>
+                            </div>
+                            <div class="col-md-4">
+                               
+                            </div>
+                            <div class="col-md-4">
+                            
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    
+
+    function SetCount() {
+        var tId = $('#tId').val();
+        var tCount = $('#txt_Tcount').val();
+        if (tId == '') {
+            alert('Please select tournament');
+            return;
+        }
+        if (tCount == '') {
+            alert('Please enter transfer number');
+            return;
+        }
+
+        
+        /// $('#spinnerContainer').show();
+        var pData = { TournamentId: tId, TransferCount: tCount };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/SetTransferCount',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert('Transfers reset');
+                    $('#txt_Tcount').val('');
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+    function ResetSubscription() {
+        /// $('#spinnerContainer').show();
+       // var pData = { TournamentId: tId, TransferCount: tCount };
+       // var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/ResetSubscription',
+            type: 'POST',
+            //data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert(data.statusMessage);
+
+                } else {
+                    alert(data.statusMessage);
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+</script>
+

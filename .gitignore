@@ -1,0 +1,45 @@
+﻿# Environment variables / Credentials
+.env
+*.env
+*.key
+*.pem
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+__MACOSX/
+
+# Visual Studio / Visual Studio Code
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+.vscode/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Android build outputs
+*.apk
+*.aab
+.gradle/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+
+# Xcode / CocoaPods
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/

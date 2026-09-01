@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "ScoreBoard";
+    Layout = "~/Views/Shared/_LayoutScoreBoard.cshtml";
+}
+
+<h2>ScoreBoard</h2>
+<input type="hidden" id="T1" />
+<input type="hidden" id="T2" />
+
+<section>
+    <div class="container">
+        <div class="row score-header">
+            <div class="col-xs-3 text-left">
+                <img id="T1_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+            </div>
+            <div class="col-xs-6">
+                <div class="row score-header-score">
+                    <div class="col-xs-6 mid-text b-ryt text-right">
+                        <p class="text-orange" id="Team1Score"></p>
+                        <span id="Team1over"></span>
+                    </div>
+                    <div class="col-xs-6 mid-text text-left">
+                        <p class="text-orange" id="Team2Score">To Bat</p>
+                        <span id="Team2over">...</span>
+                    </div>
+                    <div class="col-md-12 mid-text text-center">
+                        <small class="text-orange" id="matchHeadline"></small>
+                    </div>
+                    <div class="col-md-12 mid-text text-center">
+                        <span id="mDate"></span>
+                        <span id="mVenue"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-3 text-right">
+                <img id="T2_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row" id="ModalScore">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <div class="mb-0">
+                            <h3 id="team1tab"></h3>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="th-desc">
+                                        BATSMAN
+                                    </th>
+                                    <th>
+                                        R
+                                    </th>
+                                    <th>
+                                        B
+                                    </th>
+                                    <th>
+                                        4s
+                                    </th>
+                                    <th>
+                                        6s
+                                    </th>
+                                    <th>
+                                        SR
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="score_batsman_inng1"></tbody>
+                        </table>
+                        <hr />
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="th-desc">
+                                        BOWLER
+                                    </th>
+                                    <th>
+                                        O
+                                    </th>
+                                    <th>
+                                        M
+                                    </th>
+                                    <th>
+                                        R
+                                    </th>
+                                    <th>
+                                        W
+                                    </th>
+                                    <th>
+                                        ER
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="score_bowler_inng1"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingTwo">
+                        <div class="mb-0">
+                            <h3 id="team2tab"></h3>
+                        </div>
+                    </div>
+                    <div class="card-block">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="th-desc">
+                                        BATSMAN
+                                    </th>
+                                    <th>
+                                        R
+                                    </th>
+                                    <th>
+                                        B
+                                    </th>
+                                    <th>
+                                        4s
+                                    </th>
+                                    <th>
+                                        6s
+                                    </th>
+                                    <th>
+                                        SR
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="score_batsman_inng2"></tbody>
+                        </table>
+                        <hr />
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="th-desc">
+                                        BOWLER
+                                    </th>
+                                    <th>
+                                        O
+                                    </th>
+                                    <th>
+                                        M
+                                    </th>
+                                    <th>
+                                        R
+                                    </th>
+                                    <th>
+                                        W
+                                    </th>
+                                    <th>
+                                        ER
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="score_bowler_inng2"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/CustomScript/LiveScore/ScoreBoard.js"></script>
+
+

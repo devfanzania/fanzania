@@ -1,0 +1,565 @@
+﻿
+@{
+    ViewBag.Title = "ManageTeam";
+    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+}
+
+
+@Html.Hidden("Rule_MinWicketKeeper")
+@Html.Hidden("Rule_MaxWicketKeeper")
+@Html.Hidden("Rule_MaxBatsman")
+@Html.Hidden("Rule_MinBatsman")
+@Html.Hidden("Rule_MaxBowler")
+@Html.Hidden("Rule_MinBowler")
+@Html.Hidden("Rule_MaxAllrounder")
+@Html.Hidden("Rule_MinAllrounder")
+@Html.Hidden("Rule_MaxSameTeamPlayer")
+@Html.Hidden("Rule_MaxOverseasPlayer")
+@Html.Hidden("Rule_SubCount")
+
+@Html.Hidden("SelectedPlayerCnt")
+@Html.Hidden("Selectedwk")
+@Html.Hidden("SelectedBat")
+@Html.Hidden("SelectedBowl")
+@Html.Hidden("SelectedAll")
+
+@Html.Hidden("OverSeasPlayer")
+
+@Html.Hidden("NitroLeft")
+@Html.Hidden("AutoPilotLeft")
+@Html.Hidden("PainKillerLeft")
+
+@Html.Hidden("NitroUsed")
+@Html.Hidden("AutoPilotUsed")
+@Html.Hidden("PainKillerUsed")
+
+@Html.Hidden("AllotedBudget")
+@Html.Hidden("Budget_Calc")
+@Html.Hidden("Transfer_Cnt")
+@Html.Hidden("Tournament_Status")
+
+@Html.Hidden("CaptName")
+@Html.Hidden("VCaptName")
+<link rel="preconnect" href="https://fonts.gstatic.com">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<!----<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500&display=swap" rel="stylesheet">-->
+
+<style>
+    .nativePramot {
+        /* position: absolute;*/
+        top: 3%;
+        margin: auto;
+        font-family: 'Montserrat', sans-serif;
+        width: 100%;
+    }
+
+    .mainGrid {
+        margin-bottom: 23px;
+        padding: 0% 4%;
+        /* width: 100%; */
+    }
+
+    .boxesPostion {
+        /* margin: 0 auto;*/
+        height: auto;
+        background-color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        border-radius: 0px;
+        display: grid;
+        /* border: 2px solid #ab9e9e;*/
+    }
+
+    .previewText {
+        padding: 5px 18px 12px;
+        font-family: 'Montserrat', sans-serif;
+        position: relative;
+    }
+
+    .titleTop {
+        color: #000423;
+        border-bottom: 0px solid #e0e3e9;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 0px;
+        line-height: normal;
+        word-break: break-all;
+    }
+
+    .previewDec {
+        color: #324B54;
+        margin-bottom: 7px;
+        border-bottom: 0px solid #e0e3e9;
+        font-size: 16px;
+        margin-top: 0px;
+        font-weight: 500;
+        padding: 3% 0%;
+        margin-bottom: 0px;
+        font-family: 'Montserrat', sans-serif;
+        text-align: left;
+        line-height: normal;
+        word-break: break-word;
+    }
+
+    .nativePramot i.fa.fa-bell {
+        margin-right: 9px;
+        font-size: 23px;
+    }
+
+    .border {
+        border: 1px solid #e1e1e1;
+    }
+
+    .powerdBy {
+        width: 100%;
+        display: grid;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px !important;
+        text-align: center;
+        padding-bottom: 0px;
+        margin-bottom: 3px;
+        color: #ff00009c;
+        /* margin-top: 14px;*/
+    }
+
+    .highlightStrip {
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        background: linear-gradient(to right, #EF2C0B 0%,#EF2C0B 50%,#FD8601 100%);
+        width: fit-content;
+        margin-top: 11px;
+        color: #fff;
+        padding: 7px 92px 7px 10px;
+        font-size: 14px
+    }
+
+    .boxSection {
+        padding: 4% 4% 2%;
+    }
+
+    .boxSectionBorder {
+        padding: 0% 2%;
+    }
+
+    .viratPic {
+        vertical-align: middle;
+        margin-right: 13px;
+    }
+
+    .black {
+        color: #000423;
+        font-weight: 600;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .normalFont {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #324B54;
+        margin-bottom: 4px;
+    }
+
+    .smallFont {
+        margin-top: 7px;
+        font-size: 14px;
+        color: #324B54;
+        padding-top: 0px;
+        margin-bottom: 7px;
+    }
+
+    .modal-open {
+        overflow: hidden;
+    }
+
+    .modal-body1 {
+        max-height: 600px !important;
+    }
+
+    .CloseIconSub {
+        color: #4c7fe2;
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        transition: transform 300ms, opacity 200ms !important;
+        cursor: pointer;
+    }
+
+    .icon-close:before {
+        content: "\e928";
+    }
+</style>
+<div id="ModalForgotPassword" class="modal fade bs-example-modal-lg">
+    <div class="modal-dialog modal-med modal-open">
+        <div class="modal-content">
+
+            <div class="modal-body modal-body1" style="padding-left: 0px;padding-right: 0px;text-align: left;">
+                <div class="">
+                    <div class="nativePramot">
+                        <div class="boxesPostion">
+                            <i class="CloseIconSub" data-dismiss="modal"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAA20lEQVQ4EeXSsQrCMBAG4D6hq4sgzoLv4GJB0K108QF0FsFBcBOcxEWcrUWw0jrUKtb2lxsOJJemIN3aJUMuX//cxUKFn1WhhTpjr3eO+JkXtjOKM+SabdGzLAOceYiee8H1/hHg5pCgNTxje0zEnsCoghDCVJCgpu3BXYRI5X+Kp6mCZRCF0Cbj/Ay2R74xEdcbMSpa7WI0+id0xj78W8rntKsR46sNpgG6juyhKhZiDHGz+crqUH5BLaZCfKAMFBg9xvX+gcky0o6fQHsWwAtk/wTGKf5Za4J9AQbcd/4k7kATAAAAAElFTkSuQmCC" /></i>
+
+                            <p class="powerdBy" id="tname"></p>
+                            <div class="highlightStrip" id="playername">
+
+                            </div>
+                            <div class="previewText">
+                                <div class="row">
+                                    <div class="cust-col-xs-12">
+                                        <div class="mainGrid">
+                                            <p class="previewDec" id="ponts">
+
+                                            </p>
+                                            <div class="boxSectionBorder">
+                                                <div class="border"></div>
+                                            </div>
+                                            <div class="boxSection" id="selecetedby">
+
+                                            </div>
+                                            <div class="boxSection" id="totalPoints">
+
+                                            </div>
+                                            <div class="boxSection" id="outof">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="inner-wrap">
+    <div class="container body-container">
+
+        <div class="row">
+            <div id="playerlistcontainer" class="col-md-6">
+                <div id="PLayerList">
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <ul class="f-btn">
+                                <li>
+                                    <button id="btn_Type_1" class="active" type="button" onclick="FilterByType('All','1');">All<span id="showTotalPlayerCnt" class="red"></span></button>
+                                    <span id="TotalPlayersOnRules"></span>
+                                </li>
+                                <li>
+                                    <button id="btn_Type_2" type="button" onclick="FilterByType('batsman','2');">
+                                        <img src="~/Assets/Icon/BatsmanBlackCircle.png" /><span id="showTotalBatsmanCnt" class="red"></span>
+                                    </button>
+                                    <span id="TotalBatsmanOnRules"></span>
+                                </li>
+                                <li>
+                                    <button id="btn_Type_3" type="button" onclick="FilterByType('wicketkeeper','3');">
+                                        <img src="~/Assets/Icon/WicketkeeperBlackCircle.png" /><span id="showTotalWKCnt" class="red"></span>
+                                    </button><span id="TotalWKOnRules"></span>
+                                </li>
+                                <li>
+                                    <button id="btn_Type_4" type="button" onclick="FilterByType('allrounder','4');">
+                                        <img src="~/Assets/Icon/AllrounderBlackCircle.png" /><span id="showTotalARCnt" class="red"></span>
+                                    </button><span id="TotalAllrounderOnRules"></span>
+                                </li>
+                                <li>
+                                    <button id="btn_Type_5" type="button" onclick="FilterByType('bowler','5');">
+                                        <img src="~/Assets/Icon/BowlerBlackCircle.png" /><span id="showTotalBowlerCnt" class="red"></span>
+                                    </button><span id="TotalBowlersOnRules"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 searchbox">
+                                <input type="text" id="SearchPlayer" class="searcharea" placeholder="Type the player to search" />
+                                <span class="search-button"><i class="fa fa-search"></i></span>
+                            </div>
+                            <div class="col-lg-6 filterbox">
+                                <a id="filter_team" class="filterarea" href="#" onclick="OpenTeamFilterModal();">Filter by team<img src="/Assets/Icon/Filter.png" /></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="playergrid">
+                                <table id="playergrid"></table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+
+                    <div class="nd-right nd-right-p5 left-skew">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="dailyBudget">
+                                        <span class="budget" id="TotalBudget"></span>
+                                        <p>Budget</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 dailyGame">
+                                    <p class="m-info text-center">
+                                        @* <img style="display:none;" id="imageteam1" src="/Assets/Icon/bat_.png" class="blink-image" alt="" height="25px" width="25px" />*@
+                                        <span class="team1" id="team1"></span> vs <span class="team2" id="team2"></span>
+                                        @*<img id="imageteam2" style="display:none;" src="/Assets/Icon/circle_green.png" class="blink-image" alt="" height="25px" width="25px" />*@
+                                    </p>
+                                    <p class="m-info text-center">
+                                        <img style="display:none;" id="greenimage" src="/Assets/Icon/circle_green.png" class="blink-image" alt="" height="16px" width="16px" />
+                                        <span class="teambat" id="teambat"></span>
+                                    </p>
+
+                                      <p class="m-info text-center" id="showdate" style="padding: 0px 0px !important;" style="display:none"><span id="matchDate"></span> | <span id="matchVenue"></span></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="dailyBudget">
+                                        <output class="winn budget" id="winn"></output> 
+                                        <p>   PREDICTION </p>
+                                        </div>
+                                        @*<a href="/DailyGame/HomeD/Index" class="btn-em">Exit</a>
+            <a href="#" class="btn-em" onclick="SavePlayers_Confirm();">Save</a>*@
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+                    </div>
+                    <div class="d-ground2">
+
+                        <div class="playground-team">
+                           
+
+                            <div class="dGroundPalyers" style="margin: 25px auto !important;">
+
+                                <a href="/DailyGame/HomeD/Index" style="" class="btn-em">Exit</a>
+                                <a href="#" class="btn-em" style="float: right;" onclick="SavePlayers_Confirm();">Save</a>
+
+                                <div id="playerList">
+
+                                </div>
+
+                            </div>
+
+                            <div class="team-indicates">
+                                <div class="team-indicate">
+                                    <img src="~/Assets/Icon/WicketkeeperGrey.png" />
+                                </div>
+                                <div class="team-indicate2">
+                                    <img src="~/Assets/Icon/BatsmanGrey.png" />
+
+                                </div>
+                                <div class="team-indicate3">
+                                    <img src="~/Assets/Icon/BowlerGrey.png" />
+                                </div>
+                                <div class="team-indicate4">
+                                    <img src="~/Assets/Icon/AllrounderGrey.png" />
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-md-6 dailyGame">
+                                <a href="/DailyGame/HomeD/Index" class="btn-e">Exit</a>
+                                <a href="#" class="btn-e" onclick="SavePlayers_Confirm();">Save</a>
+                            </div>*@
+                    </div>
+
+                    <div id="div_bottom"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<div id="ModalCapVCap" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title text-center"><span id="Modal_Playername"></span></h4>
+                </span>
+            </div>
+            <div class="modal-body">
+
+                <div class="capt">
+
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" id="Chk_captain" class="radio" value="1" name="capvs[1][]" /><span>Captain<p>2x</p></span>
+                        </label>
+                    </div>
+
+                    <div id="ck-button">
+                        <label>
+                            <input type="checkbox" id="Chk_vcaptain" class="radio" value="1" name="capvs[1][]" /><span>Vice Captain<p>1.5x</p></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                @Html.Hidden("PlayerId_CapVs")
+                @Html.Hidden("PlayerName_CapVs")
+
+                <button class="btn btn-popup" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-popup" onclick="SaveCaptainVsCaptain();">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalTeamFilter" class="modal fade">
+    <div class="modal-dialog modal-filter">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title modal-title-saveMatch text-center"><span>Filter by team name</span></h4>
+                </span>
+            </div>
+            <div class="modal-body filter-body">
+                <div class="capt2 text-left">
+                    <div id="filtersteam">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-popup" data-dismiss="modal" onclick="ClearFilter();">Reset</button>
+                <button type="button" class="btn btn-popup" onclick="FilterTeam();">Apply</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalSaveConfirm" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title modal-title-saveMatch text-center"><span>Do you wish to save your Team? </span></h4>
+                </span>
+
+            </div>
+            <div class="modal-body">
+                <div class="capt2">
+                    <p>
+                        <img src="~/Assets/Icon/Captain.png" /><span id="CaptainName"></span>
+                        <img src="~/Assets/Icon/ViceCaptain.png" /><span id="VicecaptainName"></span>
+                    </p>
+
+                </div>
+                <p style="  padding-bottom: 15px;"><span style="color: #e45051;font-weight: 700;font-size: 17px;">Pick Your Match Winner(50 points)</span></p>
+
+                <p>
+
+
+                    <div class="row ">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2 col-sm-4" style="text-align: right;padding-top: 11px;">
+                            <span id="teamspan1" style="font-weight: 700;font-size: 18px;"></span>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <div id="basic-switch"></div>
+                            <span style="display:none" id="basic-switch-value"></span>
+                        </div>
+                        <div class="col-md-2 col-sm-4" style="text-align: left;padding-top: 11px;">
+                            <span id="teamspan2" style="font-weight: 700;font-size: 18px;"></span>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <input type="hidden" value="" id="team11" name="group1">
+                    <input type="hidden" value="" id="team22" name="group1">
+                    @*<fieldset id="group1">
+            Predict  Winner &nbsp&nbsp
+            <input type="radio" value="" id="team11" name="group1"><span class="team1" id="teamspan1" style="padding-left: 5px;"></span>
+            <span style="padding:5px ;font-weight: 500;">VS</span>
+            <span class="team2" id="teamspan2" style="padding-right: 5px;"></span><input type="radio" value="" id="team22" name="group1">
+        </fieldset>*@
+                </p>
+                <p class="modalNoty">You can always change your team before scheduled start of the game.</p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-popup" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-popup" onclick="SavePlayers();">Yes</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div id="ModalResetConfirmation" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span>
+                        <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                        <h4 class="modal-title text-center"><span></span></h4>
+                    </span>
+
+                </div>
+                <div class="modal-body">
+                    <p>Your team will be set to the one you had fielded in the last match ?</p>
+                </div>
+                <div class="modal-footer text-center">
+
+                    <button class="btn btn-popup" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-popup" onclick="ResetSelectedPlayerList()">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div id="spinnerContainer" class="spinnerContainer" style="display: block;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+
+<script src="~/Areas/DailyGame/CustomScript/ManageDailyTeam.js"></script>
+
+<script src="~/JS/jquery.theswitch.min.js"></script>
+<script>
+
+        var Session_MatchId = '';
+        var Session_SelectecPlayerCount = '';
+        var Session_SelectedBatsmanCount = '';
+        var Session_SelectedWicketkeeperCount = '';
+        var Session_SelectedBowlerCount = ''
+        var Session_SelectedAllrounderCount = '';
+        var Session_MatchType = '';
+
+        var urlGetPlayerList = '';
+
+        $(document).ready(function () {
+
+            Session_MatchId = @Session["Session_DMatchId"].ToString();
+            Session_SelectecPlayerCount = @Session["SelectDPlayerCount"].ToString();
+            Session_SelectedBatsmanCount = @Session["DBatsmanCount"].ToString();
+            Session_SelectedWicketkeeperCount = @Session["DWicketkeeperCount"].ToString();
+            Session_SelectedBowlerCount = @Session["DBowlerCount"].ToString();
+            Session_SelectedAllrounderCount = @Session["DAllrounderCount"].ToString();
+            Session_MatchType = '@Session["Session_DMatchType"].ToString()';
+
+            OnPageLoad();
+
+        });
+
+
+</script>
+

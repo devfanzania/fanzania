@@ -1,0 +1,6 @@
+framework module Pods_FanzaniaTests {
+  umbrella header "Pods-FanzaniaTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

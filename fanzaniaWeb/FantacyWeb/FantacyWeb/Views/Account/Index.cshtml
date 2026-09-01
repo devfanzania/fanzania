@@ -1,0 +1,122 @@
+﻿@model Fantacy_Model.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 form-box">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-top">
+                                <h3>Enter your world of <span>pure fantasy sports.</span></h3>
+          
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-bottom">
+                                <div class="login-from-left">
+                                    <img src="~/Assets/Icon/fanzania-icon.png" class="login-icn" />
+                                    <p>Login to your fanzania account</p>
+                                    <form id="frmlogin" method="post" class="login-form">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-username form-control", placeholder = "Your Email" })
+                                            @Html.ValidationMessageFor(m => m.Email)
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-password form-control", placeholder = "Your Password" })
+                                            @Html.ValidationMessageFor(m => m.Password)
+                                        </div>
+                                        <input type="hidden" id="getlat" name="Lat" class="form-control" />
+                                        <input type="hidden" id="getlong"   name="Long"  class="form-control" />
+                                        
+                                        <div class="form-group">
+                                            @ViewBag.Message
+                                            @Html.Raw(TempData["msg"])
+                                        </div>
+
+                                        <p class="forgotpass" onclick="OpenDailog();">Reset or forgot your Password ? @*<i class="fa fa-question-circle" aria-hidden="true"></i>*@</p>
+
+                                        <button id="btnLogin" type="submit" class="btn btn-sign-in">Log In</button>
+
+                                    </form>
+
+                                    <div class="col-sm-12 social-login text-center">
+                                        <h3>OR</h3>
+                                        <div class="social-login-buttons">
+                                            <a class="btn btn-link-1 btn-link-1-facebook" href='@Url.Action("Facebook", "Account")'>
+
+                                                <img src="~/Assets/Icon/facebook.png" /> Sign in
+                                            </a>
+                                            
+                                            <button type="button" id="btn_google" class="btn-link-1-google-plus g-signin2" data-onsuccess="onSignIn"><i class="fa fa-google"></i> Google</button>
+                                           
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalForgotPassword" class="modal fade">
+    <div class="modal-dialog modal-med">
+        <div class="modal-content">
+            <div class="modal-header modal-header-dark">
+
+                <h4 class="modal-title"><span>Please enter your register email id.</span></h4>
+                <input type="hidden" id="topicid" value="" />
+                <img src="~/Images/close_popup.png" alt="" class="close" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body" style="padding-left: 10px;">
+                <table style="width: 100%;" class="cellspacing-8">
+                    <tr>
+                        <td>
+                            <input type="email" onkeypress="requiredField(this)" id="txtEmailForgot"  class="form-control" />
+                            <span id="EmailErrMsg" ></span>
+                            
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-width-80" onclick="ForgetPass();">Submit</button>
+                <button type="button" class="btn btn-primary btn-width-80" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<script src="~/JS/CustomLogin.js"></script>
+
+<script>
+      $(document).ready(function () {
+          getLocation();
+      });
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else { x.innerHTML = "Geolocation is not supported by this browser."; }
+    }
+    function showPosition(position) {
+   var lat = position.coords.latitude;
+   var long = position.coords.longitude;
+        $('#getlat').val(lat);
+        $('#getlong').val(long)
+     
+    }
+</script>

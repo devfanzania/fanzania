@@ -1,0 +1,30 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Fanzania' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Fanzania
+    pod 'Alamofire', '= 4.9'
+    pod 'AlamofireImage', '= 3.5'
+    pod 'GoogleSignIn'
+    pod 'FacebookSDK'
+    pod 'FacebookCore'
+    pod 'FacebookLogin'
+    pod 'SwiftyJSON', '= 4.0'
+    pod 'SwiftyJSONModel'
+    pod 'Firebase/Analytics'
+    pod 'Firebase/Crashlytics'
+
+  target 'FanzaniaTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'FanzaniaUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+  
+end

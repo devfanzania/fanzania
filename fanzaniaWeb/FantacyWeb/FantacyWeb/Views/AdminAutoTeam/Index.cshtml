@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Hidden("SelectedTourId")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add New Auto Team</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label">Select Tournament</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlTourList" class="form-control1"></select>
+                            </div>
+                            <div class="col-md-3">
+                                <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="AddEditRedirection()";>Add New</button>
+                            </div>
+
+                        </div>
+                                             
+                    </div>
+                </div>
+                <h3 class="inner-tittle">Auto Team List</h3>
+                <div class="grid-1">
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 text-center">
+                                <div class="pointTable">
+                                    <table id="AutoTeamgrid"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+       
+        var tid = sessionStorage.getItem("AutoTeamTournamentId");
+        LoadTournament();
+        if (tid != null) {
+            $('#ddlTourList').val(tid);
+            ShowSaveTeamGrid(tid);
+        } 
+
+    });
+
+    function LoadTournament() {
+        var pId = $('#pId').val();
+        var pData = { TournamentId: "0" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/GetAllTournament',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                $('#ddlTourList').empty();
+                $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+                $.each(data, function (index, value) {
+                    $('#ddlTourList').append($("<option></option>").val(value.TournamentId).html(value.TournamentName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        
+        ShowSaveTeamGrid(Tid);
+    });
+
+    var Teamgrid
+    function ShowSaveTeamGrid(Tid) {
+        
+        
+        var count = 0;
+        if (Teamgrid != null)
+            count = Teamgrid.count();
+        if (count <= 0) {
+            Teamgrid = $("#AutoTeamgrid").grid({
+                dataSource: { url: "/AdminAutoTeam/GetAutoTeam", data: { TournamentId: Tid } },
+                notFoundText: "no team found!",
+                uiLibrary: "bootstrap",
+                columns: [
+                    { field: "", title: "", align: "center", cssClass: "delete", width: "60px" },
+                    { field: "Player1Name", title: "Player 1", width: "100px" },
+                    { field: "Player2Name", title: "Player 2", width: "100px" },
+                    { field: "Player3Name", title: "Player 3", align: "center", width: "100px" },
+                    { field: "Player4Name", title: "Player 4", align: "center", width: "100px" },
+                    { field: "Player5Name", title: "Player 5", align: "center", width: "100px" },
+                    { field: "Player6Name", title: "Player 6", align: "center", width: "100px" },
+                    { field: "Player7Name", title: "Player 7", align: "center", width: "100px" },
+                    { field: "Player8Name", title: "Player 8", align: "center", width: "100px" },
+                    { field: "Player9Name", title: "Player 9", align: "center", width: "100px" },
+                    { field: "Player10Name", title: "Player 10", align: "center", width: "100px" },
+                    { field: "Player11Name", title: "Player 11", align: "center", width: "100px" },
+                    { field: "TeamCaptName", title: "Captain", align: "center", width: "100px" },
+                    { field: "TeamVCaptName", title: "V-Captain", align: "center", width: "100px" },
+                    
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+            Teamgrid.on("rowDataBound", function (e, $row, id, record) {
+                
+                $row.find('.delete').append('<a href="#" title="Delete Team" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteTeam(\'' + record.AutoSelectionTeamId + '\')"; width="17" height="17" /></a>');
+            });
+        }
+        else {
+            Teamgrid.reload({ page: 1, TournamentId: Tid });
+        }
+    }
+
+    function AddEditRedirection() {
+        
+        var Tid = $('#ddlTourList').val();
+        if (Tid != '') {
+            location.href = '/AdminAutoTeam/AutoTeamAddEdit?tid=' + Tid;
+        } else {
+            alert('Please select tournament');
+        }
+        
+
+    }
+
+    function DeleteTeam(AutoTeamId) {
+        //$('#spinnerContainer').show();
+        var Tid = $('#ddlTourList').val();
+        var uurl = '/AdminAutoTeam/DeleteAutoTeam';
+        var pData = { AutoSelectionTeamId: AutoTeamId, TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    Teamgrid.reload({ page: 1, TournamentId: Tid });
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete team!");
+                return false;
+            }
+        });
+
+    }
+</script>
+

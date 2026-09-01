@@ -1,0 +1,783 @@
+﻿
+@{
+    ViewBag.Title = "TournamentAddEdit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle text-left">Details</h3>
+                    </div>
+                    
+                    <div class="text-right pull-right col-md-6">
+                        <a href="/AdminTour/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>Back</a>
+                    </div>
+                </div>
+                <div class="grid-1">
+                    <div class="form-body">
+                        @*<form class="form-horizontal">*@
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_TournamentId" class="control-label">Tournament Id</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control1" id="txt_TournamentId" readonly="readonly" placeholder="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_TournamentName" class="control-label">Tournament Name</label>
+
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control1" id="txt_TournamentName" placeholder="" style="display:none;">
+                                <select id="ddlTourList" style="display:none;" class="form-control1"></select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_Status" class="control-label">Status</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select name="selector2" id="ddl_Status" class="form-control1">
+                                    <option value="UPCOMING">UPCOMING</option>
+                                    <option value="INPROGRESS">INPROGRESS</option>
+                                    <option value="BREAK">BREAK</option>
+                                    <option value="COMPLETE">COMPLETE</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ddl_Stage" class="control-label">Stage</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select name="selector1" id="ddl_Stage" class="form-control1">
+                                    <option value="T20">T20</option>
+                                    <option value="ODI">ODI</option>
+                                    <option value="TEST">TEST</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_SDate" class="control-label">Start Date</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control1" id="txt_SDate" autocomplete="off" placeholder="Start Date">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_EDate" class="control-label">End Date</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control1" id="txt_EDate" autocomplete="off" placeholder="End Date">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_SeriesId" class="control-label">TournamentKey</label>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <input type="text" class="form-control1" id="TournamentKey" placeholder="">
+                            </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12 text-right">
+                                    <button id="btn_Save_Details" class="btn btn-info" onclick="SaveTournament()" ;> Save Details</button>
+
+                                </div>
+                            </div>
+
+                            @*</form>*@
+                        </div>
+
+                    </div>
+
+                <h3 class="inner-tittle">Team Rules</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        @*<form class="form-horizontal">*@
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_wk" class="control-label">Wicket Keeper</label>
+                                <input type="number" class="form-control1" id="txt_wk" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Maxbat" class="control-label">Max Batsman</label>
+                                <input type="number" class="form-control1" id="txt_Maxbat" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Minbat" class="control-label">Min Batsman</label>
+                                <input type="number" class="form-control1" id="txt_Minbat" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Maxbwl" class="control-label">Max Bowler</label>
+                                <input type="number" class="form-control1" id="txt_Maxbwl" placeholder="Number Only">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_Minbwl" class="control-label">Min Bowler</label>
+                                <input type="number" class="form-control1" id="txt_Minbwl" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Maxall" class="control-label">Max Allrounder</label>
+                                <input type="text" class="form-control1" id="txt_Maxall" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Minall" class="control-label">Min Allrounder</label>
+                                <input type="number" class="form-control1" id="txt_Minall" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Maxstp" class="control-label">Max Same Team Player</label>
+                                <input type="number" class="form-control1" id="txt_Maxstp" placeholder="Number Only">
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_TotalPlayer" class="control-label">Total Player</label>
+                                <input type="number" class="form-control1" id="txt_TotalPlayer" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_MaxOverseas" class="control-label">Max Overseas</label>
+                                <input type="number" class="form-control1" id="txt_MaxOverseas" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Budget" class="control-label">Budget</label>
+                                <input type="number" class="form-control1" id="txt_Budget" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Subscount" class="control-label">Subs Count</label>
+                                <input type="number" class="form-control1" id="txt_Subscount" placeholder="Number Only">
+                            </div>
+
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_Nitro" class="control-label">Nitro</label>
+                                <input type="number" class="form-control1" id="txt_Nitro" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Painkiller" class="control-label">Pain Killer</label>
+                                <input type="number" class="form-control1" id="txt_Painkiller" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="txt_Autopilot" class="control-label">Auto Pilot</label>
+                                <input type="number" class="form-control1" id="txt_Autopilot" placeholder="Number Only">
+                            </div>
+                            <div class="col-md-3  text-right">
+
+                                <button id="btn_Save_Rules" class="btn btn-info" onclick="SaveTeamRule()" ;> Save Rules</button>
+                            </div>
+                        </div>
+
+
+                        @*</form>*@
+                    </div>
+
+                </div>
+
+                <h3 class="inner-tittle">Point Rules</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        @*<form class="form-horizontal">*@
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label">Select File</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control1" type="file" id="FileUpload" onchange="ValidateFileType(this);" />
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="control-label" id="default_template"><a href="/Downloader.ashx?FilePath=Template/PointRule_Template.xlsx" >Download Template</a></label>
+                                @*<label class="control-label" id="existing_template"><a href="#" style="font-size: 13pt;" onclick="ExportToExcel();">Download Point Sheet</a></label>*@
+                            </div>
+                            <div class="col-md-3 text-right">
+                                <button id="btnShowPointRules" type="button" class="btn btn-info" onclick="ShowData();">Show</button>
+                                <button id="btnSavePointRules" type="button" class="btn btn-info" onclick="SaveTournamentPoint();">Save Points</button>
+                            </div>
+                        </div>
+                        
+                        @*</form>*@
+                    </div>
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 text-center">
+
+                                <div class="pointTable">
+                                    <table id="TourPointgrid"></table>
+                                    <table id="ShowTourPointgrid"></table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<table id="tblExcel" class="table2excel" style="display: none;"></table>
+
+<script>
+
+    $(function () {
+        $("#txt_SDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy/mm/dd",
+            yearRange: '2018:' + '2025'
+        });
+    });
+    $(function () {
+        $("#txt_EDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy/mm/dd",
+            yearRange: '2018:' + '2025'
+        });
+    });
+    $(document).ready(function () {
+        var Tid = '@Session["AdminTournamentId"].ToString()';
+        var Mode = '@Session["Mode"].ToString()';
+        var gameType = sessionStorage.getItem('GameType');
+        $('#TournamentId').val(Tid);
+
+        if (gameType == 'D') {
+            $('#txt_TournamentName').hide();
+            $('#ddlTourList').show();
+            $('#ddlTourList').empty();
+            $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+            $("#ddlTourList").append($("<option></option>").val('-99').html('Daily Match T20'));
+            $("#ddlTourList").append($("<option></option>").val('-100').html('Daily Match ODI'));
+
+            $('#ddl_Status').attr("disabled", "disabled");
+            $('#ddl_Stage').attr("disabled", "disabled");
+            $('#txt_SDate').attr("disabled", "disabled");
+            $('#txt_EDate').attr("disabled", "disabled");
+            $('#btn_Save_Details').attr("disabled", "disabled");
+
+        }
+        else {
+            $('#txt_TournamentName').show();
+            $('#ddlTourList').hide();
+
+            $('#ddl_Status').removeAttr("disabled");
+            $('#ddl_Stage').removeAttr("disabled");
+            $('#txt_SDate').removeAttr("disabled");
+            $('#txt_EDate').removeAttr("disabled");
+            $('#btn_Save_Details').removeAttr("disabled");
+        }
+
+        if (Mode == "add") {
+            $('#btn_Save_Rules').attr("disabled", "disabled");
+            $('#btnShowPointRules').attr("disabled", "disabled");
+            $('#btnSavePointRules').attr("disabled", "disabled");
+            if (gameType == 'D') {
+                $('#btn_Save_Rules').removeAttr("disabled");
+            }
+
+            $('#btn_Save_Rules').text("Save Rules");
+            $('#btn_Save_Details').text("Save Details");
+            $('#btnSavePointRules').text("Save Points");
+            //$("#default_template").css("display", "block");
+            //$("#existing_template").css("display", "none");
+        }
+        else if (Mode == "edit") {
+
+            $('#btn_Save_Rules').text("Update Rules");
+            $('#btn_Save_Details').text("Update Details");
+            $('#btnSavePointRules').text("Update Points");
+            GetTournament(Tid);
+            GetTournamentRule(Tid);
+            ShowTournamentpoint(Tid);
+            //$("#default_template").css("display", "none");
+            //$("#existing_template").css("display", "none ");
+        }
+        //$('#btnShowPointRules').removeAttr("disabled");
+        //$('#btnSavePointRules').removeAttr("disabled");
+
+    });
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        GetTournamentRule(Tid);
+        var count = 0;
+        if (ShowPointgrid != null)
+            count = ShowPointgrid.count();
+        if (count > 0) {
+            ShowPointgrid.reload({ page: 1, TournamentId: Tid });
+        }else{
+                ShowTournamentpoint(Tid);
+        }
+        $('#btnShowPointRules').removeAttr("disabled");
+        $('#btnSavePointRules').removeAttr("disabled");
+    });
+    function ValidateFileType(file) {
+        var ext = $(file).val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xls', 'xlsx']) == -1) {
+            alert('Please select only excel file!');
+            // $(file).replaceWith($(file).clone());
+            return false;
+        }
+    }
+
+    function ShowData() {
+        //$('#divMsg').html("");
+        if ($('#FileUpload').val() == "") {
+            alert('Please select users excel file!');
+            jQuery('#FileUpload').trigger('click');
+            return;
+        }
+        var pData = new FormData();
+        var files = $("#FileUpload").get(0).files;
+        //$('#spinnerContainer').show();
+        pData.append("pFile", files[0]);
+        var res = $.ajax({
+            url: '/AdminTour/SaveExcel',
+            type: 'POST',
+            data: pData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.result == "T") {
+                    LoadPointGrid(data.fileName);
+                    //$('#spinnerContainer').hide();
+                }
+                else {
+                    //alert('Unable to show. Try again!');
+                    //$('#divMsg').html(data.resMsg);
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    var Pointgrid
+    function LoadPointGrid(fileName) {
+        $("#TourPointgrid").css("display", "block");
+        $("#ShowTourPointgrid").css("display", "none");
+        var count = 0;
+        if (Pointgrid != null)
+            count = Pointgrid.count();
+        if (count <= 0) {
+            Pointgrid = $("#TourPointgrid").grid({
+                dataSource: { url: "GetTournamentPointList", data: { FileName: fileName } },
+                notFoundText: "No data found!",
+                uiLibrary: "bootstrap",
+                responsive: true,
+                minWidth: 800,
+                columns: [
+                    { field: "TournamentStage", title: "T Stage", width: "80px" },
+                { field: "RunScored", title: "Run Scored", width: "80px" },
+                { field: "FourBonus", title: "4 Bonus", align: "center", width: "80px" },
+                { field: "SixBonus", title: "6 Bonus", align: "center", width: "80px" },
+                { field: "HalfCenturyBonus", title: "Half Century Bonus", align: "center", cssClass: "status", width: "80px" },
+                { field: "CenturyBonus", title: "Century Bonus", align: "center", cssClass: "status", width: "80px" },
+                { field: "DismissalDuck", title: "Dismiss alDuck", align: "center", cssClass: "status", width: "80px" },
+                { field: "MinBall4SR", title: "Min Ball 4 SR", align: "center", cssClass: "status", width: "80px" },
+                { field: "StrikeRateBelow50", title: "Strike Rate Below 50", align: "center", cssClass: "status", width: "80px" },
+                { field: "StrikeRate50To60", title: "Strike Rate 50 To 60", align: "center", cssClass: "status", width: "80px" },
+                { field: "StrikeRate60To70", title: "Strike Rate 60 To 70", align: "center", cssClass: "status", width: "80px" },
+                { field: "StrikeRate110To150", title: "Strike Rate 110 To 150", align: "center", cssClass: "status", width: "80px" },
+                { field: "StrikeRateUp150", title: "Strike Rate Up 150", align: "center", cssClass: "status", width: "80px" },
+                { field: "WicketTaken", title: "Wicket Taken", align: "center", cssClass: "status", width: "80px" },
+                { field: "Wicket3UpBonus", title: "Wicket 3 Up Bonus", align: "center", cssClass: "status", width: "80px" },
+                { field: "Wicket5UpBonus", title: "Wicket 5 Up Bonus", align: "center", cssClass: "status", width: "80px" },
+                { field: "MaidenOver", title: "Maiden Over", align: "center", cssClass: "status", width: "80px" },
+                { field: "Hattrick", title: "Hattrick", align: "center", cssClass: "status", width: "80px" },
+                { field: "MinOver4ER", title: "Min Over 4 ER", align: "center", cssClass: "status", width: "80px" },
+                { field: "EconomyBelow4", title: "Economy Below 4 ", align: "center", cssClass: "status", width: "80px" },
+                { field: "Economy4To5", title: "Economy 4 To 5", align: "center", cssClass: "status", width: "80px" },
+                { field: "Economy5To6", title: "Economy 5 To 6", align: "center", cssClass: "status", width: "80px" },
+                { field: "Economy9To11", title: "Economy 9 To 11", align: "center", cssClass: "status", width: "80px" },
+                { field: "EconomyUp11", title: "Economy Up 11", align: "center", cssClass: "status", width: "80px" },
+                { field: "Captain", title: "Captain", align: "center", cssClass: "status", width: "80px" },
+                { field: "ViceCaptain", title: "Vice Captain", align: "center", cssClass: "status", width: "80px" },
+                { field: "CatchTaken", title: "Catch Taken", align: "center", cssClass: "status", width: "80px" },
+                { field: "Stumping", title: "Stumping", align: "center", cssClass: "status", width: "80px" },
+                { field: "RunOutDirect", title: "RunOut Direct", align: "center", cssClass: "status", width: "80px" },
+                { field: "RunOutThrower", title: "RunOut Thrower", align: "center", cssClass: "status", width: "80px" },
+                { field: "RunOutCatcher", title: "RunOut Catcher", align: "center", cssClass: "status", width: "80px" },
+                { field: "Nitro", title: "Nitro", align: "center", cssClass: "status", width: "80px" },
+                { field: "MoM", title: "MoM", align: "center", cssClass: "status", width: "80px" }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+
+
+        }
+        else {
+            Pointgrid.reload({ page: 1, FileName: fileName });
+        }
+    }
+
+    function SaveTournamentPoint() {
+        if (Pointgrid == null || Pointgrid.count() <= 0) {
+            alert('Please upload some data!');
+            return;
+        }
+        var Tid = '';
+
+        var gameType = sessionStorage.getItem('GameType');
+        if (gameType == 'D') {
+            Tid = $('#ddlTourList').val();
+        } else {
+            Tid = $('#TournamentId').val();
+        }
+        if (Tid == '' || Tid == 'Select Tournament') {
+            alert('Please select tournament.');
+            return;
+        }
+        var pData = {
+            TournamentId: Tid
+        }
+        var jsonData = JSON.stringify(pData);
+        /// $('#spinnerContainer').show();
+        $.ajax({
+            url: '/AdminTour/SaveTournametPoint',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    alert('Data uploaded successfuly!');
+                    location.href = '/AdminTour/Index';
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        })
+
+    }
+
+    function SaveTournament() {
+        var tId = '';
+        var tName = '';
+        var gameType = sessionStorage.getItem('GameType');
+        if (gameType == 'D') {
+            tId = $('#ddlTourList').val();
+            tName = $("#ddlTourList option:selected").text();
+        }
+        else {
+            tId = $('#txt_TournamentId').val();
+            tName = $('#txt_TournamentName').val();
+        }
+        //console.log(tName);
+        var tStage = $('#ddl_Stage').val();
+        var tStatus = $('#ddl_Status').val();
+        var tStartDate = $('#txt_SDate').val();
+        var tEndDate = $('#txt_EDate').val();
+        if (tName == '' || tName == 'Select Tournament') {
+            alert('Please enter tournament name');
+            return;
+        }
+        if (tStartDate == '') {
+            alert('Please enter start date');
+            return;
+        }
+        if (tEndDate == '') {
+            alert('Please enter end date');
+            return;
+        }
+        /// $('#spinnerContainer').show();
+        if (tId == '') {
+            tId = '0';
+        }
+        var TournamentKey = $('#TournamentKey').val();
+        
+        var pData = { TournamentId: tId, TournamentName: tName, TournamentStatus: tStatus, TournamentStage: tStage, TournamentStartDate: tStartDate, TournamentEndDate: tEndDate, TournamentType: gameType, TournamentKey: TournamentKey};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/SaveTournament',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+
+                    $('#TournamentId').val(data.ResponseId);
+                    $('#txt_TournamentId').val(data.ResponseId);
+                    alert('Data uploaded successfuly!');
+                    $('#btn_Save_Rules').removeAttr("disabled");
+                    $('#btn_Save_Details').attr("disabled", "disabled");
+
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function SaveTeamRule() {
+        var Tid = $('#TournamentId').val();
+        var txt_wk = $('#txt_wk').val();
+        var txt_Maxbat = $('#txt_Maxbat').val();
+        var txt_Minbat = $('#txt_Minbat').val();
+        var txt_Maxbwl = $('#txt_Maxbwl').val();
+        var txt_Minbwl = $('#txt_Minbwl').val();
+        var txt_Maxall = $('#txt_Maxall').val();
+        var txt_Minall = $('#txt_Minall').val();
+        var txt_Maxstp = $('#txt_Maxstp').val();
+        var txt_TotalPlayer = $('#txt_TotalPlayer').val();
+        var txt_MaxOverseas = $('#txt_MaxOverseas').val();
+        var txt_Budget = $('#txt_Budget').val();
+        var txt_Subscount = $('#txt_Subscount').val();
+        var txt_Nitro = $('#txt_Nitro').val();
+        var txt_Painkiller = $('#txt_Painkiller').val();
+        var txt_Autopilot = $('#txt_Autopilot').val();
+        var gameType = sessionStorage.getItem('GameType');
+        if (gameType == 'D') {
+            Tid = $('#ddlTourList').val();
+        }
+        if (Tid == '' || Tid == 'Select Tournament') {
+            alert('Please select tournament.');
+            return;
+        }
+
+        if (txt_wk == '' || txt_Maxbat == '' || txt_Minbat == '' || txt_Maxbwl == '' || txt_Minbwl == '' || txt_Maxall == '' || txt_Minall == '' || txt_TotalPlayer == '' || txt_MaxOverseas == '' || txt_Budget == '' || txt_Subscount == '' || txt_Nitro == '' || txt_Painkiller == '' || txt_Painkiller == '' || txt_Autopilot == '') {
+            alert('Please fill all the fields..');
+            return;
+        }
+
+        /// $('#spinnerContainer').show();
+        var pData = {
+            TournamentId: Tid, WicketKeeper: txt_wk, MaxBatsman: txt_Maxbat, MinBatsman: txt_Minbat, MaxBowler: txt_Maxbwl, MinBowler: txt_Minbwl, MaxAllrounder: txt_Maxall, MinAllrounder: txt_Minall,
+            MaxSameTeamPlayer: txt_Maxstp, TotalPlayers: txt_TotalPlayer, MaxOverseasPlayer: txt_MaxOverseas, TotalBudget: txt_Budget, SubCount: txt_Subscount, NitroCount: txt_Nitro, PainKillerCount: txt_Painkiller, AutoPilotCount: txt_Autopilot
+        };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/SaveTournamentRule',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert('Data uploaded successfuly!');
+                    $('#btnShowPointRules').removeAttr("disabled");
+                    $('#btnSavePointRules').removeAttr("disabled");
+                    $('#btn_Save_Rules').attr("disabled", "disabled");
+                }
+                else {
+                    alert(data.statusMessage);
+                }
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        })
+    }
+
+    function GetTournament(tId) {
+        var pData = { TournamentId: tId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/GetTournament',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //console.log(data[0]["TournamentId"]);
+                $('#txt_TournamentId').val(data[0]["TournamentId"]);
+                $('#txt_TournamentName').val(data[0]["TournamentName"]);
+                $('#ddl_Stage').val(data[0]["TournamentStage"]);
+                $('#ddl_Status').val(data[0]["TournamentStatus"]);
+                $('#txt_SDate').val(data[0]["TournamentStartDate"]);
+                $('#txt_EDate').val(data[0]["TournamentEndDate"]);
+                $('#TournamentKey').val(data[0]["TournamentKey"]);
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function GetTournamentRule(tId) {
+        var pData = { TournamentId: tId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTour/GetTournamentRule',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.length > 0) {
+                    //console.log(data[0]["TournamentId"]);
+                    $('#txt_wk').val(data[0]["WicketKeeper"]);
+                    $('#txt_Maxbat').val(data[0]["MaxBatsman"]);
+                    $('#txt_Minbat').val(data[0]["MinBatsman"]);
+                    $('#txt_Maxbwl').val(data[0]["MaxBowler"]);
+                    $('#txt_Minbwl').val(data[0]["MinBowler"]);
+                    $('#txt_Maxall').val(data[0]["MaxAllrounder"]);
+                    $('#txt_Minall').val(data[0]["MinAllrounder"]);
+                    $('#txt_Maxstp').val(data[0]["MaxSameTeamPlayer"]);
+                    $('#txt_TotalPlayer').val(data[0]["TotalPlayers"]);
+                    $('#txt_MaxOverseas').val(data[0]["MaxOverseasPlayer"]);
+                    $('#txt_Budget').val(data[0]["TotalBudget"]);
+                    $('#txt_Subscount').val(data[0]["SubCount"]);
+                    $('#txt_Nitro').val(data[0]["NitroCount"]);
+                    $('#txt_Painkiller').val(data[0]["PainKillerCount"]);
+                    $('#txt_Autopilot').val(data[0]["AutoPilotCount"]);
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function ExportToExcel() {
+        var Tid = $('#TournamentId').val();
+        var pData = { TournamentId: Tid };
+        //$('#spinnerContainer').show();
+        $.ajax({
+            url: '/AdminTour/ExportPointList',
+            type: 'GET',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+
+                //alert('hi');
+                //alert(data);
+                $('#tblExcel').empty();
+                var trHead = "<thead><tr><th>TournamentStage</th><th>RunScored</th><th>FourBonus</th><th>SixBonus</th><th>HalfCenturyBonus</th><th>CenturyBonus</th><th>DismissalDuck</th><th>MinBall4SR</th><th>StrikeRateBelow50</th><th>StrikeRate50To60</th>";
+                trHead += "<th>StrikeRate60To70</th><th>StrikeRate110To150</th><th>StrikeRateUp150</th><th>WicketTaken</th><th>Wicket3UpBonus</th><th>Wicket5UpBonus</th><th>MaidenOver</th><th>Hattrick</th><th>MinOver4ER</th><th>EconomyBelow4</th><th>Economy4To5</th>";
+                trHead += "<th>Economy5To6</th><th>Economy9To11</th><th>EconomyUp11</th><th>Captain</th><th>ViceCaptain</th><th>CatchTaken</th><th>Stumping</th><th>RunOutDirect</th><th>RunOutThrower</th><th>RunOutCatcher</th><th>Nitro</th><th>MoM</th></tr></thead>";
+                var tBody = trHead + "<tbody>";
+
+                $.each(data, function (index, value) {
+
+                    tBody += "<tr><td>" + value.TournamentStage + "</td><td>" + value.RunScored + "</td><td>" + value.FourBonus + "</td><td>" + value.SixBonus + "</td><td>" + value.HalfCenturyBonus + "</td><td>" + value.CenturyBonus + "</td><td>" + value.DismissalDuck + "</td><td>" + value.MinBall4SR + "</td><td>" + value.StrikeRateBelow50 + "</td><td>" + value.StrikeRate50To60 + "</td><td>" + value.StrikeRate60To70 + "</td>";
+                    tBody += "<td>" + value.StrikeRate110To150 + "</td><td>" + value.StrikeRateUp150 + "</td><td>" + value.WicketTaken + "</td><td>" + value.Wicket3UpBonus + "</td><td>" + value.Wicket5UpBonus + "</td><td>" + value.MaidenOver + "</td><td>" + value.Hattrick + "</td><td>" + value.MinOver4ER + "</td><td>" + value.EconomyBelow4 + "</td><td>" + value.Economy4To5 + "</td><td>" + value.Economy5To6 + "</td><td>" + value.Economy9To11 + "</td>";
+                    tBody += "<td>" + value.EconomyUp11 + "</td><td>" + value.Captain + "</td><td>" + value.ViceCaptain + "</td><td>" + value.CatchTaken + "</td><td>" + value.Stumping + "</td><td>" + value.RunOutDirect + "</td><td>" + value.RunOutThrower + "</td><td>" + value.RunOutCatcher + "</td><td>" + value.Nitro + "</td><td>" + value.MoM + "</td></tr>";
+
+                });
+                tBody += "</tbody>";
+
+                $('#tblExcel').append(tBody);
+                var FileName = "PointList_" + new Date().toLocaleString();
+                $(".table2excel").table2excel({
+                    //exclude: ".noExl",
+                    name: "Excel Document Name",
+                    filename: FileName
+                });
+                //$('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                alert('Not able to export excel, because system allow us for 10000 rows of data download at a time.');
+            }
+        }).done(function () {
+        });;
+    }
+
+    var ShowPointgrid
+    function ShowTournamentpoint(Tid) {
+
+        $("#TourPointgrid").css("display", "none");
+        $("#ShowTourPointgrid").css("display", "block ");
+        var count = 0;
+        if (ShowPointgrid != null)
+            count = ShowPointgrid.count();
+        if (count <= 0) {
+            ShowPointgrid = $("#ShowTourPointgrid").grid({
+                dataSource: { url: "/AdminTour/ExportPointList", data: { TournamentId: Tid } },
+                notFoundText: "No data found!",
+                uiLibrary: "bootstrap",
+                responsive: true,
+                minWidth: 800,
+                columns: [
+                    { field: "TournamentStage", title: "T Stage", width: "80px" },
+                    { field: "RunScored", title: "Run Scored", width: "80px" },
+                    { field: "FourBonus", title: "4 Bonus", align: "center", width: "80px" },
+                    { field: "SixBonus", title: "6 Bonus", align: "center", width: "80px" },
+                    { field: "HalfCenturyBonus", title: "Half Century Bonus", align: "center", cssClass: "status", width: "80px" },
+                    { field: "CenturyBonus", title: "Century Bonus", align: "center", cssClass: "status", width: "80px" },
+                    { field: "DismissalDuck", title: "Dismiss alDuck", align: "center", cssClass: "status", width: "80px" },
+                    { field: "MinBall4SR", title: "Min Ball 4 SR", align: "center", cssClass: "status", width: "80px" },
+                    { field: "StrikeRateBelow50", title: "Strike Rate Below 50", align: "center", cssClass: "status", width: "80px" },
+                    { field: "StrikeRate50To60", title: "Strike Rate 50 To 60", align: "center", cssClass: "status", width: "80px" },
+                    { field: "StrikeRate60To70", title: "Strike Rate 60 To 70", align: "center", cssClass: "status", width: "80px" },
+                    { field: "StrikeRate110To150", title: "Strike Rate 110 To 150", align: "center", cssClass: "status", width: "80px" },
+                    { field: "StrikeRateUp150", title: "Strike Rate Up 150", align: "center", cssClass: "status", width: "80px" },
+                    { field: "WicketTaken", title: "Wicket Taken", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Wicket3UpBonus", title: "Wicket 3 Up Bonus", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Wicket5UpBonus", title: "Wicket 5 Up Bonus", align: "center", cssClass: "status", width: "80px" },
+                    { field: "MaidenOver", title: "Maiden Over", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Hattrick", title: "Hattrick", align: "center", cssClass: "status", width: "80px" },
+                    { field: "MinOver4ER", title: "Min Over 4 ER", align: "center", cssClass: "status", width: "80px" },
+                    { field: "EconomyBelow4", title: "Economy Below 4 ", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Economy4To5", title: "Economy 4 To 5", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Economy5To6", title: "Economy 5 To 6", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Economy9To11", title: "Economy 9 To 11", align: "center", cssClass: "status", width: "80px" },
+                    { field: "EconomyUp11", title: "Economy Up 11", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Captain", title: "Captain", align: "center", cssClass: "status", width: "80px" },
+                    { field: "ViceCaptain", title: "Vice Captain", align: "center", cssClass: "status", width: "80px" },
+                    { field: "CatchTaken", title: "Catch Taken", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Stumping", title: "Stumping", align: "center", cssClass: "status", width: "80px" },
+                    { field: "RunOutDirect", title: "RunOut Direct", align: "center", cssClass: "status", width: "80px" },
+                    { field: "RunOutThrower", title: "RunOut Thrower", align: "center", cssClass: "status", width: "80px" },
+                    { field: "RunOutCatcher", title: "RunOut Catcher", align: "center", cssClass: "status", width: "80px" },
+                    { field: "Nitro", title: "Nitro", align: "center", cssClass: "status", width: "80px" },
+                    { field: "MoM", title: "MoM", align: "center", cssClass: "status", width: "80px" }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+        }
+        else {
+            ShowPointgrid.reload({ page: 1, TournamentId: Tid });
+        }
+
+    }
+
+</script>

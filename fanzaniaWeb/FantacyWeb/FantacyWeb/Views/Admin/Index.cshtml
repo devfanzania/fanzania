@@ -1,0 +1,66 @@
+﻿@model Fantacy_Model.AdminModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin - fanzania</title>
+    <link href="~/css/animate.css" rel="stylesheet" />
+    <link href="~/css/AdminStyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class='info'>
+        <h1>Admin Login</h1>
+    </div>
+   
+    <div class='form aniamted bounceIn'>
+        <div class='login'>
+            <h2>Login To Your Account</h2>
+            @using (@Html.BeginForm())
+            {
+                @Html.TextBoxFor(a => a.UserName, new { @placeholder = "User name" })
+                <div class="error">
+                    @Html.ValidationMessageFor(a => a.UserName)
+                </div>
+
+                @Html.PasswordFor(a => a.Password, new { @placeholder = "Password" })
+                <div class="error2">
+                    @Html.ValidationMessageFor(a => a.Password)
+                    @ViewBag.Message
+                </div>
+                <button type="submit">Login</button>
+            }
+        </div>
+        <footer>
+           
+        </footer>
+    </div>
+
+    <div id="spinnerContainer" class="spinnerContainer" style="display: none;">
+        <div id="spinner" class="spinner">
+            <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+        </div>
+    </div>
+
+    <div class='info'>
+        <span>Copyright © <a href='#'>fanzania</a></span>
+    </div>
+
+    <script src="~/Scripts/jquery.js"></script>
+
+    <script type="text/javascript">
+        window.onsubmit = formSubmit;
+        function formSubmit() {
+            $('#spinnerContainer').show();
+        }
+        $(document).ready(function () {
+            $('#spinnerContainer').hide();
+        });
+    </script>
+</body>
+
+</html>

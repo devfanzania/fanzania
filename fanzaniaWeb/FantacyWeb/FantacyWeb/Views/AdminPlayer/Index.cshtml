@@ -1,0 +1,460 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add New Player</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label1">Game Type</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlGameType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label">Select Tournament</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlTourList" class="form-control1"></select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label">Select Team</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlTeam" class="form-control1"></select>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_AddNewMatch" class="control-label">Add New Player</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" id="default_template"><a href="/Downloader.ashx?FilePath=Template/Player_Template.xlsx">Download Template</a></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control1" type="file" id="FileUpload" onchange="ValidateFileType(this);" />
+                            </div>
+                            <div>
+                                <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="SavePlayer();">Save</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="inner-wrap" id="divpoint">
+                                <div class="col-md-12 text-center">
+
+                                    <div class="pointTable">
+                                        <table id="PreSavePlayergrid"></table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="inner-tittle">Saved Player List</h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button id="btnActivePlayes" type="button" class="btn btn-info" onclick="ActiveInactive(1);">Active</button>
+                        <button id="btnInactivePlayers" type="button" class="btn btn-info" onclick="ActiveInactive(0);">Inactive</button>
+                    </div>
+                </div>
+
+
+                <div class="grid-1">
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 text-center">
+                                <div class="pointTable">
+                                    <table id="SavePlayergrid"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="spinnerContainer" class="spinnerContainer" style="display: block;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#spinnerContainer').show();
+        if (sessionStorage.getItem("Temp_PlayerGameType") != null) {
+            $('#ddlGameType').val(sessionStorage.getItem("Temp_PlayerGameType"));
+            var tid = sessionStorage.getItem("PlayerTournamentId");
+            if ($('#ddlGameType').val() == 'D') {
+                LoadDailyTuounament();
+            }
+            else {
+                LoadTournament();
+            }
+            $('#ddlTourList').val(tid);
+            LoadTeam(tid);
+            $("#ddlTeam").val(sessionStorage.getItem("Temp_PlayerTeamId"));
+            ShowSavePlayerGrid(tid, sessionStorage.getItem("Temp_PlayerTeamId"));
+        }
+        else {
+            $('#ddlGameType').val('T');
+            LoadTournament();
+        }
+        $('#spinnerContainer').hide();
+    });
+    $("#ddlGameType").change(function () {
+        if ($('#ddlGameType').val() == 'D') {
+            LoadDailyTuounament();
+        } else {
+            LoadTournament();
+        }
+        sessionStorage.setItem("Temp_PlayerGameType", $('#ddlGameType').val());
+    });
+    function LoadDailyTuounament() {
+        $('#ddlTourList').empty();
+        $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+        $("#ddlTourList").append($("<option></option>").val('-99').html('Daily Match T20'));
+        $("#ddlTourList").append($("<option></option>").val('-100').html('Daily Match ODI'));
+    }
+
+    function LoadTournament() {
+        var pId = $('#pId').val();
+        var pData = { TournamentId: "0" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminPlayer/GetAllTournament',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                $('#ddlTourList').empty();
+                $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+                $.each(data, function (index, value) {
+                    $('#ddlTourList').append($("<option></option>").val(value.TournamentId).html(value.TournamentName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        LoadTeam(Tid);
+        ShowSavePlayerGrid(Tid);
+
+    });
+    $("#ddlTeam").change(function () {
+        var Tid = $('#ddlTourList').val();
+        var Teamid = $('#ddlTeam').val();
+        SavePlayergrid.reload({ page: 1, TournamentId: Tid, ParticipationTeamId: Teamid, GameType: $("#ddlGameType").val() });
+        sessionStorage.setItem("Temp_PlayerTeamId", Teamid);
+    });
+
+    function LoadTeam(tid) {
+
+        var pData = { TournamentId: tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminPlayer/GetTeam',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#ddlTeam').empty();
+                $('#ddlTeam').append($("<option></option>").val('').html("Select Team"));
+                $.each(data, function (index, value) {
+                    $('#ddlTeam').append($("<option></option>").val(value.ParticipationTeamId).html(value.ParticipationTeamName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    function ValidateFileType(file) {
+        var ext = $(file).val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xls', 'xlsx']) == -1) {
+            alert('Please select only excel file!');
+            // $(file).replaceWith($(file).clone());
+            return false;
+        }
+        else {
+            $("#PreSavePlayergrid").css("display", "table");
+            PreSavePlayer();
+        }
+    }
+
+    function PreSavePlayer() {
+        $('#spinnerContainer').show();
+        //$('#divMsg').html("");
+        if ($('#FileUpload').val() == "") {
+            alert('Please select users excel file!');
+            jQuery('#FileUpload').trigger('click');
+            return;
+        }
+        var pData = new FormData();
+        var files = $("#FileUpload").get(0).files;
+        //$('#spinnerContainer').show();
+        pData.append("pFile", files[0]);
+        var res = $.ajax({
+            url: '/AdminPlayer/ShowPlayer',
+            type: 'POST',
+            data: pData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.result == "T") {
+                    PreSavePlayerGrid(data.fileName);
+                    $('#spinnerContainer').hide();
+                }
+                else {
+                    //alert('Unable to show. Try again!');
+                    //$('#divMsg').html(data.resMsg);
+                }
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    var PreSavePlayergrid
+    function PreSavePlayerGrid(fileName) {
+        $("#PreSavePlayergrid").css("display", "inline-table");
+        var count = 0;
+        if (PreSavePlayergrid != null)
+            count = PreSavePlayergrid.count();
+        if (count <= 0) {
+            PreSavePlayergrid = $("#PreSavePlayergrid").grid({
+                dataSource: { url: "/AdminPlayer/PreSavePlayerList", data: { FileName: fileName } },
+                notFoundText: "no player found!",
+                uiLibrary: "bootstrap",
+                columns: [
+
+                    { field: "PlayerName", title: "Name", width: "80px" },
+                    { field: "PlayerShortName", title: "Short Name", width: "80px" },
+
+                    { field: "PlayerDesc", title: "Description", align: "center", width: "100px" },
+                    { field: "PlayerType", title: "Player Type", align: "center", cssClass: "status", width: "80px" },
+                    { field: "PlayerSpeciality", title: "Speciality", align: "center", cssClass: "status", width: "80px" },
+                    { field: "PlayerValue", title: "Value", align: "center", cssClass: "status", width: "80px" },
+                    { field: "ParticipationTeamName", title: "Team", align: "center", cssClass: "status", width: "80px" },
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+        }
+        else {
+            PreSavePlayergrid.reload({ page: 1, FileName: fileName });
+        }
+    }
+
+    var SavePlayergrid
+    function ShowSavePlayerGrid(Tid, TeamId) {
+        $('#spinnerContainer').show();
+        var PTeamId = 0;
+        if (TeamId != '')
+            PTeamId = TeamId;
+        var count = 0;
+        if (SavePlayergrid != null)
+            count = SavePlayergrid.count();
+        if (count <= 0) {
+            SavePlayergrid = $("#SavePlayergrid").grid({
+                dataSource: { url: "/AdminPlayer/GetSavePlayer", data: { TournamentId: Tid, ParticipationTeamId: PTeamId, GameType: $("#ddlGameType").val() } },
+                notFoundText: "no player found!",
+                uiLibrary: "bootstrap",
+                selectionMethod: "checkbox",
+                columns: [
+
+                    { field: "PlayerKey", title: "Player Key", align: "left", width: "8%" },
+                    { field: "PlayerName", title: "Name", align: "left", width: "12%" },
+                    { field: "PlayerShortName", title: "Short Name", width: "10%" },
+                    { field: "PlayerDesc", title: "Description", align: "center", width: "10%" },
+                    { field: "PlayerType", title: "Player Type", align: "center", cssClass: "status", width: "8%" },
+                    { field: "PlayerSpeciality", title: "Speciality", align: "center", cssClass: "status", width: "10%" },
+                    { field: "PlayerValue", title: "Value", align: "center", cssClass: "status", width: "6%" },
+                    { field: "ParticipationTeamName", title: "Team", align: "center", cssClass: "status", width: "10%" },
+                    { field: "", title: "", align: "center", cssClass: "edit", width: "5%" },
+                    { field: "", title: "", align: "center", cssClass: "delete", width: "5%" },
+                    { field: "PlayerId", title: "", align: "center", hidden: true, cssClass: "PlayerId", }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+            SavePlayergrid.on("rowDataBound", function (e, $row, id, record) {
+                $row.find('.edit').append('<a href="#" title="Edit Player" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'' + record.PlayerId + '\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+                $row.find('.delete').append('<a href="#" title="Delete Player" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeletePlayer(\'' + record.PlayerId + '\',\'' + Tid + '\')"; width="17" height="17" /></a>');
+
+                if (record.PlayerStatus == 'True') {
+                    //$row.find("input:checkbox").removeAttr("checked");
+                    $row.css('color', '#26b711');
+                }
+                else {
+                    //$row.find("input:checkbox").prop("checked", "true");
+                    $row.css('color', '#f10f0f');
+                }
+            });
+        }
+        else {
+            SavePlayergrid.reload({ page: 1, TournamentId: Tid, ParticipationTeamId: PTeamId, GameType: $("#ddlGameType").val() });
+        }
+        $('#spinnerContainer').hide();
+    }
+
+    function SavePlayer() {
+        if (PreSavePlayergrid == null || PreSavePlayergrid.count() <= 0) {
+            alert('Please upload some data!');
+            return;
+        }
+        var Tid = $('#ddlTourList').val();
+        if (Tid == '') {
+            alert('Please select a tournament!');
+            return;
+        }
+        $('#spinnerContainer').show();
+        var pData = {
+            TournamentId: Tid
+        }
+        var jsonData = JSON.stringify(pData);
+        /// $('#spinnerContainer').show();
+        $.ajax({
+            url: '/AdminPlayer/SavePlayer',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    $('#FileUpload').val('');
+                    $("#PreSavePlayergrid").css("display", "none");
+
+                    alert('Data uploaded successfuly!');
+                    //location.href = '/AdminTour/Index';
+                }
+                else {
+                    alert(data.Error);
+                }
+                var Tid = $('#ddlTourList').val();
+                SavePlayergrid.reload({ page: 1, TournamentId: Tid });
+                $('#spinnerContainer').hide();
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        });
+
+    }
+
+    function ActiveInactive(status) {
+        var pList = '';
+        $("#SavePlayergrid tr:not(:first)").each(function () {
+            $this = $(this);
+
+            if ($this.find("input[type*='checkbox']").prop("checked")) {
+                var pId = $this.find(".PlayerId").html();
+                if (pList == '') {
+                    pList = pId;
+                }
+                else {
+                    pList += '|' + pId;
+                }
+            }
+        });
+
+        var pData = {
+            PlayerIds: pList, Status: status
+        }
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminPlayer/ActiveInactive',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    alert('Data updated');
+                    SavePlayergrid.reload({ page: 1, TournamentId: $('#ddlTourList').val(), ParticipationTeamId: 0, GameType: $("#ddlGameType").val() });
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        });
+    }
+    function AddEditRedirection(Pid, Tid) {
+        location.href = '/AdminPlayer/PlayerEdit?pid=' + Pid + '&tid=' + Tid;
+    }
+
+    function DeletePlayer(PlayerId, Tid) {
+        $('#spinnerContainer').show();
+
+        var uurl = '/AdminPlayer/DeletePlayer';
+        var pData = { PlayerId: PlayerId, TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    SavePlayergrid.reload({ page: 1, TournamentId: Tid });
+                    $('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete player!");
+                return false;
+            }
+        });
+
+    }
+
+</script>

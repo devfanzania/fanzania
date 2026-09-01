@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Payment</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <header class="main-header header-style-one">
+        <!-- Header Top -->
+        <!-- Header Top End -->
+        <!--Header-Main Box-->
+        <div class="header-mainbox">
+            <div class="container ptn pbn">
+                <div class="clearfix">
+                    <div class="text-left">
+                        <div class="logo inner-logo"> <a href="#"><img src="~/images/logo-icon.png" alt=""></a> </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Header Main Box End-->
+    </header>
+    <!--End Main Header -->
+    <!--section start-->
+    <section class="">
+        <div class="text-center">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><strong>Thank You!</strong></h1>
+                </div>
+                <div class="col-md-12">
+                    <h3>Payment Failed.</h3>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <!----<p>You might have typed in the wrong address or the page has moved or some error related to the server. In the meantime, try again or return to the Home Page.</p>-->
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="col-md-12">
+                    <!---- <img src="~/images/error.png" alt="" />-->
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+            </div>
+    </section>
+    <!-- Section end-->
+
+
+    <script src="~/JS/jquery.js"></script>
+    <script src="~/JS/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            setTimeout(function () {
+                window.location.href = '/Payment/Subscription'
+            }, 1000);
+
+
+        });
+    </script>
+</body>
+</html>

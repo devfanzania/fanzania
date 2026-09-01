@@ -1,0 +1,286 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+@Html.Hidden("TournamentStatus")
+<input type="hidden" value="@ViewBag.hdnFlag" id="hdnFlag" />
+<input type="hidden" id="hdnTourCnt" />
+<input type="hidden" id="hdnLeagueCnt" />
+<input type="hidden" id="hdnLeagueId" />
+
+<section id="TournamentSlider">
+    <div class="container">
+        <div class="banner-slider">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="carousel slide multi-item-carousel" data-interval="false" data-wrap="false" id="theCarousel">
+                        <div id="UserTournamentBox" class="carousel-inner">
+
+                        </div>
+                    </div>
+                    <a id="TournamentSlide_prev" class="left carousel-control" href="#theCarousel" data-slide="prev" onclick="OnChangeTournamentSlide('prev');"><i class="fa fa-angle-left"></i></a>
+                    <a id="TournamentSlide_next" class="right carousel-control" href="#theCarousel" data-slide="next" onclick="OnChangeTournamentSlide('next');"><i class="fa fa-angle-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section>
+    <div class="container">
+        <div class="heading">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="/Assets/Icon/fanzania-icon-white.png" alt="" class="fanzania-icon" />
+                    <h3 class="team-name-hdng" id="userTeamName"></h3>
+                </div>
+                <div class="col-md-6">
+                    <a id="btn_join" class="btn2" onclick="OpenJoinLeague()" ;>Join League</a>
+                    <a id="btn_create" class="btn2" onclick="CreateLeague()" ;>Create League</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="LeagueMsg">
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="text-center"><strong> Missing out on fun?</strong>
+                        </br></br> 
+                        Create a league of your own or join a league if you have a code.</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="leagueInfoContainer">
+    <div class="container">
+        <div class="dashboard">
+            <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+            <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+            <div class="wrapper">
+                <ul class="nav nav-tabs list" id="UserLeagueBox">
+                    
+                </ul>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="position-l">
+                        <p id="userPositionDiv"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="LeagueStatus"></div>
+                    <a href="#" class="btn3" onclick="CopyCode()";>Share Code <img src="/Assets/Icon/Share Code.png" /></a>
+                    <input type="text" id="hdnLeagueCode"/>
+                    <div id="ExitOrChangeCode"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive leagueTable">
+                        <table class="table league-table text-left" id="Teamgrid"></table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<div id="ModalCreateLeague" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title"><span>Create League : </span><span id="Tname"></span></h4>
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body" style="padding-left: 10px;">
+
+                <table class="table" style="width: 100%;">
+
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" id="txtLeagueName" class="form-control" placeholder="Enter League Name" />
+                                <span class="Labelregister">League name minimum 3 characters</span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div id="checkmsg" class="text-left" style="color:#fff; float:left;"></div>
+                <button type="button" class="btn btn-warning btn-width-80" onclick="CheckAvailable()" ;>Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ModalJoinLeague" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content modal-bak">
+            <div class="modal-header">
+                <span>
+                    <img src="~/Assets/Icon/fanzania-icon.png" class="modal-logo" />
+                    <h4 class="modal-title"><span>Join League: </span><span id="Tname_J"></span></h4>
+                </span>
+                <img src="~/Assets/Icon/close_popup.png" alt="" class="close img-popup" data-dismiss="modal" aria-hidden="true" />
+            </div>
+            <div class="modal-body" style="padding-left: 10px;">
+                <table class="table" style="width: 100%;" class="cellspacing-8">
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" id="txtLeaguePin" class="form-control" placeholder="Enter league pin" />
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <div id="checkJoinmsg" class="text-left" style="color:#fff; float:left;"></div>
+                <button type="button" class="btn btn-warning btn-width-80" onclick="JoinLeague()" ;>Join</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="ModalShowteam" class="modal fade league-modal" id="league-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/Assets/Image/fanzania-icon-o.png" />
+                <h5 class="modal-title" id="exampleModalLongTitle"><span id="Modal_Teamname"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="/Assets/Image/close.png" /></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hdnModalTourmentId" />
+                <input type="hidden" id="hdnModalUserTeamId" />
+                <input type="hidden" id="hdnModalTeamName" />
+                <div class="row">
+                    <div class="col-md-12 modal-tab">
+                        <ul id="tabMatch" class="nav nav-tabs">
+                            <li id="tabCT" class="active col-md-6"><a data-toggle="tab" href="#menu2" onclick="TeamViewTab('CT');">Current Team</a></li>
+                            <li id="tabLMP" class="col-md-6"><a data-toggle="tab" href="#menu1" onclick="TeamViewTab('LMP');">Last Match Points</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="menu1" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        <div class="transtext"><p class="o-text" id="modalMatchTeams"></p></div>
+                                        <div class="trans">
+                                            <h5 id="modalLastMatchPoint"></h5>
+                                        </div>
+                                            
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="transtext"><p class="o-text">Power Play</p></div>
+                                        <div class="auto-d" id="powerPlayContainer">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="menu2" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        <div class="transtext"><p>Transfers Left</p></div>
+                                        <div class="trans">
+                                            <h5 id="modalTransfersLeft"></h5>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="row">
+                                            <div class="col-md-4 text-center">
+                                                <div id="nitroPosition" class="toogle-btn1">
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 text-center">
+                                                <div id="painkillerPosition" class="toogle-btn1">
+                                                    <span><img src="/Assets/Icon/Painkiller_red.png" /> Painkiller</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 text-center">
+                                                <div id="autocaptainPosition" class="toogle-btn1">
+                                                    <span><img src="/Assets/Icon/Autocaptain_grey.png" /> Autocaptain</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Power Plays</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="popup-playground">
+                            <div id="Players" style="padding-top:15px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="spinnerContainer" class="spinnerContainer" style="display: none;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+<!----------------------------------------------------------->
+
+
+<script>
+    var Session_TournamentId = '';
+    var Session_LeagueId = '';
+    var Session_UserId = '';
+
+    $(document).ready(function () {
+        Session_LeagueId = @Session["LeagueId"].ToString();
+        Session_TournamentId = @Session["TournamentId"].ToString();
+        Session_UserId = @Session["UserId"].ToString();
+        OnPageLoad();
+    });
+
+</script>
+
+<script src="/CustomScript/League/League.js"></script>

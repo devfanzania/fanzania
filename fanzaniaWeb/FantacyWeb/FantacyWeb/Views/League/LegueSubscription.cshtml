@@ -1,0 +1,1568 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+@Html.Hidden("TournamentStatus")
+<link href="~/css/stylesub.css" rel="stylesheet" />
+<style>
+    .m-box {
+        width: 27px;
+        margin: 0px auto !important;
+        padding: 0px 0px 0px 0 !important;
+        background: #f9f9f9;
+        border-radius: 8px 0;
+    }
+
+    i.color2 {
+        color: #ccc;
+    }
+
+    i.color3 {
+        color: #e4b006;
+    }
+
+    i.color4 {
+        color: #897777;
+    }
+
+    .Labelregister1 {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 0em !important;
+        color: #9e9898;
+    }
+
+    .breakdown-btnLs {
+        padding: 5px 10px;
+        border: 2px solid #fa3f45;
+        border-radius: 50px;
+        font-size: 12px;
+    }
+
+    .covrageLs {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .hedingtitleLs {
+        font-weight: 800;
+        font-size: 13px;
+    }
+
+    .coll-center {
+        text-align: center;
+    }
+
+    .covrageft {
+        text-align: center;
+        font-size: 13px;
+        color: #e95354;
+        font-weight: 600;
+    }
+
+    .btn-proceedtopayment {
+        background: linear-gradient(to left, #fa3f45 0%,#ff9000 100%);
+        color: #fff;
+        font-weight: 500;
+        width: 100%;
+        padding: 10px 20px;
+        position: relative;
+        float: right;
+        margin-left: 10px;
+        border-radius: 30px;
+    }
+
+    .covrages {
+        font-size: 12px;
+        color: #e95354;
+        font-weight: 500;
+    }
+
+    .form-control1 {
+        height: 50px;
+        border: 1px solid #e95354;
+        border-radius: 0;
+        background-color: #fff;
+        border-radius: 10px;
+        height: 36px;
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+    }
+
+    input[type=checkbox]:after {
+        content: " ";
+        background-color: #D7B1D7;
+        display: inline-block;
+        visibility: visible;
+    }
+
+    input[type='checkbox'] {
+        width: 28px !important;
+        height: 28px !important;
+        margin: 4px;
+        /* border-radius: 25px; */
+        /* -webkit-appearance: none; */
+        -moz-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        /* outline: 1px solid gray; */
+        /* box-shadow: none; */
+        font-size: 0.8em;
+        text-align: center;
+        line-height: 2em;
+        background: green;
+        border-radius: 15px;
+    }
+
+        input[type="checkbox"]:disabled:checked {
+            width: 30px !important;
+            height: 30px !important;
+            margin: 4px;
+            /* border-radius: 25px; */
+            /* -webkit-appearance: none; */
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            /* outline: 1px solid gray; */
+            /* box-shadow: none; */
+            font-size: 0.8em;
+            text-align: center;
+            line-height: 2em;
+            background-color: #ccc !important;
+            border-radius: 15px;
+        }
+
+ input[type='checkbox']:disabled:checked:after {
+                content: '✔';
+                color: white;
+                background-color: #ccc !important;
+                font-size: 16px;
+                margin-top: 2px;
+            }
+
+  input[type='checkbox']:checked:after {
+            content: '✔';
+            color: white;
+            background-color: green !important;
+            font-size: 16px;
+            margin-top: 3px;
+        }
+
+    .popupspan {
+        font-size: 11px;
+        padding-right: 5px;
+        padding-left: 5px;
+        font-weight: 500;
+    }
+
+    #rzp-paymentresponse {
+        display: none;
+    }
+
+    .tooltip-wrapper {
+        display: inline-block; /* display: block works as well */
+        
+    }
+   .tooltip-wrapper .showsubscribed {
+            /* don't let button block mouse events from reaching wrapper */
+            pointer-events: none;
+     }
+
+    .tooltip-wrapper.disabled {
+            /* OPTIONAL pointer-events setting above blocks cursor setting, so set it here */
+            cursor: not-allowed;
+      }
+    .hrrow {
+        border-top: 1px solid #ded2d2b8;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+</style>
+<input type="hidden" value="@ViewBag.hdnFlag" id="hdnFlag" />
+<input type="hidden" id="hdnTourCnt" />
+<input type="hidden" id="hdnLeagueCnt" />
+<input type="hidden" id="hdnLeagueId" />
+
+<div class="row commanrow ">
+    @*<div class="col-md-2 leftpanel">
+            <div class="firrstcolum">
+                <p class="hedingleft"> fanzania</p>
+
+                <p class="hedingleft">is</p>
+
+                <p class="hedingleft">still</p>
+
+                <p class="hedingleft free">  FREE</p>
+
+                <p class="hedingleft "> to play.</p>
+            </div>
+        </div>*@
+    <div class="col-md-1 "></div>
+    <div class="col-md-10 ">
+        <div class="firstsection" style="padding-top: 100px;">
+
+        </div>
+        <div class="row hedingbaground commanrow onlyMobile">
+            <div class="row hedingbaground commanrow onlyMobile">
+
+
+
+                <div class="coll">
+
+                    <div>
+                        <span class="covrages">Select Currency</span>
+                        <select id="selectcurrancy" class="form-control1" >
+                            <option value="INR">  INR</option>
+                            <option value="GBP">GBP </option>
+                            <option value="USD"> USD</option>
+                        </select>
+                        <a href='#' class="covrage ">CREATE NEW REQUEST</a>
+                    </div>
+                </div>
+                <div class="coll coll-center">
+
+                </div>
+                <div class="coll coll-center">
+                </div>
+                <div class="coll coll-center">
+
+                </div>
+                <div class="coll coll-center">
+
+
+                </div>
+
+            </div>
+        </div>
+        <hr class="hr">
+        <div class="row hedingbaground commanrow onlyMobile">
+            <div class="row hedingbaground commanrow onlyMobile">
+
+
+
+
+                <div class="coll">
+                    <div class="hedingtitleLs">Team  </div>
+
+                </div>
+                <div class="coll coll-center">
+                    <div class="hedingtitleLs">PRIZE ELIGIBILITY   </div>
+                    <span class="covrageLs currancy">INR </span> <span class="covrageLs" id="planfirstamount"> @ViewBag.subscriptionlist[0].PrizePackageAmount</span>
+                    <div><span> <a onclick="checkalllivescoring('fistplan','fistplant',@ViewBag.subscriptionlist[0].PrizePackageAmount,1)" ; class="breakdown-btnLs enablebtn" data-toggle="modal" data-target="#myBreakdown">SELECT ALL</a> <a   class="breakdown-btnLs disablebtn" style ="display:none;background-color: #ccc ;" data-toggle="modal" data-target="#myBreakdown">SELECT ALL</a></span></div>
+
+                </div>
+                <div class="coll coll-center">
+                    <div class="hedingtitleLs">LIVE SCORING  </div>
+                    <span class="covrageLs currancy">INR </span> <span class="covrageLs" id="plansecondamount">  @ViewBag.subscriptionlist[0].LivePackageAmount</span>
+                    <div><span> <a class="breakdown-btnLs" onclick="checkallpriceeligibility('secondplan','secondplant', @ViewBag.subscriptionlist[0].LivePackageAmount,2)" ; data-toggle="modal" data-target="#myBreakdown">SELECT ALL</a></span></div>
+                </div>
+                <div class="coll coll-center">
+                    <div class="hedingtitleLs">  FULL PACKAGE </div>
+                    <span class="covrageLs currancy">INR </span> <span class="covrageLs" id="planthirdamount">@ViewBag.subscriptionlist[0].FullPackageAmount</span>
+                    <div><span> <a class="breakdown-btnLs enablebtn" onclick="CheckallfullPackage('thirdplan','thirdplant',@ViewBag.subscriptionlist[0].FullPackageAmount,3)" data-toggle="modal" data-target="#myBreakdown">SELECT ALL</a> <a class="breakdown-btnLs disablebtn" style="display:none;background-color: #ccc ;" data-toggle="modal" data-target="#myBreakdown">SELECT ALL</a></span></div>
+
+                </div>
+                <div class="coll coll-center">
+                    <div class="hedingtitleLs">TOTAL AMOUNT </div>
+                    <span class="covrageLs currancy">INR</span>
+
+                </div>
+
+            </div>
+        </div>
+        @{int i = 1;}
+        @{int len = Enumerable.Count(ViewBag.subscriptionlist);}
+
+        <hr class="hr">
+        @foreach (var item in ViewBag.subscriptionlist)
+        {
+            <div class="row commanrow onlyMobile mainContent" id="@(i)">
+                <div class="coll">
+                    <div class="mostpopular" style=""> <span style="display:none" id="UserId_@(i)">@item.UserId</span><span class="covrageLs">  @item.UserTeamName</span>  </div>
+                    <div>  <span class="covrageLs" style=" font-size:10px !important;">@item.Name</span>  </div>
+                </div>
+                <div class="coll coll-center">
+
+                    @if (item.SubscriptionType == 1)
+                    {<span class="tooltip-wrapper disabled" title="Already Subscribed">
+                            <input disabled checked type='checkbox' class="fistplant showsubscribed">
+                        </span>
+                        <input disabled checked type='checkbox' style="display:none" class="fistplan" id='mode@(i)'>
+                    }
+                    else if (item.SubscriptionType == 3)
+                    {
+                        <span class="" id="">-</span>
+                        <input disabled checked type='checkbox' style="display:none" class="fistplan hidden_@(i)" id='mode@(i)'>
+                    }
+                    else
+                    {
+                        <div class="firstsection">
+                            <span style="display:none" class="disable_select_1_@(i) unselect" id="">-</span>
+                            <a onclick="show(@(i),@item.PrizePackageAmount,@(i),1,@item.UserId);" class="covrage fistplant  1_@(i)" id='Select@(i)'>Select</a>
+                            <input onchange="change(@(i),@item.PrizePackageAmount,@(i),1,@item.UserId);" style="display:none" class="fistplan rowchecked 1_@(i)_checkbox" type='checkbox' id='mode@(i)'>
+                        </div>
+                    }
+                </div>
+                <div class="coll coll-center">
+                    @if (item.SubscriptionType == 2)
+                    {
+                        <span class="tooltip-wrapper disabled" title="Already Subscribed">
+                            <input disabled checked type='checkbox' class="secondplant showsubscribed">
+                        </span>
+                        <input disabled checked type='checkbox' class="secondplan" style="display:none" id='mode@(i)_@(i)'>
+                    }
+                    else if (item.SubscriptionType == 3)
+                    {
+                        <span class="" id="">-</span>
+                        <input disabled checked type='checkbox' class="secondplan hidden_@(i)" style="display:none" id='mode@(i)_@(i)'>
+                    }
+                    else
+                    {
+                        <div class="firstsection">
+                            <span style="display:none" class="disable_select_2_@(i)" id="">-</span>
+                            <a onclick="show('@(i)_@(i)',@item.LivePackageAmount,@(i),2,@item.UserId);" class="covrage secondplant  2_@(i) " id='Select@(i)_@(i)'>Select</a>
+                            <input onchange="change('@(i)_@(i)',@item.LivePackageAmount,@(i),2,@item.UserId);" style="display:none" class=" secondplan rowchecked 2_@(i)_checkbox" type='checkbox' id='mode@(i)_@(i)'>
+                        </div>
+                    }
+
+                </div>
+                <div class="coll coll-center">
+
+                    @if (item.SubscriptionType == 3)
+                    {
+                        <span class="tooltip-wrapper disabled" title="Already Subscribed">
+                            <input disabled checked type='checkbox' class="thirdplant showsubscribed">
+                        </span>
+                        <input disabled checked type='checkbox' class="thirdplan " style="display:none" id='mode@(i)_@(i)_@(i)'>
+                    }
+                    else
+                    {
+                        <div class="firstsection">
+                            <span style="display:none" class="disable_select_3_@(i)" id="">-</span>
+                            <a onclick="show('@(i)_@(i)_@(i)',@item.FullPackageAmount,@(i),3,@item.UserId);" class="covrage thirdplant 3_@(i)" id='Select@(i)_@(i)_@(i)'>Select</a>
+                            <input onchange="change('@(i)_@(i)_@(i)',@item.FullPackageAmount,@(i),3,@item.UserId);" style="display:none" class="thirdplan rowchecked 3_@(i)_checkbox" type='checkbox' id='mode@(i)_@(i)_@(i)'>
+                        </div>
+                    }
+                </div>
+                <div class="coll coll-center">
+                    <div class="firstsection"><span class="currancy">INR </span>&nbsp<span class="dispalyamt"id="rowcheckedtotalamount@(i)"> 0</span>  </div>
+
+                </div>
+            </div>
+            if(i != len - 0)
+            {
+                <hr class="hrrow">
+            }
+
+
+            i++;
+
+
+        }
+        <hr class="hr">
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular">  <span class="covrage">SUBSCRIPTIONS SELECTED</span>   </div>
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection">
+                    <span class="covrage" id="checkedtotalfirstplan">0</span>
+                </div>
+            </div>
+            <div class="coll coll-center">
+                <span class="covrage" id="checkedtotalsecondplan">0</span>
+            </div>
+            <div class="coll coll-center">
+                <span class="covrage" id="checkedtotalthirdplan">0</span>
+            </div>
+            <div class="coll coll-center">
+                <span class="covrage" id="checkedttotalallplan">0</span>
+            </div>
+        </div>
+        <hr class="hr">
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular"> <span class="covrage"> TOTAL AMOUNT </span><span class="covrages">Before Discount</span></div>
+
+            </div>
+
+            <div class="coll coll-center">
+                <div class="firstsection">&nbsp </div>
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection">  &nbsp</div>
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection"> &nbsp  </div>
+            </div>
+            <div class="coll coll-center">
+
+                <div class="firstsection">  <span class="currancy covrageft">INR</span> <span class="covrage" id="finaltotalall">0</span> </div>
+            </div>
+        </div>
+        <hr class="hr">
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular">
+                    <span class="covrageft"> TOTAL AMOUNT </span><span class="covrages">After Discount</span>
+                    <span class="dropdown dropup">
+                        <a class="dropdown-toggle " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </a>
+                        <p class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 191px;">
+                            <span class="popupspan"><span id="DiscountRate1">@ViewBag.subscriptionlist[0].DiscountRate1</span> % | 5-10 users in the request. </span>
+                            <span class="popupspan"><span id="DiscountRate2">@ViewBag.subscriptionlist[0].DiscountRate2</span> % | 11-20 users in the request. </span>
+                            <span class="popupspan"><span id="DiscountRate3">@ViewBag.subscriptionlist[0].DiscountRate3</span> % | Over 21  in the request. </span>
+                        </p>
+                    </span>
+
+                </div>
+
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection">&nbsp </div>
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection"> &nbsp </div>
+            </div>
+            <div class="coll coll-center">
+                <div class="firstsection">  &nbsp </div>
+            </div>
+            <div class="coll coll-center">
+
+                <div class="firstsection">  <span class="currancy covrageft">INR</span> <span class="covrageft" id="afterdiscounttotal">0</span> </div>
+            </div>
+        </div>
+
+        <hr class="hr">
+
+        <div class="row hedingbaground commanrow onlyMobile">
+            <div class="coll">
+                <div class="hedingtitleLs">&nbsp  </div>
+
+            </div>
+            <div class="coll coll-center">
+                <div class="hedingtitleLs">&nbsp </div>
+
+            </div>
+            <div class="coll coll-center">
+                <div class="hedingtitleLs"><a id="" onclick="payment();" class="btn-proceedtopayment ">PROCEED TO PAYMENT</a> </div>
+
+            </div>
+            <div class="coll coll-center">
+                <div class="hedingtitleLs">  &nbsp </div>
+
+            </div>
+            <div class="coll coll-center">
+                <div class="hedingtitleLs">&nbsp </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 "></div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+    $("#selectcurrancy").change(function () {
+
+        if ($('#selectcurrancy').val() == 'USD') {
+
+            $("#planfirstamount").text('NA');
+            $("#plansecondamount").text(@ViewBag.subscriptionlist[0].LivePackageAmount_USD);
+            $("#planthirdamount").text('NA');
+            $(".currancy").text('USD');
+            $(".dispalyamt").text(0);
+            $("#checkedtotalfirstplan").text(0);
+            $("#checkedtotalsecondplan").text(0);
+            $("#checkedtotalthirdplan").text(0);
+            $("#checkedttotalallplan").text(0);
+            $("#finaltotalall").text(0);
+            $("#afterdiscounttotal").text(0);
+            $('.fistplan ').hide();  
+            $('.fistplant').hide();
+            $('.unselect').show();
+            $('.disablebtn').show();
+            $('.enablebtn').hide();
+           
+            checkalllivescoring('fistplan', 'fistplant', @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+            checkallpriceeligibility('secondplan','secondplant', @ViewBag.subscriptionlist[0].LivePackageAmount_USD,2)
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+        }
+        else if ($('#selectcurrancy').val() == 'INR') {
+
+            $("#planfirstamount").text(@ViewBag.subscriptionlist[0].PrizePackageAmount);
+            $("#plansecondamount").text(@ViewBag.subscriptionlist[0].LivePackageAmount);
+            $("#planthirdamount").text(@ViewBag.subscriptionlist[0].FullPackageAmount);
+            $(".currancy").text('INR');
+            $(".dispalyamt").text(0);
+            $("#checkedtotalfirstplan").text(0);
+            $("#checkedtotalsecondplan").text(0);
+            $("#checkedtotalthirdplan").text(0);
+            $("#checkedttotalallplan").text(0);
+            $("#finaltotalall").text(0);
+            $("#afterdiscounttotal").text(0);
+            $('.disablebtn').hide();
+            $('.enablebtn').show();
+             checkalllivescoring('fistplan', 'fistplant', @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+            checkallpriceeligibility('secondplan','secondplant', @ViewBag.subscriptionlist[0].LivePackageAmount,2)
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+        
+
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+
+            $("#planfirstamount").text('NA');
+            $("#plansecondamount").text(@ViewBag.subscriptionlist[0].LivePackageAmount_GBP);
+            $("#planthirdamount").text('NA');
+            $(".currancy").text('GBP');
+            $(".dispalyamt").text(0);
+            $("#checkedtotalfirstplan").text(0);
+            $("#checkedtotalsecondplan").text(0);
+            $("#checkedtotalthirdplan").text(0);
+            $("#checkedttotalallplan").text(0);
+            $("#finaltotalall").text(0);
+            $("#afterdiscounttotal").text(0);
+            $('.fistplan ').hide();
+            $('.fistplant').hide();
+            $('.unselect').show();
+            $('.disablebtn').show();
+            $('.enablebtn').hide();
+             checkalllivescoring('fistplan', 'fistplant', @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+            checkallpriceeligibility('secondplan','secondplant', @ViewBag.subscriptionlist[0].LivePackageAmount_GBP,2)
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+        }
+    });
+    $(function () {
+        $('.tooltip-wrapper').tooltip();
+    });
+    let map = new Map();
+    var Checkallls = false;
+    var Checkallpe = false;
+    var Checkallfp = false;
+    var Checkallpee = false;
+
+    var Finalstorage = JSON.parse(localStorage.getItem("storagefinal"));
+    localStorage.removeItem('storagefinal');
+   // console.log("data", Finalstorage);
+    function checkalllivescoring(classname, slectclassname, package_amount, columid) {
+        var rowid = 1;
+
+        if ($('#selectcurrancy').val() == 'USD') {
+               package_amount = @ViewBag.subscriptionlist[0].PrizePackageAmount_USD;
+               if (Checkallfp == true) {
+             CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3)
+
+        }
+        if (Checkallpee == true) {
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3)
+            return;
+        }
+             }
+               else if ($('#selectcurrancy').val() == 'INR') {
+                   package_amount = @ViewBag.subscriptionlist[0].PrizePackageAmount;
+               if (Checkallfp == true) {
+             CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+
+        }
+        if (Checkallpee == true) {
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+            return;
+        }
+
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+                package_amount = @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP;
+                if (Checkallfp == true) {
+             CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3)
+
+        }
+        if (Checkallpee == true) {
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3)
+            return;
+        }
+        }
+
+         @*if (Checkallfp == true) {
+             CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+
+        }
+        if (Checkallpee == true) {
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+            return;
+        }*@
+        $('.' + classname).each(function () {
+            if (!Checkallls) {
+            var cb = $(this);
+            if (!cb.is(':disabled')) {
+             console.log(rowid);
+             this.checked = true;
+                    //$('.' + classname).show();
+                cb.show();
+                $('.' + columid + '_' + rowid).hide();
+             //   $('.3_' + rowid).show();
+              //  $('.2_' + rowid).show();
+                //$('.disable_select_3_' + rowid).hide();
+                //$('.disable_select_2_' + rowid).hide();
+                $('.disable_select_1_' + rowid).hide();
+                //disable_select_1_3
+                //$('.3_' + rowid + '_checkbox').prop('checked', false);
+                //$('.2_' + rowid + '_checkbox').prop('checked', false);
+                //$('.3_' + rowid + '_checkbox').hide();
+                //$('.2_' + rowid + '_checkbox').hide();
+              $('.thirdplan').prop('checked', false);
+              $('.thirdplan').hide();
+              $('.thirdplant').show();
+                var UserId = $('#UserId_' + rowid).text();
+               // console.log(UserId);
+                 if ($('#selectcurrancy').val() == 'USD') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+                @*removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);*@
+                addmapdata(rowid, package_amount, columid, Number(UserId));
+
+        }
+            }
+            else {
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                    this.checked = false;
+                    cb.hide();
+                 //   $('.' + classname).hide();
+                    $('.' + slectclassname).show();
+                    $('.disable_select_1_' + rowid).hide();
+                    $('.thirdplan').prop('checked', false);
+                    $('.thirdplan').hide();
+                    $('.thirdplant').show();
+                    removemapdata(rowid, package_amount, columid);
+                }
+            }
+
+            rowid++
+        });
+        if (Checkallls) {
+            Checkallls = false;
+        } else {
+            Checkallls = true;
+        }
+
+         console.log(map);
+        //if (classname == 'thirdplan') {
+        //    $('#checkedtotalthirdplan').html($('.' + classname + ':checked').not(':disabled').length);
+        //} else if (classname == 'secondplan') {
+        //    $('#checkedtotalsecondplan').html($('.' + classname + ':checked').not(':disabled').length);
+        //} else if (classname == 'fistplan') {
+        //    $('#checkedtotalfirstplan').html($('.' + classname + ':checked').not(':disabled').length);
+        //}checkedtotalfirstplan
+        $('#checkedtotalfirstplan').html($('.' + classname + ':checked').not(':disabled').length);
+        $('#checkedtotalthirdplan').html($('.thirdplan:checked').not(':disabled').length);
+        $('#checkedtotalsecondplan').html($('.secondplan:checked').not(':disabled').length);
+        var totalFirstPlan = $("#checkedtotalfirstplan").text();
+        var totalsecondPlan = $("#checkedtotalsecondplan").text();
+        var totalThirdPlan = $("#checkedtotalthirdplan").text();
+        var allplantotal = Number(totalFirstPlan) + Number(totalsecondPlan) + Number(totalThirdPlan);
+        $('#checkedttotalallplan').html(allplantotal);
+        discountcalculation(allplantotal)
+
+        //   $(".fistplan").prop("checked", !clicked);
+        //  clicked = !clicked;
+        //var rowid = 1;
+        //$('.fistplan').each(function () {
+        //    if (!checkallls) {
+
+        //        this.checked = true;
+        //        $('.fistplan').show();
+        //        $('.fistplant').hide();
+        //        addmapdata(rowid, package_amount, columid);
+
+        //    } else {
+        //        this.checked = false;
+        //        $('.fistplan').hide();
+        //        $('.fistplant').show();
+        //        removemapdata(rowid, package_amount, columid);
+
+        //    }
+        //    rowid++
+        //});
+        //if (checkallls) {
+        //    checkallls = false;
+        //} else {
+        //    checkallls = true;
+        //}
+        //$('#checkedtotalfirstplan').html($('.fistplan:checked').length);
+        ////get span value
+        //// alert($("#checkedtotalfirstplan").text());
+        //var totalfirstplan = $("#checkedtotalfirstplan").text();
+        //var totalsecondplan = $("#checkedtotalsecondplan").text();
+        //var totalthirdplan = $("#checkedtotalthirdplan").text();
+        //var allplantotal = number(totalfirstplan) + number(totalsecondplan) + number(totalthirdplan);
+        //$('#checkedttotalallplan').html(allplantotal);
+    }
+
+    function checkallpriceeligibility(classname, slectclassname, package_amount, columid) {
+           if ($('#selectcurrancy').val() == 'USD') {
+               package_amount = @ViewBag.subscriptionlist[0].LivePackageAmount_USD;
+                if (Checkallfp == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3)
+                }
+                if (Checkallls == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3)
+                    return;
+                }
+             }
+               else if ($('#selectcurrancy').val() == 'INR') {
+                   package_amount = @ViewBag.subscriptionlist[0].LivePackageAmount;
+                if (Checkallfp == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+                }
+                if (Checkallls == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+                    return;
+                }
+
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+                package_amount = @ViewBag.subscriptionlist[0].LivePackageAmount_GBP;
+                 if (Checkallfp == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3)
+                }
+                if (Checkallls == true) {
+                    CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3)
+                    return;
+                }
+        }
+        //   $(".fistplan").prop("checked", !clicked);
+        //  clicked = !clicked;
+
+        var rowid = 1;
+      //  Checkallpee = false;
+        $('.'+classname).each(function () {
+            if (!Checkallpee) {
+
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                    this.checked = true;
+                    //$('.' + classname).show();
+                    cb.show();
+                    $('.' + columid + '_' + rowid).hide();
+                  //  $('#classname' ).show();
+                   // $('#slectclassname' ).hide();
+                    if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP') {
+                        $('.disable_select_3_' + rowid).show();
+                        $('.3_' + rowid).hide();
+                    } else {
+                        $('.thirdplan').prop('checked', false);
+                        $('.thirdplan').hide();
+                        $('.thirdplant').show();
+                    }
+                    $('.disable_select_2_' + rowid).hide();
+                   
+                    if ($('#selectcurrancy').val() == 'USD') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+
+
+                    var UserId = $('#UserId_' + rowid).text();
+                    addmapdata(rowid, package_amount, columid, Number(UserId));
+
+                }
+
+            } else {
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                    this.checked = false;
+                    cb.hide();
+                    //   $('.' + classname).hide();
+                    $('.disable_select_2_' + rowid).hide();
+                    if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP') {
+                        $('.disable_select_3_' + rowid).show();
+                        $('.3_' + rowid).hide();
+                    } else {
+                        $('.thirdplan').prop('checked', false);
+                        $('.thirdplan').hide();
+                        $('.thirdplant').show();
+                    }
+                   
+                    $('.' + slectclassname).show();
+                    //removemapdata(rowid, package_amount, columid);
+                     if ($('#selectcurrancy').val() == 'USD') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+
+                }
+
+            }
+            rowid++
+        });
+        if (Checkallpee) {
+            Checkallpee = false;
+        } else {
+            Checkallpee = true;
+        }
+
+
+     //   console.log(Checkallpee);
+        @*if (Checkallls == true && Checkallpee == true) {
+             Checkallls = false;
+             Checkallpee = false;
+            checkallpriceeligibility('secondplan', 'secondplant', @ViewBag.subscriptionlist[0].PrizePackageAmount, 2)
+            checkalllivescoring('fistplan', 'fistplant',  @ViewBag.subscriptionlist[0].LivePackageAmount, 1)
+             Checkallfp = true;
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+        }*@
+        console.log(map);
+        $('#checkedtotalsecondplan').html($('.' + classname + ':checked').not(':disabled').length);
+        $('#checkedtotalthirdplan').html($('.thirdplan:checked').not(':disabled').length);
+        $('#checkedtotalfirstplan').html($('.firstplan:checked').not(':disabled').length);
+
+      //}
+        var totalFirstPlan = $("#checkedtotalfirstplan").text();
+        var totalsecondPlan = $("#checkedtotalsecondplan").text();
+        var totalThirdPlan = $("#checkedtotalthirdplan").text();
+        var allplantotal = Number(totalFirstPlan) + Number(totalsecondPlan) + Number(totalThirdPlan);
+        $('#checkedttotalallplan').html(allplantotal);
+        discountcalculation(allplantotal)
+    }
+
+    function CheckallfullPackage(classname, slectclassname, package_amount, columid) {
+
+        var rowid = 1;
+        $('.' + classname).each(function () {
+            if (!Checkallfp) {
+
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                   
+                    //$('.' + classname).show();
+                    if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP') {
+                        $('.2_' + rowid + '_checkbox').hide();
+                        $('.disable_select_2_' + rowid).hide();
+                        $('.2_' + rowid).show();
+                    }
+                    else {
+                        this.checked = true;
+                        cb.show();
+                        $('.2_' + rowid + '_checkbox').hide();
+                        $('.disable_select_2_' + rowid).show();
+                        $('.' + columid + '_' + rowid).hide();
+                        $('.2_' + rowid).hide();
+                    }
+                   // cb.show();
+                  //  $('.' + columid + '_' + rowid).hide();
+
+                    $('.1_' + rowid).hide();
+                 //   $('.2_' + rowid).hide();
+                    $('.disable_select_1_' + rowid).show();
+                   // $('.disable_select_2_' + rowid).show();
+                    $('.2_' + rowid + '_checkbox').prop('checked', false);
+                    $('.1_' + rowid + '_checkbox').prop('checked', false);
+                    $('.2_' + rowid + '_checkbox').hide();
+                    $('.1_' + rowid + '_checkbox').hide();
+                   // $('#mode' + Player_id).show();
+                    //$('#Select' + Player_id).hide();
+                    @*removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);*@
+                    if ($('#selectcurrancy').val() == 'USD') {
+                          package_amount = @ViewBag.subscriptionlist[0].FullPackageAmount_USD;
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                         package_amount = @ViewBag.subscriptionlist[0].FullPackageAmount;
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                         package_amount = @ViewBag.subscriptionlist[0].FullPackageAmount_GBP;
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+                    var UserId = $('#UserId_' + rowid).text();
+                    if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP') { } else {
+                        addmapdata(rowid, package_amount, columid, Number(UserId));
+                    }
+                   
+
+                }
+
+            } else {
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                    this.checked = false;
+                    cb.hide();
+                    //   $('.' + classname).hide();
+                   
+
+                    $('.1_' + rowid).show();
+                    $('.2_' + rowid).show();
+                    if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP' ) {
+                        $('.disable_select_1_' + rowid).show();
+                        $('.1_' + rowid).hide();
+                        $('.disable_select_2_' + rowid).hide();
+                        $('.disable_select_3_' + rowid).show();
+                        $('.3_' + rowid).hide();
+                    } else {
+                        $('.' + slectclassname).show();
+                        $('.disable_select_1_' + rowid).hide();
+                        $('.disable_select_2_' + rowid).hide();
+                        $('.disable_select_3_' + rowid).hide();
+                    }
+                   
+                    $('.2_' + rowid + '_checkbox').prop('checked', false);
+                    $('.1_' + rowid + '_checkbox').prop('checked', false);
+                    $('.2_' + rowid + '_checkbox').hide();
+                    $('.1_' + rowid + '_checkbox').hide();
+                    Checkallpee = false;
+                    Checkallls = false;
+                     if ($('#selectcurrancy').val() == 'USD') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+                    @*removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                    removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);*@
+                 //   removemapdata(rowid, package_amount, columid);
+                }
+
+            }
+            rowid++
+        });
+        if (Checkallfp) {
+            Checkallfp = false;
+        } else {
+            Checkallfp = true;
+        }
+
+        //console.log(Checkallls);
+
+        @*if (Checkallls == true && Checkallpee == true) {
+            Checkallls = false;
+            Checkallpee = false;
+            checkallpriceeligibility('secondplan', 'secondplant', @ViewBag.subscriptionlist[0].PrizePackageAmount, 2)
+            checkalllivescoring('fistplan', 'fistplant',  @ViewBag.subscriptionlist[0].LivePackageAmount, 1)
+            Checkallfp = true;
+            CheckallfullPackage('thirdplan', 'thirdplant', @ViewBag.subscriptionlist[0].FullPackageAmount, 3)
+        }*@
+        console.log(map);
+        //if (classname == 'thirdplan') {
+
+        //}
+        //else if (classname == 'secondplan') {
+        //    $('#checkedtotalsecondplan').html($('.' + classname + ':checked').not(':disabled').length);
+        //} else if (classname == 'fistplan') {
+        //    $('#checkedtotalfirstplan').html($('.' + classname + ':checked').not(':disabled').length);
+        //}
+        if ($('#selectcurrancy').val() != 'USD' || $('#selectcurrancy').val() != 'GBP') {
+            $('#checkedtotalthirdplan').html($('.' + classname + ':checked').not(':disabled').length);
+            $('#checkedtotalfirstplan').html($('.firstplan:checked').not(':disabled').length);
+            $('#checkedtotalsecondplan').html($('.secondplan:checked').not(':disabled').length);
+            var totalFirstPlan = $("#checkedtotalfirstplan").text();
+            var totalsecondPlan = $("#checkedtotalsecondplan").text();
+            var totalThirdPlan = $("#checkedtotalthirdplan").text();
+            var allplantotal = Number(totalFirstPlan) + Number(totalsecondPlan) + Number(totalThirdPlan);
+            $('#checkedttotalallplan').html(allplantotal);
+            discountcalculation(allplantotal)
+        } 
+        
+
+    }
+
+
+    @*function CheckallfullPackage(classname, slectclassname, package_amount, columid) {
+        var rowid = 1;
+        $('.' + classname).each(function () {
+            if (!Checkallpe) {
+            var cb = $(this);
+            if (!cb.is(':disabled')) {
+             console.log(rowid);
+             this.checked = true;
+                    //$('.' + classname).show();
+                cb.show();
+                if ($('.1_' + rowid + '_checkbox').is(':checked')) {
+                   // $('#mode' + Player_id).show();
+                  //  $('#Select' + Player_id).hide();
+                    $('.'+columid+'_'+rowid).hide();
+                    addmapdata(rowid, package_amount, columid);
+                }
+                if ($('.2_' + rowid + '_checkbox').is(':checked')) {
+                 //   $('#mode' + Player_id).show();
+                 //   $('#Select' + Player_id).hide();
+                    $('.' + columid + '_' + rowid).hide();
+                    $('.3_' + rowid + '_checkbox').prop('checked', false);
+                    $('.3_' + rowid + '_checkbox').hide();
+                    $('.' + columid + '_' + rowid).hide();
+                    addmapdata(rowid, package_amount, columid);
+
+                }
+                if ($('.3_' + rowid + '_checkbox').is(':checked')) {
+                    $('.fistplan').not(':disabled').prop('checked', false)
+                    $('.fistplan').hide();
+                    $('.1_'  + rowid).hide();
+                $('.1_' + rowid).hide();
+                $('.2_' + rowid).hide();
+
+                $('.disable_select_1_'  + rowid).show();
+                $('.disable_select_2_'  + rowid).show();
+                $('.2_' + rowid +'_checkbox').prop('checked', false);
+                $('.1_' + rowid + '_checkbox').prop('checked', false);
+                $('.2_' + rowid + '_checkbox').hide();
+                $('.1_' + rowid + '_checkbox').hide();
+                $('.' + columid + '_' + rowid).hide();
+    //            3_2
+         //   $('#mode' + Player_id).show();
+           // $('#Select' + Player_id).hide();
+
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+            removemapdata(rowid, @ViewBag.subscriptionlist[0].PrizePackageAmount, 2);
+            removemapdata(rowid, @ViewBag.subscriptionlist[0].LivePackageAmount, 1);
+            addmapdata(rowid, package_amount, columid);
+        }
+        if ($('.1_' + rowid + '_checkbox').is(':checked') && $('.2_' + rowid + '_checkbox').is(':checked')) {
+
+            $('.2_' + rowid + '_checkbox').prop('checked', false);
+            $('.1_' + rowid + '_checkbox').prop('checked', false);
+            $('.2_' + rowid + '_checkbox').hide();
+            $('.1_' + rowid + '_checkbox').hide();
+            $('.disable_select_1_' + rowid).show();
+            $('.disable_select_2_' + rowid).show();
+
+            $('.3_' + rowid + '_checkbox').prop('checked', true);
+            $('.3_' + rowid + '_checkbox').show();
+      //      console.log(Player_id);
+            $('.1_' + rowid).hide();
+            $('.2_' + rowid).hide();
+            $('.3_' + rowid).hide();
+            $('.' + columid + '_' + rowid).hide();
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 1);
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 2);
+            addmapdata(rowid, @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+             }
+                //   $('.' + slectclassname).hide();
+                  // addmapdata(rowid, package_amount, columid);
+
+                }
+            }
+            else {
+                var cb = $(this);
+                if (!cb.is(':disabled')) {
+                    console.log(rowid);
+                    this.checked = false;
+                    cb.hide();
+                     $('.' + classname).hide();
+                    if (columid == 3) {
+
+                        $('.1_' + rowid).show();
+                        $('.2_' + rowid).show();
+                        $('.disable_select_1_' + rowid).hide();
+                        $('.disable_select_2_' + rowid).hide();
+                        $('.2_' + rowid + '_checkbox').prop('checked', false);
+                        $('.1_' + rowid + '_checkbox').prop('checked', false);
+                       $('.2_' + rowid + '_checkbox').hide();
+                        $('.1_' + rowid + '_checkbox').hide();
+                    }
+                    $('.' + slectclassname).show();
+                    removemapdata(rowid, package_amount, columid);
+                }
+            }
+
+            rowid++
+        });
+         console.log(map);
+        if (classname == 'thirdplan') {
+            $('#checkedtotalthirdplan').html($('.' + classname + ':checked').not(':disabled').length);
+        } else if (classname == 'secondplan') {
+            $('#checkedtotalsecondplan').html($('.' + classname + ':checked').not(':disabled').length);
+        } else if (classname == 'fistplan') {
+            $('#checkedtotalfirstplan').html($('.' + classname + ':checked').not(':disabled').length);
+        }
+        var totalFirstPlan = $("#checkedtotalfirstplan").text();
+        var totalsecondPlan = $("#checkedtotalsecondplan").text();
+        var totalThirdPlan = $("#checkedtotalthirdplan").text();
+        var allplantotal = Number(totalFirstPlan) + Number(totalsecondPlan) + Number(totalThirdPlan);
+        $('#checkedttotalallplan').html(allplantotal);
+        discountcalculation(allplantotal)
+        if (Checkallpe) {
+            Checkallpe = false;
+        } else {
+            Checkallpe = true;
+        }
+    }*@
+
+
+    function show(Player_id, package_amount, rowid, columid, UserId) {
+                    if ($('#selectcurrancy').val() == 'USD') {
+                        if (columid == 1) {
+                            package_amount =  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD;
+                         } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount_USD;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount_USD;
+                            }
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        if (columid == 1) {
+                            package_amount =@ViewBag.subscriptionlist[0].PrizePackageAmount;
+                        } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount;
+                         }
+
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                        if (columid == 1) {
+                            package_amount =@ViewBag.subscriptionlist[0].PrizePackageAmount_GBP;
+                        } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount_GBP;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount_GBP;
+                            }
+                    }
+
+        $('#mode' + Player_id).prop('checked', true);
+        //    $("#mode" + Player_id).prop("checked", !$("#mode" + Player_id).prop("checked"));
+        if ($('.1_' + rowid + '_checkbox').is(':checked')) {
+            $('#mode' + Player_id).show();
+            $('#Select' + Player_id).hide();
+            addmapdata(rowid, package_amount, columid, UserId);
+        }
+        if ($('.2_' + rowid + '_checkbox').is(':checked')) {
+            $('#mode' + Player_id).show();
+            $('#Select' + Player_id).hide();
+            addmapdata(rowid, package_amount, columid, UserId);
+        }
+        if ($('.3_' + rowid + '_checkbox').is(':checked')) {
+            $('.1_' + rowid).hide();
+            $('.2_' + rowid).hide();
+            $('.disable_select_1_'  + rowid).show();
+            $('.disable_select_2_'  + rowid).show();
+            $('.2_' + rowid +'_checkbox').prop('checked', false);
+            $('.1_' + rowid + '_checkbox').prop('checked', false);
+            $('.2_' + rowid + '_checkbox').hide();
+            $('.1_' + rowid + '_checkbox').hide();
+            $('#mode' + Player_id).show();
+            $('#Select' + Player_id).hide();
+
+            @*removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+            removemapdata(rowid, @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+            removemapdata(rowid, @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);*@
+            if ($('#selectcurrancy').val() == 'USD') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                    }
+            addmapdata(rowid, package_amount, columid, UserId);
+        }
+        if ($('.1_' + rowid + '_checkbox').is(':checked') && $('.2_' + rowid + '_checkbox').is(':checked')) {
+
+            $('.2_' + rowid + '_checkbox').prop('checked', false);
+            $('.1_' + rowid + '_checkbox').prop('checked', false);
+            $('.2_' + rowid + '_checkbox').hide();
+            $('.1_' + rowid + '_checkbox').hide();
+            $('.disable_select_1_' + rowid).show();
+            $('.disable_select_2_' + rowid).show();
+
+            $('.3_' + rowid + '_checkbox').prop('checked', true);
+            $('.3_' + rowid + '_checkbox').show();
+      //      console.log(Player_id);
+            $('.1_' + rowid).hide();
+            $('.2_' + rowid).hide();
+            $('.3_' + rowid).hide();
+            @*removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+            removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);*@
+             if ($('#selectcurrancy').val() == 'USD') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_USD, 2);
+                         addmapdata(rowid, @ViewBag.subscriptionlist[0].FullPackageAmount_USD, 3, UserId);
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount, 1);
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount, 2);
+                         addmapdata(rowid, @ViewBag.subscriptionlist[0].FullPackageAmount, 3, UserId);
+
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                         removemapdata(rowid,  @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].PrizePackageAmount_GBP, 1);
+                        removemapdata(rowid,  @ViewBag.subscriptionlist[0].LivePackageAmount_GBP, 2);
+                          addmapdata(rowid, @ViewBag.subscriptionlist[0].FullPackageAmount_GBP, 3, UserId);
+                    }
+
+            @*addmapdata(rowid, @ViewBag.subscriptionlist[0].FullPackageAmount, 3, UserId);*@
+        }
+
+
+        //set total lenght count span
+        $('#checkedtotalfirstplan').html($('.fistplan:checked').not(':disabled').length);
+        $('#checkedtotalsecondplan').html($('.secondplan:checked').not(':disabled').length);
+        $('#checkedtotalthirdplan').html($('.thirdplan:checked').not(':disabled').length);
+
+        //get all span value
+        var totalFirstPlan = $("#checkedtotalfirstplan").text();
+        var totalsecondPlan = $("#checkedtotalsecondplan").text();
+        var totalThirdPlan = $("#checkedtotalthirdplan").text();
+        var allplantotal = Number(totalFirstPlan) + Number(totalsecondPlan) + Number(totalThirdPlan);
+        $('#checkedttotalallplan').html(allplantotal);
+
+        discountcalculation(allplantotal)
+        console.log(map);
+
+    }
+    function change(Player_id, package_amount, rowid, columid) {
+        if ($('#selectcurrancy').val() == 'USD') {
+                        if (columid == 1) {
+                            package_amount =  @ViewBag.subscriptionlist[0].PrizePackageAmount_USD;
+                         } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount_USD;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount_USD;
+                            }
+                    }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                        if (columid == 1) {
+                            package_amount =@ViewBag.subscriptionlist[0].PrizePackageAmount;
+                        } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount;
+                         }
+
+                    } else if ($('#selectcurrancy').val() == 'GBP') {
+                        if (columid == 1) {
+                            package_amount =@ViewBag.subscriptionlist[0].PrizePackageAmount_GBP;
+                        } else if (columid == 2) {
+                            package_amount=@ViewBag.subscriptionlist[0].LivePackageAmount_GBP;
+                        } else if (columid == 3) {
+                            package_amount =@ViewBag.subscriptionlist[0].FullPackageAmount_GBP;
+                            }
+                    }
+        $('#mode' + Player_id).prop('checked', false);
+        $('#Select' + Player_id).show();
+        $('#mode' + Player_id).hide();
+
+        if (columid == 3) {
+            if ($('#selectcurrancy').val() == 'USD' || $('#selectcurrancy').val() == 'GBP') {
+                $('.disable_select_1_' + rowid).show();
+                $('.1_' + rowid).hide();
+                $('.disable_select_2_' + rowid).hide();
+            } else {
+                $('.disable_select_1_' + rowid).hide();
+                $('.disable_select_2_' + rowid).hide();
+            }
+          //  $('.1_' + rowid).show();
+            $('.2_' + rowid).show();
+         //   $('.disable_select_1_' + rowid).hide();
+           // $('.disable_select_2_' + rowid).hide();
+            $('.2_' + rowid + '_checkbox').prop('checked', false);
+            $('.1_' + rowid + '_checkbox').prop('checked', false);
+            $('.2_' + rowid + '_checkbox').hide();
+            $('.1_' + rowid + '_checkbox').hide();
+        }
+
+        $('#checkedtotalfirstplan').html($('.fistplan:checked').not(':disabled').length);
+        $('#checkedtotalsecondplan').html($('.secondplan:checked').not(':disabled').length);
+        $('#checkedtotalthirdplan').html($('.thirdplan:checked').not(':disabled').length);
+        var Alltotal = $("#checkedttotalallplan").text();
+        var removeonetotal = Number(Alltotal) - 1
+        $('#checkedttotalallplan').html(removeonetotal);
+        removemapdata(rowid, package_amount, columid);
+        discountcalculation(removeonetotal)
+        console.log(map);
+    }
+    function discountcalculation(allplantotal) {
+        var finaltotalall = $("#finaltotalall").text();
+        $('#afterdiscounttotal').html(finaltotalall);
+        var DiscountRate1 = $("#DiscountRate1").text();
+        var DiscountRate2 = $("#DiscountRate2").text();
+        var DiscountRate3 = $("#DiscountRate3").text();
+        if (allplantotal > 20) {
+            var totalValue = finaltotalall * ((100 - DiscountRate3) / 100)
+            $('#afterdiscounttotal').html((totalValue).toFixed(2));
+        } else if (allplantotal > 10) {
+            var totalValue = finaltotalall * ((100 - DiscountRate2) / 100)
+            $('#afterdiscounttotal').html((totalValue).toFixed(2));
+        } else if (allplantotal >= 5) {
+            var totalValue = finaltotalall * ((100 - DiscountRate1) / 100)
+            $('#afterdiscounttotal').html((totalValue).toFixed(2));
+        }
+
+    }
+    function addmapdata(rowid, package_amount, columid,UserId) {
+        let obj = {
+            UserId: UserId,
+            colum: columid,
+            amount: package_amount
+        }
+        var cb = [];
+        if (map.has(rowid)) {
+            var check = map.get(rowid);
+
+            check.push(obj);
+            map.set(rowid, check);
+        } else {
+            cb.push(obj);
+            map.set(rowid, cb);
+        }
+        //total
+        var gettotal = map.get(rowid);
+        var total = 0;
+        gettotal.forEach(function (item, index) {
+            total = total + item.amount;
+        });
+        $('#rowcheckedtotalamount' + rowid).html(total);
+
+        //final Total
+        var finaltotal = 0;
+        map.forEach((values, keys) => {
+            values.forEach(function (item, index) {
+
+                finaltotal = finaltotal + item.amount;
+                //   console.log(finaltotal);
+            })
+        })
+        $('#finaltotalall').html((finaltotal).toFixed(2));
+
+    }
+    function removemapdata(rowid, package_amount, columid) {
+        if (map.has(rowid)) {
+            var check = map.get(rowid);
+            var newarray = []
+            check.forEach(function (item, index) {
+                if (item.colum != columid) {
+                    newarray.push(item);
+                }
+            });
+            map.set(rowid, newarray);
+            //total
+            var gettotal = map.get(rowid);
+            var total = 0;
+            gettotal.forEach(function (item, index) {
+                total = total + item.amount;
+            });
+            $('#rowcheckedtotalamount' + rowid).html(total);
+
+            //final Total
+            var finaltotal = 0;
+            map.forEach((values, keys) => {
+                values.forEach(function (item, index) {
+
+                    finaltotal = finaltotal + item.amount;
+                    //  console.log(finaltotal);
+                })
+            })
+            $('#finaltotalall').html(finaltotal);
+        }
+    }
+   // mapp = new Map(JSON.parse(localStorage.myMap));
+    //console.log(mapp);
+    function payment() {
+
+      //  console.log("data", newarray);
+        var UserName = '@ViewBag.UserName';
+        var Email = '@ViewBag.Email';
+        var PhoneNumber = '@ViewBag.PhoneNumber';
+        //  return;
+
+        //if (tire == 'SubTier1') {
+        //    amount = document.getElementById('amountSubTier1').value;
+        //    description = 'PRIZE ELIGIBILITY Package | INR 99 Gives you eligibility to win prizes in both Tournament Mode and Match Contests.Applicable for IPL 2021 only.Excludes Live Scoring'
+        //} else if (tire == 'SubTier2') {
+        //    amount = document.getElementById('amountSubTier2').value;
+        //    description = 'LIVE SCORE Package | INR 99 Gives you access to Live Score feature in both Tournament Mode and Match Contests.Applicable for IPL 2021 only.Prize Eligibility Excluded.'
+        //} else if (tire == 'SubTier3'){
+        //    amount = document.getElementById('amountSubTier3').value;
+        //    description = 'PRIZE ELIGIBILITY and LIVE SCORE Package | INR 149 Gives you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests. Applicable for IPL 2021 only.'
+        //}
+                     var currency = '';
+                     if ($('#selectcurrancy').val() == 'USD') {
+                         currency = 'USD';
+                        }
+                    else if ($('#selectcurrancy').val() == 'INR') {
+                         currency = 'INR';
+                     }
+                     else if ($('#selectcurrancy').val() == 'GBP') {
+                         currency = 'GBP';
+                        }
+        amount = $("#afterdiscounttotal").text();
+        if (amount == null || amount == 0) {
+            toastr_warning("please select  Subscription");
+            return;
+        }
+        description = 'League Payment'
+
+        var uurl = '/League/CreateOrder';
+        var pData = { UserName: UserName, Email: Email, PhoneNumber: PhoneNumber, amount: amount, currency: currency};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                  console.log(data);
+              //    return;
+                //   console.log(data.razorpayKey);
+                var FinalData = []
+                var afterdiscounttotal = $("#afterdiscounttotal").text();
+
+                map.forEach((values, keys) => {
+                    if (values != null) {
+                        values.forEach(function (item, index) {
+                            let obj = {
+                                UserId: item.UserId,
+                                SubscriptionType: Number(item.colum),
+                                amount: Number(item.amount),
+                                Discounttotal: Number(afterdiscounttotal),
+                                receipt: data.receipt,
+                                LeagueId: @ViewBag.LID,
+                                LoggedInUserId:@Session["UserId"].ToString(),
+                                Currency:currency,
+                            }
+                            FinalData.push(obj);
+
+                        })
+                    }
+                })
+
+               // localStorage.setItem("storagefinal", JSON.stringify(FinalData));
+              //  var Finalstorage = JSON.parse(localStorage.getItem("storagefinal"));
+               // console.log("data", Finalstorage);
+              //  return;
+                var options = {
+                    "key": data.razorpayKey, // Enter the Key ID generated from the Dashboard
+                    "amount": data.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": data.currency,
+                    "name": 'fanzania',
+                    "description": description,
+                    // "image": "https://example.com/your_logo", // You can give your logo url
+                    "order_id": data.orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response) {
+                       // alert(response);
+                     //   console.log(response);
+                        // After payment successfully made response will come here
+                        // Set the data in hidden form
+                        //  updateSubscriptionDetails(tire, data.amount, data.receipt);
+                        document.getElementById('rzp_paymentid').value = response.razorpay_payment_id;
+                        document.getElementById('rzp_orderid').value = response.razorpay_order_id;
+                        localStorage.setItem("storagefinal", JSON.stringify(FinalData));
+                        var Finalstorage = JSON.parse(localStorage.getItem("storagefinal"));
+                        console.log("data", Finalstorage);
+                        // // Let's submit the form automatically
+                        document.getElementById('rzp-paymentresponse').click();
+                    },
+                    "prefill": {
+                        "name": UserName,
+                        "email": Email,
+                        "contact": PhoneNumber
+                    },
+                    "notes": {
+                        //  "address": "
+                    }
+                    // "theme": {
+                    //   "color": "#F37254"
+                    //  }
+
+                };
+                //  console.log(options);
+                var propay = new Razorpay(options);
+                propay.open();
+                var rzp1 = new Razorpay(options);
+
+
+
+            },
+            error: function (req, status, error) {
+                $('#spinnerContainer').hide();
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+
+</script>
+
+@using (Html.BeginForm("Complete", "League"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.Hidden("rzp_paymentid")
+    @Html.Hidden("rzp_orderid")
+    <button type="submit" id="rzp-paymentresponse" class="btn btn-primary invisible" style="display:none" hidden>Submit</button>
+}
+
+

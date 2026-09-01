@@ -1,0 +1,383 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Add New Team</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label1">Game Type</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlGameType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label for="txt_TournamentId" class="control-label">Select Tournament</label>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="ddlTourList" class="form-control1"></select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-3">
+                                <label  class="control-label">Add New Team</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" id="default_template"><a href="/Downloader.ashx?FilePath=Template/Team_Template.xlsx">Download Template</a></label>
+                            </div>
+                            <div class="col-md-3">
+                                <input class="form-control1" type="file" id="FileUpload" onchange="ValidateFileType(this);" />
+                            </div>
+                            <div>
+                                <button id="btnSaveMatch" type="button" class="btn btn-info" onclick="SaveTeam();">Save</button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="inner-wrap" id="divpoint">
+                                <div class="col-md-12 text-center">
+
+                                    <div class="pointTable">
+                                        <table id="PreSaveTeamgrid"></table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <h3 class="inner-tittle">Saved Team List</h3>
+                <div class="grid-1">
+                    <div class="row">
+                        <div class="inner-wrap" id="divpoint">
+                            <div class="col-md-12 text-center">
+                                <div class="pointTable">
+                                    <table id="SaveTeamgrid"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        
+            var tid = sessionStorage.getItem("TeamTournamentId");
+            if (sessionStorage.getItem("Temp_TeamGameType") != null) {
+                $('#ddlGameType').val(sessionStorage.getItem("Temp_TeamGameType"));
+                if (tid != null) {
+                    if ($('#ddlGameType').val() == 'D') {
+                        LoadDailyTuounament();
+                    } else {
+                        LoadTournament();
+                    }
+                    $('#ddlTourList').val(tid);
+                    ShowSaveTeamGrid(tid);
+                }else{
+                    LoadTournament();
+                }
+            }else{
+                    LoadTournament();
+            }
+    });
+    function LoadDailyTuounament() {
+        $('#ddlTourList').empty();
+        $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+        $("#ddlTourList").append($("<option></option>").val('-99').html('Daily Match T20'));
+        $("#ddlTourList").append($("<option></option>").val('-100').html('Daily Match ODI'));
+    }
+    $("#ddlGameType").change(function () {
+        sessionStorage.setItem("Temp_TeamGameType", $('#ddlGameType').val());
+        if ($('#ddlGameType').val() == 'D') {
+            LoadDailyTuounament();
+        } else {
+            LoadTournament();
+        }
+    });
+
+    function LoadTournament() {
+        var pId = $('#pId').val();
+        var pData = { TournamentId: "0" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminTeam/GetAllTournament',
+            type: 'GET',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                $('#ddlTourList').empty();
+                $('#ddlTourList').append($("<option></option>").val('').html("Select Tournament"));
+                $.each(data, function (index, value) {
+                    $('#ddlTourList').append($("<option></option>").val(value.TournamentId).html(value.TournamentName));
+                });
+
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlTourList").change(function () {
+        var Tid = $('#ddlTourList').val();
+        
+        ShowSaveTeamGrid(Tid);
+    });
+
+    function ValidateFileType(file) {
+        
+        var ext = $(file).val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['xls', 'xlsx']) == -1) {
+            alert('Please select only excel file!');
+            // $(file).replaceWith($(file).clone());
+            return false;
+        }
+        else {
+            //console.log('first step');
+            $("#PreSaveMatchgrid").css("display", "table");
+            PreSaveTeam();
+        }
+    }
+
+
+    function PreSaveTeam() {
+        
+        //$('#divMsg').html("");
+        if ($('#FileUpload').val() == "") {
+            alert('Please select users excel file!');
+            jQuery('#FileUpload').trigger('click');
+            return;
+        }
+        var pData = new FormData();
+        var files = $("#FileUpload").get(0).files;
+        //$('#spinnerContainer').show();
+        pData.append("pFile", files[0]);
+        var res = $.ajax({
+            url: '/AdminTeam/ShowTeam',
+            type: 'POST',
+            data: pData,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                
+                if (data.result == "T") {
+                    
+                    PreSaveTeamGrid(data.fileName);
+                    //$('#spinnerContainer').hide();
+                }
+                else {
+                    //alert('Unable to show. Try again!');
+                    //$('#divMsg').html(data.resMsg);
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    var PreSaveTeamgrid
+    function PreSaveTeamGrid(fileName) {
+        $("#PreSaveTeamgrid").css("display", "inline-table");
+        var count = 0;
+        if (PreSaveTeamgrid != null)
+            count = PreSaveTeamgrid.count();
+        if (count <= 0) {
+            PreSaveTeamgrid = $("#PreSaveTeamgrid").grid({
+                dataSource: { url: "/AdminTeam/PreSaveTeamList", data: { FileName: fileName } },
+                notFoundText: "no team found!",
+                uiLibrary: "bootstrap",
+                columns: [
+                    { field: "ParticipationTeamName", title: "Team Name" },
+                    { field: "TeamShortName", title: "Short Name" },
+                    { field: "TeamDescription", title: "Description", align: "center" }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+        }
+        else {
+            PreSaveTeamgrid.reload({ page: 1, FileName: fileName });
+        }
+
+    }
+
+    var SaveTeamgrid
+    function ShowSaveTeamGrid(Tid) {
+        
+        var count = 0;
+        if (SaveTeamgrid != null)
+            count = SaveTeamgrid.count();
+        if (count <= 0) {
+            SaveTeamgrid = $("#SaveTeamgrid").grid({
+                dataSource: { url: "/AdminTeam/GetSaveTeam", data: { TournamentId: Tid } },
+                notFoundText: "no team found!",
+                uiLibrary: "bootstrap",
+                columns: [
+                    { field: "ParticipationTeamName", title: "Team Name", width: "30%" },
+                    { field: "TeamKey", title: "TeamKey", width: "30%" },
+                    { field: "TeamShortName",align: "center", title: "Short Name", width: "10%" },
+                    { field: "TeamDescription", title: "Description", align: "center", width: "30%" },
+                    { field: "", title: "", align: "center", cssClass: "edit", width: "10%" },
+                    { field: "", title: "", align: "center", cssClass: "delete", width: "10%" },    
+                    { field: "", title: "", align: "center", cssClass: "reset", width: "10%" }
+
+                ]//,
+                //pager: { enable: true, limit: 10, sizes: [10, 20, 30, 40] }
+            });
+            SaveTeamgrid.on("rowDataBound", function (e, $row, id, record) {
+
+                $row.find('.edit').append('<a href="#" title="Edit Team" ><img src="/Assets/Icon/editicon.png" alt="" onclick="AddEditRedirection(\'' + record.ParticipationTeamId + '\',\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+                $row.find('.delete').append('<a href="#" title="Delete Team" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteTeam(\'' + record.ParticipationTeamId + '\',\'' + Tid + '\')"; width="17" height="17" /></a>');
+                if ($('#ddlGameType').val() == "D") {
+                    $row.find('.reset').append('<a href="#" title="Reset Team Point" ><img src="/Assets/Icon/reset.png" alt="" onclick="ResetPoints(\'' + record.ParticipationTeamId + '\',\'' + Tid + '\')"; width="17" height="17" /></a>');
+                }
+            });
+        }
+        else {
+            SaveTeamgrid.reload({ page: 1, TournamentId: Tid });
+        }
+
+    }
+
+    function SaveTeam() {
+        if (PreSaveTeamgrid == null || PreSaveTeamgrid.count() <= 0) {
+            alert('Please upload some data!');
+            return;
+        }
+        
+        var Tid = $('#ddlTourList').val();
+        if (Tid == '') {
+            alert('Please select a tournament!');
+            return;
+        }
+        var pData = {
+            TournamentId: Tid
+        }
+        var jsonData = JSON.stringify(pData);
+        /// $('#spinnerContainer').show();
+        $.ajax({
+            url: '/AdminTeam/SaveTeam',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    $("#PreSaveTeamgrid").css("display", "none");
+                    $('#FileUpload').val('');
+                        alert('Data uploaded successfuly!');
+                    //location.href = '/AdminTour/Index';
+                }
+                else {
+                    alert(data.Error);
+                }
+                var Tid = $('#ddlTourList').val();
+                SaveTeamgrid.reload({ page: 1, TournamentId: Tid });
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+            }
+        })
+
+    }
+
+    function AddEditRedirection(ptid, Tid) {
+        
+        location.href = '/AdminTeam/TeamEdit?ptid=' + ptid + '&tid=' + Tid;
+    }
+
+    function DeleteTeam(TeamId, Tid) {
+        //$('#spinnerContainer').show();
+
+        var uurl = '/AdminTeam/DeleteTeam';
+        var pData = { ParticipationTeamId: TeamId, TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    SaveTeamgrid.reload({ page: 1, TournamentId: Tid });
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete team!");
+                return false;
+            }
+        });
+
+    }
+
+    function ResetPoints(ptid, Tid) {
+        if (confirm('Are you sure you want to reset?')) {
+            
+            var pData = { TournamentId: Tid, ParticipationTeamId: ptid };
+            var jsonData = JSON.stringify(pData);
+            $.ajax({
+                url: '/AdminTeam/ResetPlayerPoints',
+                type: 'POST',
+                data: jsonData,
+                dataType: 'json',
+                async: false,
+                // cache: false,
+                contentType: "application/json; charset=utf-8",
+
+                success: function (data) {
+
+                    if (data.status == "success") {
+
+                        alert('Data updated successfuly!');
+                    }
+                    else {
+                        alert(data.statusMessage);
+                    }
+                },
+                error: function (req, status, error) {
+                    var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                    alert(JSON.stringify(req));
+                }
+            })
+        } else {
+
+        }
+    }
+
+</script>
+

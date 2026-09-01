@@ -1,0 +1,323 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+}
+<input type="hidden" id="MatchId" />
+<input type="hidden" id="MatchDate" />
+<input type="hidden" id="MatchVenue" />
+<input type="hidden" id="T1" />
+<input type="hidden" id="T2" />
+<input type="hidden" id="T1Img" />
+<input type="hidden" id="T2Img" />
+<input type="hidden" id="T1Score" />
+<input type="hidden" id="T2Score" />
+
+
+<section id="matchlist" class="inner-wrap">
+    <div class="container">
+        <div class="team-heading">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="pull-left daily">
+                        <div class="mat-d2">
+                            <h5 id="rank"></h5>
+                            <h5>Rank</h5>
+                        </div>
+                        <div class="mat-d3">
+                            <h5 id="tPoints"></h5>
+                            <h5>Total Points</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="carousel slide" data-interval="false" data-wrap="false" id="CarouselLiveMatch">
+                        <div id="MatchDetails" class="carousel-inner">
+                        </div>
+                        <a id="CarouselLiveMatch_left" class="left carousel-control" href="#CarouselLiveMatch" data-slide="prev" onclick="OnChangeMatchSlide('prev');"><i class="fa fa-caret-left"></i></a>
+                        <a id="CarouselLiveMatch_right" class="right carousel-control" href="#CarouselLiveMatch" data-slide="next" onclick="OnChangeMatchSlide('next');"><i class="fa fa-caret-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <a herf="#" class="btn a_liveScore" onclick="OpenScore();">
+                        <p id="t1s"></p>
+                        <p id="t2s"></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tableList">
+    <div class="container">
+        <div class="livematch-tab">
+            <ul id="tabMatch" class="nav nav-tabs">
+                <li class="active col-xs-6"><a data-toggle="tab" href="#menu1" onclick="LiveScoreClick()" ;>MY POINTS</a></li>
+                <li class="col-xs-6"><a data-toggle="tab" href="#menu2" onclick="TrackLeagueClick()" ;>MY STANDINGS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="" id="divTeams">
+                            <div class="col-md-12 text-center">
+                                <div class="col-md-6">
+                                    <div class="table-responsive liveTable"><table id="team1"></table></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="table-responsive liveTable"><table id="team2"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <div class="row livematch-innertab">
+                        @*<div class="wrapper">
+                            <ul class="nav nav-tabs list" id="UserLeagueBox"></ul>
+                        </div>*@
+                        <div class="col-md-6 text-center" id="divLeagueuser">
+                            <div class="table-responsive liveTable"><table id="gridLiveleagueUser"></table></div>
+                        </div>
+                        <div class="col-md-6 text-center" id="divLiveScore">
+                            <div class="table-responsive liveTable"><table id="gridLiveScore"></table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="ModalScore" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-2 pull-left">
+                        <button type="button" class="back-m text-left" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="col-xs-7 text-center">
+                        <div class="c-hd-mid">
+                            <h5 class="modal-title text-center" id="exampleModalLongTitle">
+                                <img src="/Assets/Image/fanzania-icon-o.png" />
+
+                                <span id="matchBtw"></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 text-right">
+                        <span id="mDate"></span>
+                        <span id="mVenue"></span>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <img id="T1_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-6 mid-text b-ryt text-right">
+                                <p class="text-orange" id="Team1Score"></p>
+                                <span id="Team1over"></span>
+                            </div>
+                            <div class="col-xs-6 mid-text text-left">
+                                <p class="text-orange" id="Team2Score">To Bat</p>
+                                <span id="Team2over">...</span>
+                            </div>
+                            <div class="col-md-12 mid-text">
+                                <small class="text-orange" id="matchHeadline"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <img id="T2_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+                    </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingOne">
+                                    <div class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                            <h3 id="team1tab"></h3>
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                       
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">
+                                    <div class="card-block">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-desc">
+                                                        BATSMAN
+                                                    </th>
+                                                    <th>
+                                                        R
+                                                    </th>
+                                                    <th>
+                                                        B
+                                                    </th>
+                                                    <th>
+                                                        4s
+                                                    </th>
+                                                    <th>
+                                                        6s
+                                                    </th>
+                                                    <th>
+                                                        SR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="score_batsman_inng1">
+
+                                            </tbody>
+                                        </table>
+                                        <hr/>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-desc">
+                                                        BOWLER
+                                                    </th>
+                                                    <th>
+                                                        O
+                                                    </th>
+                                                    <th>
+                                                        M
+                                                    </th>
+                                                    <th>
+                                                        R
+                                                    </th>
+                                                    <th>
+                                                        W
+                                                    </th>
+                                                    <th>
+                                                        ER
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="score_bowler_inng1"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" role="tab" id="headingTwo">
+                                    <div class="mb-0">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                            <h3 id="team2tab"></h3>
+                                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                    <div class="card-block">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-desc">
+                                                        BATSMAN
+                                                    </th>
+                                                    <th>
+                                                        R
+                                                    </th>
+                                                    <th>
+                                                        B
+                                                    </th>
+                                                    <th>
+                                                        4s
+                                                    </th>
+                                                    <th>
+                                                        6s
+                                                    </th>
+                                                    <th>
+                                                        SR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="score_batsman_inng2"></tbody>
+                                        </table>
+                                        <hr />
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-desc">
+                                                        BOWLER
+                                                    </th>
+                                                    <th>
+                                                        O
+                                                    </th>
+                                                    <th>
+                                                        M
+                                                    </th>
+                                                    <th>
+                                                        R
+                                                    </th>
+                                                    <th>
+                                                        W
+                                                    </th>
+                                                    <th>
+                                                        ER
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="score_bowler_inng2"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section id="blankMsg" class="inner-wrap" styly="display:none;">
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="text-center">
+                            <strong>
+                                Stay tuned. We will be back with live scoring once your next match starts or check your subscription package.
+                            </strong>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<input type="hidden" id="hdnTourCnt" />
+
+@Html.Hidden("MatchId")
+@Html.Hidden("TournamemtId")
+@Html.Hidden("Team1")
+@Html.Hidden("Team2")
+@Html.Hidden("UserTeamId")
+@Html.Hidden("UserId")
+<script>
+    $(document).ready(function () {
+        Session_usedId = '@Session["UserId"].ToString()';
+        MatchDetails();
+    });
+    var Session_usedId = '';
+</script>
+<script src="~/Areas/DailyGame/CustomScript/DailyLiveScore.js"></script>
+

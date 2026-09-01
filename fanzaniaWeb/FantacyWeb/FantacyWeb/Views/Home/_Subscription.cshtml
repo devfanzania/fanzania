@@ -1,0 +1,482 @@
+﻿<style>
+    .form-control1 {
+        height: 50px;
+        border: 1px solid #e95354;
+        border-radius: 0;
+        background-color: #fff;
+        border-radius: 10px;
+        height: 36px;
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+    }
+</style>
+<div class="row commanrow">
+    <div class="col-md-2 leftpanel">
+        <div class="firrstcolum">
+            <p class="hedingleft"> fanzania</p>
+
+            <p class="hedingleft">is</p>
+
+            <p class="hedingleft">still</p>
+
+            <p class="hedingleft free">  FREE</p>
+
+            <p class="hedingleft "> to play.</p>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="firstsection" style="padding-top: 30px;">
+            To subscribe, please login, choose your payment currency INR/GBP/USD and pick your preferred plan. For bulk subscriptions for your league, please go to your league page and use the 'League Subscription' button.
+            @*For*@
+            @* <output id="details1"></output>, we have introduced add-on subscription plans for premium features so you can have more fun at nominal prices*@
+        </div>
+        @*<div class="firstsection">To subscribe, please login and choose your preferred plan.
+        </div>*@
+        <div class="row commanrow">
+
+            <div class="coll">
+                &nbsp
+            </div>
+            <div class="coll">
+                &nbsp
+            </div>
+            <div class="coll">
+                &nbsp
+            </div>
+            <div class="coll">
+                &nbsp
+            </div>
+            <div class="coll">
+                <!----  <div class="firstsection mostpopular"> <p> <span class="fa fa-thumbs-o-up"></span> MOST POPULAR</p> </div> -->
+            </div>
+        </div>
+        <div class="row hedingbaground commanrow onlyMobile">
+            <div class="row hedingbaground commanrow onlyMobile">
+                <div class="col-md-2 col-xs-hidden" style="
+    background-color: #fff;
+    width: 20%;
+">
+                    <div>
+                        <div class="hedingtitle">Select Currency   </div>
+
+                        <select id="selectcurrancy" class="form-control1" style="font-weight: 600;width: 66%;height: 23px!important;padding: 2px 10px!important;font-size: 14px!important;">
+                            <option value="INR">  INR</option>
+                            <option value="GBP">GBP </option>
+                            <option value="USD"> USD</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="grayDiv">
+                    <div class="sameSize1">
+                        <div class="hedingtitle">BASIC </div>
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">PRIZE ELIGIBILITY </div>
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">  LIVE SCORE </div>
+
+                    </div>
+                    <div class="sameSize1">
+                        <div class="hedingtitle">PRIZE ELIGIBILITY and LIVE SCORE  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr" style="margin-top: 0px;">
+        <div class="row commanrow">
+            <div class="col-md-1 col-xs-4" style="padding-top: 10px; padding-bottom: 10px;padding-left: 0px;">
+                <div class="mostpopular"> Coverage</div>
+            </div>
+            <div class="col-md-11 col-xs-8 covrage" style="padding-top: 10px; padding-bottom: 10px;">
+                <div class="pacakgeRes">All packages relate to <output id="details"></output></div>
+                @* <div class="pacakgeRes">(Tournament Mode And Match  Contests)</div>*@
+            </div>
+
+        </div>
+        <!--<hr class="hr">-->
+        <!--<div class="table-responsive">
+            <table class="table subsciptionTbl">
+      <thead>
+        <tr>
+          <th scope="col"> <span class="mostpopular">Price</span></th>
+          <th scope="col">Free</th>
+          <th scope="col">INR 99</th>
+          <th scope="col">INR 99</th>
+    <th scope="col">INR 149</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">  <span class="mostpopular">What is  included*</span></th>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+          <td>Make your team and play in leagues for free</td>
+        </tr>
+        <tr>
+          <th scope="row">&nbsp;</th>
+          <td>&nbsp;</td>
+          <td>Give you eligibility to win prizes in both Tournament Mode and Match Contests</td>
+          <td>Give you access to live score fetaure in both Tournament Mode and Match Contests</td>
+           <td>Give you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests</td>
+        </tr>
+        <tr>
+          <th scope="row">What is not included*</th>
+          <td>Excludes Live Score and Prize Eligibility</td>
+          <td>Excludes Live Score</td>
+          <td>Excludes prize Eligibility</td>
+          <td>&nbsp;</td>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>-->
+        <hr class="hr">
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular "> Price</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTierFree"></div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier1"> </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier2">  </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection covrage1" id="SubTier3">   </div>
+            </div>
+
+        </div>
+        <hr class="hr">
+        <div class="row commanrow onlyMobile mainContent">
+            <div class="coll">
+                <div class="mostpopular">  Features</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 18px;">Basic Support</span>
+                    <br />
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 18px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 18px;"><del>Live Scoring</del></span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 18px;">
+                        <del>Prize Eligibility</del></spanstyle="font-size:>
+                        <br />
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;"><del>Live Scoring</del></span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Prize Eligibility</span>
+                    <br />
+                </div>
+                @*<div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;">
+                    Gives you eligibility to win prizes in both Tournament Mode and Match Contests
+                </div>*@
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Live Scoring</span>
+                    <br />
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px;color:#e95354;"></i>&nbsp;&nbsp;&nbsp;<span style="font-size: 16px;">
+                        <del>Prize Eligibility</del></spanstyle="font-size:>
+                        <br />
+                </div>
+
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Premium Support</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Standard Features</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Live Scoring</span>
+                    <br />
+                    <i class="fa fa-check" aria-hidden="true" style="font-size: 20px;color: #17a517;"></i>&nbsp;&nbsp;<span style="font-size: 16px;">Prize Eligibility</span>
+                    <br />
+                </div>
+
+            </div>
+            @*<div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection " style="padding-top: 20px;"> Gives you access to live score fetaure in both Tournament Mode and Match Contests </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;"> Gives you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests  </div>
+            </div>*@
+        </div>
+        @*<div class="row commanrow onlyMobile mainContent">
+            <div class="coll">
+                <div class="mostpopular">  Features</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection"><i class="fa fa-times" aria-hidden="true" style="font-size: 14px;"></i><i class="fa fa-check" aria-hidden="true" style="font-size: 14px;color: #17a517;"></i>Make your team and play in leagues for free</div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;">
+                    Gives you eligibility to win prizes in both Tournament Mode and Match Contests
+                </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection " style="padding-top: 20px;"> Gives you access to live score fetaure in both Tournament Mode and Match Contests </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">  Make your team and play in leagues for free </div>
+                <div class="firstsection" style="padding-top: 20px;"> Gives you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests  </div>
+            </div>
+        </div>*@
+
+        <hr class="hr">
+        <!-- <div class="row commanrow">
+        <div class="col-md-2">
+            <div class="mostpopular "> Price</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection covrage1">Free</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection covrage1"> INR 99</div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection covrage1">  INR 99</div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection covrage1">  INR 149</div>
+        </div>
+
+
+    </div>
+    <hr class="hr">
+
+    <div class="row commanrow">
+        <div class="col-md-2">
+            <div class="mostpopular">  What is  included*</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection">Make your team and play in leagues for free</div>
+        </div>
+        <div class="col-md-2">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection" style="padding-top: 20px;">
+               Give you eligibility to win prizes in both Tournament Mode and Match Contests
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection " style="padding-top: 20px;"> Give you access to live score fetaure in both Tournament Mode and Match Contests </div>
+        </div>
+        <div class="col-md-3">
+            <div class="firstsection">  Make your team and play in leagues for free </div>
+            <div class="firstsection" style="padding-top: 20px;"> Give you access to live score fetaure and eligibility to win prizes in both Tournament Mode and Match Contests  </div>
+        </div>
+
+    </div>
+    <hr class="hr">-->
+        @*<div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular"> What is not included* </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes Live Score and Prize Eligibility </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes Live Score  </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">Excludes prize Eligibility   </div>
+            </div>
+            <div class="coll">
+            </div>
+        </div>*@
+        @* <hr class="hr">*@
+
+        <div class="row commanrow">
+
+            <div class="coll">
+                <div class="firstsection">* Only key features shown  </div><br />
+
+            </div>
+            <div class="coll">&nbsp</div>
+            <div class="coll">
+                <div class="firstsection">
+                    <a href="/Account/Index"><button type="submit" class="btn-red-sub">PAY </button></a>
+                </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+                    <a href="/Account/Index"><button type="submit" class="btn-red-sub">PAY </button></a>
+                </div>
+            </div>
+            <div class="coll">
+                <div class="firstsection">
+                    <a href="/Account/Index"><button type="submit" class="btn-red-sub">PAY </button></a>
+                </div>
+            </div>
+        </div>
+        <div class="row commanrow onlyMobile">
+            <div class="coll">
+                <div class="mostpopular"> Our Payment Partners<br /> <img src="~/Assets/logo/razerpaylogo.png" style="width: 50%;background: #fff;" alt=""> </div>
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+
+            </div>
+            <div class="coll">
+            </div>
+        </div>
+        @* <div class="firstsection"> * For bulk subscriptions for your league, please go to your league page and use the 'League Subscription' button.  </div><br />*@
+
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        GetSubscriptionDetails();
+    });
+    let getsubdetails;
+    $("#selectcurrancy").change(function () {
+        console.log("getde",getsubdetails);
+        var outof = '';
+        var outof1 = '';
+        var outof2 = '';
+        var outof3 = '';
+        if ($('#selectcurrancy').val() == 'USD') {
+            
+            outof1 += '<span>USD</span> <span>NA</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>USD</span> <span>' + getsubdetails.LivePackageAmount_USD + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += ' <span>USD</span> <span>NA</span>';
+            $("#SubTier3").html(outof3);
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+            $('#paybtn1').hide();
+            $('#dpaybtn1').show();
+            $('#paybtn3').hide();
+            $('#dpaybtn3').show();
+           
+
+        }
+        else if ($('#selectcurrancy').val() == 'INR') {
+            outof1 += '<span>INR</span> <span>' + getsubdetails.PrizePackageAmount + '</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>INR</span> <span>' + getsubdetails.LivePackageAmount + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += '<span>INR</span> <span>' + getsubdetails.FullPackageAmount + '</span>';
+            $("#SubTier3").html(outof3);
+            $('#paybtn1').show();
+            $('#dpaybtn1').hide();
+            $('#paybtn3').show();
+            $('#dpaybtn3').hide();
+           
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+           
+
+
+        } else if ($('#selectcurrancy').val() == 'GBP') {
+            outof1 += '<span>GBP</span> <span>NA</span>';
+            $("#SubTier1").html(outof1);
+            outof2 += '<span>GBP</span> <span>' + getsubdetails.LivePackageAmount_GBP + '</span>';
+            $("#SubTier2").html(outof2);
+
+            outof3 += '<span>GBP</span> <span>NA</span>';
+            $("#SubTier3").html(outof3);
+            outof += '<span>' + getsubdetails.SubTierFree + '</span>';
+            $("#SubTierFree").html(outof);
+            $('#paybtn1').hide();
+            $('#dpaybtn1').show();
+            $('#paybtn3').hide();
+            $('#dpaybtn3').show();
+            
+
+        }
+    });
+    function GetSubscriptionDetails() {
+  
+          var pData = { UserId: 0};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/Payment/GetSubscriptionDetails',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                getsubdetails = data;
+             //   console.log(data);
+            //   return;
+              //  if (data.status == 'success') {
+                var outof = '';
+                var outof1 = '';
+                var outof2 = '';
+                var outof3 = '';
+                    //$("#SubTier1").text(data.SubTier1)
+                 //   $("#SubTier2").text(data.SubTier2)
+                 //   $("#SubTier3").text(data.SubTier3)
+                //    $('#SubTierFree').html(outof);   
+
+                outof1 += '<span>' + data.SubTier1 + '</span>';
+                $("#SubTier1").html(outof1);
+                outof2 += '<span>' + data.SubTier2 + '</span>';
+                $("#SubTier2").html(outof2);
+
+                outof3 += '<span>' + data.SubTier3 + '</span>';
+                $("#SubTier3").html(outof3);
+                    outof += '<span>'+data.SubTierFree+'</span>';
+                $("#SubTierFree").html(outof);
+                document.getElementById('details').innerHTML = data.Details;
+            //   document.getElementById('details1').innerHTML = data.Details;
+                
+              //  }
+
+            },
+            error: function (req, status, error) {
+                toastr_warning("Opps! something went wrong. Try reload this page.");
+                return false;
+            }
+        });
+    }
+</script>

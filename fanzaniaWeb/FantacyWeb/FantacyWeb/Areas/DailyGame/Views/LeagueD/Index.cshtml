@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+}
+
+@Html.Hidden("TournamentId")
+@Html.Hidden("TournamentStatus")
+<input type="hidden" value="@ViewBag.hdnFlag" id="hdnFlag" />
+<input type="hidden" id="hdnTourCnt" />
+<input type="hidden" id="hdnLeagueCnt" />
+<input type="hidden" id="hdnLeagueId" />
+<input type="hidden" id="hdnMatchCnt" />
+
+<section class="inner-wrap daily-league" id="leagueInfoContainer">
+    <div class="container">
+        <div class="row n-d">
+            <div class="col-md-6">
+                <div class="carousel slide" data-interval="false" data-wrap="false" id="CarouselMatch">
+                    <div id="MatchDetails" class="carousel-inner">
+
+                    </div>
+                    <a id="CarouselMatch_left" class="left carousel-control" href="#CarouselMatch" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+                    <a id="CarouselMatch_right" class="right carousel-control" href="#CarouselMatch" data-slide="next"><i class="fa fa-angle-right"></i></a>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul id="" class="text-center panel-info-final">
+                            <li class="text-uppercase" id="tPoints"></li>
+                            <li class="text-uppercase" id="rank"></li>
+                            <li class="text-uppercase" id="tTeam"></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive leagueTable">
+                            <table class="table league-table text-left" id="Teamgrid"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="nd-right left-skew">
+                    @*<i class="fa fa-gift"></i>*@
+                    <p id="displayMsg"></p>
+                </div>
+                <div id="MyTeamView" class="row">
+
+                    <div class="col-md-12 d-ground3">
+                        <div class="playground-team">
+                            <div class="dGroundPalyers">
+                                <div id="Players">
+                                </div>
+                            </div>
+                            <div class="team-indicates">
+                                <div class="team-indicate">
+                                    <img src="~/Assets/Icon/WicketkeeperGrey.png" />
+                                </div>
+                                <div class="team-indicate2">
+                                    <img src="~/Assets/Icon/BatsmanGrey.png" />
+
+                                </div>
+                                <div class="team-indicate3">
+                                    <img src="~/Assets/Icon/BowlerGrey.png" />
+                                </div>
+                                <div class="team-indicate4">
+                                    <img src="~/Assets/Icon/AllrounderGrey.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="LeagueMsg" styly="display:none;">
+    <div class="container">
+        <div class="dashboard">
+            <div class="dashboard-in">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h4 class="text-center">
+                            <strong>
+                                You can see your final league standings here after match completion.
+                            </strong>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="spinnerContainer" class="spinnerContainer" style="display: none;">
+    <div id="spinner" class="spinner">
+        <img id="img-spinner" src="~/Assets/Icon/ball.gif" alt="Loading" />
+    </div>
+</div>
+<!----------------------------------------------------------->
+
+
+<script>
+    var Session_TournamentId = '';
+    var Session_LeagueId = '';
+    var Session_UserId = '';
+
+    $(document).ready(function () {
+
+        Session_UserId = @Session["UserId"].ToString();
+        OnPageLoad();
+    });
+
+</script>
+
+<script src="/Areas/DailyGame/CustomScript/DailyLeague.js"></script>

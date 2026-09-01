@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<div class="sub-heard-part">
+        <ol class="breadcrumb m-b-0">
+            <li><a href="index.html">Dashboard</a></li>
+            <li class="active"> / Tournament</li>
+        </ol>
+    </div>*@
+
+
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <!----<div class="grid-1">
+                                <div class="form-body">
+                                   <div class="row form-group">
+                            <div class="col-md-3">
+                                <label class="control-label1">Game Type</label>
+                            </div>
+                            <div class="col-md-3">
+
+                                <select id="ddlGameType" class="form-control1">
+                                    <option value="T">Tournament</option>
+                                    <option value="D">Daily Match</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a id="btnAddEdit" href="#" class="btn btn-info" onclick="AddEditRedirection('add',0)" ;> Add Tournament</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+               
+                <div class="leagueTable"><table id="TourList"></table></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+       ShowTourList();
+       // LoadMatch(0, 'UPCOMING');
+      //  LoadMatch(0, 'Live');
+
+    });
+
+    function LoadMatch( ) {
+        var pData = { UserId: 0, UserId:"pending" };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/GetMatch',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (matchStatus == 'UPCOMING') {
+                    $('#ddlUpcomMatchList').empty();
+                    $('#ddlUpcomMatchList').append($("<option></option>").val('').html("Select Upcomming Match"));
+                    $.each(data, function (index, value) {
+                        $('#ddlUpcomMatchList').append($("<option></option>").val(value.UniqueId).html(value.MatchScheduledDate + ' - ' + value.Team1 + ' vs ' + value.Team2));
+                    });
+                }
+                else {
+                    $('#ddlLiveMatchList').empty();
+                    $('#ddlLiveMatchList').append($("<option></option>").val('').html("Select Live Match"));
+                    $.each(data, function (index, value) {
+                        $('#ddlLiveMatchList').append($("<option></option>").val(value.UniqueId).html(value.MatchScheduledDate + ' - ' + value.Team1 + ' vs ' + value.Team2));
+                    });
+                }
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlLiveMatchList").change(function () {
+        $('#TourList').grid('destroy', true, true);
+        $('#ddlUpcomMatchList').val('');
+        ShowTourList($('#ddlLiveMatchList').val());
+
+    });
+    $("#ddlUpcomMatchList").change(function () {
+        $('#ddlLiveMatchList').val('');
+        $('#TourList').grid('destroy', true, true);
+        ShowTourList($('#ddlUpcomMatchList').val());
+
+    });
+    var gridTour;
+    function ShowTourList() {
+       // console.log(UniqueId);
+       // return;
+        gridTour = $("#TourList").grid({
+            dataSource: { url: '@Url.Action("FetchKycDetails", "AdminKycVerification")', data: { UserId:0, KYCStatus:"pending" } },
+            notFoundText: "No Players available",
+            uiLibrary: "bootstrap",
+
+            columns: [
+                { field: "PANName", title: "Name", width: "20.%", align: "left", cssClass: "PANName" },
+                { field: "PANNumber", title: "PAN Number ", width: "10%", align: "left", cssClass: "PANNumber" },
+                { field: "PANDOB", title: "PAN DOB", width: "10%", align: "left", cssClass: "PANDOB" },
+                { field: "PANState", title: "PAN State", width: "10%", align: "left", cssClass: "PANState" },
+                { field: "KYCStatus", title: "PAN Status", width: "10%", align: "left", cssClass: "KYCStatus" },
+                { field: "", title: "", width: "10%", align: "center", cssClass: "approved" },
+                { field: "", title: "", width: "10%", align: "center", cssClass: "rejected" },
+                { field: "", title: "", width: "15%", align: "left", cssClass: "KYCDocImage" },
+            
+             //   { field: "", tooltip: "Edit Tournament", width: "10%", align: "center", cssClass: "EditTournament" },
+            //    { field: "", tooltip: "Delete Tournament", width: "10%", align: "center", cssClass: "DeleteTournament" }
+
+            ],
+            //pager: { enable: true, limit: 20, sizes: [10, 20, 30, 40] }
+        });
+
+        gridTour.on("rowDataBound", function (e, $row, id, record) {
+    
+          
+           
+            $row.find('.approved').append('<button   class="btn btn-info" onclick="Update_KycStatusApproved(' + record.UserId + ')";>Approved</button>');
+            $row.find('.rejected').append('<button  class="btn btn-info" onclick="Update_KycStatusRejected(' + record.UserId + ')";>Rejected</button>');
+            if (record.KYCDocImage != null) {
+                $row.find('.KYCDocImage').append('<a class="btn btn-info" href="http://www.fanzania.com/FantasyCricketRest/ImagePath/image/users/' + record.KYCDocImage + '" target="_blank">View Kyc Document</a>');
+
+            } else {
+                $row.find('.KYCDocImage').append('KYC Image not uploaded');
+
+            }
+          
+            //$row.find('.DeleteTournament').append('<a href="#" title="Delete Tournament" ><img src="/Assets/Icon/delete.png" alt="" onclick="DeleteTournament(\'' + record.TournamentId + '\')"; width="17" height="17" /></a>');
+        });
+    }
+
+    function AddEditRedirection(Type, Tid) {
+        sessionStorage.setItem('GameType', $('#ddlGameType').val());
+        if (Type == "add") {
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type;
+        }else if(Type == "edit"){
+            location.href = '/AdminTour/TournamentAddEdit?type=' + Type + '&tid=' + Tid;
+        }
+
+    }
+    function Update_KycStatusApproved(UserId) {
+         //$('#spinnerContainer').show();
+       
+        //console.log(UserId); return;
+        var uurl = '/AdminKycVerification/UpdateKycStatus/';
+        var pData = { UserId: UserId, KYCStatus:"approved"};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+            //    console.log('jyoti')
+                if (data.status = 'success') {
+                   // alert('Successfully deleted');
+                 //   gridTour.reload({ page: 1, TournamentId: "0" });
+                  //
+                    ShowTourList();
+                    location.href = '/AdminKycVerification/Index';
+                    alert("Status  update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function Update_KycStatusRejected(UserId) {
+        //$('#spinnerContainer').show();
+
+        //console.log(UserId); return;
+        var uurl = '/AdminKycVerification/UpdateKycStatus/';
+        var pData = { UserId: UserId, KYCStatus: "rejected" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //    console.log('jyoti')
+                if (data.status = 'success') {
+                    // alert('Successfully deleted');
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    //
+                    ShowTourList();
+                    location.href = '/AdminKycVerification/Index';
+                    alert("Status  update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function set_mom(id, appid) {
+        //$('#spinnerContainer').show();
+        //var txt_ba_points = $('#txt_ba_points' + id).val();
+       // var txt_bo_points = $('#txt_bo_points' + id).val();
+     //   var txt_fi_points = $('#txt_fi_points' + id).val();
+        // console.log(appid); return;
+        var uurl = '/AdminUpdatePScore/SetManualMom';
+        var pData = { UniqueId: "1216493", APIPId: appid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //    console.log('jyoti')
+                if (data.status = 'success') {
+                    // alert('Successfully deleted');
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    //
+                    ShowTourList();
+                    alert("MoM update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function DeleteTournament(Tid) {
+        //$('#spinnerContainer').show();
+
+        var uurl = '/AdminTour/DeleteTournament';
+        var pData = { TournamentId: Tid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                if (data.status = 'Success') {
+                    alert('Successfully deleted');
+                    gridTour.reload({ page: 1, TournamentId: "0" });
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+</script>

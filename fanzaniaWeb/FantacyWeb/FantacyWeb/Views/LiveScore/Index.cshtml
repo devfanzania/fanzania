@@ -1,0 +1,551 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<style>
+
+    .btn-red {
+        background: linear-gradient(to left, #fa3f45 0%,#ff9000 100%);
+        color: #fff;
+        border-radius: 20px;
+        width: 138px;
+        margin: 2px 0;
+        float: right;
+        height: 30px;
+        font-weight: 600;
+    }
+
+    .canvasjs-chart-credit {
+        display: none !important;
+    }
+    .charttab {
+        border-right: 1px solid #ec0909;
+        padding-right: 10px;
+        color: #ec0909;
+        font-weight: 500;
+    }
+    .dec {
+      
+        color: black !important;
+        font-size: 12px;
+    }
+    .titlesideimage {
+        position: absolute;
+        z-index: 999;
+        top: 17px;
+        opacity: 1;
+        padding-left: 4px;
+    }
+    .showteam {
+        position: absolute;
+        z-index: 999;
+        right: 58px;
+        top: 21px;
+        opacity: 1;
+        font-size: 11px;
+    }
+    .total {
+        font-size: 12px;
+        font-weight:700;
+    }
+    .tab-content {
+         padding: 0px !important; 
+    }
+    .spanall {
+        color: #fa3f45;
+    }
+    .hr {
+        margin-top: 6px;
+        margin-bottom: 6px;
+        border-top: 1px solid #eeeeee;
+        border: revert !important;
+    }
+    .btn3:hover {
+        text-decoration: none;
+        background: linear-gradient(to left, #fa3f45 0%,#ff9000 100%) !important;
+        color: #fff;
+    }
+   
+</style>
+<input type="hidden" id="hdnLeagueCnt" />
+<input type="hidden" id="MatchId" />
+<input type="hidden" id="MatchDate" />
+<input type="hidden" id="MatchVenue" />
+<input type="hidden" id="T1" />
+<input type="hidden" id="T2" />
+<input type="hidden" id="T1Img" />
+<input type="hidden" id="T2Img" />
+<input type="hidden" id="T1Score" />
+<input type="hidden" id="T2Score" />
+<section id="TournamentSlider" class="inner-wrap">
+    <div class="container">
+        <div class="banner-slider">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="carousel slide multi-item-carousel" data-interval="false" data-wrap="false" id="theCarousel">
+                        <div id="TournamentBox" class="carousel-inner">
+
+                        </div>
+                    </div>
+                    <a id="TournamentSlide_prev" class="left carousel-control" href="#theCarousel" data-slide="prev" onclick="OnChangeTournamentSlide('prev');"><i class="fa fa-angle-left"></i></a>
+                    <a id="TournamentSlide_next" class="right carousel-control" href="#theCarousel" data-slide="next" onclick="OnChangeTournamentSlide('next');"><i class="fa fa-angle-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<section>
+    <div class="container">
+        <div class="team-heading">
+            <div class="row">
+                @*<div class="col-md-3">
+                        <img src="/Assets/Icon/fanzania-icon-white.png" />
+                        <h5 class="livepn" id="teamname"></h5>
+                        <h5 class="livepp" id="powerplay"></h5>
+                    </div>*@
+                <div class="col-md-3">
+                    <div class="pull-left">
+                        <div class="mat-d2">
+                            <h5 id="thisMatch"></h5>
+                            <h5>This Match</h5>
+                        </div>
+
+                        <div class="mat-d3">
+                            <h5 id="liveTotal"></h5>
+                            <h5>Live Total</h5>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="carousel slide" data-interval="false" data-wrap="false" id="CarouselLiveMatch">
+                        <div id="MatchDetails" class="carousel-inner">
+                        </div>
+                        <a id="CarouselLiveMatch_left" class="left carousel-control" href="#CarouselLiveMatch" data-slide="prev" onclick="OnChangeMatchSlide('prev');"><i class="fa fa-caret-left"></i></a>
+                        <a id="CarouselLiveMatch_right" class="right carousel-control" href="#CarouselLiveMatch" data-slide="next" onclick="OnChangeMatchSlide('next');"><i class="fa fa-caret-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <a herf="#" class="btn a_liveScore" onclick="OpenScore();">
+                        <p id="t1s"></p>
+                        <p id="t2s"></p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="livematch-tab">
+            <ul id="tabMatch" class="nav nav-tabs">
+                <li class="active col-xs-6"><a data-toggle="tab" href="#menu1" onclick="LiveScoreClick()" ;>MY LIVE POINTS</a></li>
+                <li class="col-xs-6"><a data-toggle="tab" href="#menu2" onclick="TrackLeagueClick()" ;>LEAGUE STANDINGS</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="menu1" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="" id="divTeams">
+                            <div class="col-md-12 text-center">
+                                <div class="col-md-6">
+                                    <div class="table-responsive liveTable"><table id="team1"></table></div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <div class="table-responsive liveTable"><table id="team2"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <div class="row livematch-innertab">
+                        <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+                        <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                        <div class="wrapper">
+                            <ul class="nav nav-tabs list" id="UserLeagueBox"></ul>
+                        </div>
+
+
+                        <div class="col-md-6 text-center " id="divLeagueuser" >
+                            <div class="table-responsive liveTable"><table id="gridLiveleagueUser"></table></div>
+                        </div>
+                        <div class="col-md-6 text-center " id="divLiveScore">
+                            <div id="showbtn" style="display:none">dd</div>
+                            <!----  <a href="#" class="btn3" onclick="ManageTeam('65','101','IPL2020','INPROGRESS')" ;="">Compare </a> -->
+                            <div class="table-responsive liveTable"><table id="gridLiveScore"></table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+@*<div id="ModalScore" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row">
+                        <div class="col-xs-2 pull-left">
+                            <button type="button" class="back-m text-left" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="col-xs-7 text-center">
+                            <div class="c-hd-mid">
+                                <h5 class="modal-title text-center" id="exampleModalLongTitle">
+                                    <img src="/Assets/Image/fanzania-icon-o.png" />
+
+                                    <span id="matchBtw"></span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            <span id="mDate"></span>
+                            <span id="mVenue"></span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img id="T1_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <div class="col-xs-6 mid-text b-ryt text-right">
+                                    <p class="text-orange" id="Team1Score"></p>
+                                    <span id="Team1over"></span>
+                                </div>
+                                <div class="col-xs-6 mid-text text-left">
+                                    <p class="text-orange" id="Team2Score">To Bat</p>
+                                    <span id="Team2over">...</span>
+                                </div>
+                                <div class="col-md-12 mid-text">
+                                    <small class="text-orange" id="matchHeadline"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <img id="T2_p" class="card-j-img" src="https://www.fanzania.com/FantasyCricketRest/ImagePath/image/cricket/teams/AS.png" alt="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingOne">
+                                        <div class="mb-0">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                <h3 id="team1tab"></h3>
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">
+                                        <div class="card-block">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="th-desc">
+                                                            BATSMAN
+                                                        </th>
+                                                        <th>
+                                                            R
+                                                        </th>
+                                                        <th>
+                                                            B
+                                                        </th>
+                                                        <th>
+                                                            4s
+                                                        </th>
+                                                        <th>
+                                                            6s
+                                                        </th>
+                                                        <th>
+                                                            SR
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="score_batsman_inng1"></tbody>
+                                            </table>
+                                            <hr />
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="th-desc">
+                                                            BOWLER
+                                                        </th>
+                                                        <th>
+                                                            O
+                                                        </th>
+                                                        <th>
+                                                            M
+                                                        </th>
+                                                        <th>
+                                                            R
+                                                        </th>
+                                                        <th>
+                                                            W
+                                                        </th>
+                                                        <th>
+                                                            ER
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="score_bowler_inng1"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="headingTwo">
+                                        <div class="mb-0">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                <h3 id="team2tab"></h3>
+                                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+                                        <div class="card-block">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="th-desc">
+                                                            BATSMAN
+                                                        </th>
+                                                        <th>
+                                                            R
+                                                        </th>
+                                                        <th>
+                                                            B
+                                                        </th>
+                                                        <th>
+                                                            4s
+                                                        </th>
+                                                        <th>
+                                                            6s
+                                                        </th>
+                                                        <th>
+                                                            SR
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="score_batsman_inng2"></tbody>
+                                            </table>
+                                            <hr />
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="th-desc">
+                                                            BOWLER
+                                                        </th>
+                                                        <th>
+                                                            O
+                                                        </th>
+                                                        <th>
+                                                            M
+                                                        </th>
+                                                        <th>
+                                                            R
+                                                        </th>
+                                                        <th>
+                                                            W
+                                                        </th>
+                                                        <th>
+                                                            ER
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="score_bowler_inng2"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<div id="comparepopup" class="modal fade league-modal" id="league-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" style="width: 763px !important; " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="/Assets/Image/fanzania-icon-o.png">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="padding-right: 60px;"><span id="Modal_Teamname"></h5>
+                <p class="showteam"><span id="livematchno" style="border-right: 1px solid;padding-right: 3px;"></span><img src="/Assets/Icon/circle_green.png" alt="" height="12px" width="12px" /><span id="liveteams" style="padding-left: 3px;"></span></p>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><img src="/Assets/Image/close.png"></span>
+                </button>
+            </div>
+            <div class="modal-body" style="max-height: 600px !important;">
+                <input type="hidden" id="hdnModalTourmentId" value="101">
+                <input type="hidden" id="hdnModalUserTeamId" value="65">
+                <input type="hidden" id="hdnModalTeamName" value="MyNewT">
+                <div class="row" style="margin-right: 0px!important; margin-left: 0px !important;">
+                    <div class="col-md-12 modal-tab">
+                        <ul id="tabMatch" class="nav nav-tabs" style="margin-top: 0px !important;">
+                            <li id="tabCT" class="active col-md-6 col-xs-6"><a data-toggle="tab" style="font-size: 12px;"  href="#livematch">LIVE MATCH COMPARISON</a></li>
+                            <li id="tabLMP" class="col-md-6 col-xs-6"><a data-toggle="tab" style="font-size: 12px;"  href="#totalpoints">TOTAL POINTS COMPARISON</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="livematch" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="" id="content"></div>
+
+                                    </div>
+
+                                </div>
+                                <!-- <div class="row">
+           <div class=" col-md-3 text-center">
+               <span class="total spanall">MY TEAM</span>
+           </div>
+           <div class=" col-md-2 text-center">
+
+           </div>
+           <div class=" col-md-2 text-center">
+
+           </div>
+           <div class=" col-md-2 text-center">
+
+           </div>
+           <div class=" col-md-3 text-center">
+               <span class="total spanall">PEHLWAANS</span>
+           </div>
+       </div>-->
+                                <div class="table-responsive liveTable" style="margin-top: 0px !important;"><table id="gridlivematch"></table></div>
+                                <hr class="hr" />
+                                <div class="row">
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall">THIS MATCH</span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total" id="mytotalpoints"><span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total" style="color:green" id="Matchtotalpointplus1"></span>
+                                        <span class="total" style="color:red" id="Matchtotalpointminus"></span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total" id="othertotalpoints"></span>
+                                    </div>
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall">THIS MATCH</span>
+                                    </div>
+                                </div>
+                                <hr class="hr" />
+                                <div class="row">
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall"> TOTAL</span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total" id="MyMatchTotalPoints1"></span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total"></span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total" id="OtherMatchTotalPoints1"></span>
+                                    </div>
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall">TOTAL</span>
+                                    </div>
+                                </div>
+                                <hr class="hr" />
+                                <div class="row">
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall" id="MyPrediction"> </span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+                                        <span class="total "> Prediction</span>
+                                    </div>
+                                    <div class=" col-md-2 text-center">
+
+                                    </div>
+                                    <div class=" col-md-3 text-center">
+                                        <span class="total spanall" id="OtherPrediction"></span>
+                                    </div>
+                                </div>
+                                <hr class="hr" />
+                            </div>
+                            <div id="totalpoints" class="tab-pane fade ">
+                                <div class="row" style="padding-top: 3px;">
+                                    <div class="col-md-6 text-right charttab">
+                                        <span id="myteampoints"> </span>
+                                        <br />
+                                        <span id="gmyteam"></span>
+                                    </div>
+                                    <div class="col-md-6 text-left" style="font-weight: 500;">
+                                        <span id="otherteampoints"> </span>
+                                        <br />
+                                        <span id="goteam"></span>
+                                    </div>
+                                </div>
+                                <div class="row" id="contentg">
+                                  
+                                </div>
+                                    <div class="row">
+                                        <canvas id="speedChart" width="600" height="400"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row text-center" id="blankMsg">
+    <h3> No match is going on</h3>
+</div>
+<input type="hidden" id="hdnTourCnt" />
+
+@Html.Hidden("MatchId")
+@Html.Hidden("TournamemtId")
+@Html.Hidden("Team1")
+@Html.Hidden("Team2")
+@Html.Hidden("UserTeamId")
+@Html.Hidden("UserId")
+<script>
+    $(document).ready(function () {
+        Session_usedId = '@Session["UserId"].ToString()';
+        LoadTournament();
+    });
+    var Session_usedId = '';
+</script>
+
+<script src="~/CustomScript/LiveScore/Chart.min.js"></script>
+
+<script src="~/CustomScript/LiveScore/LiveScore.js"></script>
+

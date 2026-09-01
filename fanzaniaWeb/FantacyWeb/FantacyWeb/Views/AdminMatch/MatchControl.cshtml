@@ -1,0 +1,495 @@
+﻿
+@{
+    ViewBag.Title = "MatchControl";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.Hidden("TournamentId")
+@Html.Hidden("UniqueId")
+<div class="forms-main">
+    <div class="forms-inner">
+        <div class="set-1">
+            <div class="graph-2 general">
+                <h3 class="inner-tittle">Match Control</h3>
+                <div class="grid-1">
+                    <div class="form-body">
+                            @*<div class="row form-group">
+                                <div class="col-md-3">
+                                    <label class="control-label1">Game Type</label>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <select id="ddlGameType" class="form-control1">
+                                        <option value="T">Tournament</option>
+                                        <option value="D">Daily Match</option>
+                                    </select>
+                                </div>
+                            </div>*@
+                            <div class="row form-group">
+                                @*<div class="col-md-3">
+                                    <label for="ddlTourList" class="control-label">Select Tournament</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="ddlTourList" class="form-control1"></select>
+                                </div>*@
+                                <div class="col-md-3">
+                                    <select id="ddlUpcomMatchList" class="form-control1"></select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="ddlLiveMatchList" class="form-control1"></select>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <button id="btn_MCalculation" class="btn btn-block btn-info" onclick="ManualPointCalculation()" ;> Manual Point Calculation</button>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <button id="btn_Calculation" class="btn btn-block btn-info" onclick="CalculatePoint()" ;>Calculate Points</button>
+                                </div>
+                            </div>
+                            <div class="row from-group">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-3 text-center">
+
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <button id="btn_hideScore" class="btn btn-block btn-info" onclick="HideScore()" ;> Hide Score</button>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                </div>
+                <h3 class="inner-tittle">Saved Match List</h3>
+                <div class="grid-1">
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label for="txt_UniqueId" class="control-label">Unique Id</label>
+                            <input type="text" class="form-control1" id="txt_UniqueId" readonly="readonly">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="txt_Type" class="control-label">Type</label>
+                            <input type="text" class="form-control1" id="txt_Type" readonly="readonly">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="txt_Date" class="control-label">Date</label>
+                            <input type="text" class="form-control1" id="txt_Date" readonly="readonly">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="txt_Status" class="control-label">Status</label>
+                            <input type="text" class="form-control1" id="txt_Status" readonly="readonly">
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label for="txt_Team1" class="control-label">Team 1</label>
+                            <input type="text" class="form-control1" id="txt_Team1" readonly="readonly">
+                            <input type="checkbox" id="chk_Team1" class="radio" value="1" name="capvs[1][]" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="txt_Team2" class="control-label">Team 2</label>
+                            <input type="text" class="form-control1" id="txt_Team2" readonly="readonly">
+                            <input type="checkbox" id="chk_Team2" class="radio" value="1" name="capvs[1][]" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ddl_Inngs" class="control-label">Innings</label>
+                            <select name="selector2" id="ddl_Inngs" class="form-control1"></select>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <button id="btn_SwitchTeam" class="btn btn-info" onclick="SwitchBattingTeam()" ;> Switch Batting Team</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="btn_tossWinner" class="btn btn-info" onclick="TossWinner()" ;>Toss Winner</button>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button id="btn_FinishMatch" class="btn btn-info" onclick="FinishMatch()";> Finish Match</button>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <button id="btn_StartMatch" class="btn btn-info" onclick="StartInnings()";> Start Innings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#ddlLiveMatchList').empty();
+        $('#ddlUpcomMatchList').empty();
+
+        $('#btn_StartMatch').attr("disabled", "disabled");
+        $('#btn_MCalculation').attr("disabled", "disabled");
+        $('#btn_Calculation').attr("disabled", "disabled");
+        $('#btn_FinishMatch').attr("disabled", "disabled");
+
+        $('#btn_hideScore').attr("disabled", "disabled");
+        $('#btn_tossWinner').attr("disabled", "disabled");
+
+        LoadMatch(0, 'UPCOMING');
+        LoadMatch(0, 'Live');
+    });
+   
+   
+    function LoadMatch(Tid, matchStatus) {
+        var pData = { TournamentId: Tid, MatchStatus: matchStatus};
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/GetMatch',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (matchStatus == 'UPCOMING') {
+                    $('#ddlUpcomMatchList').empty();
+                    $('#ddlUpcomMatchList').append($("<option></option>").val('').html("Select Upcomming Match"));
+                    $.each(data, function (index, value) {
+                        $('#ddlUpcomMatchList').append($("<option></option>").val(value.UniqueId).html(value.MatchScheduledDate + ' - ' + value.Team1 + ' vs ' + value.Team2));
+                    });
+                }
+                else {
+                    $('#ddlLiveMatchList').empty();
+                    $('#ddlLiveMatchList').append($("<option></option>").val('').html("Select Live Match"));
+                    $.each(data, function (index, value) {
+                        $('#ddlLiveMatchList').append($("<option></option>").val(value.UniqueId).html(value.MatchScheduledDate + ' - ' + value.Team1 + ' vs ' + value.Team2));
+                    });
+                }
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    $("#ddlLiveMatchList").change(function () {
+        GetMatchDetail($('#ddlLiveMatchList').val());
+        $('#ddlUpcomMatchList').val('');
+        $('#btn_StartMatch').attr("disabled", "disabled");
+        $('#btn_MCalculation').removeAttr("disabled");
+        $('#btn_Calculation').removeAttr("disabled");
+        $('#btn_FinishMatch').removeAttr("disabled");
+        $('#btn_hideScore').removeAttr("disabled");
+        $('#btn_tossWinner').attr("disabled", "disabled");
+    });
+    $("#ddlUpcomMatchList").change(function () {
+        GetMatchDetail($('#ddlUpcomMatchList').val());
+        $('#ddlLiveMatchList').val('');
+        $('#btn_StartMatch').removeAttr("disabled");
+        $('#btn_MCalculation').attr("disabled", "disabled");
+        $('#btn_Calculation').attr("disabled", "disabled");
+        $('#btn_FinishMatch').attr("disabled", "disabled");
+        $('#btn_tossWinner').removeAttr("disabled");
+        $('#btn_hideScore').attr("disabled", "disabled");
+    });
+
+    function GetMatchDetail(ddlval) {
+        $('#txt_UniqueId').val('');
+        $('#txt_Type').val('');
+        $('#txt_Date').val('');
+        $('#txt_Team1').val('');
+        $('#txt_Team2').val('');
+        $('#txt_Status').val('');
+        $('#chk_Team1').prop("checked", false);
+        $('#chk_Team2').prop("checked", false);
+        $('#ddl_Inngs').empty();
+
+        //var ddlval = $('#ddlLiveMatchList').val();
+        $('#UniqueId').val(ddlval);
+        if (ddlval != '') {
+            var pData = { UniqueId: ddlval };
+            //var jsonData = JSON.stringify(pData);
+            $.ajax({
+                url: '/AdminMatch/GetMatchDeatils',
+                type: 'POST',
+                data: pData,
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+
+                    $('#txt_UniqueId').val(data[0]["UniqueId"]);
+                    $('#txt_Type').val(data[0]["MatchType"]);
+                    $('#txt_Date').val(data[0]["MatchScheduledDate"]);
+                    $('#txt_Team1').val(data[0]["Team1"]);
+                    $('#txt_Team2').val(data[0]["Team2"]); //$('#chk_Team2').val(data[0]["Team2"]);
+                    $('#txt_Status').val(data[0]["MatchStatus"]);
+                    if (data[0]["Inning1BattingTeam"] != null) {
+                        $('#btn_SwitchTeam').removeAttr("disabled");
+                        if (data[0]["Team1"] == data[0]["Inning1BattingTeam"]) {
+                            $('#chk_Team1').prop("checked", true);
+                            $('#chk_Team2').prop("checked", false);
+                        }
+                        if (data[0]["Team2"] == data[0]["Inning1BattingTeam"]) {
+                            $('#chk_Team1').prop("checked", false);
+                            $('#chk_Team2').prop("checked", true);
+                        }
+                    } else {
+                        $('#btn_SwitchTeam').attr("disabled", "disabled");
+                        $('#chk_Team1').prop("checked", false);
+                        $('#chk_Team2').prop("checked", false);
+                    }
+
+                    var innlist = '';
+                    if (data[0]["MatchType"] == 'TEST') {
+                        innlist = '<option value="1">1st Innings</option><option value="2">2nd Innings</option><option value="3">3rd Innings</option><option value="4">4th Innings</option>';
+                    } else {
+                        innlist = '<option value="1">1st Innings</option><option value="2">2nd Innings</option>';
+                    }
+                    $('#ddl_Inngs').html(innlist);
+                },
+                error: function (req, status, error) {
+                    alert('Unable to connect server!');
+                }
+            });
+        }
+
+
+    }
+
+    function StartInnings() {
+        var innVal = $('#ddl_Inngs').val();
+        ChangeStatus(innVal);
+    }
+    function FinishMatch() {
+       ChangeStatus('5');
+    }
+
+    function ChangeStatus(innVal) {
+
+        var Innteam = '';
+        if (chk_Team1.checked) {
+            Innteam = $('#txt_Team1').val();
+        }
+        if (chk_Team2.checked) {
+            Innteam = $('#txt_Team2').val();
+        }
+        //var innVal = $('#ddl_Inngs').val();
+        var Tid = $('#TournamentId').val();
+        var UniqueId = $('#UniqueId').val();
+        //var Mno = $('#txt_MatchNo').val();
+
+        var pData = { BattingTeam: Innteam, Inning: innVal, TournamentId: Tid, UniqueId: UniqueId };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/MatchStart',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    alert('Innings Started!');
+                    location.href = '/AdminMatch/MatchControl';
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    function SwitchBattingTeam() {
+
+           
+        var Tid = $('#TournamentId').val();
+        var UniqueId = $('#UniqueId').val();
+        
+
+        var pData = { TournamentId: Tid, UniqueId: UniqueId };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/SwitchBattingTeam',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: true,
+            success: function (data) {
+                if (data.status == "success") {
+                    alert('Team Successfully switched!');
+                    location.href = '/AdminMatch/MatchControl';
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+
+    $("input:checkbox").on('click', function () {
+        // in the handler, 'this' refers to the box clicked on
+        var $box = $(this);
+        if ($box.is(":checked")) {
+            // the name of the box is retrieved using the .attr() method
+            // as it is assumed and expected to be immutable
+            var group = "input:checkbox[name='" + $box.attr("name") + "']";
+            // the checked state of the group/box on the other hand will change
+            // and the current value is retrieved using .prop() method
+            $(group).prop("checked", false);
+            $box.prop("checked", true);
+        } else {
+            $box.prop("checked", false);
+        }
+    });
+
+    function ManualPointCalculation() {
+
+        var UniqueId = $('#UniqueId').val();
+        if (UniqueId == '') {
+            alert('Please select a match!');
+            return;
+        }
+       
+        var pData = { UniqueId: UniqueId };
+        //var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/ManualPointCalculation',
+            type: 'POST',
+            data: pData,
+            dataType: 'json',
+            async: false,
+            success: function (data) {
+                if (data.status == "success") {
+                    alert(data.statusMessage);
+                }
+                else {
+                    alert(data.Error);
+                }
+            },
+            error: function (req, status, error) {
+                alert('Unable to connect server!');
+            }
+        });
+    }
+
+    function CalculatePoint() {
+        var UniqueId = $('#UniqueId').val();
+        if (UniqueId == '') {
+            alert('Please select a match!');
+            return;
+        }
+        /// $('#spinnerContainer').show();
+        var pData = { UniqueId: UniqueId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/CalculatePoints',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert(data.statusMessage);
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function TossWinner() {
+        var UniqueId = $('#UniqueId').val();
+
+        var tosswin = '';
+        if (chk_Team1.checked) {
+            tosswin = $('#txt_Team1').val();
+        }
+        if (chk_Team2.checked) {
+            tosswin = $('#txt_Team2').val();
+        }
+
+        if (UniqueId == '') {
+            alert('Please select a match!');
+            return;
+        }
+
+        if (tosswin == '') {
+            alert('Please select a team!');
+            return;
+        }
+
+        /// $('#spinnerContainer').show();
+        var pData = { UniqueId: UniqueId, TossWinnerTeam: tosswin };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/TossWinner',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert(data.statusMessage);
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+
+    function HideScore() {
+        var UniqueId = $('#UniqueId').val();
+        if (UniqueId == '') {
+            alert('Please select a live match!');
+            return;
+        }
+
+        /// $('#spinnerContainer').show();
+        var pData = { UniqueId: UniqueId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: '/AdminMatch/HideScore',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: false,
+            // cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    alert(data.statusMessage);
+                }
+
+            },
+            error: function (req, status, error) {
+                var str = "Req:" + req + ", Status:" + status + ", Error:" + error;
+                alert(JSON.stringify(req));
+                // $('#spinnerContainer').hide();
+            }
+        })
+    }
+</script>
+

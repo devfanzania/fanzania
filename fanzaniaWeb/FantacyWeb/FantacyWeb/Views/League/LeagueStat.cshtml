@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "LeagueStat";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+<section class="inner-wrap">
+    <div class="container">
+        <div class="dashboardStat">
+            <div class="row">
+                <div class="col-md-6 text-left"><a href="/League/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>  Back to League</a></div>
+            </div>
+            @*<div class="row"><div class="dashboard-title2 text-center"><h5 id="TourName"></h5><h6 id="TeamName"></h6></div></div>*@
+            <div class="responsive-tabs-1">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Team's Top Performer</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Team's Top Preferred Players</a>
+                    </li>
+
+                </ul>
+
+                <div id="tabs-content" class="tab-content panel-group">
+                    <div class="panel-heading" role="tab" id="heading1">
+                        <a href="#tab1" class="" role="button" data-toggle="collapse" data-parent="tabs-content" aria-expanded="true"
+                           aria-controls="tab1">Team's Top Performer</a>
+                    </div>
+                    <div id="tab1" role="tabpanel" class="tab-pane active panel-collapse collapse in" aria-labelledby="heading1">
+                        <div class="row">
+                            <div class="" id="divLeague">
+                                <div class="col-md-12 text-center">
+                                    <div class="table-responsive"><table id="Team_Top_Performer"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading" role="tab" id="heading2">
+                        <a href="#tab2" class="collapsed" role="button" data-toggle="collapse" data-parent="tabs-content"
+                           aria-expanded="true" aria-controls="tab2">Team's Top Preferred Players</a>
+                    </div>
+                    <div id="tab2" role="tabpanel" class="tab-pane panel-collapse collapse" aria-labelledby="heading2">
+                        <div class="row">
+                            <div class="" id="divLeague">
+                                <div class="col-md-12 text-center">
+                                    <div class="table-responsive statTable"><table id="Team_Top_Preferred_Players"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    // Instanciation
+    $(document).ready(function () {
+        $('.responsive-tabs-1-1').responsiveTabs();
+
+        var tourName = sessionStorage.getItem("UserTourName");
+        var teamName = sessionStorage.getItem("UserTeamName");
+
+        $('#TourName').html(tourName);
+        $('#TeamName').html(teamName);
+
+        var Lid = '@Session["Lid_Stat"].ToString()';
+        var Tid = '@Session["Tid_Stat"].ToString()';
+        LoadTeam_Top_Performer(Lid, Tid);
+        LoadTeam_Top_Preferred_Players(Lid, Tid);
+    });
+
+    $.fn.responsiveTabs = function () {
+        var container = this;
+        container
+            .on('show.bs.collapse', '.panel-collapse', function () {
+                $(this).addClass('active')
+                    .siblings('.panel-collapse').removeClass('active').collapse('hide');
+                container.find('.nav-tabs a[href="#' + $(this).attr('id') + '"]').parent().addClass('active')
+                    .siblings().removeClass('active');
+            })
+            .on('show.bs.tab', '.nav-tabs a', function () {
+                $($(this).attr('href')).addClass('in')
+                    .siblings('.tab-pane').removeClass('in');
+            });
+    };
+
+    var Grid_Team_Top_Performer;
+    function LoadTeam_Top_Performer(LId, TId) {
+
+        Grid_Team_Top_Performer = $("#Team_Top_Performer").grid({
+            dataSource: { url: '@Url.Action("Team_Top_Performer", "League")', data: { LeagueiD: LId, TournamentId: TId } },
+            notFoundText: "No data available!",
+            responsive: true,
+            uiLibrary: "bootstrap",
+            fixedHeader: true,
+            height: 350,
+            minWidth: 600,
+            columns: [
+
+                { field: "TeamRank", title: "Rank", width: "10%", align: "center", cssClass: "TeamRank" },
+                { field: "UserTeamName", title: "Team Name", width: "30%", align: "center", cssClass: "UserTeamName" },
+                { field: "", title: "Top 3 Players", width: "20%", align: "left", cssClass: "TopPlayers" },
+                { field: "", title: "Points", width: "20%", align: "center", cssClass: "Points" }
+            ],
+        });
+        Grid_Team_Top_Performer.on("rowDataBound", function (e, $row, id, record) {
+
+            $row.find('.TopPlayers').html('<p class="TopPlayerName">' + record.Player1 + '</p><p class="TopPlayerName">' + record.Player2 + '</p><p class="TopPlayerName">' + record.Player3 + '</p>');
+
+            $row.find('.Points').html('<p class="TopPlayerNamePoint">' + record.Player1Points + '</p><p class="TopPlayerNamePoint">' + record.Player2Points + '</p><p class="TopPlayerNamePoint">' + record.Player3Points + '</p>');
+
+        });
+    }
+
+    var Grid_Team_Top_Preferred_Players;
+    function LoadTeam_Top_Preferred_Players(LId, TId) {
+
+        Grid_Team_Top_Preferred_Players = $("#Team_Top_Preferred_Players").grid({
+            dataSource: { url: '@Url.Action("Team_Top_Preferred_Players", "League")', data: { LeagueiD: LId, TournamentId: TId } },
+            notFoundText: "No data available!",
+            responsive: true,
+            uiLibrary: "bootstrap",
+            fixedHeader: true,
+            height: 350,
+            minWidth: 600,
+            columns: [
+
+                { field: "TeamRank", title: "Rank", width: "10%", align: "center", cssClass: "TeamRank" },
+                { field: "UserTeamName", title: "Team Name", width: "30%", align: "center", cssClass: "UserTeamName" },
+                { field: "", title: "Top 3 Favourite", width: "20%", align: "left", cssClass: "Favourite" },
+                { field: "", title: "Match Played", width: "20%", align: "center", cssClass: "Played" }
+            ],
+        });
+        Grid_Team_Top_Preferred_Players.on("rowDataBound", function (e, $row, id, record) {
+
+            $row.find('.Favourite').html('<p class="TopPlayerName">' + record.Player1 + '</p><p class="TopPlayerName">' + record.Player2 + '</p><p class="TopPlayerName">' + record.Player3 + '</p>');
+
+            var Player1Match = '0';
+            var Player2Match = '0';
+            var Player3Match = '0';
+
+            if (record.Player1Match == null) { Player1Match = '0'; } else { Player1Match = record.Player1Match }
+            if (record.Player2Match == null) { Player2Match = '0'; } else { Player2Match = record.Player2Match }
+            if (record.Player3Match == null) { Player3Match = '0'; } else { Player3Match = record.Player3Match }
+
+            $row.find('.Played').html('<p class="TopPlayerNamePoint">' + Player1Match + '</p><p class="TopPlayerNamePoint">' + Player2Match + '</p><p class="TopPlayerNamePoint">' + Player3Match + '</p>');
+
+        });
+    }
+
+
+
+</script>
+

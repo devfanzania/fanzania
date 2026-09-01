@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "TeamStat";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+}
+
+<section class="inner-wrap">
+    <div class="container">
+        <div class="dashboardStat">
+            <div class="row">
+                <div class="col-md-6 text-left"><a href="/Team/Index" class="back-team-btn"><i class="fa fa-arrow-left"></i>  Back to Team</a></div>
+            </div>
+            @*<div class="row">
+                <div class="heading text-center">
+                    <h5 id="TourName"></h5>
+                    <h6 id="TeamName"></h6>
+                </div>
+            </div>*@
+            <div class="responsive-tabs-1">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">My Top Ten Player's</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Recent Match Captain Usage</a>
+                    </li>
+
+                </ul>
+
+                <div id="tabs-content" class="tab-content panel-group">
+                    <div class="panel-heading" role="tab" id="heading1">
+                        <a href="#tab1" class="" role="button" data-toggle="collapse" data-parent="tabs-content" aria-expanded="true"
+                           aria-controls="tab1">My Top Ten Player's</a>
+                    </div>
+                    <div id="tab1" role="tabpanel" class="tab-pane active panel-collapse collapse in" aria-labelledby="heading1">
+                        <div class="row">
+                            <div class="inner-wrap" id="divLeague">
+                                <div class="col-md-12 text-center">
+                                    <div class="table-responsive statTable"><table id="Top_Ten_Player"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-heading" role="tab" id="heading2">
+                        <a href="#tab2" class="collapsed" role="button" data-toggle="collapse" data-parent="tabs-content"
+                           aria-expanded="true" aria-controls="tab2">Recent Match Captain Usage</a>
+                    </div>
+                    <div id="tab2" role="tabpanel" class="tab-pane panel-collapse collapse" aria-labelledby="heading2">
+                        <div class="row">
+                            <div class="inner-wrap" id="divLeague">
+                                <div class="col-md-12 text-center">
+                                    <div class="table-responsive statTable"><table id="Recent_Match_Captain_Usage"></table></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    // Instanciation
+    $(document).ready(function () {
+        $('.responsive-tabs-1-1').responsiveTabs();
+
+        var tourName = sessionStorage.getItem("UserTourName");
+        var teamName = sessionStorage.getItem("UserTeamName");
+
+        $('#TourName').html(tourName);
+        $('#TeamName').html(teamName);
+        var Utid = '@Session["Utid_Stat"].ToString()';
+        var Tid = '@Session["Tid_Stat"].ToString()';
+        LoadTop_Ten_Player(Utid, Tid);
+        LoadRecent_Match_Captain_Usage(Utid, Tid);
+    });
+
+    $.fn.responsiveTabs = function () {
+        var container = this;
+        container
+            .on('show.bs.collapse', '.panel-collapse', function () {
+                $(this).addClass('active')
+                    .siblings('.panel-collapse').removeClass('active').collapse('hide');
+                container.find('.nav-tabs a[href="#' + $(this).attr('id') + '"]').parent().addClass('active')
+                    .siblings().removeClass('active');
+            })
+            .on('show.bs.tab', '.nav-tabs a', function () {
+                $($(this).attr('href')).addClass('in')
+                    .siblings('.tab-pane').removeClass('in');
+            });
+    };
+
+    var Grid_Top_Ten_Player;
+    function LoadTop_Ten_Player(Utid, TId) {
+
+        Grid_Top_Ten_Player = $("#Top_Ten_Player").grid({
+            dataSource: { url: '@Url.Action("Top_Ten_Player", "Team")', data: { UserTeamId: Utid, TournamentId: TId } },
+            notFoundText: "No data available!",
+            responsive: true,
+            uiLibrary: "bootstrap",
+            fixedHeader: true,
+            height: 350,
+            minWidth: 600,
+            columns: [
+
+                { field: "PlayerRank", title: "Rank", width: "15%", align: "center", cssClass: "PlayerRank" },
+                { field: "PlayerName", title: "Player Name", width: "40%", align: "center", cssClass: "PlayerName" },
+                { field: "ParticipationTeamName", title: "Team Name", width: "20%", align: "left", cssClass: "ParticipationTeamName" },
+                { field: "TotalPoints", title: "Points", width: "20%", align: "center", cssClass: "TotalPoints" }
+            ],
+        });
+
+    }
+
+    var Grid_Recent_Match_Captain_Usage;
+    function LoadRecent_Match_Captain_Usage(Utid, TId) {
+
+        Grid_Recent_Match_Captain_Usage = $("#Recent_Match_Captain_Usage").grid({
+            dataSource: { url: '@Url.Action("Recent_Match_Captain_Usage", "Team")', data: { UserTeamId: Utid, TournamentId: TId } },
+            notFoundText: "No data available!",
+            responsive: true,
+            uiLibrary: "bootstrap",
+            fixedHeader: true,
+            height: 350,
+            minWidth: 600,
+            columns: [
+
+                { field: "MatchNo", title: "Match#", width: "15%", align: "center", cssClass: "MatchNo" },
+                { field: "", title: "Match", width: "30%", align: "center", cssClass: "Match" },
+                { field: "Captain", title: "Captain", width: "20%", align: "left", cssClass: "Captain" },
+                { field: "TotalPoints", title: "Points", width: "20%", align: "center", cssClass: "TotalPoints" }
+            ],
+        });
+
+        Grid_Recent_Match_Captain_Usage.on("rowDataBound", function (e, $row, id, record) {
+
+            $row.find('.Match').append('<p>' + record.Team1 + ' Vs ' + record.Team2 + '</p>');
+        });
+
+    }
+
+
+
+</script>
+
+

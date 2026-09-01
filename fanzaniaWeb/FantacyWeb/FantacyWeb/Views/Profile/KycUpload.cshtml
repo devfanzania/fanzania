@@ -1,0 +1,713 @@
+﻿@model Fantacy_Model.KycUploadModel
+@{
+    ViewBag.Title = "wallet";
+    //if(Session["USERSELECTIONMODE"].ToString() == "T")
+    //{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    //}
+    //else
+    //{
+    //    Layout = "~/Areas/DailyGame/Views/Shared/_LayoutDailyHome.cshtml";
+    //}
+
+}
+<style>
+    a:hover,
+    a:focus {
+        text-decoration: none;
+        outline: none;
+    }
+
+    .tab {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+        .tab .nav-tabs {
+            border: none;
+        }
+
+            .tab .nav-tabs li a {
+                color: #999B9D;
+                background: #F7F7F7;
+                font-size: 16px;
+                font-weight: 500;
+                text-transform: uppercase;
+                padding: 14px 30px 11px;
+                margin: 0 0 1px 0;
+                border: none;
+                border-radius: 0;
+                position: relative;
+                transition: all 0.3s ease-in-out;
+            }
+
+                .tab .nav-tabs li a:hover,
+                .tab .nav-tabs li.active a,
+                .tab .nav-tabs li.active a:hover {
+                    color: #fa3f45;
+                    background-color: #f7f7f7;
+                    border: none;
+                }
+
+                .tab .nav-tabs li a:before,
+                .tab .nav-tabs li a:after {
+                    content: '';
+                    background-color: #fa3f45;
+                    height: 3px;
+                    width: 0;
+                    position: absolute;
+                    left: 0;
+                    bottom: -3px;
+                    transition: all 0.3s ease 0s;
+                }
+
+                .tab .nav-tabs li a:after {
+                    height: 45px;
+                    width: 45px;
+                    border-radius: 50%;
+                    transform: translateX(-50%) scale(0);
+                    transform-origin: bottom center;
+                    left: 50%;
+                    bottom: 0;
+                }
+
+                .tab .nav-tabs li.active a:before,
+                .tab .nav-tabs li a:hover:before {
+                    width: 100%;
+                }
+
+                .tab .nav-tabs li.active a:after,
+                .tab .nav-tabs li a:hover:after {
+                    opacity: 0;
+                    transform: translateX(-50%) scale(1);
+                }
+
+        .tab .tab-content {
+            color: #999;
+            background-color: #fff;
+            font-size: 14px;
+            letter-spacing: 1px;
+            line-height: 25px;
+            padding: 30px 25px 20px;
+            border: 3px solid #e1e1e1;
+            HEIGHT: 314PX;
+        }
+
+    .label {
+        color: white;
+        padding: 8px;
+    }
+
+    .success {
+        background-color: #4CAF50;
+    }
+    /* Green */
+    .info {
+        background-color: #2196F3;
+    }
+    /* Blue */
+    .warning {
+        background-color: #ff9800;
+    }
+    /* Orange */
+    .danger {
+        background-color: #f44336;
+    }
+    /* Red */
+    .other {
+        background-color: #e7e7e7;
+        color: black;
+    }
+    /* Gray */
+    .btn-red-sub {
+        background: #192d39;
+        color: #fff;
+        border-radius: 20px;
+        width: 100px;
+        margin: 2px 0;
+        float: left;
+        height: 30px;
+        font-weight: 600;
+    }
+
+    .button {
+        background: none !important;
+        border: none;
+        padding: 0 !important;
+        /*optional*/
+        font-family: arial, sans-serif;
+        /*input has OS specific font-family*/
+        color: #069;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+</style>
+
+<section class="wallet-area inner-wrap"></section>
+<section>
+    <div class="container">
+        <div class="container" style="    HEIGHT: 600PX;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">PAN</a></li>
+                            <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">Contact Details </a></li>
+                            <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab">Bank Details</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs" style="HEIGHT: 507PX;">
+                            <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="frmregister" method="post">
+                                            <div class="form-group" style="margin-bottom: 8px;">
+                                                <lable style="font-size: 14px;">
+                                                    Kyc Status  :
+                                                </lable>
+
+
+
+                                                @if (@Model.KYCStatus == "pending")
+                                                {
+                                                    <span class="label warning">@Model.KYCStatus</span>
+                                                }
+                                                else if (@Model.KYCStatus == "approved")
+                                                {
+                                                    <span class="label success">@Model.KYCStatus</span>
+
+                                                }
+                                                else if (@Model.KYCStatus == "rejected")
+                                                {
+                                                    <span class="label danger">@Model.KYCStatus</span>
+
+                                                }
+                                                else if (@Model.KYCStatus == "submitted")
+                                                {
+                                                    <span class="label info">@Model.KYCStatus</span>
+
+                                                }
+                                                else if (@Model.KYCStatus == "saved")
+                                                {
+                                                    <span class="label info">@Model.KYCStatus</span>
+
+                                                }
+
+
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom: 8px;">
+                                                @Html.TextBoxFor(m => m.PANName, new { @class = "form-firstname form-control", placeholder = "Name *" })
+
+                                                <lable style="font-size: 10px;">As on PAN Card</lable>
+                                                @Html.ValidationMessageFor(m => m.PANName)
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 8px;">
+                                                @Html.TextBoxFor(m => m.PANNumber, new { @class = "form-phone form-control", id = "KYCDocName", placeholder = "PAN Number *" })
+                                                <lable style="font-size: 10px;"> PAN number</lable>
+                                                @Html.ValidationMessageFor(m => m.PANNumber)
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 10px;">
+                                                @Html.TextBoxFor(model => model.PANDOB, new { @class = "form-control", id = "PANDOB", placeholder = "Date Of Brith *", autocomplete = "off" })
+                                                <lable style="font-size: 10px;">Date Of Birth</lable>
+                                                @Html.ValidationMessageFor(m => m.PANDOB)
+                                            </div>
+                                            <div class="form-group" style="margin-bottom: 8px;">
+                                                @Html.TextBoxFor(m => m.PANState, new { @class = "form-control form-Email", id = "PANState", placeholder = "State *", })
+                                                <lable style="font-size: 10px;">State</lable>
+                                                @Html.ValidationMessageFor(m => m.PANState)
+                                            </div>
+
+                                            @if (@Model.KYCStatus != "pending")
+                                            {
+                                                <div class="form-group" style="padding-top:5px;padding-bottom:5px">
+                                                    <label style="font-weight: 200;padding-bottom:5px">Upload PAN Card Image </label>
+                                                    @Html.TextBoxFor(m => m.UploadedImage, new { @id = "filePhoto", @type = "file", @accept = "image/*, application/pdf", @onchange = "KycUpdateImage();" })
+
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-group" style="padding-top:5px;padding-bottom:5px">
+                                                    <label style="font-weight: 200;padding-bottom:5px"> You have uploaded PAN card image </label>
+
+                                                </div>
+
+                                            }
+
+                                            <div class="form-group">
+                                                <span class="field-validation-error">@ViewBag.Message</span>
+                                            </div>
+
+
+
+
+                                            @if (@Model.KYCStatus == "pending")
+                                            {
+                                                <button disabled type="submit" style="width: 198px;border: 1px solid #999999;
+                                                 background-color: #cccccc;
+                                                color: #666666" id="btnSave" class="btn-e">
+                                                    Submit for approval
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button id="btnSave" type="submit" style="width: 198px;" class="btn-e">Submit for approval</button>
+                                            }
+
+                                            <div class="form-group">
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="Section2">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="frmregister" method="post">
+                                            <div class="form-group" style="margin-bottom: 15px;">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <input class="form-firstname form-control valid" readonly placeholder="Email" type="text" value="@Session["Email"].ToString()">
+                                                    </div>
+                                                    <div class="col-md-2">
+
+
+                                                        <span class="fa fa-check" style="color: #6ed23c;"></span>
+
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-10">
+                                                    <div class="form-group" style="margin-bottom: 15px;">
+
+                                                        <input class="form-firstname form-control valid" readonly placeholder="Phone Number" type="text" value="@if (!string.IsNullOrEmpty(Session["PhoneNumber"] as string)){@Session["PhoneNumber"].ToString();}">
+                                                        @if (string.IsNullOrEmpty(Session["PhoneNumber"] as string))
+                                                        {
+                                                            <lable style="font-size: 10px;">Update your phone number in your profile section. </lable>
+                                                            <br />
+                                                        }
+                                                        @if (@Model.MobileVerified == "no")
+                                                        {
+                                                            if (@Model.KYCStatus != "approved")
+                                                            {
+                                                            <lable style="font-size: 10px;">Send OTP will be enable when KYC is approved.</lable>
+                                                            }
+                                                        }
+                                                      </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div id="showverificationn" style="display:none"><span id="" class="fa fa-check" style="color: #6ed23c;"></span></div>
+                                                    @if (@Model.MobileVerified != "no")
+                                                    {
+
+                                                        <span id="" class="fa fa-check" style="color: #6ed23c;"></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        if (@Model.KYCStatus == "approved")
+                                                        {
+                                                            <button type="button" id="sendotp" class="btn-red-sub" onclick="sendverificationcode(@Session["UserId"].ToString())">Send OTP </button>
+
+
+                                                        }
+                                                        else
+                                                        {
+                                                           
+
+                                                            <button disabled type="submit" style="border: 1px solid #999999;background-color: #cccccc;  color: #666666" id="btnSave" class="btn-red-sub">
+                                                                Send OTP
+                                                            </button>
+
+                                                        }
+
+                                                    }
+                                                </div>
+                                            </div>
+
+                                            <div id="verifiactionsection" style="display:none">
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="form-group" style="margin-bottom: 15px;">
+                                                            <input class="form-firstname form-control valid" id="ActivationToken" placeholder="Enter Your OTP Code" type="text" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <button type="button" class="btn-red-sub" onclick="VerifyOTP(@Session["UserId"].ToString())">Verify OTP </button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <div class="form-group" style="margin-bottom: 15px;">
+                                                            <button type="button" class=" button" onclick="sendverificationcode(@Session["UserId"].ToString())">Resend </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                    </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div role="tabpanel" class="tab-pane fade" id="Section3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <form id="frmregister" method="post">
+                                            <div class="form-group" style="margin-bottom: 15px;">
+                                                <div class="row">
+                                                    <div class="col-md-11">
+                                                        <input class="form-firstname form-control valid" id="AccountNumber" name="AccountNumber" placeholder="Account Number" type="text" value="">
+                                                        <lable style="font-size: 10px;"> Enter Account Number</lable>
+
+                                                    </div>
+                                                    <!----<div class="col-md-1">
+
+                                                        <div  style="display:none"><span id="" class="fa fa-check" style="color: #6ed23c;"></span></div>
+                                                    </div>-->
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-11">
+                                                    <div class="form-group" style="margin-bottom: 15px;">
+                                                        <input class="form-firstname form-control valid" id="BankName" name="BankName" placeholder="Bank Name" type="text" value="">
+                                                        <lable style="font-size: 10px;">Enter Bank Name  </lable>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-md-11">
+                                                    <div class="form-group" style="margin-bottom: 15px;">
+                                                        <input class="form-firstname form-control valid" id="IFSC" name="IFSC" placeholder="IFSC Code" type="text" value="">
+                                                        <lable style="font-size: 10px;">Enter IFSC Code </lable>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-md-11">
+                                                    <div class="form-group" style="margin-bottom: 8px;">
+                                                        <lable style="font-size: 14px;">
+                                                            Bank Verified  :
+                                                        </lable>
+                                                        <span style="display:none" id="showverificationnbank" class="label success">YES</span>
+                                                        <span style="display:none" id="showverificationnbankNo" class="label danger">NO</span>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                    @if (@Model.KYCStatus == "approved" && @Model.MobileVerified.ToUpper() == "YES")
+                                                    {
+                                                        <button id="btnSave" type="button" onclick="updatebankdetails(@Session["UserId"].ToString())" style="width: 198px;" class="btn-e">Submit Details</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <lable style="font-size: 10px;">Submit button will be enable when KYC and Phone number is verified.</lable>
+                                                        <button id="btnSave" type="button" disabled style="width: 198px;background-color: #cccccc;" class="btn-e">Submit Details</button>
+
+
+                                                    }
+
+
+                                                </div>
+
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</section>
+
+
+
+<section class="wallet-area inner-wrap"></section>
+
+
+<script>
+    $(document).ready(function () {
+        fetchbankdetails();
+     
+    });
+    $(function () {
+        $("#PANDOB").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd-M-yy",
+            yearRange: '1960:' + (new Date).getFullYear()
+        });
+
+    });
+
+    function fetchbankdetails() {
+        //$('#spinnerContainer').show();
+        Session_UserId = @Session["UserId"].ToString();
+          
+        var uurl = '/Profile/fetchbankdetails/';
+        var pData = { UserId: Session_UserId };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+               
+                if (data.status = 'success') {
+
+                    $('#BankName').val(data.data.BankName);
+                    //   $('#IFSC').val(year);
+                    $('#AccountNumber').val(data.data.AccountNumber);
+                    $('#IFSC').val(data.data.IFSC);
+                    
+
+                    $('.ifscdisplay').hide();
+                    if (data.data.BankVerified.toUpperCase() == "YES") {
+                        $('#showverificationnbank').show();
+                    } else {
+                        $('#showverificationnbankNo').show();
+                        $('.ifscdisplay').show();
+                    }
+
+
+                    // alert('Successfully deleted');
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    //
+
+                    //   alert("Status  update successfully.");
+                    //$('#spinnerContainer').hide();
+                } 
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+
+    function updatebankdetails(UserId) {
+        //$('#spinnerContainer').show();
+        var BankName = $('#BankName').val();
+        if (BankName == '') {
+            toastr_error("Please enter Bank Name.");
+            return;
+        }
+        var IFSC = $('#IFSC').val();
+        if (IFSC == '') {
+            toastr_error("Please Enter IFSC .");
+            return;
+        }
+        var AccountNumber = $('#AccountNumber').val();
+        if (AccountNumber == '') {
+            toastr_error("Please enter AccountNumber.");
+            return;
+        }
+        //console.log(UserId); return;
+        var uurl = '/Profile/updatebankdetails/';
+        var pData = { UserId: UserId, BankName: BankName, IFSC: IFSC, AccountNumber: AccountNumber};
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                  
+                if (data.status = 'success') {
+                   // alert(data.status);
+                    toastr_success(data.statusMessage);
+                    fetchbankdetails();
+                   
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    //
+
+                    //   alert("Status  update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+                else {
+                    toastr_error(data.statusMessage);
+                    return;
+
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+
+    function Update_KycStatusApproved() {
+        //$('#spinnerContainer').show();
+
+        //console.log(UserId); return;
+        var uurl = '/Profile/UpdateKycStatus/';
+        var pData = { KYCStatus: "pending" };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                //    console.log('jyoti')
+                if (data.status = 'success') {
+                    // alert('Successfully deleted');
+                    //   gridTour.reload({ page: 1, TournamentId: "0" });
+                    //
+
+                    //   alert("Status  update successfully.");
+                    //$('#spinnerContainer').hide();
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function KycUpdateImage() {
+        var filedata = new FormData();
+        var files = $("#filePhoto").get(0).files;
+
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0) {
+            filedata.append("UploadedImage", files[0]);
+
+            //Make Ajax request with the contentType = false, and procesDate = false
+            $.ajax({
+                type: "POST",
+                url: "/Profile/KycImageUpload",
+                contentType: false,
+                processData: false,
+                data: filedata,
+                success: function (data) {
+
+                    if (data.status == "success") {
+                        //  location.href = '/Profile/KycUpload';
+                     //   Update_KycStatusApproved();
+                        toastr_success("File saved successfully.");
+                    }
+                    else {
+                        toastr_error("File Not Saved. Please Contact Admin Team.");
+
+                        return;
+                    }
+                }
+            }).fail(function (xhr, textStatus, err) { alert(err); });
+        }
+
+
+    }
+    function sendverificationcode(userid) {
+
+        var uurl = '/Profile/sendverificationcode/';
+        var pData = { UserId: userid };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+
+                if (data.status == "success") {
+                    toastr_success(data.statusMessage);
+
+                    $('#verifiactionsection').show();
+                    $('#sendotp').hide();
+
+                }
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+    function VerifyOTP(userid) {
+        var Code = $('#ActivationToken').val();
+        if (Code == '') {
+            toastr_warning("Please enter your OTP Code !");
+            return;
+        }
+        var uurl = '/Profile/verifyotp/';
+        var pData = { UserId: userid, ActivationToken: Code };
+        var jsonData = JSON.stringify(pData);
+        $.ajax({
+            url: uurl,
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            async: true,
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+
+            success: function (data) {
+                console.log(data.status);
+
+                if (data.status == "fail") {
+                 
+                    toastr_error(data.statusMessage);
+                    //$('#spinnerContainer').hide();
+                } else {
+                    $('#showverificationn').show();
+                    $('#verifiactionsection').hide();
+                    toastr_success(data.statusMessage);
+                }
+
+            },
+            error: function (req, status, error) {
+                //$('#spinnerContainer').hide();
+                // toastr_warning("Unable to connect server for delete tournament!");
+                return false;
+            }
+        });
+
+    }
+
+</script>
